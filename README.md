@@ -1,0 +1,40 @@
+# Production-Grade Kubernetes Reliability Lab
+
+A hands-on Kubernetes reliability engineering project using local kind and AWS EKS.
+
+## Goals
+
+- Learn Kubernetes from first principles.
+- Deploy a production-style application locally and on EKS.
+- Use Helm, Terraform, observability, autoscaling, and reliability experiments.
+- Build a portfolio-quality DevOps/SRE project.
+
+## Tech Stack
+
+- Python FastAPI
+- Docker
+- Kubernetes
+- kind
+- kubectl
+- Helm
+- Terraform
+- AWS EKS
+- Prometheus
+- Grafana
+- GitHub Actions
+
+## Project Structure
+
+```txt
+app/              Application source code
+k8s/              Raw Kubernetes manifests
+helm/             Helm chart
+terraform/        AWS infrastructure as code
+observability/    Monitoring, dashboards, alerts
+experiments/      Reliability experiments
+docs/             Architecture, runbooks, SLOs
+.github/          CI workflows
+
+## Current Status
+
+Step 1 complete: local toolchain and repository initialized.
