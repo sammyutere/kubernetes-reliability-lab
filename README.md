@@ -4,7 +4,7 @@ A hands-on Kubernetes reliability engineering project using local kind and AWS E
 
 ## Goals
 
-- Learn Kubernetes from first principles.
+- Build hands-on competency in production-grade Kubernetes operations, reliability engineering, and platform tooling.
 - Deploy a production-style application locally and on EKS.
 - Use Helm, Terraform, observability, autoscaling, and reliability experiments.
 - Build a portfolio-quality DevOps/SRE project.
