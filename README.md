@@ -38,3 +38,16 @@ docs/             Architecture, runbooks, SLOs
 ## Current Status
 
 Step 1 complete: local toolchain and repository initialized.
+
+## Step 2: Application Created
+
+The project now includes a small FastAPI reliability application with:
+
+- Health check endpoint
+- Readiness check endpoint
+- Prometheus metrics endpoint
+- Failure simulation endpoint
+- Latency simulation endpoint
+- CPU load simulation endpoint
+- Unit tests
+
