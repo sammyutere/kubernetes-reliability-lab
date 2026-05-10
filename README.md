@@ -51,3 +51,15 @@ The project now includes a small FastAPI reliability application with:
 - CPU load simulation endpoint
 - Unit tests
 
+
+## Step 3: Application Containerised
+
+The FastAPI reliability app now includes:
+
+- Production-style Dockerfile
+- Non-root container user
+- Pinned Python dependencies
+- Prometheus metrics endpoint
+- Local container run instructions
+- Makefile targets for build, run, test, logs, and cleanup
+

@@ -30,3 +30,32 @@ cd app
 PYTHONPATH=. pytest -v
 ```
 
+
+## Build container image
+
+```bash
+docker build -t reliability-app:local ./app
+```
+
+## Run container
+
+```bash
+docker run --rm -p 8000:8000 reliability-app:local
+```
+
+## Test container
+
+```bash
+curl http://127.0.0.1:8000/healthz
+curl http://127.0.0.1:8000/readyz
+curl http://127.0.0.1:8000/metrics
+```
+
+## Run container in background
+
+```bash
+docker run -d --name reliability-app-test -p 8000:8000 reliability-app:local
+docker logs reliability-app-test
+docker stop reliability-app-test
+docker rm reliability-app-test
+```
