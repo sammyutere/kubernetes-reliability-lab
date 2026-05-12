@@ -8,11 +8,12 @@ The local cluster allows Kubernetes workloads to be tested before deploying to A
 
 ## Cluster Shape
 
+```txt
 reliability-lab
 ├── control-plane
 ├── worker
 └── worker2
-
+```
 ## Create Cluster
 
 ```bash
