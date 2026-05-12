@@ -39,3 +39,21 @@ docker-stop:
 docker-test:
 	curl -f http://127.0.0.1:8000/healthz
 	curl -f http://127.0.0.1:8000/readyz
+
+kind-create:
+	kind create cluster --config k8s/kind-config.yaml
+
+kind-delete:
+	kind delete cluster --name $(KIND_CLUSTER)
+
+kind-clusters:
+	kind get clusters
+
+kubectl-context:
+	kubectl config current-context
+
+nodes:
+	kubectl get nodes
+
+pods-all:
+	kubectl get pods -A

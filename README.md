@@ -63,3 +63,15 @@ The FastAPI reliability app now includes:
 - Local container run instructions
 - Makefile targets for build, run, test, logs, and cleanup
 
+
+## Step 4: Local kind Cluster Created
+
+The project now includes a local multi-node Kubernetes cluster configuration using kind.
+
+Cluster shape:
+
+- 1 control-plane node
+- 2 worker nodes
+
+This local cluster is used to test Kubernetes workloads before deploying to AWS EKS.
+
