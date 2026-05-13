@@ -19,6 +19,7 @@ MacBook Pro
 ```
 ## Application Flow
 
+```txt
 FastAPI source code
     ↓
 Docker image: reliability-app:local
@@ -32,7 +33,7 @@ Deployment
 Service
     ↓
 Ingress
-
+```
 ## Current Components
 
 | Component            |      Status | Purpose                                                                  |
