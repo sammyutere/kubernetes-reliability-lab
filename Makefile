@@ -57,3 +57,9 @@ nodes:
 
 pods-all:
 	kubectl get pods -A
+
+kind-load:
+	kind load docker-image $(APP_NAME):local --name $(KIND_CLUSTER)
+
+kind-image-check:
+	docker exec -it $(KIND_CLUSTER)-worker crictl images | grep $(APP_NAME)
