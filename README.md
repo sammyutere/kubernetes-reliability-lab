@@ -34,15 +34,21 @@ observability/    Monitoring, dashboards, alerts
 experiments/      Reliability experiments
 docs/             Architecture, runbooks, SLOs
 .github/          CI workflows
+```
 
 ## Current Status
 
-Step 1 complete: local toolchain and repository initialized.
+- Step 1 complete: local toolchain and repository initialized.
+- Step 2 complete: FastAPI reliability app created.
+- Step 3 complete: application containerised.
+- Step 4 complete: local kind cluster created.
+- Step 5 complete: local container image loaded into kind.
 
-## Step 2: Application Created
+## Completed Capabilities 
 
-The project now includes a small FastAPI reliability application with:
+The project currently includes:
 
+- FastAPI reliability application
 - Health check endpoint
 - Readiness check endpoint
 - Prometheus metrics endpoint
@@ -50,28 +56,19 @@ The project now includes a small FastAPI reliability application with:
 - Latency simulation endpoint
 - CPU load simulation endpoint
 - Unit tests
-
-
-## Step 3: Application Containerised
-
-The FastAPI reliability app now includes:
-
 - Production-style Dockerfile
 - Non-root container user
-- Pinned Python dependencies
-- Prometheus metrics endpoint
-- Local container run instructions
-- Makefile targets for build, run, test, logs, and cleanup
+- Local multi-node kind cluster
+- Makefile workflow helpers
 
+## Next Milestone
 
-## Step 4: Local kind Cluster Created
+Create Kubernetes manifests for:
 
-The project now includes a local multi-node Kubernetes cluster configuration using kind.
-
-Cluster shape:
-
-- 1 control-plane node
-- 2 worker nodes
-
-This local cluster is used to test Kubernetes workloads before deploying to AWS EKS.
+- Namespace
+- Deployment
+- Service
+- ConfigMap
+- Probes
+- Resource requests and limits
 
