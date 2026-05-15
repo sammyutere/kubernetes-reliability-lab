@@ -63,3 +63,12 @@ kind-load:
 
 kind-image-check:
 	docker exec -it $(KIND_CLUSTER)-worker crictl images | grep $(APP_NAME)
+
+namespace-apply:
+	kubectl apply -f k8s/base/namespace.yaml
+
+namespace-get:
+	kubectl get namespace $(NAMESPACE) --show-labels
+
+namespace-use:
+	kubectl config set-context --current --namespace=$(NAMESPACE)

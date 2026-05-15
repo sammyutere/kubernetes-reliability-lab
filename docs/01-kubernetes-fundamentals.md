@@ -82,3 +82,33 @@ Next:
 - Create a Deployment
 - Run the app as Kubernetes Pods
 - Expose the app through a Service
+
+## Namespace Implementation
+
+The project uses a dedicated namespace:
+
+```txt
+reliability-lab
+This keeps application resources separate from Kubernetes system resources and future environments.
+```
+The namespace is defined declaratively in:
+
+```bash
+k8s/base/namespace.yaml
+```
+Apply it with:
+
+```bash
+kubectl apply -f k8s/base/namespace.yaml
+```
+Use it as the default namespace for the current kubectl context:
+
+```bash
+kubectl config set-context --current --namespace=reliability-lab
+```
+Verify:
+
+```bash
+kubectl get namespace reliability-lab --show-labels
+kubectl get all
+```

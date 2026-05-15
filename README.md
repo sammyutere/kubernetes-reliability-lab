@@ -89,6 +89,15 @@ Completed:
 - Image validation inside Kubernetes node runtime
 - Local Kubernetes image workflow established
 
+### Step 6 — Kubernetes Namespace Creation
+
+Completed:
+
+- Dedicated `reliability-lab` namespace
+- Declarative Namespace manifest
+- Namespace labels for ownership and environment metadata
+- kubectl context updated to use the project namespace
+
 ## Current Status
 
 - Step 1 complete: local toolchain and repository initialized.
@@ -96,6 +105,7 @@ Completed:
 - Step 3 complete: application containerised.
 - Step 4 complete: local kind cluster created.
 - Step 5 complete: local container image loaded into kind.
+- Step 6 complete: Kubernetes Namespace Created.
 
 ## Completed Capabilities 
 
@@ -129,7 +139,6 @@ MacBook Pro
 
 Create Kubernetes manifests for:
 
-- Namespace
 - Deployment
 - Service
 - ConfigMap
