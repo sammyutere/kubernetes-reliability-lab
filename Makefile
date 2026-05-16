@@ -90,3 +90,18 @@ app-logs:
 
 pod-describe:
 	kubectl describe pod -l app.kubernetes.io/name=$(APP_NAME) -n $(NAMESPACE)
+
+service-apply:
+	kubectl apply -f k8s/base/service.yaml
+
+service-get:
+	kubectl get svc $(APP_NAME) -n $(NAMESPACE)
+
+service-describe:
+	kubectl describe svc $(APP_NAME) -n $(NAMESPACE)
+
+service-endpoints:
+	kubectl get endpoints $(APP_NAME) -n $(NAMESPACE)
+
+service-port-forward:
+	kubectl port-forward svc/$(APP_NAME) 8080:80 -n $(NAMESPACE)

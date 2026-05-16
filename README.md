@@ -111,6 +111,17 @@ Completed:
 - CPU and memory limits
 - Basic Pod self-healing validation
 
+### Step 8 — Kubernetes Service Creation
+
+Completed:
+
+- Declarative ClusterIP Service manifest
+- Stable internal endpoint for the reliability app
+- Label selector routing to Deployment Pods
+- Service-to-Pod port mapping
+- Endpoint validation
+- Local access through `kubectl port-forward`
+
 ## Current Status
 
 - Step 1 complete: local toolchain and repository initialized.
@@ -120,6 +131,7 @@ Completed:
 - Step 5 complete: local container image loaded into kind.
 - Step 6 complete: Kubernetes Namespace created.
 - Step 7 complete: Kubernetes Deployment created.
+- Step 8 complete: Kubernetes Service created.
 
 ## Completed Capabilities 
 
@@ -140,6 +152,9 @@ The project currently includes:
 - Kubernetes Deployment running 3 app replicas
 - Liveness and readiness probes configured
 - Basic Kubernetes self-healing demonstrated
+- Internal Kubernetes Service exposing the app
+- Stable Service endpoint in front of disposable Pods
+- Port-forward access for local validation
 
 ## Current Architecture
 
@@ -154,9 +169,9 @@ MacBook Pro
 ```
 ## Next Milestone
 
-Create Kubernetes networking resources:
+Add production-style application configuration:
 
-- Service
-- Port-forward validation
-- Internal cluster access
-- Application endpoint testing through Kubernetes Service
+- ConfigMap
+- Secret example
+- Environment variable injection
+- Separation of config from image

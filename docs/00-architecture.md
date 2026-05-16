@@ -84,3 +84,21 @@ reliability-lab namespace
 └── Container: reliability-app:local
 ```
 The Deployment gives the app basic self-healing behaviour. If a Pod is deleted or fails, Kubernetes creates a replacement to maintain the declared replica count.
+
+## Service Architecture
+
+The application is now reachable through a Kubernetes ClusterIP Service.
+
+```txt
+reliability-lab namespace
+├── Service: reliability-app
+│ └── Port 80
+│ └── TargetPort http → containerPort 8000
+└── Deployment: reliability-app
+└── ReplicaSet
+├── Pod: reliability-app
+├── Pod: reliability-app
+└── Pod: reliability-app
+```
+The Service provides stable network access to Pods managed by the Deployment.
+Pods may be deleted, recreated, or rescheduled, but the Service endpoint remains stable.

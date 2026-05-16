@@ -165,3 +165,61 @@ Deployment
     └── Pod
 ```
 Each Pod runs the reliability-app container.
+
+## Service Implementation
+
+The reliability app is exposed inside the cluster through a Kubernetes Service:
+
+```txt
+k8s/base/service.yaml
+The Service is a ClusterIP Service.
+This means it is reachable inside the Kubernetes cluster but not directly from outside the cluster.
+```
+Apply it:
+
+```bash
+kubectl apply -f k8s/base/service.yaml
+```
+Verify it:
+
+```bash
+kubectl get svc -n reliability-lab
+kubectl describe svc reliability-app -n reliability-lab
+kubectl get endpoints reliability-app -n reliability-lab
+```
+Access it locally with port-forwarding:
+
+```bash
+kubectl port-forward svc/reliability-app 8080:80 -n reliability-lab
+```
+Then test:
+
+```bash
+curl http://127.0.0.1:8080/healthz
+curl http://127.0.0.1:8080/readyz
+curl http://127.0.0.1:8080/metrics
+```
+## Service Mental Model
+
+Pods are disposable and receive changing IP addresses.
+
+A Service gives a stable endpoint in front of those Pods.
+
+```txt
+Client
+  ↓
+Service: reliability-app
+  ↓
+Endpoints
+  ↓
+Pods
+  ↓
+Container port 8000
+```
+The Service uses labels to find matching Pods.
+
+In this project, it selects Pods with:
+
+```txt
+app.kubernetes.io/name=reliability-app
+```
