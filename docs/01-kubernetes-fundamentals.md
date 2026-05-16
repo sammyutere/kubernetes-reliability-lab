@@ -129,7 +129,7 @@ The Deployment declares:
 - liveness probe
 - CPU and memory requests
 - CPU and memory limits
-
+```
 Apply it:
 
 ```bash
