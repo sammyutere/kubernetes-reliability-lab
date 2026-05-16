@@ -98,6 +98,19 @@ Completed:
 - Namespace labels for ownership and environment metadata
 - kubectl context updated to use the project namespace
 
+### Step 7 — Kubernetes Deployment Creation
+
+Completed:
+
+- Declarative Deployment manifest
+- 3-replica application workload
+- Local kind image usage with `IfNotPresent`
+- Readiness probe configuration
+- Liveness probe configuration
+- CPU and memory requests
+- CPU and memory limits
+- Basic Pod self-healing validation
+
 ## Current Status
 
 - Step 1 complete: local toolchain and repository initialized.
@@ -105,7 +118,8 @@ Completed:
 - Step 3 complete: application containerised.
 - Step 4 complete: local kind cluster created.
 - Step 5 complete: local container image loaded into kind.
-- Step 6 complete: Kubernetes Namespace Created.
+- Step 6 complete: Kubernetes Namespace created.
+- Step 7 complete: Kubernetes Deployment created.
 
 ## Completed Capabilities 
 
@@ -123,6 +137,9 @@ The project currently includes:
 - Non-root container user
 - Local multi-node kind cluster
 - Makefile workflow helpers
+- Kubernetes Deployment running 3 app replicas
+- Liveness and readiness probes configured
+- Basic Kubernetes self-healing demonstrated
 
 ## Current Architecture
 
@@ -137,11 +154,9 @@ MacBook Pro
 ```
 ## Next Milestone
 
-Create Kubernetes manifests for:
+Create Kubernetes networking resources:
 
-- Deployment
 - Service
-- ConfigMap
-- Probes
-- Resource requests and limits
-
+- Port-forward validation
+- Internal cluster access
+- Application endpoint testing through Kubernetes Service

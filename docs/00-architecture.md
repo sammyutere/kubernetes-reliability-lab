@@ -67,3 +67,20 @@ The project will eventually validate:
 - Pod disruption handling
 - Observability and alerting
 - Operational runbooks
+
+## Deployment Architecture
+
+The application is now managed by a Kubernetes Deployment.
+
+```txt
+reliability-lab namespace
+└── Deployment: reliability-app
+└── ReplicaSet
+├── Pod: reliability-app
+│ └── Container: reliability-app:local
+├── Pod: reliability-app
+│ └── Container: reliability-app:local
+└── Pod: reliability-app
+└── Container: reliability-app:local
+```
+The Deployment gives the app basic self-healing behaviour. If a Pod is deleted or fails, Kubernetes creates a replacement to maintain the declared replica count.

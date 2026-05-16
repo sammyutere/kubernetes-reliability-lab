@@ -72,3 +72,21 @@ namespace-get:
 
 namespace-use:
 	kubectl config set-context --current --namespace=$(NAMESPACE)
+
+deploy-apply:
+	kubectl apply -f k8s/base/deployment.yaml
+
+deploy-status:
+	kubectl rollout status deployment/$(APP_NAME) -n $(NAMESPACE)
+
+deploy-get:
+	kubectl get deployment $(APP_NAME) -n $(NAMESPACE)
+
+pods:
+	kubectl get pods -n $(NAMESPACE) -o wide
+
+app-logs:
+	kubectl logs deployment/$(APP_NAME) -n $(NAMESPACE)
+
+pod-describe:
+	kubectl describe pod -l app.kubernetes.io/name=$(APP_NAME) -n $(NAMESPACE)

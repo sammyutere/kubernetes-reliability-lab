@@ -112,3 +112,56 @@ Verify:
 kubectl get namespace reliability-lab --show-labels
 kubectl get all
 ```
+
+## Deployment Implementation
+
+The reliability app is deployed with a Kubernetes Deployment:
+
+```txt
+k8s/base/deployment.yaml
+The Deployment declares:
+
+- 3 desired replicas
+- container image reliability-app:local
+- local image pull policy
+- HTTP container port 8000
+- readiness probe
+- liveness probe
+- CPU and memory requests
+- CPU and memory limits
+
+Apply it:
+
+```bash
+kubectl apply -f k8s/base/deployment.yaml
+```
+Check rollout:
+
+```bash
+kubectl rollout status deployment/reliability-app -n reliability-lab
+```
+Inspect Pods:
+
+```bash
+kubectl get pods -n reliability-lab -o wide
+kubectl describe pod <pod-name> -n reliability-lab
+kubectl logs deployment/reliability-app -n reliability-lab
+```
+Test self-healing:
+
+```bash
+kubectl delete pod -l app.kubernetes.io/name=reliability-app -n reliability-lab
+kubectl get pods -n reliability-lab -w
+```
+## Deployment Mental Model
+
+A Deployment does not directly run the app. It creates and manages ReplicaSets, and ReplicaSets manage Pods.
+
+```txt
+Deployment
+└── ReplicaSet
+    ├── Pod
+    ├── Pod
+    └── Pod
+```
+Each Pod runs the reliability-app container.
