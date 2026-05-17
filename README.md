@@ -122,6 +122,16 @@ Completed:
 - Endpoint validation
 - Local access through `kubectl port-forward`
 
+### Step 9 — Kubernetes ConfigMap Creation
+
+Completed:
+
+- Declarative ConfigMap manifest
+- Runtime configuration separated from container image
+- ConfigMap injected into Pods as environment variables
+- Deployment updated to consume externalised configuration
+- Configuration rollout behaviour validated
+
 ## Current Status
 
 - Step 1 complete: local toolchain and repository initialized.
@@ -132,6 +142,7 @@ Completed:
 - Step 6 complete: Kubernetes Namespace created.
 - Step 7 complete: Kubernetes Deployment created.
 - Step 8 complete: Kubernetes Service created.
+- Step 9 complete: Kubernetes ConfigMap created.
 
 ## Completed Capabilities 
 
@@ -155,6 +166,8 @@ The project currently includes:
 - Internal Kubernetes Service exposing the app
 - Stable Service endpoint in front of disposable Pods
 - Port-forward access for local validation
+- Runtime configuration managed through Kubernetes ConfigMap
+- Same container image can support multiple environment configurations
 
 ## Current Architecture
 
@@ -169,9 +182,9 @@ MacBook Pro
 ```
 ## Next Milestone
 
-Add production-style application configuration:
+Add secret handling:
 
-- ConfigMap
-- Secret example
-- Environment variable injection
-- Separation of config from image
+- Secret example manifest
+- Sensitive configuration pattern
+- `.gitignore` protection
+- Deployment secret injection

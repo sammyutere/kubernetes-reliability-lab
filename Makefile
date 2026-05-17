@@ -105,3 +105,16 @@ service-endpoints:
 
 service-port-forward:
 	kubectl port-forward svc/$(APP_NAME) 8080:80 -n $(NAMESPACE)
+
+config-apply:
+	kubectl apply -f k8s/base/configmap.yaml
+
+config-get:
+	kubectl get configmap reliability-app-config -n $(NAMESPACE)
+
+config-describe:
+	kubectl describe configmap reliability-app-config -n $(NAMESPACE)
+
+restart-app:
+	kubectl rollout restart deployment/$(APP_NAME) -n $(NAMESPACE)
+	kubectl rollout status deployment/$(APP_NAME) -n $(NAMESPACE)

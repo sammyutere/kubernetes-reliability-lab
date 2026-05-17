@@ -102,3 +102,21 @@ reliability-lab namespace
 ```
 The Service provides stable network access to Pods managed by the Deployment.
 Pods may be deleted, recreated, or rescheduled, but the Service endpoint remains stable.
+
+## Configuration Architecture
+
+The application now receives runtime configuration from a Kubernetes ConfigMap.
+
+```txt
+ConfigMap: reliability-app-config
+├── APP_NAME
+├── APP_VERSION
+├── APP_ENV
+└── LOG_LEVEL
+↓
+Deployment: reliability-app
+↓
+Pods receive values as environment variables
+```
+This separates application configuration from the container image. The same image can now be reused across local Kubernetes, EKS development, staging, and production-style environments.
+

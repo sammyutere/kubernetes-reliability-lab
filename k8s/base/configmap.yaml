@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: reliability-app-config
+  namespace: reliability-lab
+  labels:
+    app.kubernetes.io/name: reliability-app
+    app.kubernetes.io/part-of: kubernetes-reliability-lab
+    app.kubernetes.io/component: config
+    app.kubernetes.io/managed-by: kubectl
+data:
+  APP_NAME: "reliability-app"
+  APP_VERSION: "0.1.0"
+  APP_ENV: "kubernetes-local"
+  LOG_LEVEL: "info"

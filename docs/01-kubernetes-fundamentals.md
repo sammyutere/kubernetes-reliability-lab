@@ -223,3 +223,49 @@ In this project, it selects Pods with:
 ```txt
 app.kubernetes.io/name=reliability-app
 ```
+
+## ConfigMap Implementation
+
+The project uses a ConfigMap to provide non-secret runtime configuration to the reliability app.
+
+Manifest:
+
+```txt
+k8s/base/configmap.yaml
+```
+The ConfigMap currently provides:
+
+```txt
+APP_NAME
+APP_VERSION
+APP_ENV
+LOG_LEVEL
+```
+The Deployment consumes the ConfigMap using:
+
+```yaml
+envFrom:
+  - configMapRef:
+      name: reliability-app-config
+```
+Apply it:
+
+```bash
+kubectl apply -f k8s/base/configmap.yaml
+kubectl apply -f k8s/base/deployment.yaml
+```
+Verify:
+
+```bash
+kubectl describe configmap reliability-app-config -n reliability-lab
+kubectl port-forward svc/reliability-app 8080:80 -n reliability-lab
+curl -s http://127.0.0.1:8080/ | jq
+```
+Important operational note:
+
+When a ConfigMap is consumed as environment variables, existing Pods do not automatically receive updated values. Restart the Deployment to roll out the new configuration:
+
+```bash
+kubectl rollout restart deployment/reliability-app -n reliability-lab
+```
+
