@@ -16,6 +16,8 @@ def test_root_returns_app_info():
     assert body["app"] == "reliability-app"
     assert body["environment"] == "local"
     assert "hostname" in body
+    assert body["api_key_configured"] in ["true", "false"]
+    assert body["feature_token_configured"] in ["true", "false"]
 
 
 def test_healthz_returns_ok():

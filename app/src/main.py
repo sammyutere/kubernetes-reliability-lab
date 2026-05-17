@@ -10,6 +10,8 @@ from prometheus_client import Counter, Histogram, generate_latest, CONTENT_TYPE_
 APP_NAME = os.getenv("APP_NAME", "reliability-app")
 APP_VERSION = os.getenv("APP_VERSION", "0.1.0")
 APP_ENV = os.getenv("APP_ENV", "local")
+API_KEY = os.getenv("API_KEY", "")
+FEATURE_TOKEN = os.getenv("FEATURE_TOKEN", "")
 
 app = FastAPI(
     title="Kubernetes Reliability Lab App",
@@ -39,6 +41,8 @@ def root() -> Dict[str, str]:
         "version": APP_VERSION,
         "environment": APP_ENV,
         "hostname": socket.gethostname(),
+        "api_key_configured": str(bool(API_KEY)).lower(),
+        "feature_token_configured": str(bool(FEATURE_TOKEN)).lower(),
         "message": "Kubernetes Reliability Lab app is running",
     }
 

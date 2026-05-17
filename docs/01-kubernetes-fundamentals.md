@@ -269,3 +269,41 @@ When a ConfigMap is consumed as environment variables, existing Pods do not auto
 kubectl rollout restart deployment/reliability-app -n reliability-lab
 ```
 
+
+## Secret Implementation
+
+The project uses a Kubernetes Secret to demonstrate sensitive runtime configuration.
+
+Example manifest:
+
+```txt
+k8s/base/secret.example.yaml
+```
+Local real secret file:
+
+```txt
+k8s/base/secret.local.yaml
+```
+The local file is ignored by Git and must not be committed.
+
+The Deployment consumes the Secret using:
+
+```yaml
+envFrom:
+  - secretRef:
+      name: reliability-app-secret
+```
+Apply local secret:
+
+```bash
+kubectl apply -f k8s/base/secret.local.yaml
+```
+Verify:
+
+```bash
+kubectl get secret reliability-app-secret -n reliability-lab
+kubectl describe secret reliability-app-secret -n reliability-lab
+```
+Operational rule:
+
+Never commit real credentials to Git. Commit only example secret manifests with placeholder values.

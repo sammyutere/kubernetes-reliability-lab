@@ -30,6 +30,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: reliability-app-config
+            - secretRef:
+                name: reliability-app-secret
           readinessProbe:
             httpGet:
               path: /readyz

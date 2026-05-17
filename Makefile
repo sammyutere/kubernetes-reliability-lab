@@ -118,3 +118,15 @@ config-describe:
 restart-app:
 	kubectl rollout restart deployment/$(APP_NAME) -n $(NAMESPACE)
 	kubectl rollout status deployment/$(APP_NAME) -n $(NAMESPACE)
+
+secret-example:
+	kubectl apply -f k8s/base/secret.example.yaml
+
+secret-local:
+	kubectl apply -f k8s/base/secret.local.yaml
+
+secret-get:
+	kubectl get secret reliability-app-secret -n $(NAMESPACE)
+
+secret-describe:
+	kubectl describe secret reliability-app-secret -n $(NAMESPACE)

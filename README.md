@@ -132,6 +132,16 @@ Completed:
 - Deployment updated to consume externalised configuration
 - Configuration rollout behaviour validated
 
+### Step 10 — Kubernetes Secret Creation
+
+Completed:
+
+- Safe example Secret manifest
+- Local ignored Secret workflow
+- Secret injected into Pods as environment variables
+- App updated to verify secret presence without exposing values
+- Deployment updated to consume ConfigMap and Secret values
+
 ## Current Status
 
 - Step 1 complete: local toolchain and repository initialized.
@@ -143,6 +153,7 @@ Completed:
 - Step 7 complete: Kubernetes Deployment created.
 - Step 8 complete: Kubernetes Service created.
 - Step 9 complete: Kubernetes ConfigMap created.
+- Step 10 complete: Kubernetes Secret created.
 
 ## Completed Capabilities 
 
@@ -168,6 +179,8 @@ The project currently includes:
 - Port-forward access for local validation
 - Runtime configuration managed through Kubernetes ConfigMap
 - Same container image can support multiple environment configurations
+- Sensitive runtime configuration pattern using Kubernetes Secret
+- Git-safe secret handling with committed example and ignored local file
 
 ## Current Architecture
 
@@ -182,9 +195,8 @@ MacBook Pro
 ```
 ## Next Milestone
 
-Add secret handling:
+Add availability protection:
 
-- Secret example manifest
-- Sensitive configuration pattern
-- `.gitignore` protection
-- Deployment secret injection
+- PodDisruptionBudget
+- Voluntary disruption handling
+- Node drain validation

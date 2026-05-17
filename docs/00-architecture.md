@@ -120,3 +120,18 @@ Pods receive values as environment variables
 ```
 This separates application configuration from the container image. The same image can now be reused across local Kubernetes, EKS development, staging, and production-style environments.
 
+
+## Secret Configuration Architecture
+
+The application now supports sensitive runtime configuration through a Kubernetes Secret.
+
+```txt
+Secret: reliability-app-secret
+├── API_KEY
+└── FEATURE_TOKEN
+↓
+Deployment: reliability-app
+↓
+Pods receive values as environment variables
+```
+The application verifies whether secrets are configured without exposing secret values.
