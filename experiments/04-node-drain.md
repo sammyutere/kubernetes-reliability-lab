@@ -61,7 +61,9 @@ kubectl get nodes
 ```
 ## Observed Behaviour
 
-To be completed during experiment execution.
+During local kind testing, all reliability-app Pods were initially scheduled on reliability-lab-worker2. This is expected because the Deployment did not yet define topology spread constraints or pod anti-affinity. Kubernetes does not guarantee even Pod distribution by default.
+
+To be completed fully during experiment execution.
 
 ## Conclusion
 
