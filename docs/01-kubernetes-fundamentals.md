@@ -307,3 +307,57 @@ kubectl describe secret reliability-app-secret -n reliability-lab
 Operational rule:
 
 Never commit real credentials to Git. Commit only example secret manifests with placeholder values.
+
+## PodDisruptionBudget Implementation
+
+The project uses a PodDisruptionBudget to protect app availability during voluntary disruption.
+
+Manifest:
+
+```txt
+k8s/base/pdb.yaml
+```
+Current policy:
+
+```txt
+minAvailable: 2
+```
+This means at least 2 matching Pods should remain available during voluntary disruptions.
+
+Apply it:
+
+```bash
+kubectl apply -f k8s/base/pdb.yaml
+```
+Verify:
+
+```bash
+kubectl get pdb -n reliability-lab
+kubectl describe pdb reliability-app-pdb -n reliability-lab
+```
+Test with node drain:
+
+```bash
+kubectl drain reliability-lab-worker --ignore-daemonsets --delete-emptydir-data
+kubectl get pods -n reliability-lab -o wide -w
+kubectl uncordon reliability-lab-worker
+```
+## PDB Mental Model
+
+A PDB does not keep Pods alive during crashes.
+
+It controls voluntary evictions.
+
+Examples of voluntary disruptions:
+
+- node drain
+- node upgrades
+- cluster maintenance
+- autoscaler scale-down
+
+Examples not protected by PDB:
+
+- application crash
+- node hardware failure
+- kernel panic
+- out-of-memory kill

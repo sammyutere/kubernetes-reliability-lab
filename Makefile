@@ -130,3 +130,18 @@ secret-get:
 
 secret-describe:
 	kubectl describe secret reliability-app-secret -n $(NAMESPACE)
+
+pdb-apply:
+	kubectl apply -f k8s/base/pdb.yaml
+
+pdb-get:
+	kubectl get pdb -n $(NAMESPACE)
+
+pdb-describe:
+	kubectl describe pdb reliability-app-pdb -n $(NAMESPACE)
+
+drain-worker:
+	kubectl drain $(KIND_CLUSTER)-worker --ignore-daemonsets --delete-emptydir-data
+
+uncordon-worker:
+	kubectl uncordon $(KIND_CLUSTER)-worker

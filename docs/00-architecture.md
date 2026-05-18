@@ -135,3 +135,18 @@ Deployment: reliability-app
 Pods receive values as environment variables
 ```
 The application verifies whether secrets are configured without exposing secret values.
+
+## Availability Protection Architecture
+
+The application now includes a PodDisruptionBudget.
+
+```txt
+Deployment: reliability-app
+├── Pod 1
+├── Pod 2
+└── Pod 3
+
+PodDisruptionBudget: reliability-app-pdb
+└── minAvailable: 2
+```
+This protects application availability during voluntary disruption such as node drains and maintenance operations.

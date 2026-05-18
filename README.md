@@ -142,6 +142,15 @@ Completed:
 - App updated to verify secret presence without exposing values
 - Deployment updated to consume ConfigMap and Secret values
 
+### Step 11 — PodDisruptionBudget Creation
+
+Completed:
+
+- Declarative PodDisruptionBudget manifest
+- Availability protection with `minAvailable: 2`
+- Voluntary disruption control for the reliability app
+- Node drain experiment documentation
+
 ## Current Status
 
 - Step 1 complete: local toolchain and repository initialized.
@@ -154,6 +163,7 @@ Completed:
 - Step 8 complete: Kubernetes Service created.
 - Step 9 complete: Kubernetes ConfigMap created.
 - Step 10 complete: Kubernetes Secret created.
+- Step 11 complete: PodDisruptionBudget created.
 
 ## Completed Capabilities 
 
@@ -181,6 +191,8 @@ The project currently includes:
 - Same container image can support multiple environment configurations
 - Sensitive runtime configuration pattern using Kubernetes Secret
 - Git-safe secret handling with committed example and ignored local file
+- PodDisruptionBudget protecting minimum app availability during voluntary disruption
+- Node drain experiment documented
 
 ## Current Architecture
 
@@ -195,8 +207,9 @@ MacBook Pro
 ```
 ## Next Milestone
 
-Add availability protection:
+Add autoscaling:
 
-- PodDisruptionBudget
-- Voluntary disruption handling
-- Node drain validation
+- Metrics Server
+- HorizontalPodAutoscaler
+- CPU load simulation
+- Scale-up and scale-down validation

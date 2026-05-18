@@ -1,0 +1,15 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: reliability-app-pdb
+  namespace: reliability-lab
+  labels:
+    app.kubernetes.io/name: reliability-app
+    app.kubernetes.io/part-of: kubernetes-reliability-lab
+    app.kubernetes.io/component: availability
+    app.kubernetes.io/managed-by: kubectl
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: reliability-app
