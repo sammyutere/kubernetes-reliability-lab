@@ -68,6 +68,19 @@ kubectl get deployment reliability-app -n reliability-lab
 kubectl get pods -n reliability-lab -o wide
 kubectl top pods -n reliability-lab
 ```
+## Evidence
+
+No screenshots were captured during this experiment execution.
+
+Command-line evidence was observed during execution using:
+
+```bash
+kubectl get hpa reliability-app-hpa -n reliability-lab -w
+kubectl get pods -n reliability-lab -w
+kubectl top pods -n reliability-lab
+
+Future experiments will include explicit evidence capture steps before, during, and after execution.
+
 ## Observed Behaviour
 
 Initial Deployment replica count was 3 Pods.
@@ -111,4 +124,9 @@ The experiment also demonstrated the importance of properly configured CPU resou
 Observed scale-down behaviour confirmed that Kubernetes intentionally delays rapid downscaling in order to reduce workload instability and replica thrashing.
 
 In a production AWS EKS environment, this HPA behaviour would typically operate alongside node autoscaling systems such as Cluster Autoscaler or Karpenter.
+
+## Follow-up Improvement
+
+For future reliability experiments, evidence will be captured using screenshots and command outputs before, during, and after test execution.
+
 
