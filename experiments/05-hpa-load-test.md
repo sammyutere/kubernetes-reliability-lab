@@ -78,17 +78,14 @@ Command-line evidence was observed during execution using:
 kubectl get hpa reliability-app-hpa -n reliability-lab -w
 kubectl get pods -n reliability-lab -w
 kubectl top pods -n reliability-lab
-
+```
 Future experiments will include explicit evidence capture steps before, during, and after execution.
 
 ## Observed Behaviour
 
 Initial Deployment replica count was 3 Pods.
-
 Metrics Server required approximately 1–2 minutes after installation before `kubectl top` returned valid CPU metrics.
-
 During sustained load generation against the `/cpu` endpoint, average CPU utilisation increased above the HPA target threshold of 50%.
-
 The HorizontalPodAutoscaler increased the Deployment replica count from 3 replicas to 5 replicas.
 
 New Pods transitioned through:
