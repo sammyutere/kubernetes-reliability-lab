@@ -361,3 +361,57 @@ Examples not protected by PDB:
 - node hardware failure
 - kernel panic
 - out-of-memory kill
+
+## HorizontalPodAutoscaler Implementation
+
+The project uses a HorizontalPodAutoscaler to scale the reliability app based on CPU utilisation.
+
+Manifest:
+
+```txt
+k8s/base/hpa.yaml
+```
+Current policy:
+
+```txt
+minReplicas: 3
+maxReplicas: 8
+target average CPU utilisation: 50%
+```
+The HPA targets:
+
+```txt
+Deployment/reliability-app
+```
+Apply it:
+
+```bash
+kubectl apply -f k8s/base/hpa.yaml
+```
+Verify:
+
+```bash
+kubectl get hpa -n reliability-lab
+kubectl describe hpa reliability-app-hpa -n reliability-lab
+```
+Metrics Server is required for CPU and memory resource metrics:
+
+```bash
+kubectl top nodes
+kubectl top pods -n reliability-lab
+```
+## HPA Mental Model
+
+The HPA does not create nodes. It changes the replica count of a workload.
+
+```txt
+HPA
+  ↓ adjusts replicas
+Deployment
+  ↓ creates/removes Pods
+ReplicaSet
+  ↓ manages Pods
+Pods
+```
+CPU-based HPA depends on resource requests. Without CPU requests, Kubernetes cannot calculate utilisation percentages reliably.
+

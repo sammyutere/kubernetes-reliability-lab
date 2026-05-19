@@ -150,3 +150,18 @@ PodDisruptionBudget: reliability-app-pdb
 └── minAvailable: 2
 ```
 This protects application availability during voluntary disruption such as node drains and maintenance operations.
+
+## Autoscaling Architecture
+
+The application now includes HorizontalPodAutoscaler support.
+
+```txt
+Metrics Server
+↓ provides CPU metrics
+HorizontalPodAutoscaler: reliability-app-hpa
+↓ adjusts replica count
+Deployment: reliability-app
+↓ creates or removes Pods
+Pods: reliability-app
+```
+The HPA scales the app between 3 and 8 replicas based on average CPU utilisation.

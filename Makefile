@@ -145,3 +145,26 @@ drain-worker:
 
 uncordon-worker:
 	kubectl uncordon $(KIND_CLUSTER)-worker
+
+metrics-server-install:
+	kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+	kubectl patch deployment metrics-server -n kube-system --type='json' -p='[{"op":"add","path":"/spec/template/spec/containers/0/args/-","value":"--kubelet-insecure-tls"}]' || true
+	kubectl rollout status deployment/metrics-server -n kube-system
+
+top-nodes:
+	kubectl top nodes
+
+top-pods:
+	kubectl top pods -n $(NAMESPACE)
+
+hpa-apply:
+	kubectl apply -f k8s/base/hpa.yaml
+
+hpa-get:
+	kubectl get hpa -n $(NAMESPACE)
+
+hpa-describe:
+	kubectl describe hpa reliability-app-hpa -n $(NAMESPACE)
+
+load-test:
+	./experiments/scripts/load-test.sh http://127.0.0.1:8080/cpu 180

@@ -151,6 +151,17 @@ Completed:
 - Voluntary disruption control for the reliability app
 - Node drain experiment documentation
 
+### Step 12 — HorizontalPodAutoscaler Creation
+
+Completed:
+
+- Metrics Server installed for local resource metrics
+- Declarative HPA manifest
+- CPU-based autoscaling policy
+- Minimum and maximum replica bounds
+- Load-test script for autoscaling validation
+- HPA experiment documentation
+
 ## Current Status
 
 - Step 1 complete: local toolchain and repository initialized.
@@ -164,6 +175,7 @@ Completed:
 - Step 9 complete: Kubernetes ConfigMap created.
 - Step 10 complete: Kubernetes Secret created.
 - Step 11 complete: PodDisruptionBudget created.
+- Step 12 complete: HorizontalPodAutoscaler created.
 
 ## Completed Capabilities 
 
@@ -193,6 +205,9 @@ The project currently includes:
 - Git-safe secret handling with committed example and ignored local file
 - PodDisruptionBudget protecting minimum app availability during voluntary disruption
 - Node drain experiment documented
+- CPU-based horizontal autoscaling using Kubernetes HPA
+- Metrics Server integration for local kind resource metrics
+- Load-test workflow for autoscaling validation
 
 ## Current Architecture
 
@@ -207,9 +222,8 @@ MacBook Pro
 ```
 ## Next Milestone
 
-Add autoscaling:
+Add network policy:
 
-- Metrics Server
-- HorizontalPodAutoscaler
-- CPU load simulation
-- Scale-up and scale-down validation
+- Default traffic control model
+- Pod ingress restrictions
+- Service connectivity validation
