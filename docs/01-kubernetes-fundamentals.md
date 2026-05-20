@@ -415,3 +415,33 @@ Pods
 ```
 CPU-based HPA depends on resource requests. Without CPU requests, Kubernetes cannot calculate utilisation percentages reliably.
 
+
+## NetworkPolicy Implementation
+
+The project uses a Kubernetes NetworkPolicy to define allowed ingress traffic to the reliability app.
+
+Manifest:
+
+```txt
+k8s/base/networkpolicy.yaml
+```
+Policy intent:
+
+```txt
+Allow inbound TCP traffic to reliability-app Pods on port 8000 only from Pods labelled access=allowed.
+```
+Apply it:
+
+```bash
+kubectl apply -f k8s/base/networkpolicy.yaml
+```
+Verify it:
+
+```bash
+kubectl get networkpolicy -n reliability-lab
+kubectl describe networkpolicy reliability-app-ingress-policy -n reliability-lab
+```
+Important operational note:
+
+NetworkPolicy resources require a compatible CNI implementation to enforce them. A Kubernetes API server may accept the resource even if the cluster networking layer does not enforce the rules.
+

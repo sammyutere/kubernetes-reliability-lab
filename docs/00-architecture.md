@@ -165,3 +165,19 @@ Deployment: reliability-app
 Pods: reliability-app
 ```
 The HPA scales the app between 3 and 8 replicas based on average CPU utilisation.
+
+## Network Security Architecture
+
+The application now includes a Kubernetes NetworkPolicy.
+
+```txt
+Client Pod with access=allowed
+↓ allowed
+Service: reliability-app
+↓
+Pods: reliability-app on port 8000
+
+Client Pod without access=allowed
+↓ denied if NetworkPolicy is enforced by CNI
+```
+This introduces least-privilege network access for application Pods.

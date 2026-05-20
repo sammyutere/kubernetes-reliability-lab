@@ -1,0 +1,4 @@
+NAME                              READY   STATUS    RESTARTS        AGE    LABELS
+reliability-app-88d85dd98-8bhr5   1/1     Running   2 (8m36s ago)   27h    app.kubernetes.io/component=api,app.kubernetes.io/name=reliability-app,app.kubernetes.io/part-of=kubernetes-reliability-lab,pod-template-hash=88d85dd98
+reliability-app-88d85dd98-t54md   1/1     Running   4 (8m36s ago)   2d4h   app.kubernetes.io/component=api,app.kubernetes.io/name=reliability-app,app.kubernetes.io/part-of=kubernetes-reliability-lab,pod-template-hash=88d85dd98
+reliability-app-88d85dd98-z9j65   1/1     Running   1 (8m36s ago)   27h    app.kubernetes.io/component=api,app.kubernetes.io/name=reliability-app,app.kubernetes.io/part-of=kubernetes-reliability-lab,pod-template-hash=88d85dd98

@@ -162,6 +162,17 @@ Completed:
 - Load-test script for autoscaling validation
 - HPA experiment documentation
 
+### Step 13 — NetworkPolicy Creation
+
+Completed:
+
+- Declarative NetworkPolicy manifest
+- Ingress traffic control model
+- Allowed client Pod validation
+- Denied client Pod validation
+- Evidence capture for policy behaviour
+- Documentation of CNI enforcement dependency
+
 ## Current Status
 
 - Step 1 complete: local toolchain and repository initialized.
@@ -176,6 +187,7 @@ Completed:
 - Step 10 complete: Kubernetes Secret created.
 - Step 11 complete: PodDisruptionBudget created.
 - Step 12 complete: HorizontalPodAutoscaler created.
+- Step 13 complete: NetworkPolicy created.
 
 ## Completed Capabilities 
 
@@ -208,6 +220,8 @@ The project currently includes:
 - CPU-based horizontal autoscaling using Kubernetes HPA
 - Metrics Server integration for local kind resource metrics
 - Load-test workflow for autoscaling validation
+- NetworkPolicy manifest for least-privilege ingress control
+- Network policy validation workflow with captured evidence
 
 ## Current Architecture
 
@@ -222,8 +236,8 @@ MacBook Pro
 ```
 ## Next Milestone
 
-Add network policy:
+Add Kustomize overlays:
 
-- Default traffic control model
-- Pod ingress restrictions
-- Service connectivity validation
+- Local overlay
+- EKS overlay placeholder
+- Environment-specific manifest management

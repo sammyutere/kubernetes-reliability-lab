@@ -1,0 +1,16 @@
+Name:         reliability-app-ingress-policy
+Namespace:    reliability-lab
+Created on:   2026-05-20 23:52:58 +0100 BST
+Labels:       app.kubernetes.io/component=network-security
+              app.kubernetes.io/managed-by=kubectl
+              app.kubernetes.io/name=reliability-app
+              app.kubernetes.io/part-of=kubernetes-reliability-lab
+Annotations:  <none>
+Spec:
+  PodSelector:     app.kubernetes.io/name=reliability-app
+  Allowing ingress traffic:
+    To Port: 8000/TCP
+    From:
+      PodSelector: access=allowed
+  Not affecting egress traffic
+  Policy Types: Ingress

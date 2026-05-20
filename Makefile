@@ -168,3 +168,18 @@ hpa-describe:
 
 load-test:
 	./experiments/scripts/load-test.sh http://127.0.0.1:8080/cpu 180
+
+netpol-apply:
+	kubectl apply -f k8s/base/networkpolicy.yaml
+
+netpol-get:
+	kubectl get networkpolicy -n $(NAMESPACE)
+
+netpol-describe:
+	kubectl describe networkpolicy reliability-app-ingress-policy -n $(NAMESPACE)
+
+netpol-test-allowed:
+	kubectl run curl-allowed-evidence --rm --image=curlimages/curl:8.10.1 -n $(NAMESPACE) --restart=Never --labels="access=allowed" --command -- sh -c 'curl -s -o /dev/null -w "%{http_code}\n" http://$(APP_NAME)/healthz'
+
+netpol-test-denied:
+	kubectl run curl-denied-evidence --rm --image=curlimages/curl:8.10.1 -n $(NAMESPACE) --restart=Never --command -- sh -c 'curl --connect-timeout 5 -s -o /dev/null -w "%{http_code}\n" http://$(APP_NAME)/healthz || true'
