@@ -103,3 +103,9 @@ The reliability-app Pods were isolated so that only explicitly permitted client 
 This improves the project’s production-readiness by introducing network segmentation and least-privilege traffic control.
 
 In a production EKS environment, this pattern would be used to restrict application ingress to trusted workloads such as ingress controllers, monitoring systems, or approved internal services.
+
+## Additional Operational Observation
+
+When migrating from manually-applied Kubernetes manifests to Helm-managed releases, existing resources caused Helm ownership conflicts because the resources were originally managed by `kubectl`.
+
+The conflicting resources had to be deleted before Helm could successfully install and manage the release.
