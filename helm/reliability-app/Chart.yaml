@@ -1,0 +1,8 @@
+apiVersion: v2
+name: reliability-app
+description: Helm chart for the Kubernetes Reliability Lab application
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
+icon: https://raw.githubusercontent.com/kubernetes/kubernetes/master/logo/logo.png
+

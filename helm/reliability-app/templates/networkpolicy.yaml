@@ -1,0 +1,23 @@
+{{- if .Values.networkPolicy.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ include "reliability-app.fullname" . }}-ingress-policy
+  labels:
+    {{- include "reliability-app.labels" . | nindent 4 }}
+    app.kubernetes.io/component: network-security
+spec:
+  podSelector:
+    matchLabels:
+      {{- include "reliability-app.selectorLabels" . | nindent 6 }}
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              {{ .Values.networkPolicy.allowedPodLabel.key }}: {{ .Values.networkPolicy.allowedPodLabel.value | quote }}
+      ports:
+        - protocol: TCP
+          port: {{ .Values.container.port }}
+{{- end }}

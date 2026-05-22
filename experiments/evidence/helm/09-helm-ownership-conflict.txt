@@ -1,0 +1,15 @@
+Helm installation initially failed because Kubernetes resources already existed and were managed by kubectl rather than Helm.
+
+Resources deleted before successful Helm install:
+
+- NetworkPolicy
+- HorizontalPodAutoscaler
+- PodDisruptionBudget
+- Service
+- Deployment
+- ConfigMap
+
+Secret resource intentionally preserved.
+
+Operational lesson:
+Helm does not automatically adopt existing kubectl-managed resources unless ownership metadata matches the Helm release.

@@ -1,0 +1,182 @@
+---
+# Source: reliability-app/templates/networkpolicy.yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: reliability-app-ingress-policy
+  labels:
+    app.kubernetes.io/name: reliability-app
+    app.kubernetes.io/instance: reliability-app
+    app.kubernetes.io/version: "0.1.0"
+    app.kubernetes.io/part-of: kubernetes-reliability-lab
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: reliability-app-0.1.0
+    app.kubernetes.io/component: network-security
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: reliability-app
+      app.kubernetes.io/instance: reliability-app
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              access: "allowed"
+      ports:
+        - protocol: TCP
+          port: 8000
+---
+# Source: reliability-app/templates/pdb.yaml
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: reliability-app-pdb
+  labels:
+    app.kubernetes.io/name: reliability-app
+    app.kubernetes.io/instance: reliability-app
+    app.kubernetes.io/version: "0.1.0"
+    app.kubernetes.io/part-of: kubernetes-reliability-lab
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: reliability-app-0.1.0
+    app.kubernetes.io/component: availability
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: reliability-app
+      app.kubernetes.io/instance: reliability-app
+---
+# Source: reliability-app/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: reliability-app-config
+  labels:
+    app.kubernetes.io/name: reliability-app
+    app.kubernetes.io/instance: reliability-app
+    app.kubernetes.io/version: "0.1.0"
+    app.kubernetes.io/part-of: kubernetes-reliability-lab
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: reliability-app-0.1.0
+data:
+  APP_NAME: "reliability-app"
+  APP_VERSION: "0.1.0"
+  APP_ENV: "kubernetes-local"
+  LOG_LEVEL: "info"
+---
+# Source: reliability-app/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: reliability-app
+  labels:
+    app.kubernetes.io/name: reliability-app
+    app.kubernetes.io/instance: reliability-app
+    app.kubernetes.io/version: "0.1.0"
+    app.kubernetes.io/part-of: kubernetes-reliability-lab
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: reliability-app-0.1.0
+    app.kubernetes.io/component: api
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: reliability-app
+    app.kubernetes.io/instance: reliability-app
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: http
+---
+# Source: reliability-app/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reliability-app
+  labels:
+    app.kubernetes.io/name: reliability-app
+    app.kubernetes.io/instance: reliability-app
+    app.kubernetes.io/version: "0.1.0"
+    app.kubernetes.io/part-of: kubernetes-reliability-lab
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: reliability-app-0.1.0
+    app.kubernetes.io/component: api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: reliability-app
+      app.kubernetes.io/instance: reliability-app
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: reliability-app
+        app.kubernetes.io/instance: reliability-app
+        app.kubernetes.io/component: api
+    spec:
+      containers:
+        - name: reliability-app
+          image: "reliability-app:local"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: reliability-app-config
+            - secretRef:
+                name: reliability-app-secret
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 2
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 3
+          resources:
+            limits:
+              cpu: 500m
+              memory: 256Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+---
+# Source: reliability-app/templates/hpa.yaml
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: reliability-app-hpa
+  labels:
+    app.kubernetes.io/name: reliability-app
+    app.kubernetes.io/instance: reliability-app
+    app.kubernetes.io/version: "0.1.0"
+    app.kubernetes.io/part-of: kubernetes-reliability-lab
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: reliability-app-0.1.0
+    app.kubernetes.io/component: autoscaling
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: reliability-app
+  minReplicas: 3
+  maxReplicas: 8
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 50

@@ -1,0 +1,16 @@
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/reliability-app-f4dc7b56c-7czhl   1/1     Running   0          4m25s
+pod/reliability-app-f4dc7b56c-7fjqj   1/1     Running   0          4m25s
+pod/reliability-app-f4dc7b56c-jrw96   1/1     Running   0          4m25s
+
+NAME                      TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
+service/reliability-app   ClusterIP   10.96.69.230   <none>        80/TCP    4m25s
+
+NAME                              READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/reliability-app   3/3     3            3           4m25s
+
+NAME                                        DESIRED   CURRENT   READY   AGE
+replicaset.apps/reliability-app-f4dc7b56c   3         3         3       4m25s
+
+NAME                                                      REFERENCE                    TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/reliability-app-hpa   Deployment/reliability-app   cpu: 2%/50%   3         8         3          4m25s

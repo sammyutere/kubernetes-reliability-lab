@@ -1,0 +1,18 @@
+Reliability app has been deployed.
+
+Release: {{ .Release.Name }}
+Namespace: {{ .Release.Namespace }}
+
+Check resources:
+
+  kubectl get all -n {{ .Release.Namespace }}
+
+Port-forward the Service:
+
+  kubectl port-forward svc/{{ include "reliability-app.fullname" . }} 8080:{{ .Values.service.port }} -n {{ .Release.Namespace }}
+
+Test:
+
+  curl http://127.0.0.1:8080/healthz
+  curl http://127.0.0.1:8080/readyz
+  curl http://127.0.0.1:8080/metrics

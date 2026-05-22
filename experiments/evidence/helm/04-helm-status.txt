@@ -1,0 +1,58 @@
+NAME: reliability-app
+LAST DEPLOYED: Fri May 22 20:31:19 2026
+NAMESPACE: reliability-lab
+STATUS: deployed
+REVISION: 1
+DESCRIPTION: Install complete
+RESOURCES:
+==> v1/NetworkPolicy
+NAME                             POD-SELECTOR                                                                        AGE
+reliability-app-ingress-policy   app.kubernetes.io/instance=reliability-app,app.kubernetes.io/name=reliability-app   3m56s
+
+==> v1/PodDisruptionBudget
+NAME                  MIN AVAILABLE   MAX UNAVAILABLE   ALLOWED DISRUPTIONS   AGE
+reliability-app-pdb   2               N/A               1                     3m56s
+
+==> v1/ConfigMap
+NAME                     DATA   AGE
+reliability-app-config   4      3m56s
+
+==> v1/Service
+NAME              TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
+reliability-app   ClusterIP   10.96.69.230   <none>        80/TCP    3m56s
+
+==> v1/Deployment
+NAME              READY   UP-TO-DATE   AVAILABLE   AGE
+reliability-app   3/3     3            3           3m56s
+
+==> v1/Pod(related)
+NAME                              READY   STATUS    RESTARTS   AGE
+reliability-app-f4dc7b56c-7czhl   1/1     Running   0          3m56s
+reliability-app-f4dc7b56c-7fjqj   1/1     Running   0          3m56s
+reliability-app-f4dc7b56c-jrw96   1/1     Running   0          3m56s
+
+==> v2/HorizontalPodAutoscaler
+NAME                  REFERENCE                    TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+reliability-app-hpa   Deployment/reliability-app   cpu: 3%/50%   3         8         3          3m56s
+
+
+TEST SUITE: None
+NOTES:
+Reliability app has been deployed.
+
+Release: reliability-app
+Namespace: reliability-lab
+
+Check resources:
+
+  kubectl get all -n reliability-lab
+
+Port-forward the Service:
+
+  kubectl port-forward svc/reliability-app 8080:80 -n reliability-lab
+
+Test:
+
+  curl http://127.0.0.1:8080/healthz
+  curl http://127.0.0.1:8080/readyz
+  curl http://127.0.0.1:8080/metrics

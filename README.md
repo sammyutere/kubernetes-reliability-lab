@@ -173,6 +173,18 @@ Completed:
 - Evidence capture for policy behaviour
 - Documentation of CNI enforcement dependency
 
+### Step 14 — Helm Chart Creation
+
+Completed:
+
+- Helm chart for reliability app
+- Parameterised Deployment, Service, ConfigMap, HPA, PDB, and NetworkPolicy templates
+- Local and EKS values files
+- Helm lint and template validation
+- Helm install/upgrade workflow
+- Helm evidence capture
+- Resolved Helm ownership conflicts from previously kubectl-managed resources
+
 ## Current Status
 
 - Step 1 complete: local toolchain and repository initialized.
@@ -188,6 +200,7 @@ Completed:
 - Step 11 complete: PodDisruptionBudget created.
 - Step 12 complete: HorizontalPodAutoscaler created.
 - Step 13 complete: NetworkPolicy created.
+- Step 14 complete: Helm Chart created.
 
 ## Completed Capabilities 
 
@@ -222,6 +235,9 @@ The project currently includes:
 - Load-test workflow for autoscaling validation
 - NetworkPolicy manifest for least-privilege ingress control
 - Network policy validation workflow with captured evidence
+- Helm-packaged Kubernetes application release
+- Environment-specific values for local kind and future EKS deployment
+- Helm validation and install workflow
 
 ## Current Architecture
 
@@ -236,8 +252,9 @@ MacBook Pro
 ```
 ## Next Milestone
 
-Add Kustomize overlays:
+Add Helm release workflow:
 
-- Local overlay
-- EKS overlay placeholder
-- Environment-specific manifest management
+- Upgrade validation
+- Rollback test
+- Release history
+- Failure recovery workflow

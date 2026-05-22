@@ -183,3 +183,21 @@ netpol-test-allowed:
 
 netpol-test-denied:
 	kubectl run curl-denied-evidence --rm --image=curlimages/curl:8.10.1 -n $(NAMESPACE) --restart=Never --command -- sh -c 'curl --connect-timeout 5 -s -o /dev/null -w "%{http_code}\n" http://$(APP_NAME)/healthz || true'
+
+helm-lint:
+	helm lint helm/$(APP_NAME)
+
+helm-template:
+	helm template $(APP_NAME) helm/$(APP_NAME) -n $(NAMESPACE) -f helm/$(APP_NAME)/values-local.yaml
+
+helm-install:
+	helm upgrade --install $(APP_NAME) helm/$(APP_NAME) -n $(NAMESPACE) --create-namespace -f helm/$(APP_NAME)/values-local.yaml
+
+helm-status:
+	helm status $(APP_NAME) -n $(NAMESPACE)
+
+helm-list:
+	helm list -n $(NAMESPACE)
+
+helm-uninstall:
+	helm uninstall $(APP_NAME) -n $(NAMESPACE)

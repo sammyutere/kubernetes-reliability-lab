@@ -1,0 +1,2 @@
+NAME           	NAMESPACE      	REVISION	UPDATED                             	STATUS  	CHART                	APP VERSION
+reliability-app	reliability-lab	1       	2026-05-22 20:31:19.887102 +0100 BST	deployed	reliability-app-0.1.0	0.1.0      
