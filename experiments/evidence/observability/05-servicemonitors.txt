@@ -1,0 +1,14 @@
+NAMESPACE    NAME                                                 AGE
+monitoring   monitoring-grafana                                   169m
+monitoring   monitoring-kube-prometheus-alertmanager              169m
+monitoring   monitoring-kube-prometheus-apiserver                 169m
+monitoring   monitoring-kube-prometheus-coredns                   169m
+monitoring   monitoring-kube-prometheus-kube-controller-manager   169m
+monitoring   monitoring-kube-prometheus-kube-etcd                 169m
+monitoring   monitoring-kube-prometheus-kube-proxy                169m
+monitoring   monitoring-kube-prometheus-kube-scheduler            169m
+monitoring   monitoring-kube-prometheus-kubelet                   169m
+monitoring   monitoring-kube-prometheus-operator                  169m
+monitoring   monitoring-kube-prometheus-prometheus                169m
+monitoring   monitoring-kube-state-metrics                        169m
+monitoring   monitoring-prometheus-node-exporter                  169m

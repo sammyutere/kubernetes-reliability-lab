@@ -201,3 +201,23 @@ helm-list:
 
 helm-uninstall:
 	helm uninstall $(APP_NAME) -n $(NAMESPACE)
+
+monitoring-repo:
+	helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+	helm repo update
+
+monitoring-install:
+	helm upgrade --install monitoring prometheus-community/kube-prometheus-stack -n monitoring --create-namespace -f observability/prometheus-values.yaml
+
+monitoring-pods:
+	kubectl get pods -n monitoring -o wide
+
+monitoring-status:
+	helm status monitoring -n monitoring
+
+grafana-port-forward:
+	kubectl port-forward svc/monitoring-grafana 3000:80 -n monitoring
+
+prometheus-port-forward:
+	kubectl port-forward svc/monitoring-kube-prometheus-prometheus 9090:9090 -n monitoring
+

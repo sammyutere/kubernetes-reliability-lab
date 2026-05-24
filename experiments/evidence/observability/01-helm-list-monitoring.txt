@@ -1,0 +1,2 @@
+NAME      	NAMESPACE 	REVISION	UPDATED                             	STATUS  	CHART                       	APP VERSION
+monitoring	monitoring	1       	2026-05-24 13:56:28.100901 +0100 BST	deployed	kube-prometheus-stack-85.3.2	v0.90.1    

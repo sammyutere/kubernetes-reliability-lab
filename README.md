@@ -185,6 +185,18 @@ Completed:
 - Helm evidence capture
 - Resolved Helm ownership conflicts from previously kubectl-managed resources
 
+### Step 15 — Prometheus and Grafana Installation
+
+Completed:
+
+- kube-prometheus-stack Helm installation
+- Dedicated `monitoring` namespace
+- Prometheus metrics platform
+- Grafana dashboard platform
+- Alertmanager, kube-state-metrics, node-exporter, and Prometheus Operator
+- Local port-forward access for Prometheus and Grafana
+- Observability evidence capture
+
 ## Current Status
 
 - Step 1 complete: local toolchain and repository initialized.
@@ -201,6 +213,7 @@ Completed:
 - Step 12 complete: HorizontalPodAutoscaler created.
 - Step 13 complete: NetworkPolicy created.
 - Step 14 complete: Helm Chart created.
+- Step 15 complete: Prometheus and Grafana Installed.
 
 ## Completed Capabilities 
 
@@ -238,6 +251,10 @@ The project currently includes:
 - Helm-packaged Kubernetes application release
 - Environment-specific values for local kind and future EKS deployment
 - Helm validation and install workflow
+- Cluster observability with Prometheus and Grafana
+- Kubernetes object-state metrics through kube-state-metrics
+- Node metrics through node-exporter
+- Monitoring stack managed by Helm
 
 ## Current Architecture
 
@@ -252,9 +269,9 @@ MacBook Pro
 ```
 ## Next Milestone
 
-Add Helm release workflow:
+Expose application metrics to Prometheus:
 
-- Upgrade validation
-- Rollback test
-- Release history
-- Failure recovery workflow
+- ServiceMonitor
+- App `/metrics` scraping
+- Grafana dashboard panels
+- Application-level reliability signals

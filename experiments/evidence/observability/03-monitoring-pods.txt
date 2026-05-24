@@ -1,0 +1,9 @@
+NAME                                                     READY   STATUS    RESTARTS   AGE    IP           NODE                            NOMINATED NODE   READINESS GATES
+alertmanager-monitoring-kube-prometheus-alertmanager-0   2/2     Running   0          165m   10.244.2.8   reliability-lab-worker          <none>           <none>
+monitoring-grafana-5958d97f97-9qkkt                      3/3     Running   0          165m   10.244.2.7   reliability-lab-worker          <none>           <none>
+monitoring-kube-prometheus-operator-66db65f96b-fhhgv     1/1     Running   0          165m   10.244.1.6   reliability-lab-worker2         <none>           <none>
+monitoring-kube-state-metrics-868694bc4b-ghd2l           1/1     Running   0          165m   10.244.2.6   reliability-lab-worker          <none>           <none>
+monitoring-prometheus-node-exporter-9t9pq                1/1     Running   0          165m   172.18.0.4   reliability-lab-worker          <none>           <none>
+monitoring-prometheus-node-exporter-mczj6                1/1     Running   0          165m   172.18.0.2   reliability-lab-control-plane   <none>           <none>
+monitoring-prometheus-node-exporter-q565q                1/1     Running   0          165m   172.18.0.3   reliability-lab-worker2         <none>           <none>
+prometheus-monitoring-kube-prometheus-prometheus-0       2/2     Running   0          165m   10.244.1.8   reliability-lab-worker2         <none>           <none>
