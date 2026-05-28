@@ -1,0 +1,11 @@
+  ruleSelector:
+    matchLabels:
+      release: monitoring
+  scrapeConfigNamespaceSelector: {}
+  scrapeConfigSelector:
+    matchLabels:
+      release: monitoring
+  scrapeInterval: 30s
+  securityContext:
+    fsGroup: 2000
+    runAsGroup: 2000

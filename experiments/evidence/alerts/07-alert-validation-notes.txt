@@ -1,0 +1,6 @@
+Alert validation result:
+
+- ReliabilityAppPdbNoAllowedDisruptions fired successfully.
+- This confirms PrometheusRule loading and alert evaluation are working.
+- ReliabilityAppDeploymentUnavailable did not fire during local testing.
+- Further investigation is required into the exact kube-state-metrics labels and the failure condition used for validation.

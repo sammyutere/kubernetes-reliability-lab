@@ -1,0 +1,62 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: reliability-app-alerts
+  namespace: monitoring
+  labels:
+    release: monitoring
+    app.kubernetes.io/name: reliability-app
+    app.kubernetes.io/part-of: kubernetes-reliability-lab
+    app.kubernetes.io/component: alerting
+spec:
+  groups:
+    - name: reliability-app.rules
+      rules:
+        - alert: ReliabilityAppDeploymentUnavailable
+          expr: kube_deployment_status_condition{namespace="reliability-lab", condition="Available", status="false"} == 1
+          for: 1m
+          labels:
+            severity: warning
+            service: reliability-app
+          annotations:
+            summary: "Reliability app Deployment is unavailable"
+            description: "The reliability-app Deployment has reported Available=false for more than 1 minute."
+        - alert: ReliabilityAppPodRestarting
+          expr: increase(kube_pod_container_status_restarts_total{namespace="reliability-lab", container="reliability-app"}[5m]) > 0
+          for: 1m
+          labels:
+            severity: warning
+            service: reliability-app
+          annotations:
+            summary: "Reliability app Pod restarted"
+            description: "One or more reliability-app containers restarted within the last 5 minutes."
+
+        - alert: ReliabilityAppHighCPUUsage
+          expr: avg(rate(container_cpu_usage_seconds_total{namespace="reliability-lab", container="reliability-app"}[5m])) > 0.25
+          for: 5m
+          labels:
+            severity: warning
+            service: reliability-app
+          annotations:
+            summary: "Reliability app CPU usage is high"
+            description: "Average CPU usage for reliability-app containers has exceeded 0.25 cores for more than 5 minutes."
+
+        - alert: ReliabilityAppHpaNearMaxReplicas
+          expr: kube_horizontalpodautoscaler_status_current_replicas{namespace="reliability-lab", horizontalpodautoscaler="reliability-app-hpa"} >= 7
+          for: 3m
+          labels:
+            severity: warning
+            service: reliability-app
+          annotations:
+            summary: "Reliability app HPA is near maximum replicas"
+            description: "The reliability-app HPA has scaled close to its maximum replica count."
+
+        - alert: ReliabilityAppPdbNoAllowedDisruptions
+          expr: kube_poddisruptionbudget_status_pod_disruptions_allowed{namespace="reliability-lab", poddisruptionbudget="reliability-app-pdb"} == 0
+          for: 5m
+          labels:
+            severity: info
+            service: reliability-app
+          annotations:
+            summary: "Reliability app PDB has no allowed disruptions"
+            description: "The reliability-app PodDisruptionBudget currently allows no voluntary Pod disruptions."

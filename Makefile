@@ -221,3 +221,19 @@ grafana-port-forward:
 prometheus-port-forward:
 	kubectl port-forward svc/monitoring-kube-prometheus-prometheus 9090:9090 -n monitoring
 
+alerts-apply:
+	kubectl apply -f observability/alerts.yaml
+
+alerts-get:
+	kubectl get prometheusrule reliability-app-alerts -n monitoring
+
+alerts-describe:
+	kubectl describe prometheusrule reliability-app-alerts -n monitoring
+
+alerts-test-scale-down:
+	kubectl scale deployment $(APP_NAME) -n $(NAMESPACE) --replicas=1
+
+alerts-test-restore:
+	kubectl scale deployment $(APP_NAME) -n $(NAMESPACE) --replicas=3
+	helm upgrade --install $(APP_NAME) helm/$(APP_NAME) -n $(NAMESPACE) -f helm/$(APP_NAME)/values-local.yaml
+

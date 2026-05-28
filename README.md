@@ -197,6 +197,18 @@ Completed:
 - Local port-forward access for Prometheus and Grafana
 - Observability evidence capture
 
+### Step 16 — Prometheus Alert Rules
+
+Completed:
+
+- PrometheusRule alert manifest
+- Deployment availability alert
+- Pod restart alert
+- High CPU alert
+- HPA near maximum replicas alert
+- PDB disruption safety alert
+- Alert validation and evidence capture workflow
+
 ## Current Status
 
 - Step 1 complete: local toolchain and repository initialized.
@@ -214,6 +226,7 @@ Completed:
 - Step 13 complete: NetworkPolicy created.
 - Step 14 complete: Helm Chart created.
 - Step 15 complete: Prometheus and Grafana Installed.
+- Step 16 complete: Prometheus Alert Rules
 
 ## Completed Capabilities 
 
@@ -255,6 +268,9 @@ The project currently includes:
 - Kubernetes object-state metrics through kube-state-metrics
 - Node metrics through node-exporter
 - Monitoring stack managed by Helm
+- Prometheus alerting rules for key Kubernetes reliability signals
+- Alert test workflow using controlled replica reduction
+- Evidence capture for alert rule validation
 
 ## Current Architecture
 
@@ -272,6 +288,6 @@ MacBook Pro
 Expose application metrics to Prometheus:
 
 - ServiceMonitor
-- App `/metrics` scraping
+- App `/metrics` scrape target
+- Application request metrics
 - Grafana dashboard panels
-- Application-level reliability signals

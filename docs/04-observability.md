@@ -87,3 +87,22 @@ Prometheus provides metrics collection and query capability.
 Grafana provides visual dashboards.
 
 This observability layer will later support alerting, SLO measurement, reliability experiments, and EKS operational validation.
+
+## Alerting Layer
+
+Prometheus alerting rules are defined using the Prometheus Operator `PrometheusRule` resource.
+
+Alert manifest:
+
+```txt
+observability/alerts.yaml
+```
+The current alert set covers:
+
+- Deployment availability
+- Pod restarts
+- high CPU usage
+- HPA near maximum replicas
+- PDB with no allowed disruptions
+
+Alerting converts raw metrics into operational signals that require investigation or action.
