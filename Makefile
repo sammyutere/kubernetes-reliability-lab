@@ -237,3 +237,13 @@ alerts-test-restore:
 	kubectl scale deployment $(APP_NAME) -n $(NAMESPACE) --replicas=3
 	helm upgrade --install $(APP_NAME) helm/$(APP_NAME) -n $(NAMESPACE) -f helm/$(APP_NAME)/values-local.yaml
 
+experiment-kill-pod:
+	kubectl delete pod $$(kubectl get pods -n $(NAMESPACE) -l app.kubernetes.io/name=$(APP_NAME) -o jsonpath='{.items[0].metadata.name}') -n $(NAMESPACE)
+
+experiment-kill-pod-evidence:
+	mkdir -p experiments/evidence/kill-pod
+	kubectl get deployment $(APP_NAME) -n $(NAMESPACE) > experiments/evidence/kill-pod/01-before-deployment.txt
+	kubectl get pods -n $(NAMESPACE) -o wide > experiments/evidence/kill-pod/02-before-pods.txt
+	kubectl get rs -n $(NAMESPACE) > experiments/evidence/kill-pod/03-before-replicasets.txt
+
+

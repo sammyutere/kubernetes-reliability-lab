@@ -209,6 +209,16 @@ Completed:
 - PDB disruption safety alert
 - Alert validation and evidence capture workflow
 
+### Step 17 — Kill Pod Reliability Experiment
+
+Completed:
+
+- Manual Pod deletion experiment
+- Deployment self-healing validation
+- ReplicaSet replacement behaviour observed
+- Service continuity validated after Pod replacement
+- Evidence captured for before and after states
+
 ## Current Status
 
 - Step 1 complete: local toolchain and repository initialized.
@@ -226,7 +236,8 @@ Completed:
 - Step 13 complete: NetworkPolicy created.
 - Step 14 complete: Helm Chart created.
 - Step 15 complete: Prometheus and Grafana Installed.
-- Step 16 complete: Prometheus Alert Rules
+- Step 16 complete: Prometheus Alert Rules created.
+- Step 17 complete: Kill Pod Reliability Experiment done.
 
 ## Completed Capabilities 
 
@@ -271,6 +282,8 @@ The project currently includes:
 - Prometheus alerting rules for key Kubernetes reliability signals
 - Alert test workflow using controlled replica reduction
 - Evidence capture for alert rule validation
+- Documented Pod self-healing experiment
+- Evidence-based validation of Deployment desired-state reconciliation
 
 ## Current Architecture
 
@@ -285,9 +298,9 @@ MacBook Pro
 ```
 ## Next Milestone
 
-Expose application metrics to Prometheus:
+Run bad rollout experiment:
 
-- ServiceMonitor
-- App `/metrics` scrape target
-- Application request metrics
-- Grafana dashboard panels
+- Deploy invalid image or configuration
+- Observe rollout failure
+- Validate rollback workflow
+- Capture failure and recovery evidence

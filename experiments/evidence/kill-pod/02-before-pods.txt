@@ -1,0 +1,4 @@
+NAME                              READY   STATUS    RESTARTS      AGE   IP           NODE                      NOMINATED NODE   READINESS GATES
+reliability-app-f4dc7b56c-j8hgz   1/1     Running   1 (47m ago)   10h   10.244.2.3   reliability-lab-worker    <none>           <none>
+reliability-app-f4dc7b56c-jvd4j   1/1     Running   1 (47m ago)   10h   10.244.2.5   reliability-lab-worker    <none>           <none>
+reliability-app-f4dc7b56c-kvl92   1/1     Running   1 (47m ago)   10h   10.244.1.7   reliability-lab-worker2   <none>           <none>

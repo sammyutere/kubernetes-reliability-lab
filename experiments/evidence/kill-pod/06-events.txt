@@ -1,0 +1,12 @@
+LAST SEEN   TYPE      REASON                 OBJECT                                 MESSAGE
+56m         Warning   NodeNotReady           pod/reliability-app-f4dc7b56c-j8hgz    Node is not ready
+56m         Warning   NodeNotReady           pod/reliability-app-f4dc7b56c-jvd4j    Node is not ready
+56m         Warning   NodeNotReady           pod/reliability-app-f4dc7b56c-kvl92    Node is not ready
+56m         Normal    TaintManagerEviction   pod/reliability-app-f4dc7b56c-j8hgz    Cancelling deletion of Pod reliability-lab/reliability-app-f4dc7b56c-j8hgz
+56m         Normal    TaintManagerEviction   pod/reliability-app-f4dc7b56c-jvd4j    Cancelling deletion of Pod reliability-lab/reliability-app-f4dc7b56c-jvd4j
+11m         Normal    Scheduled              pod/reliability-app-f4dc7b56c-6trjp    Successfully assigned reliability-lab/reliability-app-f4dc7b56c-6trjp to reliability-lab-worker
+11m         Normal    Pulled                 pod/reliability-app-f4dc7b56c-6trjp    Container image "reliability-app:local" already present on machine and can be accessed by the pod
+11m         Normal    Created                pod/reliability-app-f4dc7b56c-6trjp    Container created
+11m         Normal    Started                pod/reliability-app-f4dc7b56c-6trjp    Container started
+11m         Normal    Killing                pod/reliability-app-f4dc7b56c-j8hgz    Stopping container reliability-app
+11m         Normal    SuccessfulCreate       replicaset/reliability-app-f4dc7b56c   Created pod: reliability-app-f4dc7b56c-6trjp
