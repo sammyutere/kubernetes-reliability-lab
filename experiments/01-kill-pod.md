@@ -68,7 +68,7 @@ experiments/evidence/kill-pod/
 ├── 06-events.txt
 └── 07-healthz-after-delete.json
 ```
-Observed Behaviour
+## Observed Behaviour
 
 The reliability-app Deployment was running with 3 desired replicas before the experiment.
 
@@ -82,7 +82,7 @@ After recovery, the Deployment returned to the desired state with 3 available re
 
 The Service continued to provide a stable access point to the application after the Pod replacement.
 
-Conclusion
+## Conclusion
 
 The experiment successfully validated Kubernetes self-healing behaviour for a Deployment-managed workload.
 
