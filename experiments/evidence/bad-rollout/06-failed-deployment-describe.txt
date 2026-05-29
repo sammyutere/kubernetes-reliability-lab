@@ -1,0 +1,54 @@
+Name:                   reliability-app
+Namespace:              reliability-lab
+CreationTimestamp:      Fri, 22 May 2026 20:31:20 +0100
+Labels:                 app.kubernetes.io/component=api
+                        app.kubernetes.io/instance=reliability-app
+                        app.kubernetes.io/managed-by=Helm
+                        app.kubernetes.io/name=reliability-app
+                        app.kubernetes.io/part-of=kubernetes-reliability-lab
+                        app.kubernetes.io/version=0.1.0
+                        helm.sh/chart=reliability-app-0.1.0
+Annotations:            deployment.kubernetes.io/revision: 5
+                        meta.helm.sh/release-name: reliability-app
+                        meta.helm.sh/release-namespace: reliability-lab
+Selector:               app.kubernetes.io/instance=reliability-app,app.kubernetes.io/name=reliability-app
+Replicas:               3 desired | 1 updated | 4 total | 3 available | 1 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app.kubernetes.io/component=api
+           app.kubernetes.io/instance=reliability-app
+           app.kubernetes.io/name=reliability-app
+  Containers:
+   reliability-app:
+    Image:      missing-image:notfound
+    Port:       8000/TCP (http)
+    Host Port:  0/TCP (http)
+    Limits:
+      cpu:     500m
+      memory:  256Mi
+    Requests:
+      cpu:      100m
+      memory:   128Mi
+    Liveness:   http-get http://:http/healthz delay=10s timeout=2s period=10s #success=1 #failure=3
+    Readiness:  http-get http://:http/readyz delay=5s timeout=2s period=5s #success=1 #failure=3
+    Environment Variables from:
+      reliability-app-config  ConfigMap  Optional: false
+      reliability-app-secret  Secret     Optional: false
+    Environment:              <none>
+    Mounts:                   <none>
+  Volumes:                    <none>
+  Node-Selectors:             <none>
+  Tolerations:                <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    ReplicaSetUpdated
+OldReplicaSets:  reliability-app-f4dc7b56c (3/3 replicas created), reliability-app-7c7879459c (0/0 replicas created), reliability-app-5ccff6799f (0/0 replicas created)
+NewReplicaSet:   reliability-app-7595b8c557 (1/1 replicas created)
+Events:
+  Type    Reason             Age    From                   Message
+  ----    ------             ----   ----                   -------
+  Normal  ScalingReplicaSet  4m11s  deployment-controller  Scaled up replica set reliability-app-7595b8c557 from 0 to 1

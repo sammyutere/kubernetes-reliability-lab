@@ -117,3 +117,56 @@ Static Kubernetes YAML is useful for learning. Helm is stronger for repeatable d
 
 This prepares the project for EKS, CI/CD, environment-specific configuration, and release rollback workflows.
 
+
+## Failed Rollout and Rollback
+
+The project includes a bad rollout experiment to validate release recovery.
+
+A failed image rollout can be triggered with:
+
+```bash
+helm upgrade reliability-app helm/reliability-app \
+  -n reliability-lab \
+  -f helm/reliability-app/values-local.yaml \
+  --set image.repository=missing-image \
+  --set image.tag=notfound
+```
+Check rollout:
+
+```bash
+kubectl rollout status deployment/reliability-app -n reliability-lab --timeout=90s
+```
+### Selecting a Rollback Revision
+
+Before executing a rollback, inspect release history:
+
+```bash
+helm history reliability-app -n reliability-lab
+```
+A suitable rollback target is usually the most recent successfully deployed revision.
+
+Example:
+
+```txt
+Revision 7: deployed
+Revision 6: superseded
+Revision 5: superseded
+Revision 2-4: failed
+```
+In this example, revision 7 represents the latest known-good release state.
+
+Recover with Helm rollback:
+
+```bash
+helm history reliability-app -n reliability-lab
+helm rollback reliability-app <previous-good-revision> -n reliability-lab
+```
+Alternative recovery:
+
+```bash
+helm upgrade --install reliability-app helm/reliability-app \
+  -n reliability-lab \
+  -f helm/reliability-app/values-local.yaml
+```
+This validates that Helm release history can support controlled recovery from failed deployments.
+

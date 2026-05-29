@@ -247,3 +247,16 @@ experiment-kill-pod-evidence:
 	kubectl get rs -n $(NAMESPACE) > experiments/evidence/kill-pod/03-before-replicasets.txt
 
 
+experiment-bad-rollout:
+	helm upgrade $(APP_NAME) helm/$(APP_NAME) -n $(NAMESPACE) -f helm/$(APP_NAME)/values-local.yaml --set image.repository=missing-image --set image.tag=notfound
+
+experiment-rollout-status:
+	kubectl rollout status deployment/$(APP_NAME) -n $(NAMESPACE) --timeout=90s
+
+experiment-helm-history:
+	helm history $(APP_NAME) -n $(NAMESPACE)
+
+experiment-restore-good:
+	helm upgrade --install $(APP_NAME) helm/$(APP_NAME) -n $(NAMESPACE) -f helm/$(APP_NAME)/values-local.yaml
+	kubectl rollout status deployment/$(APP_NAME) -n $(NAMESPACE)
+

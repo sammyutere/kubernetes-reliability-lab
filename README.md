@@ -219,6 +219,18 @@ Completed:
 - Service continuity validated after Pod replacement
 - Evidence captured for before and after states
 
+### Step 18 — Bad Rollout Reliability Experiment
+
+Completed:
+
+- Intentional bad image rollout
+- Rollout failure observation
+- Image pull failure diagnosis
+- Service continuity check during failed rollout
+- Helm rollback or corrected upgrade recovery
+- Evidence captured for failure and recovery states
+- Validated alternative recovery using Helm upgrade after rollback failure
+
 ## Current Status
 
 - Step 1 complete: local toolchain and repository initialized.
@@ -238,6 +250,7 @@ Completed:
 - Step 15 complete: Prometheus and Grafana Installed.
 - Step 16 complete: Prometheus Alert Rules created.
 - Step 17 complete: Kill Pod Reliability Experiment done.
+- Step 18 complete: Bad Rollout Reliability Experiment done.
 
 ## Completed Capabilities 
 
@@ -284,6 +297,9 @@ The project currently includes:
 - Evidence capture for alert rule validation
 - Documented Pod self-healing experiment
 - Evidence-based validation of Deployment desired-state reconciliation
+- Documented failed rollout recovery workflow
+- Helm rollback-based operational recovery path
+- Runbook for failed application rollout
 
 ## Current Architecture
 
@@ -298,9 +314,9 @@ MacBook Pro
 ```
 ## Next Milestone
 
-Run bad rollout experiment:
+Run CPU spike experiment:
 
-- Deploy invalid image or configuration
-- Observe rollout failure
-- Validate rollback workflow
-- Capture failure and recovery evidence
+- Generate sustained CPU load
+- Observe HPA scaling
+- Capture metrics and scaling evidence
+- Document autoscaling behaviour

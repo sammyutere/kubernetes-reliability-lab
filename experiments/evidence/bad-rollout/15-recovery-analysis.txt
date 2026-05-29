@@ -1,0 +1,21 @@
+Recovery validation summary
+
+Attempt 1:
+helm rollback reliability-app 7 -n reliability-lab
+
+Result:
+Deployment did not recover successfully.
+Rollout status exceeded progress deadline.
+
+Attempt 2:
+helm upgrade --install reliability-app \
+  helm/reliability-app \
+  -n reliability-lab \
+  -f helm/reliability-app/values-local.yaml
+
+Result:
+Deployment recovered successfully.
+Application returned to healthy state.
+
+Operational lesson:
+Multiple recovery procedures should be documented and tested.

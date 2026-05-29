@@ -1,0 +1,26 @@
+LAST SEEN   TYPE      REASON                         OBJECT                                        MESSAGE
+11h         Warning   FailedGetResourceMetric        horizontalpodautoscaler/reliability-app-hpa   failed to get cpu utilization: unable to get metrics for resource cpu: unable to fetch metrics from resource metrics API: the server is currently unable to handle the request (get pods.metrics.k8s.io)
+11h         Warning   FailedComputeMetricsReplicas   horizontalpodautoscaler/reliability-app-hpa   invalid metrics (1 invalid out of 1), first error is: failed to get cpu resource metric value: failed to get cpu utilization: unable to get metrics for resource cpu: unable to fetch metrics from resource metrics API: the server is currently unable to handle the request (get pods.metrics.k8s.io)
+5h23m       Warning   FailedGetScale                 horizontalpodautoscaler/reliability-app-hpa   Unauthorized
+11m         Normal    SandboxChanged                 pod/reliability-app-f4dc7b56c-kvl92           Pod sandbox changed, it will be killed and re-created.
+11m         Normal    SandboxChanged                 pod/reliability-app-f4dc7b56c-6trjp           Pod sandbox changed, it will be killed and re-created.
+11m         Normal    SandboxChanged                 pod/reliability-app-f4dc7b56c-jvd4j           Pod sandbox changed, it will be killed and re-created.
+11m         Normal    Created                        pod/reliability-app-f4dc7b56c-kvl92           Container created
+11m         Normal    Pulled                         pod/reliability-app-f4dc7b56c-kvl92           Container image "reliability-app:local" already present on machine and can be accessed by the pod
+11m         Normal    Started                        pod/reliability-app-f4dc7b56c-jvd4j           Container started
+11m         Normal    Pulled                         pod/reliability-app-f4dc7b56c-6trjp           Container image "reliability-app:local" already present on machine and can be accessed by the pod
+11m         Normal    Created                        pod/reliability-app-f4dc7b56c-6trjp           Container created
+11m         Normal    Started                        pod/reliability-app-f4dc7b56c-6trjp           Container started
+11m         Normal    Pulled                         pod/reliability-app-f4dc7b56c-jvd4j           Container image "reliability-app:local" already present on machine and can be accessed by the pod
+11m         Normal    Created                        pod/reliability-app-f4dc7b56c-jvd4j           Container created
+11m         Normal    Started                        pod/reliability-app-f4dc7b56c-kvl92           Container started
+10m         Warning   FailedGetResourceMetric        horizontalpodautoscaler/reliability-app-hpa   failed to get cpu utilization: unable to get metrics for resource cpu: unable to fetch metrics from resource metrics API: the server is currently unable to handle the request (get pods.metrics.k8s.io)
+10m         Warning   FailedComputeMetricsReplicas   horizontalpodautoscaler/reliability-app-hpa   invalid metrics (1 invalid out of 1), first error is: failed to get cpu resource metric value: failed to get cpu utilization: unable to get metrics for resource cpu: unable to fetch metrics from resource metrics API: the server is currently unable to handle the request (get pods.metrics.k8s.io)
+5m9s        Normal    SuccessfulCreate               replicaset/reliability-app-7595b8c557         Created pod: reliability-app-7595b8c557-dljnl
+5m9s        Normal    Scheduled                      pod/reliability-app-7595b8c557-dljnl          Successfully assigned reliability-lab/reliability-app-7595b8c557-dljnl to reliability-lab-worker
+5m9s        Normal    ScalingReplicaSet              deployment/reliability-app                    Scaled up replica set reliability-app-7595b8c557 from 0 to 1
+2m9s        Normal    Pulling                        pod/reliability-app-7595b8c557-dljnl          Pulling image "missing-image:notfound"
+2m8s        Warning   Failed                         pod/reliability-app-7595b8c557-dljnl          Error: ErrImagePull
+2m8s        Warning   Failed                         pod/reliability-app-7595b8c557-dljnl          Failed to pull image "missing-image:notfound": failed to pull and unpack image "docker.io/library/missing-image:notfound": failed to resolve reference "docker.io/library/missing-image:notfound": pull access denied, repository does not exist or may require authorization: server message: insufficient_scope: authorization failed
+2s          Warning   Failed                         pod/reliability-app-7595b8c557-dljnl          Error: ImagePullBackOff
+2s          Normal    BackOff                        pod/reliability-app-7595b8c557-dljnl          Back-off pulling image "missing-image:notfound"

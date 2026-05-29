@@ -1,0 +1,5 @@
+NAME                               READY   STATUS         RESTARTS        AGE     IP           NODE                      NOMINATED NODE   READINESS GATES
+reliability-app-7595b8c557-dljnl   0/1     ErrImagePull   0               3m20s   10.244.2.6   reliability-lab-worker    <none>           <none>
+reliability-app-f4dc7b56c-6trjp    1/1     Running        1 (9m54s ago)   16h     10.244.2.5   reliability-lab-worker    <none>           <none>
+reliability-app-f4dc7b56c-jvd4j    1/1     Running        2 (9m54s ago)   27h     10.244.2.3   reliability-lab-worker    <none>           <none>
+reliability-app-f4dc7b56c-kvl92    1/1     Running        2 (9m54s ago)   27h     10.244.1.5   reliability-lab-worker2   <none>           <none>

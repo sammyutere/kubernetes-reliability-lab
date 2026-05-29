@@ -1,0 +1,11 @@
+LAST SEEN   TYPE      REASON              OBJECT                                  MESSAGE
+58m         Normal    Scheduled           pod/reliability-app-7595b8c557-dljnl    Successfully assigned reliability-lab/reliability-app-7595b8c557-dljnl to reliability-lab-worker
+58m         Normal    SuccessfulCreate    replicaset/reliability-app-7595b8c557   Created pod: reliability-app-7595b8c557-dljnl
+58m         Normal    ScalingReplicaSet   deployment/reliability-app              Scaled up replica set reliability-app-7595b8c557 from 0 to 1
+10m         Warning   Failed              pod/reliability-app-7595b8c557-dljnl    Error: ErrImagePull
+10m         Warning   Failed              pod/reliability-app-7595b8c557-dljnl    Error: ImagePullBackOff
+10m         Normal    Pulling             pod/reliability-app-7595b8c557-dljnl    Pulling image "missing-image:notfound"
+8m12s       Normal    BackOff             pod/reliability-app-7595b8c557-dljnl    Back-off pulling image "missing-image:notfound"
+7m57s       Warning   Failed              pod/reliability-app-7595b8c557-dljnl    Failed to pull image "missing-image:notfound": failed to pull and unpack image "docker.io/library/missing-image:notfound": failed to resolve reference "docker.io/library/missing-image:notfound": pull access denied, repository does not exist or may require authorization: server message: insufficient_scope: authorization failed
+3m46s       Normal    SuccessfulDelete    replicaset/reliability-app-7595b8c557   Deleted pod: reliability-app-7595b8c557-dljnl
+3m46s       Normal    ScalingReplicaSet   deployment/reliability-app              Scaled down replica set reliability-app-7595b8c557 from 1 to 0
