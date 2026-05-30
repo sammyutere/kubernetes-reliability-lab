@@ -1,0 +1,9 @@
+NAME                              READY   STATUS    RESTARTS        AGE     IP            NODE                      NOMINATED NODE   READINESS GATES
+reliability-app-f4dc7b56c-2kvl6   1/1     Running   0               2m52s   10.244.2.16   reliability-lab-worker    <none>           <none>
+reliability-app-f4dc7b56c-2w85v   1/1     Running   0               3m7s    10.244.2.14   reliability-lab-worker    <none>           <none>
+reliability-app-f4dc7b56c-6dcxj   1/1     Running   0               3m7s    10.244.2.15   reliability-lab-worker    <none>           <none>
+reliability-app-f4dc7b56c-7zrbb   1/1     Running   0               44m     10.244.1.13   reliability-lab-worker2   <none>           <none>
+reliability-app-f4dc7b56c-jtst5   1/1     Running   0               2m52s   10.244.1.19   reliability-lab-worker2   <none>           <none>
+reliability-app-f4dc7b56c-kvl92   1/1     Running   3 (28m ago)     2d5h    10.244.1.5    reliability-lab-worker2   <none>           <none>
+reliability-app-f4dc7b56c-pgh72   1/1     Running   0               3m7s    10.244.1.18   reliability-lab-worker2   <none>           <none>
+reliability-app-f4dc7b56c-t5q7w   1/1     Running   1 (2m59s ago)   62m     10.244.2.7    reliability-lab-worker    <none>           <none>

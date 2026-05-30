@@ -1,0 +1,2 @@
+NAME                  REFERENCE                    TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+reliability-app-hpa   Deployment/reliability-app   cpu: 2%/50%   3         8         3          7d19h

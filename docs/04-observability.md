@@ -106,3 +106,47 @@ The current alert set covers:
 - PDB with no allowed disruptions
 
 Alerting converts raw metrics into operational signals that require investigation or action.
+
+## Autoscaling Observability
+
+Autoscaling experiments should capture evidence before, during, and after load generation.
+
+Useful commands:
+
+```bash
+kubectl top pods -n reliability-lab
+
+kubectl get hpa reliability-app-hpa -n reliability-lab
+
+kubectl describe hpa reliability-app-hpa -n reliability-lab
+```
+### Monitoring CPU Usage
+
+Some kubectl versions do not support:
+
+```bash
+kubectl top pods --watch
+```
+
+For compatibility, use:
+
+```bash
+while true; do
+  clear
+  kubectl top pods -n reliability-lab
+  sleep 5
+done
+```
+### Local Environment Considerations
+
+A powerful local workstation may not generate sufficient CPU pressure to trigger autoscaling using production-oriented HPA thresholds.
+
+Local validation may require:
+
+- lower target utilisation
+- longer test duration
+- higher concurrency
+- more CPU-intensive workloads
+
+Evidence should always determine conclusions rather than assumptions.
+

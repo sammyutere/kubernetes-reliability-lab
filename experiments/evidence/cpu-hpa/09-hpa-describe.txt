@@ -1,0 +1,31 @@
+Name:                                                  reliability-app-hpa
+Namespace:                                             reliability-lab
+Labels:                                                app.kubernetes.io/component=autoscaling
+                                                       app.kubernetes.io/instance=reliability-app
+                                                       app.kubernetes.io/managed-by=Helm
+                                                       app.kubernetes.io/name=reliability-app
+                                                       app.kubernetes.io/part-of=kubernetes-reliability-lab
+                                                       app.kubernetes.io/version=0.1.0
+                                                       helm.sh/chart=reliability-app-0.1.0
+Annotations:                                           meta.helm.sh/release-name: reliability-app
+                                                       meta.helm.sh/release-namespace: reliability-lab
+CreationTimestamp:                                     Sat, 30 May 2026 17:22:19 +0100
+Reference:                                             Deployment/reliability-app
+Metrics:                                               ( current / target )
+  resource cpu on pods  (as a percentage of request):  3% (3m) / 10%
+Min replicas:                                          3
+Max replicas:                                          8
+Deployment pods:                                       8 current / 8 desired
+Conditions:
+  Type            Status  Reason               Message
+  ----            ------  ------               -------
+  AbleToScale     True    ScaleDownStabilized  recent recommendations were higher than current one, applying the highest recent recommendation
+  ScalingActive   True    ValidMetricFound     the HPA was able to successfully calculate a replica count from cpu resource utilization (percentage of request)
+  ScalingLimited  True    TooManyReplicas      the desired replica count is more than the maximum replica count
+Events:
+  Type    Reason             Age                  From                       Message
+  ----    ------             ----                 ----                       -------
+  Normal  SuccessfulRescale  24m                  horizontal-pod-autoscaler  New size: 4; reason: All metrics below target
+  Normal  SuccessfulRescale  20m                  horizontal-pod-autoscaler  New size: 3; reason: All metrics below target
+  Normal  SuccessfulRescale  4m31s (x2 over 29m)  horizontal-pod-autoscaler  New size: 6; reason: cpu resource utilization (percentage of request) above target
+  Normal  SuccessfulRescale  4m16s (x2 over 29m)  horizontal-pod-autoscaler  New size: 8; reason:

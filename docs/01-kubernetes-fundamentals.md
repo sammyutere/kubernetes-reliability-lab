@@ -445,3 +445,59 @@ Important operational note:
 
 NetworkPolicy resources require a compatible CNI implementation to enforce them. A Kubernetes API server may accept the resource even if the cluster networking layer does not enforce the rules.
 
+## CPU Spike and HorizontalPodAutoscaler Experiment
+
+The project includes a CPU spike experiment to validate autoscaling behaviour.
+
+### Components Involved
+
+```txt
+Load Generator
+    ↓
+Application CPU Usage
+    ↓
+Metrics Server
+    ↓
+HorizontalPodAutoscaler
+    ↓
+Deployment
+    ↓
+ReplicaSet
+    ↓
+Pods
+```
+
+### Operational Findings
+
+Initial testing did not trigger autoscaling because CPU utilisation remained below the configured threshold.
+
+Observed HPA metric:
+
+```txt
+cpu: 2%/50%
+```
+
+To improve observability in the local kind environment:
+
+- CPU target utilisation was reduced to 10%.
+- Load-test concurrency was increased.
+- Additional evidence capture was introduced.
+
+### Helm and HPA Interaction
+
+During HPA tuning, Helm upgrade initially failed because Deployment replica count was being managed by the HPA controller.
+
+The HPA was temporarily removed before reapplying the Helm configuration.
+
+This demonstrated an important operational consideration when multiple controllers interact with Deployment scaling behaviour.
+
+### Learning Outcome
+
+The experiment validated:
+
+- Metrics collection
+- Autoscaling evaluation
+- Deployment scaling logic
+- HPA ownership behaviour
+- Local environment limitations
+

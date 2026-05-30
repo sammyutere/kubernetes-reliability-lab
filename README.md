@@ -231,6 +231,18 @@ Completed:
 - Evidence captured for failure and recovery states
 - Validated alternative recovery using Helm upgrade after rollback failure
 
+### Step 19 — CPU Spike and HPA Experiment
+
+Completed:
+
+- CPU load generation
+- HPA evaluation validation
+- Metrics Server validation
+- Autoscaling evidence capture
+- HPA and Helm ownership conflict investigation
+- Local environment tuning for autoscaling validation
+- CPU metrics observation workflow compatible with macOS/kubectl versions
+
 ## Current Status
 
 - Step 1 complete: local toolchain and repository initialized.
@@ -251,6 +263,7 @@ Completed:
 - Step 16 complete: Prometheus Alert Rules created.
 - Step 17 complete: Kill Pod Reliability Experiment done.
 - Step 18 complete: Bad Rollout Reliability Experiment done.
+- Step 19 complete: CPU Spike and HPA Experiment done.
 
 ## Completed Capabilities 
 
@@ -300,6 +313,8 @@ The project currently includes:
 - Documented failed rollout recovery workflow
 - Helm rollback-based operational recovery path
 - Runbook for failed application rollout
+- Evidence-based HPA autoscaling validation
+- CPU spike experiment for capacity response testing
 
 ## Current Architecture
 
@@ -314,9 +329,9 @@ MacBook Pro
 ```
 ## Next Milestone
 
-Run CPU spike experiment:
+Run node drain experiment:
 
-- Generate sustained CPU load
-- Observe HPA scaling
-- Capture metrics and scaling evidence
-- Document autoscaling behaviour
+- Drain worker node
+- Observe PDB behaviour
+- Validate Pod rescheduling
+- Capture maintenance-disruption evidence

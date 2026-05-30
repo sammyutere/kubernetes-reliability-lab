@@ -1,0 +1,4 @@
+NAME                              CPU(cores)   MEMORY(bytes)   
+reliability-app-f4dc7b56c-6trjp   3m           41Mi            
+reliability-app-f4dc7b56c-jvd4j   3m           45Mi            
+reliability-app-f4dc7b56c-kvl92   2m           42Mi            

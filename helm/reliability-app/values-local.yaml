@@ -12,7 +12,7 @@ hpa:
   enabled: true
   minReplicas: 3
   maxReplicas: 8
-  targetCPUUtilizationPercentage: 50
+  targetCPUUtilizationPercentage: 10
 
 pdb:
   enabled: true

@@ -260,3 +260,21 @@ experiment-restore-good:
 	helm upgrade --install $(APP_NAME) helm/$(APP_NAME) -n $(NAMESPACE) -f helm/$(APP_NAME)/values-local.yaml
 	kubectl rollout status deployment/$(APP_NAME) -n $(NAMESPACE)
 
+experiment-cpu-hpa-baseline:
+	mkdir -p experiments/evidence/cpu-hpa
+	kubectl get deployment $(APP_NAME) -n $(NAMESPACE) > experiments/evidence/cpu-hpa/01-before-deployment.txt
+	kubectl get hpa $(APP_NAME)-hpa -n $(NAMESPACE) > experiments/evidence/cpu-hpa/02-before-hpa.txt
+	kubectl get pods -n $(NAMESPACE) -o wide > experiments/evidence/cpu-hpa/03-before-pods.txt
+	kubectl top pods -n $(NAMESPACE) > experiments/evidence/cpu-hpa/04-before-top-pods.txt
+
+experiment-cpu-hpa-load:
+	./experiments/scripts/load-test.sh http://127.0.0.1:8080/cpu 180
+
+experiment-cpu-hpa-capture:
+	kubectl get hpa $(APP_NAME)-hpa -n $(NAMESPACE) > experiments/evidence/cpu-hpa/05-during-hpa.txt
+	kubectl get deployment $(APP_NAME) -n $(NAMESPACE) > experiments/evidence/cpu-hpa/06-during-deployment.txt
+	kubectl get pods -n $(NAMESPACE) -o wide > experiments/evidence/cpu-hpa/07-during-pods.txt
+	kubectl top pods -n $(NAMESPACE) > experiments/evidence/cpu-hpa/08-during-top-pods.txt
+	kubectl describe hpa $(APP_NAME)-hpa -n $(NAMESPACE) > experiments/evidence/cpu-hpa/09-hpa-describe.txt
+
+
