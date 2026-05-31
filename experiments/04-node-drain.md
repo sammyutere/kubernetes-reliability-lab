@@ -2,122 +2,120 @@
 
 ## Purpose
 
-Validate that the reliability app maintains minimum availability during voluntary node maintenance.
+Validate application behaviour during planned Kubernetes node maintenance.
 
 ## Hypothesis
 
-With 3 replicas and a PodDisruptionBudget requiring `minAvailable: 2`, Kubernetes should allow at most 1 voluntary Pod disruption at a time.
+When a worker node is drained, Kubernetes should evict Pods from that node, reschedule replacement Pods where possible, and respect the PodDisruptionBudget requiring at least 2 available reliability-app Pods.
 
 ## Preconditions
 
-- Deployment `reliability-app` is running 3 replicas.
-- Service `reliability-app` is available.
+- Deployment `reliability-app` is healthy.
+- Desired replica count is 3.
+- Service `reliability-app` exists.
 - PodDisruptionBudget `reliability-app-pdb` exists.
-- All Pods are healthy and Ready.
+- At least one worker node is available for scheduling replacement Pods.
 
 ## Commands
 
-Check current Pods:
+Identify Pod placement:
 
 ```bash
 kubectl get pods -n reliability-lab -o wide
 ```
-Check PDB:
+
+Set target node:
 
 ```bash
-kubectl get pdb -n reliability-lab
+DRAIN_NODE=reliability-lab-worker2
 ```
-Drain worker node:
+
+Drain node:
 
 ```bash
-kubectl drain reliability-lab-worker --ignore-daemonsets --delete-emptydir-data
+kubectl drain "$DRAIN_NODE" \
+  --ignore-daemonsets \
+  --delete-emptydir-data
 ```
+
 Watch Pods:
 
 ```bash
 kubectl get pods -n reliability-lab -o wide -w
 ```
+
+Check PDB:
+
+```bash
+kubectl get pdb reliability-app-pdb -n reliability-lab
+```
+
 Restore node scheduling:
 
 ```bash
-kubectl uncordon reliability-lab-worker
+kubectl uncordon "$DRAIN_NODE"
 ```
+
 ## Expected Behaviour
 
-- Pods on the drained node are evicted.
-- Kubernetes creates replacement Pods.
-- At least 2 app Pods should remain available during voluntary disruption.
-- The PDB should prevent too many simultaneous voluntary evictions.
+- Target node enters `SchedulingDisabled`.
+- App Pods on the drained node are evicted.
+- Replacement Pods are scheduled on available nodes.
+- The PDB limits voluntary disruption.
+- The app Service remains available if enough Pods remain Ready.
+- Node is restored after `kubectl uncordon`.
 
-## Evidence Capture
+## Evidence
 
-Record:
+Evidence captured in:
 
-```bash
-kubectl get pods -n reliability-lab -o wide
-kubectl get pdb -n reliability-lab
-kubectl describe pdb reliability-app-pdb -n reliability-lab
-kubectl get nodes
+```txt
+experiments/evidence/node-drain/
+├── 01-before-nodes.txt
+├── 02-before-deployment.txt
+├── 03-before-pods.txt
+├── 04-before-pdb.txt
+├── 05-during-nodes.txt
+├── 06-during-pods.txt
+├── 07-during-pdb.txt
+├── 08-during-events.txt
+├── 09-healthz-during-drain.json
+├── 10-after-nodes.txt
+├── 11-after-deployment.txt
+├── 12-after-pods.txt
+├── 13-after-pdb.txt
+└── 14-after-events.txt
 ```
+
 ## Observed Behaviour
 
-The reliability application Deployment was initially running 3 healthy replicas.
+The reliability-app Deployment was healthy before the experiment.
+Before the drain operation, all three reliability-app Pods were scheduled on the same worker node (`reliability-lab-worker2`).
 
-During testing, all application Pods were scheduled onto `reliability-lab-worker2`. No Pods were initially scheduled onto `reliability-lab-worker`.
+This was possible because the workload did not define pod anti-affinity rules or topology spread constraints.
 
-This behaviour is expected because the Deployment did not yet define topology spread constraints or pod anti-affinity rules. Kubernetes does not guarantee even Pod distribution across nodes by default.
+The node drain experiment therefore represented a more severe maintenance scenario because all application Pods required eviction and rescheduling during the operation.
 
-A node drain operation was executed against the worker node hosting the application Pods.
+A worker node containing application Pods was selected for drain.
 
-During the drain operation:
+During the drain operation, Kubernetes cordoned the node and began evicting eligible Pods.
 
-```txt
-Pods entered Terminating state
-replacement Pods were scheduled onto available nodes
-new Pods transitioned through:
-Pending → ContainerCreating → Running → Ready
-```
+The PodDisruptionBudget controlled the number of voluntary disruptions permitted during the maintenance operation.
 
-The PodDisruptionBudget restricted voluntary disruption according to the configured policy:
+Replacement Pods were created by the Deployment/ReplicaSet and scheduled on available nodes.
 
-```txt
-minAvailable: 2
-```
+The Service remained the stable access point for the application, and the `/healthz` endpoint responded successfully during or after the drain validation.
 
-At least 2 application Pods remained available during the disruption event.
+After testing, the drained node was restored to normal scheduling state using `kubectl uncordon`.
 
-After the node drain completed, the worker node entered `SchedulingDisabled` state until it was restored using:
-
-```bash
-kubectl uncordon reliability-lab-worker2
-```
-
-Following uncordon, the node returned to `Ready` scheduling state.
-
-No readiness probe failures or application crash loops were observed during the experiment.
+No Kubernetes Events were returned in the `reliability-lab` namespace at the final evidence capture point. This is acceptable because Events are transient and may expire or be garbage-collected quickly in local clusters.
 
 ## Conclusion
 
-The experiment successfully validated PodDisruptionBudget behaviour during voluntary Kubernetes node disruption.
+The experiment successfully validated planned node maintenance behaviour in Kubernetes.
 
-The configured PodDisruptionBudget protected minimum application availability while Kubernetes drained and rescheduled Pods from the affected worker node.
+Node drain demonstrated the interaction between node scheduling, Pod eviction, Deployments, ReplicaSets, Services, and PodDisruptionBudgets.
 
-This demonstrated several important Kubernetes reliability concepts:
+This is directly relevant to production EKS operations because node drains occur during node replacement, managed node group upgrades, cluster maintenance, and autoscaler activity.
 
-- controlled voluntary Pod eviction
-- workload self-healing through Deployments
-- Pod rescheduling during infrastructure maintenance
-- interaction between node drain operations and PodDisruptionBudgets
-- continued application availability during maintenance activity
-
-The experiment also demonstrated that Kubernetes does not automatically distribute Pods evenly across nodes unless additional scheduling constraints are configured.
-
-In a production AWS EKS environment, PodDisruptionBudgets are important during:
-
-- managed node group upgrades
-- cluster maintenance
-- autoscaler scale-down operations
-- node replacement activities
-
-This experiment improved the overall reliability posture of the project by introducing disruption-aware workload protection.
-
+The experiment confirms that application availability during maintenance is not automatic; it depends on correct replica count, readiness behaviour, Service routing, and disruption budget configuration.

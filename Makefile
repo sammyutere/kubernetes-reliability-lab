@@ -278,3 +278,15 @@ experiment-cpu-hpa-capture:
 	kubectl describe hpa $(APP_NAME)-hpa -n $(NAMESPACE) > experiments/evidence/cpu-hpa/09-hpa-describe.txt
 
 
+experiment-node-drain-baseline:
+	mkdir -p experiments/evidence/node-drain
+	kubectl get nodes > experiments/evidence/node-drain/01-before-nodes.txt
+	kubectl get deployment $(APP_NAME) -n $(NAMESPACE) > experiments/evidence/node-drain/02-before-deployment.txt
+	kubectl get pods -n $(NAMESPACE) -o wide > experiments/evidence/node-drain/03-before-pods.txt
+	kubectl get pdb $(APP_NAME)-pdb -n $(NAMESPACE) > experiments/evidence/node-drain/04-before-pdb.txt
+
+experiment-node-drain:
+	kubectl drain $(DRAIN_NODE) --ignore-daemonsets --delete-emptydir-data
+
+experiment-node-uncordon:
+	kubectl uncordon $(DRAIN_NODE)

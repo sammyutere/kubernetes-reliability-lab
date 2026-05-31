@@ -1,0 +1,21 @@
+LAST SEEN   TYPE      REASON                         OBJECT                                        MESSAGE
+52s         Normal    Killing                        pod/reliability-app-f4dc7b56c-rxtqx           Stopping container reliability-app
+52s         Normal    SuccessfulCreate               replicaset/reliability-app-f4dc7b56c          Created pod: reliability-app-f4dc7b56c-nhqkv
+52s         Normal    Scheduled                      pod/reliability-app-f4dc7b56c-nhqkv           Successfully assigned reliability-lab/reliability-app-f4dc7b56c-nhqkv to reliability-lab-worker2
+51s         Normal    Started                        pod/reliability-app-f4dc7b56c-nhqkv           Container started
+51s         Normal    Pulled                         pod/reliability-app-f4dc7b56c-nhqkv           Container image "reliability-app:local" already present on machine and can be accessed by the pod
+51s         Normal    Created                        pod/reliability-app-f4dc7b56c-nhqkv           Container created
+42s         Normal    SuccessfulCreate               replicaset/reliability-app-f4dc7b56c          Created pod: reliability-app-f4dc7b56c-nr7z5
+42s         Normal    Scheduled                      pod/reliability-app-f4dc7b56c-nr7z5           Successfully assigned reliability-lab/reliability-app-f4dc7b56c-nr7z5 to reliability-lab-worker2
+42s         Normal    Killing                        pod/reliability-app-f4dc7b56c-cjxhn           Stopping container reliability-app
+41s         Normal    Created                        pod/reliability-app-f4dc7b56c-nr7z5           Container created
+41s         Normal    Started                        pod/reliability-app-f4dc7b56c-nr7z5           Container started
+41s         Normal    Pulled                         pod/reliability-app-f4dc7b56c-nr7z5           Container image "reliability-app:local" already present on machine and can be accessed by the pod
+32s         Normal    Scheduled                      pod/reliability-app-f4dc7b56c-qmnr2           Successfully assigned reliability-lab/reliability-app-f4dc7b56c-qmnr2 to reliability-lab-worker2
+32s         Normal    Killing                        pod/reliability-app-f4dc7b56c-bwjjt           Stopping container reliability-app
+32s         Normal    SuccessfulCreate               replicaset/reliability-app-f4dc7b56c          Created pod: reliability-app-f4dc7b56c-qmnr2
+32s         Warning   FailedGetResourceMetric        horizontalpodautoscaler/reliability-app-hpa   failed to get cpu utilization: unable to get metrics for resource cpu: unable to fetch metrics from resource metrics API: the server is currently unable to handle the request (get pods.metrics.k8s.io)
+32s         Warning   FailedComputeMetricsReplicas   horizontalpodautoscaler/reliability-app-hpa   invalid metrics (1 invalid out of 1), first error is: failed to get cpu resource metric value: failed to get cpu utilization: unable to get metrics for resource cpu: unable to fetch metrics from resource metrics API: the server is currently unable to handle the request (get pods.metrics.k8s.io)
+31s         Normal    Pulled                         pod/reliability-app-f4dc7b56c-qmnr2           Container image "reliability-app:local" already present on machine and can be accessed by the pod
+31s         Normal    Created                        pod/reliability-app-f4dc7b56c-qmnr2           Container created
+31s         Normal    Started                        pod/reliability-app-f4dc7b56c-qmnr2           Container started

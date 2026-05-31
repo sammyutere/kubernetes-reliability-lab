@@ -73,3 +73,46 @@ curl http://127.0.0.1:8080/healthz
 - Use immutable image tags.
 - Avoid deploying untested image references.
 - Keep Helm rollback workflow documented.
+
+## Runbook: Planned Node Drain
+
+### Symptoms / Use Case
+
+A Kubernetes node needs to be removed from service for maintenance, upgrade, or replacement.
+
+### Pre-checks
+
+```bash
+kubectl get nodes
+kubectl get pods -n reliability-lab -o wide
+kubectl get pdb reliability-app-pdb -n reliability-lab
+kubectl get deployment reliability-app -n reliability-lab
+```
+## Drain
+
+```bash
+DRAIN_NODE=reliability-lab-worker2
+
+kubectl drain "$DRAIN_NODE" \
+  --ignore-daemonsets \
+  --delete-emptydir-data
+```
+## Validate
+
+```bash
+kubectl get nodes
+kubectl get pods -n reliability-lab -o wide
+kubectl get pdb reliability-app-pdb -n reliability-lab
+kubectl port-forward svc/reliability-app 8080:80 -n reliability-lab
+curl http://127.0.0.1:8080/healthz
+```
+## Restore Scheduling
+
+```bash
+kubectl uncordon "$DRAIN_NODE"
+```
+## Operational Notes
+
+- PDBs protect against excessive voluntary disruption.
+- PDBs do not protect against all involuntary failures.
+- A node should be uncordoned after maintenance if it will remain part of the cluster.

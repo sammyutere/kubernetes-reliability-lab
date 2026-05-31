@@ -1,0 +1,4 @@
+NAME                            STATUS   ROLES           AGE   VERSION
+reliability-lab-control-plane   Ready    control-plane   19d   v1.35.0
+reliability-lab-worker          Ready    <none>          19d   v1.35.0
+reliability-lab-worker2         Ready    <none>          19d   v1.35.0

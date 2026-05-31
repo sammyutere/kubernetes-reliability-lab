@@ -243,6 +243,17 @@ Completed:
 - Local environment tuning for autoscaling validation
 - CPU metrics observation workflow compatible with macOS/kubectl versions
 
+### Step 20 — Node Drain Reliability Experiment
+
+Completed:
+
+- Planned node maintenance simulation
+- Node cordon and drain validation
+- Pod eviction and rescheduling observation
+- PodDisruptionBudget behaviour validation
+- Service availability check during maintenance
+- Evidence captured before, during, and after node drain
+
 ## Current Status
 
 - Step 1 complete: local toolchain and repository initialized.
@@ -264,6 +275,7 @@ Completed:
 - Step 17 complete: Kill Pod Reliability Experiment done.
 - Step 18 complete: Bad Rollout Reliability Experiment done.
 - Step 19 complete: CPU Spike and HPA Experiment done.
+- Step 20 complete: Node Drain Reliability Experiment done.
 
 ## Completed Capabilities 
 
@@ -315,6 +327,8 @@ The project currently includes:
 - Runbook for failed application rollout
 - Evidence-based HPA autoscaling validation
 - CPU spike experiment for capacity response testing
+- Documented node drain experiment for planned maintenance
+- Evidence-based validation of PDB and rescheduling behaviour
 
 ## Current Architecture
 
@@ -329,9 +343,9 @@ MacBook Pro
 ```
 ## Next Milestone
 
-Run node drain experiment:
+Complete Phase 6 review:
 
-- Drain worker node
-- Observe PDB behaviour
-- Validate Pod rescheduling
-- Capture maintenance-disruption evidence
+- Consolidate reliability experiment evidence
+- Review runbooks
+- Verify documentation consistency
+- Prepare for EKS/Terraform phase

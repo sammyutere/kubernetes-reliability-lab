@@ -501,3 +501,26 @@ The experiment validated:
 - HPA ownership behaviour
 - Local environment limitations
 
+
+## Node Drain Experiment
+
+The project includes a node drain experiment to validate planned maintenance behaviour.
+
+Node drain simulates removing a node from service for maintenance.
+
+Control loop:
+
+```txt
+kubectl drain node
+    ↓
+Node becomes unschedulable
+    ↓
+Eligible Pods are evicted
+    ↓
+Deployment/ReplicaSet creates replacements
+    ↓
+PDB controls voluntary disruption
+    ↓
+Service routes to available Pods
+```
+This experiment is directly relevant to EKS node upgrades, node replacement, and autoscaler-driven node termination.
