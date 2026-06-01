@@ -35,6 +35,29 @@ experiments/      Reliability experiments
 docs/             Architecture, runbooks, SLOs
 .github/          CI workflows
 ```
+## Documentation
+
+| Document | Purpose |
+|---|---|
+| [Architecture](docs/00-architecture.md) | Current system architecture and component relationships |
+| [Kubernetes Fundamentals](docs/01-kubernetes-fundamentals.md) | Kubernetes concepts learned through the project |
+| [Observability](docs/04-observability.md) | Prometheus, Grafana, and metrics documentation |
+| [Runbooks](docs/06-runbooks.md) | Operational recovery procedures |
+| [Helm](docs/09-helm.md) | Helm packaging and release workflow |
+| [Alerting](docs/10-alerting.md) | Prometheus alerting rules and validation notes |
+| [Phase 6 Review](docs/11-phase-6-review.md) | Reliability experiment review |
+| [EKS Readiness](docs/12-eks-readiness.md) | Preparation notes for AWS EKS phase |
+
+## Reliability Experiments
+
+| Experiment | Outcome |
+|---|---|
+| Kill Pod | Deployment self-healing validated |
+| Bad Rollout | Failure detection and recovery validated |
+| CPU Spike & HPA | Autoscaling behaviour evaluated |
+| Node Drain | Planned maintenance behaviour validated |
+| NetworkPolicy | Traffic control behaviour validated |
+
 ## Implementation Progress
 
 ### Step 1 — Engineering Environment and Repository Setup
@@ -254,6 +277,17 @@ Completed:
 - Service availability check during maintenance
 - Evidence captured before, during, and after node drain
 
+### Phase 6 Review — Reliability Experiment Consolidation
+
+Completed:
+
+- Reliability experiment evidence index
+- Phase 6 review document
+- Runbook consolidation
+- EKS readiness notes
+- Terraform phase preparation notes
+- Documentation consistency pass
+
 ## Current Status
 
 - Step 1 complete: local toolchain and repository initialized.
@@ -272,10 +306,11 @@ Completed:
 - Step 14 complete: Helm Chart created.
 - Step 15 complete: Prometheus and Grafana Installed.
 - Step 16 complete: Prometheus Alert Rules created.
-- Step 17 complete: Kill Pod Reliability Experiment done.
-- Step 18 complete: Bad Rollout Reliability Experiment done.
-- Step 19 complete: CPU Spike and HPA Experiment done.
-- Step 20 complete: Node Drain Reliability Experiment done.
+- Step 17 complete: Kill Pod Reliability Experiment.
+- Step 18 complete: Bad Rollout Reliability Experiment.
+- Step 19 complete: CPU Spike and HPA Experiment.
+- Step 20 complete: Node Drain Reliability Experiment.
+- Phase 6 Review complete: Reliability Experiment Consolidation.
 
 ## Completed Capabilities 
 
@@ -343,9 +378,10 @@ MacBook Pro
 ```
 ## Next Milestone
 
-Complete Phase 6 review:
+Begin AWS infrastructure phase:
 
-- Consolidate reliability experiment evidence
-- Review runbooks
-- Verify documentation consistency
-- Prepare for EKS/Terraform phase
+- Terraform VPC
+- Terraform EKS cluster
+- ECR repository
+- EKS Helm deployment
+- AWS cost cleanup workflow
