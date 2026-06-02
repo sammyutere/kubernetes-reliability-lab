@@ -47,6 +47,7 @@ docs/             Architecture, runbooks, SLOs
 | [Alerting](docs/10-alerting.md) | Prometheus alerting rules and validation notes |
 | [Phase 6 Review](docs/11-phase-6-review.md) | Reliability experiment review |
 | [EKS Readiness](docs/12-eks-readiness.md) | Preparation notes for AWS EKS phase |
+| [AWS Cleanup](docs/13-aws-cleanup.md) | AWS resource cleanup and cost control workflow |
 
 ## Reliability Experiments
 
@@ -288,6 +289,19 @@ Completed:
 - Terraform phase preparation notes
 - Documentation consistency pass
 
+### Step 21 - AWS Infrastructure Phase — EKS Foundation
+
+Completed:
+
+- Terraform VPC configuration
+- Terraform EKS cluster configuration
+- Managed node group configuration
+- ECR repository configuration
+- EKS Helm values file
+- ECR image push workflow
+- EKS Helm deployment workflow
+- AWS cleanup workflow
+
 ## Current Status
 
 - Step 1 complete: local toolchain and repository initialized.
@@ -311,59 +325,35 @@ Completed:
 - Step 19 complete: CPU Spike and HPA Experiment.
 - Step 20 complete: Node Drain Reliability Experiment.
 - Phase 6 Review complete: Reliability Experiment Consolidation.
+- Step 21 complete: AWS Infrastructure Phase — EKS Foundation.
 
 ## Completed Capabilities 
 
 The project currently includes:
 
-- FastAPI reliability application
-- Health check endpoint
-- Readiness check endpoint
-- Prometheus metrics endpoint
-- Failure simulation endpoint
-- Latency simulation endpoint
-- CPU load simulation endpoint
-- Unit tests
-- Production-style Dockerfile
-- Non-root container user
-- Local multi-node kind cluster
-- Makefile workflow helpers
-- Kubernetes Deployment running 3 app replicas
-- Liveness and readiness probes configured
-- Basic Kubernetes self-healing demonstrated
-- Internal Kubernetes Service exposing the app
-- Stable Service endpoint in front of disposable Pods
-- Port-forward access for local validation
-- Runtime configuration managed through Kubernetes ConfigMap
-- Same container image can support multiple environment configurations
-- Sensitive runtime configuration pattern using Kubernetes Secret
-- Git-safe secret handling with committed example and ignored local file
-- PodDisruptionBudget protecting minimum app availability during voluntary disruption
-- Node drain experiment documented
-- CPU-based horizontal autoscaling using Kubernetes HPA
-- Metrics Server integration for local kind resource metrics
-- Load-test workflow for autoscaling validation
-- NetworkPolicy manifest for least-privilege ingress control
-- Network policy validation workflow with captured evidence
-- Helm-packaged Kubernetes application release
-- Environment-specific values for local kind and future EKS deployment
-- Helm validation and install workflow
-- Cluster observability with Prometheus and Grafana
-- Kubernetes object-state metrics through kube-state-metrics
-- Node metrics through node-exporter
-- Monitoring stack managed by Helm
-- Prometheus alerting rules for key Kubernetes reliability signals
-- Alert test workflow using controlled replica reduction
-- Evidence capture for alert rule validation
-- Documented Pod self-healing experiment
-- Evidence-based validation of Deployment desired-state reconciliation
-- Documented failed rollout recovery workflow
-- Helm rollback-based operational recovery path
-- Runbook for failed application rollout
-- Evidence-based HPA autoscaling validation
-- CPU spike experiment for capacity response testing
-- Documented node drain experiment for planned maintenance
-- Evidence-based validation of PDB and rescheduling behaviour
+### Kubernetes Platform Capabilities
+
+- Containerised Python application
+- Kubernetes Deployments
+- Services
+- ConfigMaps
+- Secrets
+- PodDisruptionBudgets
+- HorizontalPodAutoscalers
+- NetworkPolicies
+- Helm packaging and deployment
+- Prometheus and Grafana monitoring
+- Reliability experiments and runbooks
+
+### Cloud Platform Capabilities
+
+- Terraform-based infrastructure provisioning
+- Amazon EKS cluster administration
+- Amazon ECR image management
+- Helm-based application deployment
+- Kubernetes workload migration from local to cloud environments
+- AWS cost-aware lab operations
+- Infrastructure lifecycle management (create, validate, destroy)
 
 ## Current Architecture
 
@@ -378,10 +368,9 @@ MacBook Pro
 ```
 ## Next Milestone
 
-Begin AWS infrastructure phase:
+Add EKS ingress and production-style exposure:
 
-- Terraform VPC
-- Terraform EKS cluster
-- ECR repository
-- EKS Helm deployment
-- AWS cost cleanup workflow
+- AWS Load Balancer Controller
+- ALB Ingress
+- Optional DNS and HTTPS
+- EKS monitoring validation

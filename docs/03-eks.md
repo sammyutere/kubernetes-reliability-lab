@@ -2,48 +2,81 @@
 
 ## Purpose
 
-This document describes the transition from local kind Kubernetes to Amazon EKS.
+This phase moves the Kubernetes Reliability Lab from local kind to AWS EKS.
 
-## Why EKS?
+## Architecture
 
-Local kind is useful for learning Kubernetes fundamentals.
+```txt
+Docker image
+↓
+Amazon ECR
+↓
+AWS EKS worker nodes
+↓
+Helm release
+↓
+reliability-app Pods
+```
+## Infrastructure
 
-Amazon EKS introduces:
-
-- managed control plane
-- cloud networking
-- IAM integration
-- production-style node management
-- cloud-native observability
-
-## Planned EKS Components
+Terraform provisions:
 
 - VPC
-- Private and public subnets
+- public subnets
+- internet gateway
 - EKS cluster
-- Managed node group
-- Amazon ECR
-- AWS Load Balancer Controller
-- Prometheus and Grafana
-- Terraform infrastructure
+- managed node group
+- ECR repository
+- IAM roles
 
-## Migration Path
+## Deploy
 
-Local:
+```bash
+cd terraform/environments/dev
+terraform init
+terraform apply
 
-```txt
-Docker → kind → Helm
+aws eks update-kubeconfig \
+  --region eu-west-2 \
+  --name reliability-lab-dev
 ```
-Cloud:
+## Push Image
 
-```txt
-AWS → EKS → Helm
+```bash
+ECR_URL=$(terraform output -raw ecr_repository_url)
+AWS_REGION=$(terraform output -raw aws_region)
+AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+
+aws ecr get-login-password --region "$AWS_REGION" \
+  | docker login --username AWS --password-stdin "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
+
+docker build -t reliability-app:0.1.0 ./app
+docker tag reliability-app:0.1.0 "$ECR_URL:0.1.0"
+docker push "$ECR_URL:0.1.0"
 ```
-## Success Criteria
+## Deploy App
 
-- Terraform deploys EKS
-- Application deploys successfully
-- Monitoring works
-- HPA functions correctly
-- Infrastructure can be destroyed cleanly
+```bash
+helm upgrade --install reliability-app helm/reliability-app \
+  -n reliability-lab \
+  --create-namespace \
+  -f helm/reliability-app/values-eks.yaml
+```
+## Validate
+
+```bash
+kubectl get nodes
+kubectl get pods -n reliability-lab
+kubectl get svc -n reliability-lab
+helm status reliability-app -n reliability-lab
+```
+## Cleanup
+
+```bash
+helm uninstall reliability-app -n reliability-lab || true
+kubectl delete namespace reliability-lab || true
+
+cd terraform/environments/dev
+terraform destroy
+```
 

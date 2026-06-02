@@ -1,0 +1,2 @@
+NAME              TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)   AGE
+reliability-app   ClusterIP   172.20.237.140   <none>        80/TCP    85m

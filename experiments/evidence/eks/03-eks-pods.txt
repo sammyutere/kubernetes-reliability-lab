@@ -1,0 +1,4 @@
+NAME                               READY   STATUS    RESTARTS   AGE   IP            NODE                          NOMINATED NODE   READINESS GATES
+reliability-app-76c79b8778-l9c7s   1/1     Running   0          85m   10.40.0.31    ip-10-40-0-15.ec2.internal    <none>           <none>
+reliability-app-76c79b8778-lp9wn   1/1     Running   0          85m   10.40.0.203   ip-10-40-0-15.ec2.internal    <none>           <none>
+reliability-app-76c79b8778-wc9bw   1/1     Running   0          85m   10.40.1.181   ip-10-40-1-252.ec2.internal   <none>           <none>

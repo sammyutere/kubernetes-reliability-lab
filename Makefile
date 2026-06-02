@@ -290,3 +290,37 @@ experiment-node-drain:
 
 experiment-node-uncordon:
 	kubectl uncordon $(DRAIN_NODE)
+
+tf-dev-init:
+	cd terraform/environments/dev && terraform init
+
+tf-dev-fmt:
+	cd terraform/environments/dev && terraform fmt
+
+tf-dev-validate:
+	cd terraform/environments/dev && terraform validate
+
+tf-dev-plan:
+	cd terraform/environments/dev && terraform plan
+
+tf-dev-apply:
+	cd terraform/environments/dev && terraform apply
+
+tf-dev-destroy:
+	cd terraform/environments/dev && terraform destroy
+
+eks-kubeconfig:
+	aws eks update-kubeconfig --region eu-west-2 --name reliability-lab-dev
+
+eks-nodes:
+	kubectl get nodes -o wide
+
+ecr-login:
+	aws ecr get-login-password --region eu-west-2 | docker login --username AWS --password-stdin $$(aws sts get-caller-identity --query Account --output text).dkr.ecr.eu-west-2.amazonaws.com
+
+eks-deploy:
+	helm upgrade --install $(APP_NAME) helm/$(APP_NAME) -n $(NAMESPACE) --create-namespace -f helm/$(APP_NAME)/values-eks.yaml
+
+eks-clean-app:
+	helm uninstall $(APP_NAME) -n $(NAMESPACE) || true
+	kubectl delete namespace $(NAMESPACE) || true

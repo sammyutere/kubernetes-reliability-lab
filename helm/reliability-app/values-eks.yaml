@@ -1,17 +1,40 @@
 replicaCount: 3
 
 image:
-  repository: REPLACE_WITH_ECR_REPOSITORY_URL
+  repository: 393864004024.dkr.ecr.us-east-1.amazonaws.com/reliability-app
   tag: "0.1.0"
   pullPolicy: IfNotPresent
 
 config:
+  APP_NAME: reliability-app
+  APP_VERSION: "0.1.0"
   APP_ENV: eks-dev
+  LOG_LEVEL: info
+
+secret:
+  enabled: false
+  name: reliability-app-secret
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: http
+
+container:
+  port: 8000
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 256Mi
 
 hpa:
   enabled: true
   minReplicas: 3
-  maxReplicas: 10
+  maxReplicas: 6
   targetCPUUtilizationPercentage: 60
 
 pdb:
