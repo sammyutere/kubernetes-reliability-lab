@@ -324,3 +324,21 @@ eks-deploy:
 eks-clean-app:
 	helm uninstall $(APP_NAME) -n $(NAMESPACE) || true
 	kubectl delete namespace $(NAMESPACE) || true
+
+lbc-install:
+	helm repo add eks https://aws.github.io/eks-charts
+	helm repo update
+	helm upgrade --install aws-load-balancer-controller eks/aws-load-balancer-controller -n kube-system --set clusterName=$(CLUSTER_NAME) --set serviceAccount.create=false --set serviceAccount.name=aws-load-balancer-controller --set region=$(AWS_REGION)
+
+lbc-status:
+	kubectl get deployment aws-load-balancer-controller -n kube-system
+	kubectl get pods -n kube-system -l app.kubernetes.io/name=aws-load-balancer-controller
+
+eks-ingress:
+	kubectl get ingress -n $(NAMESPACE)
+	kubectl describe ingress $(APP_NAME) -n $(NAMESPACE)
+
+eks-alb-url:
+	kubectl get ingress $(APP_NAME) -n $(NAMESPACE) -o jsonpath='{.status.loadBalancer.ingress[0].hostname}'
+
+

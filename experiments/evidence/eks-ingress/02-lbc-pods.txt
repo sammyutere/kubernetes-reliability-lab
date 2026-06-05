@@ -1,0 +1,4 @@
+NAME                                            READY   STATUS             RESTARTS         AGE   IP            NODE                         NOMINATED NODE   READINESS GATES
+aws-load-balancer-controller-759686788f-bncpj   0/1     CrashLoopBackOff   12 (4m40s ago)   42m   10.40.0.164   ip-10-40-0-41.ec2.internal   <none>           <none>
+aws-load-balancer-controller-85c6b5c5b-8gjdj    1/1     Running            0                46m   10.40.1.111   ip-10-40-1-90.ec2.internal   <none>           <none>
+aws-load-balancer-controller-85c6b5c5b-wlv8r    1/1     Running            0                47m   10.40.0.186   ip-10-40-0-41.ec2.internal   <none>           <none>

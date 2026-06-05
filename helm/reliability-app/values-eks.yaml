@@ -43,3 +43,14 @@ pdb:
 
 networkPolicy:
   enabled: true
+
+ingress:
+  enabled: true
+  className: alb
+  path: /
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/healthcheck-path: /healthz
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}]'
+    alb.ingress.kubernetes.io/tags: Project=kubernetes-reliability-lab,Environment=dev

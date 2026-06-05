@@ -48,6 +48,7 @@ docs/             Architecture, runbooks, SLOs
 | [Phase 6 Review](docs/11-phase-6-review.md) | Reliability experiment review |
 | [EKS Readiness](docs/12-eks-readiness.md) | Preparation notes for AWS EKS phase |
 | [AWS Cleanup](docs/13-aws-cleanup.md) | AWS resource cleanup and cost control workflow |
+| [EKS Ingress](docs/14-eks-ingress.md) | AWS Load Balancer Controller and ALB Ingress exposure |
 
 ## Reliability Experiments
 
@@ -354,23 +355,63 @@ The project currently includes:
 - Kubernetes workload migration from local to cloud environments
 - AWS cost-aware lab operations
 - Infrastructure lifecycle management (create, validate, destroy)
+- Installed AWS Load Balancer Controller on EKS
+- Exposed the reliability app through an ALB-backed Kubernetes Ingress
+- Validated public HTTP access through AWS Application Load Balancer
+- Captured EKS ingress and ALB evidence
+- Documented optional DNS and HTTPS path
+- Troubleshot EKS deployment failures caused by missing ECR images
+- Created and validated IAM roles for AWS Load Balancer Controller
+- Configured IAM Roles for Service Accounts (IRSA)
+- Resolved service account annotation and controller authentication issues
+- Diagnosed and resolved ALB provisioning failures using Kubernetes events
+- Validated end-to-end AWS Load Balancer Controller integration with EKS
 
 ## Current Architecture
 
 ```txt
-MacBook Pro
-└── Docker Desktop
-    ├── reliability-app:local image
-    └── kind cluster: reliability-lab
-        ├── control-plane node
-        ├── worker node
-        └── worker node
+Developer Workstation
+├── Docker
+│   └── reliability-app container image
+├── Terraform
+│   └── provisions AWS infrastructure
+└── kubectl / Helm
+    └── deploys application to Amazon EKS
+
+AWS
+├── Amazon ECR
+│   └── reliability-app:0.1.0
+├── Amazon EKS
+│   ├── Managed node group
+│   ├── reliability-lab namespace
+│   │   ├── Deployment: reliability-app
+│   │   ├── Service: reliability-app
+│   │   ├── HPA
+│   │   ├── PDB
+│   │   ├── NetworkPolicy
+│   │   └── Ingress
+│   └── monitoring namespace
+│       ├── Prometheus
+│       └── Grafana
+└── AWS Application Load Balancer
+    └── Routes external HTTP traffic to the reliability-app Service
+```
+```txt
+Internet Client
+    ↓
+AWS Application Load Balancer
+    ↓
+Kubernetes Ingress
+    ↓
+Service: reliability-app
+    ↓
+Pods: reliability-app
 ```
 ## Next Milestone
 
-Add EKS ingress and production-style exposure:
+Add production hardening:
 
-- AWS Load Balancer Controller
-- ALB Ingress
-- Optional DNS and HTTPS
-- EKS monitoring validation
+- HTTPS with ACM
+- optional Route 53 DNS
+- EKS observability dashboard refinement
+- cost and cleanup verification

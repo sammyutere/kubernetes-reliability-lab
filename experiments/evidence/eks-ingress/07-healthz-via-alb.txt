@@ -1,0 +1,8 @@
+HTTP/1.1 200 OK
+Date: Fri, 05 Jun 2026 22:16:48 GMT
+Content-Type: application/json
+Content-Length: 34
+Connection: keep-alive
+server: uvicorn
+
+{"status":"ok","check":"liveness"}

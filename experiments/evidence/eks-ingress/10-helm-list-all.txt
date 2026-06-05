@@ -1,0 +1,4 @@
+NAME                        	NAMESPACE      	REVISION	UPDATED                             	STATUS  	CHART                             	APP VERSION
+aws-load-balancer-controller	kube-system    	2       	2026-06-05 22:31:02.810312 +0100 BST	deployed	aws-load-balancer-controller-3.4.0	v3.4.0     
+monitoring                  	monitoring     	1       	2026-06-05 22:59:50.101532 +0100 BST	deployed	kube-prometheus-stack-86.2.0      	v0.91.0    
+reliability-app             	reliability-lab	2       	2026-06-05 22:16:05.440524 +0100 BST	deployed	reliability-app-0.1.0             	0.1.0      

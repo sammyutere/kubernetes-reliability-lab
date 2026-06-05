@@ -1,0 +1,29 @@
+Name:             reliability-app
+Labels:           app.kubernetes.io/component=ingress
+                  app.kubernetes.io/instance=reliability-app
+                  app.kubernetes.io/managed-by=Helm
+                  app.kubernetes.io/name=reliability-app
+                  app.kubernetes.io/part-of=kubernetes-reliability-lab
+                  app.kubernetes.io/version=0.1.0
+                  helm.sh/chart=reliability-app-0.1.0
+Namespace:        reliability-lab
+Address:          k8s-reliabil-reliabil-7324b9422a-198941450.us-east-1.elb.amazonaws.com
+Ingress Class:    alb
+Default backend:  <default>
+Rules:
+  Host        Path  Backends
+  ----        ----  --------
+  *           
+              /   reliability-app:80 (10.40.0.250:8000,10.40.0.46:8000,10.40.1.198:8000)
+Annotations:  alb.ingress.kubernetes.io/healthcheck-path: /healthz
+              alb.ingress.kubernetes.io/listen-ports: [{"HTTP":80}]
+              alb.ingress.kubernetes.io/scheme: internet-facing
+              alb.ingress.kubernetes.io/tags: Project=kubernetes-reliability-lab,Environment=dev
+              alb.ingress.kubernetes.io/target-type: ip
+              meta.helm.sh/release-name: reliability-app
+              meta.helm.sh/release-namespace: reliability-lab
+Events:
+  Type     Reason                  Age                 From     Message
+  ----     ------                  ----                ----     -------
+  Warning  FailedBuildModel        52m (x17 over 59m)  ingress  Failed build model due to operation error Elastic Load Balancing v2: DescribeLoadBalancers, get identity: get credentials: failed to refresh cached credentials, no EC2 IMDS role found, operation error ec2imds: GetMetadata, canceled, context deadline exceeded
+  Normal   SuccessfullyReconciled  48m                 ingress  Successfully reconciled

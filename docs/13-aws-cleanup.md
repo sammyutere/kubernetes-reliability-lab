@@ -45,3 +45,19 @@ Resources that may incur cost:
 Always run terraform destroy when finished with the lab.
 
 
+
+## Delete Ingress and ALB
+
+Before destroying Terraform infrastructure, delete the Kubernetes Ingress so the AWS Load Balancer Controller can remove the ALB.
+
+```bash
+kubectl delete ingress reliability-app -n reliability-lab || true
+```
+Verify ALB cleanup in AWS Console or with AWS CLI before final Terraform destroy.
+
+## Delete AWS Load Balancer Controller
+
+```bash
+helm uninstall aws-load-balancer-controller -n kube-system || true
+```
+
