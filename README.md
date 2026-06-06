@@ -49,6 +49,7 @@ docs/             Architecture, runbooks, SLOs
 | [EKS Readiness](docs/12-eks-readiness.md) | Preparation notes for AWS EKS phase |
 | [AWS Cleanup](docs/13-aws-cleanup.md) | AWS resource cleanup and cost control workflow |
 | [EKS Ingress](docs/14-eks-ingress.md) | AWS Load Balancer Controller and ALB Ingress exposure |
+| [Makefile Reference](docs/15-makefile-reference.md) | Operational shortcuts and required variables |
 
 ## Reliability Experiments
 
@@ -62,271 +63,141 @@ docs/             Architecture, runbooks, SLOs
 
 ## Implementation Progress
 
-### Step 1 — Engineering Environment and Repository Setup
+### Phase 1 — Application Foundation
 
 Completed:
 
-- Local engineering toolchain installation
-- GitHub repository initialization
-- Repository structure creation
-- Makefile workflow initialization
-- Python virtual environment setup
+- Repository bootstrap and project structure
+- Python reliability application development
+- Health endpoints (`/healthz`, `/readyz`)
+- Configuration management support
+- Containerisation with Docker
 
-### Step 2 — Reliability Application Development
-
-Completed:
-
-- FastAPI reliability application
-- Health check endpoint
-- Readiness check endpoint
-- Prometheus metrics endpoint
-- Failure simulation endpoint
-- Latency simulation endpoint
-- CPU load simulation endpoint
-- Unit tests
-
-### Step 3 — Application Containerisation
+### Phase 2 — Kubernetes Fundamentals (Local kind)
 
 Completed:
 
-- Production-style Dockerfile
-- Non-root container execution
-- Docker image build workflow
-- Local container runtime validation
-- `.dockerignore` optimization
-- Makefile Docker automation
+- Local multi-node kind cluster
+- Namespace isolation
+- Deployment creation and management
+- Service creation and traffic routing
+- Container image loading into kind
 
-### Step 4 — Local Kubernetes Cluster Creation
-
-Completed:
-
-- Multi-node local Kubernetes cluster using kind
-- Kubernetes control-plane node
-- Kubernetes worker nodes
-- kubectl cluster access
-- Local cluster validation
-
-### Step 5 — Container Image Integration with kind
+### Phase 3 — Reliability Foundations
 
 Completed:
 
-- Local Docker image loaded into kind cluster
-- Image validation inside Kubernetes node runtime
-- Local Kubernetes image workflow established
-
-### Step 6 — Kubernetes Namespace Creation
-
-Completed:
-
-- Dedicated `reliability-lab` namespace
-- Declarative Namespace manifest
-- Namespace labels for ownership and environment metadata
-- kubectl context updated to use the project namespace
-
-### Step 7 — Kubernetes Deployment Creation
-
-Completed:
-
-- Declarative Deployment manifest
-- 3-replica application workload
-- Local kind image usage with `IfNotPresent`
-- Readiness probe configuration
-- Liveness probe configuration
-- CPU and memory requests
-- CPU and memory limits
-- Basic Pod self-healing validation
-
-### Step 8 — Kubernetes Service Creation
-
-Completed:
-
-- Declarative ClusterIP Service manifest
-- Stable internal endpoint for the reliability app
-- Label selector routing to Deployment Pods
-- Service-to-Pod port mapping
-- Endpoint validation
-- Local access through `kubectl port-forward`
-
-### Step 9 — Kubernetes ConfigMap Creation
-
-Completed:
-
-- Declarative ConfigMap manifest
-- Runtime configuration separated from container image
-- ConfigMap injected into Pods as environment variables
-- Deployment updated to consume externalised configuration
-- Configuration rollout behaviour validated
-
-### Step 10 — Kubernetes Secret Creation
-
-Completed:
-
-- Safe example Secret manifest
-- Local ignored Secret workflow
-- Secret injected into Pods as environment variables
-- App updated to verify secret presence without exposing values
-- Deployment updated to consume ConfigMap and Secret values
-
-### Step 11 — PodDisruptionBudget Creation
-
-Completed:
-
-- Declarative PodDisruptionBudget manifest
-- Availability protection with `minAvailable: 2`
-- Voluntary disruption control for the reliability app
-- Node drain experiment documentation
-
-### Step 12 — HorizontalPodAutoscaler Creation
-
-Completed:
-
-- Metrics Server installed for local resource metrics
-- Declarative HPA manifest
-- CPU-based autoscaling policy
-- Minimum and maximum replica bounds
-- Load-test script for autoscaling validation
-- HPA experiment documentation
-
-### Step 13 — NetworkPolicy Creation
-
-Completed:
-
-- Declarative NetworkPolicy manifest
-- Ingress traffic control model
-- Allowed client Pod validation
-- Denied client Pod validation
-- Evidence capture for policy behaviour
-- Documentation of CNI enforcement dependency
-
-### Step 14 — Helm Chart Creation
-
-Completed:
-
-- Helm chart for reliability app
-- Parameterised Deployment, Service, ConfigMap, HPA, PDB, and NetworkPolicy templates
-- Local and EKS values files
-- Helm lint and template validation
-- Helm install/upgrade workflow
-- Helm evidence capture
-- Resolved Helm ownership conflicts from previously kubectl-managed resources
-
-### Step 15 — Prometheus and Grafana Installation
-
-Completed:
-
-- kube-prometheus-stack Helm installation
-- Dedicated `monitoring` namespace
-- Prometheus metrics platform
-- Grafana dashboard platform
-- Alertmanager, kube-state-metrics, node-exporter, and Prometheus Operator
-- Local port-forward access for Prometheus and Grafana
-- Observability evidence capture
-
-### Step 16 — Prometheus Alert Rules
-
-Completed:
-
-- PrometheusRule alert manifest
-- Deployment availability alert
-- Pod restart alert
-- High CPU alert
-- HPA near maximum replicas alert
-- PDB disruption safety alert
-- Alert validation and evidence capture workflow
-
-### Step 17 — Kill Pod Reliability Experiment
-
-Completed:
-
-- Manual Pod deletion experiment
-- Deployment self-healing validation
-- ReplicaSet replacement behaviour observed
-- Service continuity validated after Pod replacement
-- Evidence captured for before and after states
-
-### Step 18 — Bad Rollout Reliability Experiment
-
-Completed:
-
-- Intentional bad image rollout
-- Rollout failure observation
-- Image pull failure diagnosis
-- Service continuity check during failed rollout
-- Helm rollback or corrected upgrade recovery
-- Evidence captured for failure and recovery states
-- Validated alternative recovery using Helm upgrade after rollback failure
-
-### Step 19 — CPU Spike and HPA Experiment
-
-Completed:
-
-- CPU load generation
-- HPA evaluation validation
+- ConfigMap configuration management
+- Secret management
+- PodDisruptionBudget (PDB)
+- HorizontalPodAutoscaler (HPA)
+- NetworkPolicy implementation
 - Metrics Server validation
-- Autoscaling evidence capture
-- HPA and Helm ownership conflict investigation
-- Local environment tuning for autoscaling validation
-- CPU metrics observation workflow compatible with macOS/kubectl versions
 
-### Step 20 — Node Drain Reliability Experiment
+### Phase 4 — Helm Packaging
 
 Completed:
 
-- Planned node maintenance simulation
-- Node cordon and drain validation
-- Pod eviction and rescheduling observation
-- PodDisruptionBudget behaviour validation
-- Service availability check during maintenance
-- Evidence captured before, during, and after node drain
+- Helm chart creation
+- Helm values management
+- Local Helm deployment workflow
+- Helm upgrade workflow
+- Helm rollback investigation
+- Helm ownership conflict troubleshooting
 
-### Phase 6 Review — Reliability Experiment Consolidation
-
-Completed:
-
-- Reliability experiment evidence index
-- Phase 6 review document
-- Runbook consolidation
-- EKS readiness notes
-- Terraform phase preparation notes
-- Documentation consistency pass
-
-### Step 21 - AWS Infrastructure Phase — EKS Foundation
+### Phase 5 — Observability and Alerting
 
 Completed:
 
-- Terraform VPC configuration
-- Terraform EKS cluster configuration
-- Managed node group configuration
-- ECR repository configuration
-- EKS Helm values file
-- ECR image push workflow
-- EKS Helm deployment workflow
+- Prometheus installation
+- Grafana installation
+- PrometheusRule alerting
+- Alert validation workflow
+- Monitoring evidence capture
+- Observability documentation
+
+### Phase 6 — Reliability Engineering Experiments
+
+Completed:
+
+- Pod self-healing validation
+- Bad rollout experiment
+- Rollback and recovery testing
+- CPU spike and HPA experiment
+- Node drain experiment
+- Reliability runbooks
+- Evidence-driven reliability testing
+- Phase 6 operational review
+
+### Phase 7 — AWS Infrastructure
+
+Completed:
+
+- Terraform infrastructure provisioning
+- Amazon VPC deployment
+- Amazon EKS cluster deployment
+- Managed node group deployment
+- Amazon ECR repository creation
+- EKS kubeconfig integration
+- Infrastructure lifecycle management
+
+### Phase 8 — Cloud-Native Deployment
+
+Completed:
+
+- Container image publishing to ECR
+- Helm deployment to EKS
+- EKS workload validation
+- Environment-specific Helm values
 - AWS cleanup workflow
+- EKS readiness documentation
 
-## Current Status
+### Phase 9 — Production-Style Exposure
 
-- Step 1 complete: local toolchain and repository initialized.
-- Step 2 complete: FastAPI reliability app created.
-- Step 3 complete: application containerised.
-- Step 4 complete: local kind cluster created.
-- Step 5 complete: local container image loaded into kind.
-- Step 6 complete: Kubernetes Namespace created.
-- Step 7 complete: Kubernetes Deployment created.
-- Step 8 complete: Kubernetes Service created.
-- Step 9 complete: Kubernetes ConfigMap created.
-- Step 10 complete: Kubernetes Secret created.
-- Step 11 complete: PodDisruptionBudget created.
-- Step 12 complete: HorizontalPodAutoscaler created.
-- Step 13 complete: NetworkPolicy created.
-- Step 14 complete: Helm Chart created.
-- Step 15 complete: Prometheus and Grafana Installed.
-- Step 16 complete: Prometheus Alert Rules created.
-- Step 17 complete: Kill Pod Reliability Experiment.
-- Step 18 complete: Bad Rollout Reliability Experiment.
-- Step 19 complete: CPU Spike and HPA Experiment.
-- Step 20 complete: Node Drain Reliability Experiment.
-- Phase 6 Review complete: Reliability Experiment Consolidation.
-- Step 21 complete: AWS Infrastructure Phase — EKS Foundation.
+Completed:
+
+- AWS Load Balancer Controller installation
+- IAM Roles for Service Accounts (IRSA)
+- Manual IAM role creation and troubleshooting
+- Service account annotation troubleshooting
+- ALB-backed Kubernetes Ingress
+- Public application exposure through AWS ALB
+- EKS ingress monitoring validation
+- Ingress evidence capture
+
+### Current Focus
+
+In progress:
+
+- HTTPS with ACM
+- Optional Route 53 DNS integration
+- Production ingress hardening
+- EKS observability refinement
+- Cost optimisation and cleanup validation
+
+## Project Status
+
+Current Phase: Production-Style EKS Platform
+
+Completed:
+
+- Local Kubernetes platform
+- Helm packaging and deployment
+- Observability and alerting
+- Reliability engineering experiments
+- Terraform infrastructure provisioning
+- Amazon EKS deployment
+- Amazon ECR integration
+- AWS Load Balancer Controller
+- ALB-backed Kubernetes Ingress
+
+In Progress:
+
+- HTTPS with ACM
+- Optional Route 53 integration
+- Production ingress hardening
+- EKS observability refinement
+- Cost optimisation validation
 
 ## Completed Capabilities 
 
@@ -366,6 +237,9 @@ The project currently includes:
 - Resolved service account annotation and controller authentication issues
 - Diagnosed and resolved ALB provisioning failures using Kubernetes events
 - Validated end-to-end AWS Load Balancer Controller integration with EKS
+- Centralised operational command reference
+- Standardised Makefile-based workflow execution
+- Operator-focused documentation for common infrastructure tasks
 
 ## Current Architecture
 
