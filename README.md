@@ -50,6 +50,8 @@ docs/             Architecture, runbooks, SLOs
 | [AWS Cleanup](docs/13-aws-cleanup.md) | AWS resource cleanup and cost control workflow |
 | [EKS Ingress](docs/14-eks-ingress.md) | AWS Load Balancer Controller and ALB Ingress exposure |
 | [Makefile Reference](docs/15-makefile-reference.md) | Operational shortcuts and required variables |
+| [Architecture](docs/00-architecture.md) | Current architecture and component relationships |
+| [Project Roadmap](docs/16-project-roadmap.md) | Historical implementation journey |
 
 ## Reliability Experiments
 
