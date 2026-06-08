@@ -1,0 +1,27 @@
+Name:             reliability-app
+Labels:           app.kubernetes.io/component=ingress
+                  app.kubernetes.io/instance=reliability-app
+                  app.kubernetes.io/managed-by=Helm
+                  app.kubernetes.io/name=reliability-app
+                  app.kubernetes.io/part-of=kubernetes-reliability-lab
+                  app.kubernetes.io/version=0.1.0
+                  helm.sh/chart=reliability-app-0.1.0
+Namespace:        reliability-lab
+Address:          k8s-reliabil-reliabil-7324b9422a-1645314733.us-east-1.elb.amazonaws.com
+Ingress Class:    alb
+Default backend:  <default>
+Rules:
+  Host        Path  Backends
+  ----        ----  --------
+  *           
+              /   reliability-app:80 (10.40.1.179:8000,10.40.1.57:8000,10.40.0.111:8000)
+Annotations:  alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:393864004024:certificate/9a371515-b02c-47a9-937d-e3eae2b4381b
+              alb.ingress.kubernetes.io/healthcheck-path: /healthz
+              alb.ingress.kubernetes.io/listen-ports: [{"HTTP":80},{"HTTPS":443}]
+              alb.ingress.kubernetes.io/scheme: internet-facing
+              alb.ingress.kubernetes.io/ssl-redirect: 443
+              alb.ingress.kubernetes.io/tags: Project=kubernetes-reliability-lab,Environment=dev
+              alb.ingress.kubernetes.io/target-type: ip
+              meta.helm.sh/release-name: reliability-app
+              meta.helm.sh/release-namespace: reliability-lab
+Events:       <none>

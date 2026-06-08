@@ -1,0 +1,2 @@
+NAME              CLASS   HOSTS   ADDRESS                                                                   PORTS   AGE
+reliability-app   alb     *       k8s-reliabil-reliabil-7324b9422a-1645314733.us-east-1.elb.amazonaws.com   80      3h28m

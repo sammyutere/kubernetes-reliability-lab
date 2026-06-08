@@ -1,0 +1,18 @@
+{
+    "repositories": [
+        {
+            "repositoryArn": "arn:aws:ecr:us-east-1:393864004024:repository/reliability-app",
+            "registryId": "393864004024",
+            "repositoryName": "reliability-app",
+            "repositoryUri": "393864004024.dkr.ecr.us-east-1.amazonaws.com/reliability-app",
+            "createdAt": "2026-06-07T20:46:36.544000+01:00",
+            "imageTagMutability": "MUTABLE",
+            "imageScanningConfiguration": {
+                "scanOnPush": true
+            },
+            "encryptionConfiguration": {
+                "encryptionType": "AES256"
+            }
+        }
+    ]
+}

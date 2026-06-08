@@ -52,6 +52,7 @@ docs/             Architecture, runbooks, SLOs
 | [Makefile Reference](docs/15-makefile-reference.md) | Operational shortcuts and required variables |
 | [Architecture](docs/00-architecture.md) | Current architecture and component relationships |
 | [Project Roadmap](docs/16-project-roadmap.md) | Historical implementation journey |
+| [Production Hardening](docs/17-production-hardening.md) | HTTPS, DNS, observability refinement, and cleanup verification |
 
 ## Reliability Experiments
 
@@ -167,6 +168,19 @@ Completed:
 - EKS ingress monitoring validation
 - Ingress evidence capture
 
+### Phase 10 — Multi-Service Reliability Engineering
+
+Planned:
+
+- Multi-service application architecture
+- Frontend service
+- API service
+- Dependency service
+- Failure domain modelling
+- Service dependency mapping
+- Cascading failure simulation
+- Service recovery validation
+
 ### Current Focus
 
 In progress:
@@ -243,6 +257,31 @@ The project currently includes:
 - Standardised Makefile-based workflow execution
 - Operator-focused documentation for common infrastructure tasks
 
+### Production Hardening
+
+- HTTPS-ready ALB ingress architecture
+- ACM certificate integration workflow
+- Route 53 DNS integration workflow
+- EKS observability validation
+- Grafana dashboard validation
+- Prometheus metrics validation
+- AWS cleanup verification
+- Cost-aware platform management
+
+### Platform Recovery and Troubleshooting
+
+- Rebuilt EKS platform after full AWS cleanup
+- Restored Terraform-managed infrastructure
+- Revalidated ECR image supply chain
+- Recreated AWS Load Balancer Controller
+- Configured IRSA manually
+- Resolved service account annotation issues
+- Associated EKS IAM OIDC provider
+- Resolved controller VPC discovery failure
+- Diagnosed ALB provisioning failures
+- Resolved service account annotation issues
+- Recovered monitoring stack after infrastructure rebuild
+
 ## Current Architecture
 
 ```txt
@@ -285,9 +324,65 @@ Pods: reliability-app
 ```
 ## Next Milestone
 
-Add production hardening:
+Multi-Service Reliability Engineering
 
-- HTTPS with ACM
-- optional Route 53 DNS
-- EKS observability dashboard refinement
-- cost and cleanup verification
+Objectives:
+
+- Introduce a realistic multi-service architecture
+- Model application failure domains
+- Simulate service dependency failures
+- Implement service-level indicators (SLIs)
+- Define service-level objectives (SLOs)
+- Establish error budgets
+- Measure mean time to recovery (MTTR)
+- Deploy Alertmanager
+- Simulate cascading failures
+- Implement canary deployment workflows
+- Expand chaos engineering experiments
+
+## Future Roadmap
+
+### Phase 10 — Multi-Service Reliability Engineering
+
+- Frontend service
+- API service
+- Dependency service
+- Failure domain modelling
+- Cascading failure testing
+- Alertmanager integration
+- MTTR analysis
+
+### Phase 11 — Reliability Management
+
+- SLIs
+- SLOs
+- Error budgets
+- Error budget policies
+
+### Phase 12 — Progressive Delivery
+
+- Canary deployments
+- Controlled rollouts
+- Automated rollback validation
+
+### Phase 13 — Advanced Chaos Engineering
+
+- Network latency injection
+- Dependency failure simulation
+- Resource exhaustion testing
+- Failure recovery analysis
+
+### Phase 14 — Supply Chain Security
+
+- SBOM generation
+- Container image scanning
+- Cosign signing
+- Sigstore verification
+- Software provenance validation
+
+### Phase 15 — Platform Engineering
+
+- OPA / Gatekeeper
+- Kyverno policies
+- GitOps workflows
+- Advanced cluster governance

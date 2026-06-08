@@ -1,0 +1,8 @@
+NAME                                                      REFERENCE                    TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/reliability-app-hpa   Deployment/reliability-app   cpu: <unknown>/60%   3         6         3          3h27m
+
+NAME                                             MIN AVAILABLE   MAX UNAVAILABLE   ALLOWED DISRUPTIONS   AGE
+poddisruptionbudget.policy/reliability-app-pdb   2               N/A               1                     3h27m
+
+NAME                                                             POD-SELECTOR                                                                        AGE
+networkpolicy.networking.k8s.io/reliability-app-ingress-policy   app.kubernetes.io/instance=reliability-app,app.kubernetes.io/name=reliability-app   3h27m

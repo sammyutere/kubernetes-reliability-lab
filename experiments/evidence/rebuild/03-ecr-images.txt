@@ -1,0 +1,16 @@
+{
+    "imageDetails": [
+        {
+            "registryId": "393864004024",
+            "repositoryName": "reliability-app",
+            "imageDigest": "sha256:b0c40aae28dbb42b56c4749595f9c4130aca8842a228f6fde83bc180f5f1eee5",
+            "imageTags": [
+                "0.1.0"
+            ],
+            "imageSizeInBytes": 63379528,
+            "imagePushedAt": "2026-06-07T21:41:56.777000+01:00",
+            "imageManifestMediaType": "application/vnd.docker.distribution.manifest.v2+json",
+            "artifactMediaType": "application/vnd.docker.container.image.v1+json"
+        }
+    ]
+}
