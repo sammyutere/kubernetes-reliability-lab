@@ -1,0 +1,5 @@
+NAME                                                      REFERENCE                    TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/reliability-app-hpa   Deployment/reliability-app   cpu: 2%/10%   3         8         3          10d
+
+NAME                                             MIN AVAILABLE   MAX UNAVAILABLE   ALLOWED DISRUPTIONS   AGE
+poddisruptionbudget.policy/reliability-app-pdb   2               N/A               1                     18d

@@ -1,0 +1,45 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: multi-service-slo-alerts
+  namespace: monitoring
+  labels:
+    release: monitoring
+spec:
+  groups:
+    - name: multi-service-slo.rules
+      rules:
+        - alert: FrontendHighErrorRate
+          expr: |
+            (
+              sum(rate(frontend_http_requests_total{status=~"5.."}[5m]))
+              /
+              sum(rate(frontend_http_requests_total[5m]))
+            ) > 0.01
+          for: 2m
+          labels:
+            severity: critical
+            service: frontend
+          annotations:
+            summary: "Frontend high error rate"
+            description: "Frontend 5xx error rate is above 1%."
+
+        - alert: ApiDependencyFailures
+          expr: rate(api_dependency_failures_total[5m]) > 0
+          for: 2m
+          labels:
+            severity: warning
+            service: api
+          annotations:
+            summary: "API dependency failures detected"
+            description: "API is observing dependency call failures."
+
+        - alert: FrontendUpstreamFailures
+          expr: rate(frontend_upstream_failures_total[5m]) > 0
+          for: 2m
+          labels:
+            severity: critical
+            service: frontend
+          annotations:
+            summary: "Frontend upstream failures detected"
+            description: "Frontend is observing upstream API failures."

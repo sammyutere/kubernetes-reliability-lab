@@ -168,52 +168,37 @@ Completed:
 - EKS ingress monitoring validation
 - Ingress evidence capture
 
-### Phase 10 — Multi-Service Reliability Engineering
+### Phase 10A — Multi-Service Reliability Engineering
 
-Planned:
+Completed:
 
-- Multi-service application architecture
-- Frontend service
-- API service
-- Dependency service
+- Local multi-service architecture on kind
+- Frontend, API, and dependency services
+- Service dependency chain validation
 - Failure domain modelling
-- Service dependency mapping
-- Cascading failure simulation
-- Service recovery validation
+- SLI/SLO/error budget documentation
+- Cascading failure experiment
+- MTTR tracking framework
+- Canary deployment workflow
+- Error budget gating script
+- Expanded chaos experiment scripts
+- Multi-service reliability evidence capture
 
 ### Current Focus
 
 In progress:
 
-- HTTPS with ACM
-- Optional Route 53 DNS integration
-- Production ingress hardening
-- EKS observability refinement
-- Cost optimisation and cleanup validation
+Promote multi-service reliability architecture to EKS:
+
+- Push frontend, API, and dependency images to ECR
+- Deploy multi-service Helm chart to EKS
+- Expose frontend through ALB Ingress   
+- Validate SLO metrics on EKS
+- Run cascading failure experiment in EKS
 
 ## Project Status
 
-Current Phase: Production-Style EKS Platform
-
-Completed:
-
-- Local Kubernetes platform
-- Helm packaging and deployment
-- Observability and alerting
-- Reliability engineering experiments
-- Terraform infrastructure provisioning
-- Amazon EKS deployment
-- Amazon ECR integration
-- AWS Load Balancer Controller
-- ALB-backed Kubernetes Ingress
-
-In Progress:
-
-- HTTPS with ACM
-- Optional Route 53 integration
-- Production ingress hardening
-- EKS observability refinement
-- Cost optimisation validation
+Current Phase: Multi-Service Reliability Engineering
 
 ## Completed Capabilities 
 
@@ -282,6 +267,17 @@ The project currently includes:
 - Resolved service account annotation issues
 - Recovered monitoring stack after infrastructure rebuild
 
+### Multi-Service Reliability Engineering
+
+- Modelled service dependency failure domains
+- Simulated cascading dependency failure
+- Validated frontend → api → dependency request path
+- Documented SLIs, SLOs, and error budget policy
+- Added MTTR tracking framework
+- Added local canary deployment workflow
+- Added error budget gating simulation
+- Added chaos helper scripts for dependency outage and recovery
+
 ## Current Architecture
 
 ```txt
@@ -324,33 +320,15 @@ Pods: reliability-app
 ```
 ## Next Milestone
 
-Multi-Service Reliability Engineering
+Promote multi-service reliability architecture to EKS:
 
-Objectives:
-
-- Introduce a realistic multi-service architecture
-- Model application failure domains
-- Simulate service dependency failures
-- Implement service-level indicators (SLIs)
-- Define service-level objectives (SLOs)
-- Establish error budgets
-- Measure mean time to recovery (MTTR)
-- Deploy Alertmanager
-- Simulate cascading failures
-- Implement canary deployment workflows
-- Expand chaos engineering experiments
+- Push frontend, API, and dependency images to ECR
+- Deploy multi-service Helm chart to EKS
+- Expose frontend through ALB Ingress
+- Validate SLO metrics on EKS
+- Run cascading failure experiment in EKS
 
 ## Future Roadmap
-
-### Phase 10 — Multi-Service Reliability Engineering
-
-- Frontend service
-- API service
-- Dependency service
-- Failure domain modelling
-- Cascading failure testing
-- Alertmanager integration
-- MTTR analysis
 
 ### Phase 11 — Reliability Management
 

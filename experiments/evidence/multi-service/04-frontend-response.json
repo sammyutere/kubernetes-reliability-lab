@@ -1,0 +1,1 @@
+{"service":"frontend","status":"ok","api":{"service":"api","status":"ok","dependency":{"service":"dependency","data":"dependency response"}}}

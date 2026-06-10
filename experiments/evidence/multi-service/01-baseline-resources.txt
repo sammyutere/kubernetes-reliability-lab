@@ -1,0 +1,25 @@
+NAME                              READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS        IMAGES                  SELECTOR
+deployment.apps/api               3/3     3            3           27m   api               api:local               app.kubernetes.io/name=api
+deployment.apps/dependency        3/3     3            3           27m   dependency        dependency:local        app.kubernetes.io/name=dependency
+deployment.apps/frontend          3/3     3            3           27m   frontend          frontend:local          app.kubernetes.io/name=frontend
+deployment.apps/reliability-app   3/3     3            3           18d   reliability-app   reliability-app:local   app.kubernetes.io/instance=reliability-app,app.kubernetes.io/name=reliability-app
+
+NAME                      TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE   SELECTOR
+service/api               ClusterIP   10.96.180.98    <none>        80/TCP    27m   app.kubernetes.io/name=api
+service/dependency        ClusterIP   10.96.154.159   <none>        80/TCP    27m   app.kubernetes.io/name=dependency
+service/frontend          ClusterIP   10.96.205.153   <none>        80/TCP    27m   app.kubernetes.io/name=frontend
+service/reliability-app   ClusterIP   10.96.69.230    <none>        80/TCP    18d   app.kubernetes.io/instance=reliability-app,app.kubernetes.io/name=reliability-app
+
+NAME                                  READY   STATUS    RESTARTS      AGE    IP            NODE                      NOMINATED NODE   READINESS GATES
+pod/api-7bc645fffb-44vzv              1/1     Running   0             27m    10.244.1.8    reliability-lab-worker2   <none>           <none>
+pod/api-7bc645fffb-9hj7w              1/1     Running   0             27m    10.244.1.11   reliability-lab-worker2   <none>           <none>
+pod/api-7bc645fffb-lb9p9              1/1     Running   0             27m    10.244.2.16   reliability-lab-worker    <none>           <none>
+pod/dependency-564c667995-2zzf9       1/1     Running   0             27m    10.244.1.7    reliability-lab-worker2   <none>           <none>
+pod/dependency-564c667995-8568k       1/1     Running   0             27m    10.244.2.15   reliability-lab-worker    <none>           <none>
+pod/dependency-564c667995-f9xk6       1/1     Running   0             27m    10.244.1.10   reliability-lab-worker2   <none>           <none>
+pod/frontend-565d8c75db-m2rml         1/1     Running   0             27m    10.244.2.17   reliability-lab-worker    <none>           <none>
+pod/frontend-565d8c75db-n7lhs         1/1     Running   0             27m    10.244.1.9    reliability-lab-worker2   <none>           <none>
+pod/frontend-565d8c75db-ws98d         1/1     Running   0             27m    10.244.1.6    reliability-lab-worker2   <none>           <none>
+pod/reliability-app-f4dc7b56c-5nf6c   1/1     Running   0             91m    10.244.2.14   reliability-lab-worker    <none>           <none>
+pod/reliability-app-f4dc7b56c-69q54   1/1     Running   2 (92m ago)   3d8h   10.244.2.2    reliability-lab-worker    <none>           <none>
+pod/reliability-app-f4dc7b56c-nxt6l   1/1     Running   0             91m    10.244.2.13   reliability-lab-worker    <none>           <none>

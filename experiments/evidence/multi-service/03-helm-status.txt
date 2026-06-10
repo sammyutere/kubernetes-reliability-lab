@@ -1,0 +1,33 @@
+NAME: multi-service-app
+LAST DEPLOYED: Tue Jun  9 22:58:16 2026
+NAMESPACE: reliability-lab
+STATUS: deployed
+REVISION: 1
+DESCRIPTION: Install complete
+RESOURCES:
+==> v1/Service
+NAME   TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
+api    ClusterIP   10.96.180.98   <none>        80/TCP    28m
+dependency   ClusterIP   10.96.154.159   <none>   80/TCP   28m
+frontend   ClusterIP   10.96.205.153   <none>   80/TCP   28m
+
+==> v1/Deployment
+NAME   READY   UP-TO-DATE   AVAILABLE   AGE
+api    3/3     3            3           28m
+dependency   3/3   3     3     28m
+frontend   3/3   3     3     28m
+
+==> v1/Pod(related)
+NAME                   READY   STATUS    RESTARTS   AGE
+api-7bc645fffb-44vzv   1/1     Running   0          28m
+api-7bc645fffb-9hj7w   1/1     Running   0          28m
+api-7bc645fffb-lb9p9   1/1     Running   0          28m
+dependency-564c667995-2zzf9   1/1   Running   0     28m
+dependency-564c667995-8568k   1/1   Running   0     28m
+dependency-564c667995-f9xk6   1/1   Running   0     28m
+frontend-565d8c75db-m2rml   1/1   Running   0     28m
+frontend-565d8c75db-n7lhs   1/1   Running   0     28m
+frontend-565d8c75db-ws98d   1/1   Running   0     28m
+
+
+TEST SUITE: None

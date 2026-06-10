@@ -1,0 +1,13 @@
+NAME                              READY   STATUS    RESTARTS       AGE     IP            NODE                      NOMINATED NODE   READINESS GATES
+api-7bc645fffb-44vzv              1/1     Running   1 (158m ago)   14h     10.244.1.5    reliability-lab-worker2   <none>           <none>
+api-7bc645fffb-9hj7w              1/1     Running   1 (158m ago)   14h     10.244.1.6    reliability-lab-worker2   <none>           <none>
+api-7bc645fffb-lb9p9              1/1     Running   1 (158m ago)   14h     10.244.2.16   reliability-lab-worker    <none>           <none>
+dependency-7b576496c7-4lxwm       1/1     Running   0              2m8s    10.244.2.19   reliability-lab-worker    <none>           <none>
+dependency-7b576496c7-g5szj       1/1     Running   0              2m      10.244.1.13   reliability-lab-worker2   <none>           <none>
+dependency-7b576496c7-z2d5c       1/1     Running   0              2m15s   10.244.1.12   reliability-lab-worker2   <none>           <none>
+frontend-565d8c75db-m2rml         0/1     Running   1 (158m ago)   14h     10.244.2.15   reliability-lab-worker    <none>           <none>
+frontend-565d8c75db-n7lhs         1/1     Running   1 (158m ago)   14h     10.244.1.7    reliability-lab-worker2   <none>           <none>
+frontend-565d8c75db-ws98d         1/1     Running   1 (158m ago)   14h     10.244.1.3    reliability-lab-worker2   <none>           <none>
+reliability-app-f4dc7b56c-5nf6c   1/1     Running   1 (158m ago)   15h     10.244.2.11   reliability-lab-worker    <none>           <none>
+reliability-app-f4dc7b56c-69q54   1/1     Running   3 (158m ago)   3d23h   10.244.2.6    reliability-lab-worker    <none>           <none>
+reliability-app-f4dc7b56c-nxt6l   1/1     Running   1 (158m ago)   15h     10.244.2.10   reliability-lab-worker    <none>           <none>

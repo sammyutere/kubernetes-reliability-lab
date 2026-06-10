@@ -1,0 +1,17 @@
+NAME                              READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/api               3/3     3            3           23h
+deployment.apps/dependency        3/3     3            3           23h
+deployment.apps/frontend          3/3     3            3           23h
+deployment.apps/reliability-app   3/3     3            3           19d
+
+NAME                      TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+service/api               ClusterIP   10.96.180.98    <none>        80/TCP    23h
+service/dependency        ClusterIP   10.96.154.159   <none>        80/TCP    23h
+service/frontend          ClusterIP   10.96.205.153   <none>        80/TCP    23h
+service/reliability-app   ClusterIP   10.96.69.230    <none>        80/TCP    19d
+
+NAME                                                      REFERENCE                    TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/reliability-app-hpa   Deployment/reliability-app   cpu: 2%/10%   3         8         3          11d
+
+NAME                                             MIN AVAILABLE   MAX UNAVAILABLE   ALLOWED DISRUPTIONS   AGE
+poddisruptionbudget.policy/reliability-app-pdb   2               N/A               1                     19d
