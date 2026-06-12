@@ -407,22 +407,27 @@ AWS
 ```
 ## Next Milestone
 
-Promote multi-service reliability architecture to EKS:
+Progressive Delivery and Release Risk Control
 
-- Push frontend, API, and dependency images to ECR
-- Deploy multi-service Helm chart to EKS
-- Expose frontend through ALB Ingress
-- Validate SLO metrics on EKS
-- Run cascading failure experiment in EKS
+- Implement canary deployment on EKS
+- Introduce controlled traffic shifting
+- Validate deployment health before promotion
+- Simulate failed canary release
+- Automate rollback validation
+- Integrate error-budget gate before release
+- Document release decision criteria
+- Capture progressive delivery evidence
 
 ## Future Roadmap
 
-### Phase 11 — Progressive Delivery
+### Phase 11 — Progressive Delivery and Release Risk Control
 
 - Canary deployment on EKS
 - Traffic shifting
 - Deployment verification
-- Automated rollback
+- Failed canary simulation
+- Automated rollback validation
+- Error-budget release gate
 
 ### Phase 12 — Reliability Governance
 
