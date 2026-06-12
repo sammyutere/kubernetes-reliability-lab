@@ -355,6 +355,8 @@ The project currently includes:
 
 ## Current Architecture
 
+```txt
+
                          Internet
                              │
                              ▼
