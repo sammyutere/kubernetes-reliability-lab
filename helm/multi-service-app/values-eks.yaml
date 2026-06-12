@@ -1,0 +1,43 @@
+global:
+  imageRegistry: 393864004024.dkr.ecr.us-east-1.amazonaws.com
+  imageTag: "0.1.0"
+  imagePullPolicy: IfNotPresent
+
+services:
+  frontend:
+    replicas: 2
+    image: frontend
+    port: 8000
+    env:
+      API_URL: http://api:80
+      REQUEST_TIMEOUT_SECONDS: "2"
+
+  api:
+    replicas: 2
+    image: api
+    port: 8000
+    env:
+      DEPENDENCY_URL: http://dependency:80
+      REQUEST_TIMEOUT_SECONDS: "2"
+
+  dependency:
+    replicas: 2
+    image: dependency
+    port: 8000
+    env:
+      FAILURE_MODE: none
+      LATENCY_MS: "0"
+
+ingress:
+  enabled: true
+  className: alb
+  path: /
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/healthcheck-path: /healthz
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}]'
+    alb.ingress.kubernetes.io/tags: Project=kubernetes-reliability-lab,Environment=dev,App=multi-service
+
+serviceMonitor:
+  enabled: true

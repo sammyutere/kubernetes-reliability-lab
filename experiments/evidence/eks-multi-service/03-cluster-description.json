@@ -1,0 +1,60 @@
+{
+    "cluster": {
+        "name": "reliability-lab-dev",
+        "arn": "arn:aws:eks:us-east-1:393864004024:cluster/reliability-lab-dev",
+        "createdAt": "2026-06-11T19:44:13.705000+01:00",
+        "version": "1.34",
+        "endpoint": "https://6B873A96F4B93810DD72431B6DA9514D.gr7.us-east-1.eks.amazonaws.com",
+        "roleArn": "arn:aws:iam::393864004024:role/reliability-lab-dev-cluster-role",
+        "resourcesVpcConfig": {
+            "subnetIds": [
+                "subnet-090f7ee2379c12536",
+                "subnet-02b68ce22676b21cb"
+            ],
+            "securityGroupIds": [],
+            "clusterSecurityGroupId": "sg-0a18b0d419cf8b121",
+            "vpcId": "vpc-0a4663205861bf4f3",
+            "endpointPublicAccess": true,
+            "endpointPrivateAccess": false,
+            "publicAccessCidrs": [
+                "0.0.0.0/0"
+            ]
+        },
+        "kubernetesNetworkConfig": {
+            "serviceIpv4Cidr": "172.20.0.0/16",
+            "ipFamily": "ipv4"
+        },
+        "logging": {
+            "clusterLogging": [
+                {
+                    "types": [
+                        "api",
+                        "audit",
+                        "authenticator",
+                        "controllerManager",
+                        "scheduler"
+                    ],
+                    "enabled": false
+                }
+            ]
+        },
+        "identity": {
+            "oidc": {
+                "issuer": "https://oidc.eks.us-east-1.amazonaws.com/id/6B873A96F4B93810DD72431B6DA9514D"
+            }
+        },
+        "status": "ACTIVE",
+        "certificateAuthority": {
+            "data": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURCVENDQWUyZ0F3SUJBZ0lJVkZ0K21HNGhVRkV3RFFZSktvWklodmNOQVFFTEJRQXdGVEVUTUJFR0ExVUUKQXhNS2EzVmlaWEp1WlhSbGN6QWVGdzB5TmpBMk1URXhPRFEwTkRKYUZ3MHpOakEyTURneE9EUTVOREphTUJVeApFekFSQmdOVkJBTVRDbXQxWW1WeWJtVjBaWE13Z2dFaU1BMEdDU3FHU0liM0RRRUJBUVVBQTRJQkR3QXdnZ0VLCkFvSUJBUURFSkw2NnJLd3RaeklabXdGNmhOaTBmOFd1RCtMQUhlemNUVlBVb3h6TjArTnNiVjRqd3FSdmVRMXEKZERCMlRWeGpFUHFndW1Sbk1mc01qY1JXZ0tDellJVU5qditweHFTWDUrSlpYbXVXRlpqM0tpREJML2xmYW1tNApPS0VQOWpuYlI0K3RTNWFNM0t5QVpiYVY0QnMxWGlQYkluQ1FmcklDSHo5c2EvMTJEdG1KUUpnYW4wOHYzTGk1CjJ5SlFnT2hKMWJTMENwMnh2di9pbGh5TkM2c2pRejBFR1Y1Y0MrT042R1RJd0YxQmdWbGZPdjAzV1BhVDJuT20KT0s5RHJkZEViSnVWbktoQXVsbm5qY2VwVUMyQThkdDlSd1Bkc2Q0SE9uSjc1dGJ5SFhXNXQ0elV6OHcycWc4RwpXcHk5TU16UUJTcXRBRitpTVdxeFNjSHVUQjFwQWdNQkFBR2pXVEJYTUE0R0ExVWREd0VCL3dRRUF3SUNwREFQCkJnTlZIUk1CQWY4RUJUQURBUUgvTUIwR0ExVWREZ1FXQkJUMlhpQkpndjhJOUhydGdMdGM3eTF4S1BNZkhEQVYKQmdOVkhSRUVEakFNZ2dwcmRXSmxjbTVsZEdWek1BMEdDU3FHU0liM0RRRUJDd1VBQTRJQkFRQUdBRGN4Z0tGQwoxeXlkUEpMT3B0b241ZksrdUNBem5QcDN0Zysxc1NESHRIOGpITGk0NXJDREVhYitlOEdzMi9VSTJBMXRKWE5SCjlRNUhieWVSYURiVU1sT2FobDlUenFUZGRtZm1iYVdaRE41ZnJWZG8zanZ2WDBNSHBMTXJkUnMwQnI4UzJvSVcKekMrMGMrb0F3S2tkM1ArR1NESmJxdHBPWGo5d2krbTQ1TFVTU2VabW1BWGc2dXVYZFB4K1dmaDB1dm11YmxSSwplWVFGcnRZZ0w4RUJlaVdkK09ORWRzekZTcUErSmVSbVdtWDdkekVMVTNtdEJ1b3hwRVlYZlZqU3NXU1lhUFBFCi9lWVEva2NZbTVBUWtUUU5RMk5EWmFiTVVtNWd0ZHNxN1dQMkwraElZd253R3c5RHJHczZrNE0zeDAzQlRkdE8KTnpoWkUwNWxhUERECi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K"
+        },
+        "platformVersion": "eks.24",
+        "tags": {
+            "Project": "kubernetes-reliability-lab",
+            "Environment": "dev",
+            "ManagedBy": "terraform"
+        },
+        "accessConfig": {
+            "authenticationMode": "CONFIG_MAP"
+        }
+    }
+}

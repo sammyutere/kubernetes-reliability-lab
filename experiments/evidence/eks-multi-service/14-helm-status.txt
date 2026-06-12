@@ -1,0 +1,34 @@
+NAME: multi-service-app
+LAST DEPLOYED: Fri Jun 12 01:57:28 2026
+NAMESPACE: reliability-lab
+STATUS: deployed
+REVISION: 2
+DESCRIPTION: Upgrade complete
+RESOURCES:
+==> v1/Ingress
+NAME                CLASS   HOSTS   ADDRESS                                                                   PORTS   AGE
+multi-service-app   alb     *       k8s-reliabil-multiser-1e38d8e6a8-1354856641.us-east-1.elb.amazonaws.com   80      40m
+
+==> v1/Service
+NAME   TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+api    ClusterIP   172.20.124.95   <none>        80/TCP    40m
+dependency   ClusterIP   172.20.3.242   <none>   80/TCP   40m
+frontend   ClusterIP   172.20.87.36   <none>   80/TCP   40m
+
+==> v1/Deployment
+NAME   READY   UP-TO-DATE   AVAILABLE   AGE
+api    2/2     2            2           40m
+dependency   2/2   2     2     40m
+frontend   2/2   2     2     40m
+
+==> v1/Pod(related)
+NAME                   READY   STATUS    RESTARTS   AGE
+api-58564685f8-6dzgm   1/1     Running   0          40m
+api-58564685f8-vqkzb   1/1     Running   0          40m
+dependency-57d46946ff-9ch4h   1/1   Running   0     40m
+dependency-57d46946ff-wp4j4   1/1   Running   0     40m
+frontend-68bdbd8ccc-28dvz   1/1   Running   0     11m
+frontend-68bdbd8ccc-vj4db   1/1   Running   0     23m
+
+
+TEST SUITE: None

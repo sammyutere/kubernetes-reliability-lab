@@ -1,0 +1,60 @@
+{
+    "repositories": [
+        {
+            "repositoryArn": "arn:aws:ecr:us-east-1:393864004024:repository/reliability-app",
+            "registryId": "393864004024",
+            "repositoryName": "reliability-app",
+            "repositoryUri": "393864004024.dkr.ecr.us-east-1.amazonaws.com/reliability-app",
+            "createdAt": "2026-06-11T19:43:46.294000+01:00",
+            "imageTagMutability": "MUTABLE",
+            "imageScanningConfiguration": {
+                "scanOnPush": true
+            },
+            "encryptionConfiguration": {
+                "encryptionType": "AES256"
+            }
+        },
+        {
+            "repositoryArn": "arn:aws:ecr:us-east-1:393864004024:repository/api",
+            "registryId": "393864004024",
+            "repositoryName": "api",
+            "repositoryUri": "393864004024.dkr.ecr.us-east-1.amazonaws.com/api",
+            "createdAt": "2026-06-12T00:40:42.063000+01:00",
+            "imageTagMutability": "MUTABLE",
+            "imageScanningConfiguration": {
+                "scanOnPush": false
+            },
+            "encryptionConfiguration": {
+                "encryptionType": "AES256"
+            }
+        },
+        {
+            "repositoryArn": "arn:aws:ecr:us-east-1:393864004024:repository/frontend",
+            "registryId": "393864004024",
+            "repositoryName": "frontend",
+            "repositoryUri": "393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend",
+            "createdAt": "2026-06-12T00:40:39.824000+01:00",
+            "imageTagMutability": "MUTABLE",
+            "imageScanningConfiguration": {
+                "scanOnPush": false
+            },
+            "encryptionConfiguration": {
+                "encryptionType": "AES256"
+            }
+        },
+        {
+            "repositoryArn": "arn:aws:ecr:us-east-1:393864004024:repository/dependency",
+            "registryId": "393864004024",
+            "repositoryName": "dependency",
+            "repositoryUri": "393864004024.dkr.ecr.us-east-1.amazonaws.com/dependency",
+            "createdAt": "2026-06-12T00:40:44.289000+01:00",
+            "imageTagMutability": "MUTABLE",
+            "imageScanningConfiguration": {
+                "scanOnPush": false
+            },
+            "encryptionConfiguration": {
+                "encryptionType": "AES256"
+            }
+        }
+    ]
+}

@@ -9,6 +9,29 @@ A hands-on Kubernetes reliability engineering project using local kind and AWS E
 - Use Helm, Terraform, observability, autoscaling, and reliability experiments.
 - Build a portfolio-quality DevOps/SRE project.
 
+## Engineering Areas Demonstrated
+
+- Kubernetes Administration
+- Helm Release Management
+- Terraform Infrastructure as Code
+- Amazon EKS Operations
+- Amazon ECR Image Management
+- IAM OIDC Provider Integration
+- IAM Roles for Service Accounts (IRSA)
+- AWS Load Balancer Controller
+- ALB Ingress Management
+- Prometheus Monitoring
+- Grafana Dashboards
+- Alertmanager Integration
+- Horizontal Pod Autoscaling (HPA)
+- Pod Disruption Budgets (PDB)
+- Reliability Engineering
+- Failure Domain Modelling
+- SLI/SLO Design
+- Error Budget Management
+- MTTR Measurement
+- Cloud Cost Management
+
 ## Tech Stack
 
 - Python FastAPI
@@ -53,6 +76,8 @@ docs/             Architecture, runbooks, SLOs
 | [Architecture](docs/00-architecture.md) | Current architecture and component relationships |
 | [Project Roadmap](docs/16-project-roadmap.md) | Historical implementation journey |
 | [Production Hardening](docs/17-production-hardening.md) | HTTPS, DNS, observability refinement, and cleanup verification |
+| [Multi-Service Reliability Engineering](docs/22-multi-service-reliability-engineering.md) | Multi-service architecture, failure domains, SLOs, error budgets, MTTR, canary workflows, and chaos experiments |
+| [EKS Multi-Service Reliability](docs/23-eks-multi-service-reliability.md) | Environment reconstruction, EKS promotion, ALB ingress, observability validation, cascading failures, MTTR, and cleanup workflow |
 
 ## Reliability Experiments
 
@@ -63,6 +88,35 @@ docs/             Architecture, runbooks, SLOs
 | CPU Spike & HPA | Autoscaling behaviour evaluated |
 | Node Drain | Planned maintenance behaviour validated |
 | NetworkPolicy | Traffic control behaviour validated |
+
+## Reliability Engineering Journey
+
+```txt
+Local kind
+    ↓
+Helm
+    ↓
+Monitoring
+    ↓
+Reliability Experiments
+    ↓
+Terraform
+    ↓
+Amazon EKS
+    ↓
+IRSA
+    ↓
+AWS Load Balancer Controller
+    ↓
+ALB Ingress
+    ↓
+Multi-Service Architecture
+    ↓
+Cascading Failure Analysis
+    ↓
+MTTR Measurement
+```
+This repository demonstrates the progression from local Kubernetes administration to cloud-hosted reliability engineering practices.
 
 ## Implementation Progress
 
@@ -184,21 +238,25 @@ Completed:
 - Expanded chaos experiment scripts
 - Multi-service reliability evidence capture
 
-### Current Focus
+## Current Milestone
 
-In progress:
+### Phase 10B — EKS Multi-Service Reliability Promotion
 
-Promote multi-service reliability architecture to EKS:
+Objectives:
 
-- Push frontend, API, and dependency images to ECR
-- Deploy multi-service Helm chart to EKS
-- Expose frontend through ALB Ingress   
-- Validate SLO metrics on EKS
-- Run cascading failure experiment in EKS
-
-## Project Status
-
-Current Phase: Multi-Service Reliability Engineering
+- Environment reconstruction after AWS cleanup
+- Terraform-based infrastructure recovery
+- OIDC and IRSA validation
+- AWS Load Balancer Controller recovery
+- Monitoring stack recovery
+- ECR image promotion
+- Multi-service deployment to EKS
+- Capacity tuning and rollout troubleshooting
+- ALB ingress validation
+- Observability validation
+- Cascading failure experimentation
+- MTTR measurement
+- AWS cost-control cleanup workflow
 
 ## Completed Capabilities 
 
@@ -278,45 +336,72 @@ The project currently includes:
 - Added error budget gating simulation
 - Added chaos helper scripts for dependency outage and recovery
 
+### EKS Multi-Service Reliability Promotion
+
+- Rebuilt EKS environments after full AWS cleanup
+- Restored Terraform-managed infrastructure
+- Revalidated ECR image supply chain
+- Associated IAM OIDC provider
+- Configured IAM Roles for Service Accounts (IRSA)
+- Recreated AWS Load Balancer Controller
+- Diagnosed controller VPC discovery failures
+- Recovered Prometheus, Grafana, and Alertmanager
+- Promoted multi-service workloads to EKS
+- Tuned workload capacity to resolve rollout failures
+- Validated ALB ingress exposure
+- Executed cloud-hosted cascading failure experiments
+- Measured MTTR in EKS
+- Implemented cost-control cleanup workflows
+
 ## Current Architecture
 
-```txt
-Developer Workstation
-├── Docker
-│   └── reliability-app container image
-├── Terraform
-│   └── provisions AWS infrastructure
-└── kubectl / Helm
-    └── deploys application to Amazon EKS
+                         Internet
+                             │
+                             ▼
+                    AWS Application Load Balancer
+                             │
+                             ▼
+                     Kubernetes Ingress
+                             │
+                             ▼
+                     Frontend Service
+                             │
+                             ▼
+                         API Service
+                             │
+                             ▼
+                    Dependency Service
+
+──────────────────────────────────────
+
+Amazon EKS
+
+reliability-lab namespace
+
+├── frontend Deployment
+├── api Deployment
+├── dependency Deployment
+├── Services
+├── HPA
+├── PDB
+├── Network Policies
+└── Ingress
+
+monitoring namespace
+
+├── Prometheus
+├── Grafana
+└── Alertmanager
+
+──────────────────────────────────────
 
 AWS
-├── Amazon ECR
-│   └── reliability-app:0.1.0
-├── Amazon EKS
-│   ├── Managed node group
-│   ├── reliability-lab namespace
-│   │   ├── Deployment: reliability-app
-│   │   ├── Service: reliability-app
-│   │   ├── HPA
-│   │   ├── PDB
-│   │   ├── NetworkPolicy
-│   │   └── Ingress
-│   └── monitoring namespace
-│       ├── Prometheus
-│       └── Grafana
-└── AWS Application Load Balancer
-    └── Routes external HTTP traffic to the reliability-app Service
-```
-```txt
-Internet Client
-    ↓
-AWS Application Load Balancer
-    ↓
-Kubernetes Ingress
-    ↓
-Service: reliability-app
-    ↓
-Pods: reliability-app
+
+├── ECR
+├── IAM OIDC Provider
+├── IRSA
+├── AWS Load Balancer Controller
+└── ALB
 ```
 ## Next Milestone
 
@@ -330,37 +415,38 @@ Promote multi-service reliability architecture to EKS:
 
 ## Future Roadmap
 
-### Phase 11 — Reliability Management
+### Phase 11 — Progressive Delivery
 
-- SLIs
-- SLOs
-- Error budgets
-- Error budget policies
+- Canary deployment on EKS
+- Traffic shifting
+- Deployment verification
+- Automated rollback
 
-### Phase 12 — Progressive Delivery
+### Phase 12 — Reliability Governance
 
-- Canary deployments
-- Controlled rollouts
-- Automated rollback validation
+- SLO enforcement
+- Error-budget gates
+- Release governance
+- Reliability scorecards
 
 ### Phase 13 — Advanced Chaos Engineering
 
-- Network latency injection
-- Dependency failure simulation
-- Resource exhaustion testing
-- Failure recovery analysis
+- Dependency outages
+- Latency injection
+- Resource exhaustion
+- Recovery measurement
 
 ### Phase 14 — Supply Chain Security
 
 - SBOM generation
-- Container image scanning
+- Container scanning
+- Sigstore
 - Cosign signing
-- Sigstore verification
-- Software provenance validation
+- Provenance verification
 
 ### Phase 15 — Platform Engineering
 
-- OPA / Gatekeeper
-- Kyverno policies
-- GitOps workflows
-- Advanced cluster governance
+- OPA Gatekeeper
+- Kyverno
+- GitOps
+- Platform governance

@@ -1,0 +1,25 @@
+Name:             multi-service-app
+Labels:           app.kubernetes.io/instance=multi-service-app
+                  app.kubernetes.io/managed-by=Helm
+                  app.kubernetes.io/name=multi-service-app
+                  app.kubernetes.io/part-of=multi-service-reliability-lab
+Namespace:        reliability-lab
+Address:          k8s-reliabil-multiser-1e38d8e6a8-1354856641.us-east-1.elb.amazonaws.com
+Ingress Class:    alb
+Default backend:  <default>
+Rules:
+  Host        Path  Backends
+  ----        ----  --------
+  *           
+              /   frontend:80 (10.40.1.171:8000,10.40.0.151:8000)
+Annotations:  alb.ingress.kubernetes.io/healthcheck-path: /healthz
+              alb.ingress.kubernetes.io/listen-ports: [{"HTTP":80}]
+              alb.ingress.kubernetes.io/scheme: internet-facing
+              alb.ingress.kubernetes.io/tags: Project=kubernetes-reliability-lab,Environment=dev,App=multi-service
+              alb.ingress.kubernetes.io/target-type: ip
+              meta.helm.sh/release-name: multi-service-app
+              meta.helm.sh/release-namespace: reliability-lab
+Events:
+  Type    Reason                  Age   From     Message
+  ----    ------                  ----  ----     -------
+  Normal  SuccessfullyReconciled  45m   ingress  Successfully reconciled

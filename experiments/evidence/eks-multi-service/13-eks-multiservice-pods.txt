@@ -1,0 +1,7 @@
+NAME                          READY   STATUS    RESTARTS   AGE   IP            NODE                          NOMINATED NODE   READINESS GATES
+api-58564685f8-6dzgm          1/1     Running   0          40m   10.40.1.18    ip-10-40-1-242.ec2.internal   <none>           <none>
+api-58564685f8-vqkzb          1/1     Running   0          40m   10.40.0.222   ip-10-40-0-194.ec2.internal   <none>           <none>
+dependency-57d46946ff-9ch4h   1/1     Running   0          40m   10.40.0.199   ip-10-40-0-194.ec2.internal   <none>           <none>
+dependency-57d46946ff-wp4j4   1/1     Running   0          40m   10.40.1.129   ip-10-40-1-242.ec2.internal   <none>           <none>
+frontend-68bdbd8ccc-28dvz     1/1     Running   0          10m   10.40.0.151   ip-10-40-0-194.ec2.internal   <none>           <none>
+frontend-68bdbd8ccc-vj4db     1/1     Running   0          22m   10.40.1.171   ip-10-40-1-242.ec2.internal   <none>           <none>

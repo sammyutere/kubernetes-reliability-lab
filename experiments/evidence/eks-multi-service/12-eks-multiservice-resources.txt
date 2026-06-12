@@ -1,0 +1,9 @@
+NAME                         READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/api          2/2     2            2           40m
+deployment.apps/dependency   2/2     2            2           40m
+deployment.apps/frontend     2/2     2            2           40m
+
+NAME                 TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+service/api          ClusterIP   172.20.124.95   <none>        80/TCP    40m
+service/dependency   ClusterIP   172.20.3.242    <none>        80/TCP    40m
+service/frontend     ClusterIP   172.20.87.36    <none>        80/TCP    40m

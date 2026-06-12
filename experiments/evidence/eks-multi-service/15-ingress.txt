@@ -1,0 +1,2 @@
+NAME                CLASS   HOSTS   ADDRESS                                                                   PORTS   AGE
+multi-service-app   alb     *       k8s-reliabil-multiser-1e38d8e6a8-1354856641.us-east-1.elb.amazonaws.com   80      45m

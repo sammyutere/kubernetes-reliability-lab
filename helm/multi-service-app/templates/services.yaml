@@ -8,6 +8,7 @@ metadata:
     app.kubernetes.io/part-of: multi-service-reliability-lab
     app.kubernetes.io/managed-by: {{ $.Release.Service }}
     app.kubernetes.io/instance: {{ $.Release.Name }}
+    monitoring: enabled
 spec:
   type: ClusterIP
   selector:
