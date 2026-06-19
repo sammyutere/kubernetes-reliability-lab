@@ -1,0 +1,3 @@
+NAME                                           READY   STATUS    RESTARTS   AGE
+aws-load-balancer-controller-887bd5f4f-6gkkt   1/1     Running   0          75s
+aws-load-balancer-controller-887bd5f4f-9s5td   1/1     Running   0          75s

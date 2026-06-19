@@ -258,6 +258,21 @@ Objectives:
 - MTTR measurement
 - AWS cost-control cleanup workflow
 
+### Phase 11 — Progressive Delivery and Release Risk Control
+
+Completed:
+
+- Stable and canary deployment strategy
+- ALB weighted traffic shifting
+- 90/10, 50/50 and promotion workflows
+- Release health validation
+- Error-budget release gating
+- Failed-canary simulation
+- Automated rollback validation
+- Release decision criteria
+- Progressive delivery evidence capture
+- AWS cost-control cleanup workflow
+
 ## Completed Capabilities 
 
 The project currently includes:
@@ -353,6 +368,17 @@ The project currently includes:
 - Measured MTTR in EKS
 - Implemented cost-control cleanup workflows
 
+### Progressive Delivery and Release Risk Control
+
+- Implemented canary deployment on EKS
+- Introduced controlled ALB traffic shifting
+- Validated release health before promotion
+- Simulated failed canary release
+- Automated rollback to stable traffic
+- Integrated error-budget release gate
+- Documented promotion and rollback criteria
+- Captured progressive delivery evidence
+
 ## Current Architecture
 
 ```txt
@@ -407,27 +433,15 @@ AWS
 ```
 ## Next Milestone
 
-Progressive Delivery and Release Risk Control
+Reliability Governance and SLO Enforcement
 
-- Implement canary deployment on EKS
-- Introduce controlled traffic shifting
-- Validate deployment health before promotion
-- Simulate failed canary release
-- Automate rollback validation
-- Integrate error-budget gate before release
-- Document release decision criteria
-- Capture progressive delivery evidence
+- Convert SLOs into enforceable release controls
+- Expand Prometheus alert rules
+- Add Alertmanager routing validation
+- Create reliability scorecard
+- Define operational release policy
 
 ## Future Roadmap
-
-### Phase 11 — Progressive Delivery and Release Risk Control
-
-- Canary deployment on EKS
-- Traffic shifting
-- Deployment verification
-- Failed canary simulation
-- Automated rollback validation
-- Error-budget release gate
 
 ### Phase 12 — Reliability Governance
 

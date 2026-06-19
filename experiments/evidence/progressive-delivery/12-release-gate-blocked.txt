@@ -1,0 +1,3 @@
+Error budget remaining: 5%
+Canary health: pass
+BLOCKED: Error budget is below release threshold.

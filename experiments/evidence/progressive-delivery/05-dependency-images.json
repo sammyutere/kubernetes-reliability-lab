@@ -1,0 +1,17 @@
+{
+    "imageDetails": [
+        {
+            "registryId": "393864004024",
+            "repositoryName": "dependency",
+            "imageDigest": "sha256:44c02966c46fa4a63f7ff299abc73db7c92cd6fd2d7cee778442fe72150daf69",
+            "imageTags": [
+                "0.1.0"
+            ],
+            "imageSizeInBytes": 53515954,
+            "imagePushedAt": "2026-06-12T01:01:49.571000+01:00",
+            "imageManifestMediaType": "application/vnd.docker.distribution.manifest.v2+json",
+            "artifactMediaType": "application/vnd.docker.container.image.v1+json",
+            "lastRecordedPullTime": "2026-06-12T01:28:39.248000+01:00"
+        }
+    ]
+}

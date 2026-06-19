@@ -1,0 +1,22 @@
+Name:             frontend-progressive
+Labels:           <none>
+Namespace:        reliability-lab
+Address:          k8s-reliabil-frontend-0f888189ce-152293850.us-east-1.elb.amazonaws.com
+Ingress Class:    alb
+Default backend:  <default>
+Rules:
+  Host        Path  Backends
+  ----        ----  --------
+  *           
+              /   forward-weighted:use-annotation (<error: services "forward-weighted" not found>)
+Annotations:  alb.ingress.kubernetes.io/actions.forward-weighted:
+                {"type":"forward","forwardConfig":{"targetGroups":[{"serviceName":"frontend","servicePort":"80","weight":90},{"serviceName":"frontend-cana...
+              alb.ingress.kubernetes.io/healthcheck-path: /healthz
+              alb.ingress.kubernetes.io/listen-ports: [{"HTTP":80}]
+              alb.ingress.kubernetes.io/scheme: internet-facing
+              alb.ingress.kubernetes.io/tags: Project=kubernetes-reliability-lab,Environment=dev,Phase=progressive-delivery
+              alb.ingress.kubernetes.io/target-type: ip
+Events:
+  Type    Reason                  Age    From     Message
+  ----    ------                  ----   ----     -------
+  Normal  SuccessfullyReconciled  2m41s  ingress  Successfully reconciled

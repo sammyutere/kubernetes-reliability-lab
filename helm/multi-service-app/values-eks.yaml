@@ -1,5 +1,5 @@
 global:
-  imageRegistry: 393864004024.dkr.ecr.us-east-1.amazonaws.com
+  imageRegistry: "393864004024.dkr.ecr.us-east-1.amazonaws.com"
   imageTag: "0.1.0"
   imagePullPolicy: IfNotPresent
 
@@ -29,15 +29,7 @@ services:
       LATENCY_MS: "0"
 
 ingress:
-  enabled: true
-  className: alb
-  path: /
-  annotations:
-    alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/healthcheck-path: /healthz
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}]'
-    alb.ingress.kubernetes.io/tags: Project=kubernetes-reliability-lab,Environment=dev,App=multi-service
+  enabled: false
 
 serviceMonitor:
   enabled: true

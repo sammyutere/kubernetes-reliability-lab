@@ -1,0 +1,17 @@
+NAME                         READY   UP-TO-DATE   AVAILABLE   AGE     CONTAINERS   IMAGES                                                          SELECTOR
+deployment.apps/api          2/2     2            2           2m16s   api          393864004024.dkr.ecr.us-east-1.amazonaws.com/api:0.1.0          app.kubernetes.io/name=api
+deployment.apps/dependency   2/2     2            2           2m16s   dependency   393864004024.dkr.ecr.us-east-1.amazonaws.com/dependency:0.1.0   app.kubernetes.io/name=dependency
+deployment.apps/frontend     2/2     2            2           2m16s   frontend     393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend:0.1.0     app.kubernetes.io/name=frontend
+
+NAME                 TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)   AGE     SELECTOR
+service/api          ClusterIP   172.20.141.223   <none>        80/TCP    2m16s   app.kubernetes.io/name=api
+service/dependency   ClusterIP   172.20.126.253   <none>        80/TCP    2m16s   app.kubernetes.io/name=dependency
+service/frontend     ClusterIP   172.20.203.79    <none>        80/TCP    2m16s   app.kubernetes.io/name=frontend
+
+NAME                              READY   STATUS    RESTARTS   AGE     IP            NODE                          NOMINATED NODE   READINESS GATES
+pod/api-58564685f8-8phw9          1/1     Running   0          2m15s   10.40.1.135   ip-10-40-1-56.ec2.internal    <none>           <none>
+pod/api-58564685f8-zbgmw          1/1     Running   0          2m15s   10.40.0.177   ip-10-40-0-209.ec2.internal   <none>           <none>
+pod/dependency-57d46946ff-plvxz   1/1     Running   0          2m15s   10.40.0.245   ip-10-40-0-209.ec2.internal   <none>           <none>
+pod/dependency-57d46946ff-tmfqs   1/1     Running   0          2m15s   10.40.1.238   ip-10-40-1-56.ec2.internal    <none>           <none>
+pod/frontend-54b6645786-4p9dj     1/1     Running   0          2m15s   10.40.0.133   ip-10-40-0-209.ec2.internal   <none>           <none>
+pod/frontend-54b6645786-dbsn2     1/1     Running   0          2m15s   10.40.1.195   ip-10-40-1-56.ec2.internal    <none>           <none>

@@ -1,0 +1,3 @@
+Error budget remaining: 50%
+Canary health: pass
+APPROVED: Release can proceed.

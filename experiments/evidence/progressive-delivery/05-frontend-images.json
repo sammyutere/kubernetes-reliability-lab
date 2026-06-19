@@ -1,0 +1,18 @@
+{
+    "imageDetails": [
+        {
+            "registryId": "393864004024",
+            "repositoryName": "frontend",
+            "imageDigest": "sha256:e160939e1d8d73617a3287187d1c41bfc9076591ed922227012435c45b4f1260",
+            "imageTags": [
+                "0.2.0-canary",
+                "0.1.0"
+            ],
+            "imageSizeInBytes": 53516024,
+            "imagePushedAt": "2026-06-12T01:00:20.333000+01:00",
+            "imageManifestMediaType": "application/vnd.docker.distribution.manifest.v2+json",
+            "artifactMediaType": "application/vnd.docker.container.image.v1+json",
+            "lastRecordedPullTime": "2026-06-12T01:28:38.975000+01:00"
+        }
+    ]
+}

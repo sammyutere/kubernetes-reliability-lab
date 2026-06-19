@@ -1,0 +1,3 @@
+Rolling traffic back to stable...
+ingress.networking.k8s.io/frontend-progressive configured
+Rollback applied.

@@ -1,0 +1,17 @@
+{
+    "TargetHealthDescriptions": [
+        {
+            "Target": {
+                "Id": "10.40.1.177",
+                "Port": 8000,
+                "AvailabilityZone": "us-east-1b"
+            },
+            "HealthCheckPort": "8000",
+            "TargetHealth": {
+                "State": "draining",
+                "Reason": "Target.DeregistrationInProgress",
+                "Description": "Target deregistration is in progress"
+            }
+        }
+    ]
+}
