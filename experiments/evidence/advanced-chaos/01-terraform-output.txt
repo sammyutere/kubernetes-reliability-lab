@@ -1,0 +1,4 @@
+aws_region = "us-east-1"
+cluster_endpoint = "https://60CE15C352B14D2B28EDDFD1485436E8.gr7.us-east-1.eks.amazonaws.com"
+cluster_name = "reliability-lab-dev"
+ecr_repository_url = "393864004024.dkr.ecr.us-east-1.amazonaws.com/reliability-app"

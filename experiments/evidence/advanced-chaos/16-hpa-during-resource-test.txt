@@ -1,0 +1,4 @@
+NAME         REFERENCE               TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+api          Deployment/api          cpu: <unknown>/60%   2         6         2          7m16s
+dependency   Deployment/dependency   cpu: <unknown>/60%   2         6         2          7m12s
+frontend     Deployment/frontend     cpu: <unknown>/60%   2         6         2          7m17s

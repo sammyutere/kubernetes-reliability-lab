@@ -1,0 +1,2 @@
+NAME                          READY   STATUS    RESTARTS   AGE   IP           NODE                          NOMINATED NODE   READINESS GATES
+dependency-57d46946ff-pmjpw   1/1     Running   0          92m   10.40.1.44   ip-10-40-1-209.ec2.internal   <none>           <none>

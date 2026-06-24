@@ -5,9 +5,24 @@ PROM_URL="${PROM_URL:-http://127.0.0.1:9090}"
 
 query_prom() {
   local query="$1"
-  curl -sG "${PROM_URL}/api/v1/query" \
-    --data-urlencode "query=${query}" \
-  | python3 -c 'import sys,json; d=json.load(sys.stdin); r=d["data"]["result"]; print(r[0]["value"][1] if r else "0")'
+
+  response=$(curl -sG "${PROM_URL}/api/v1/query" \
+    --data-urlencode "query=${query}" || true)
+
+  if [ -z "$response" ]; then
+    echo "0"
+    return
+  fi
+
+  echo "$response" | python3 -c '
+import sys, json
+try:
+    d=json.load(sys.stdin)
+    result=d.get("data", {}).get("result", [])
+    print(result[0]["value"][1] if result else "0")
+except Exception:
+    print("0")
+'
 }
 
 SUCCESS_RATIO=$(query_prom 'frontend:request_success_ratio:5m')

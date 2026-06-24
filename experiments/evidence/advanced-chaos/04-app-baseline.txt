@@ -1,0 +1,17 @@
+NAME                         READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS   IMAGES                                                          SELECTOR
+deployment.apps/api          2/2     2            2           94s   api          393864004024.dkr.ecr.us-east-1.amazonaws.com/api:0.1.0          app.kubernetes.io/name=api
+deployment.apps/dependency   2/2     2            2           94s   dependency   393864004024.dkr.ecr.us-east-1.amazonaws.com/dependency:0.1.0   app.kubernetes.io/name=dependency
+deployment.apps/frontend     2/2     2            2           94s   frontend     393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend:0.1.0     app.kubernetes.io/name=frontend
+
+NAME                 TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)   AGE   SELECTOR
+service/api          ClusterIP   172.20.24.240    <none>        80/TCP    95s   app.kubernetes.io/name=api
+service/dependency   ClusterIP   172.20.39.13     <none>        80/TCP    95s   app.kubernetes.io/name=dependency
+service/frontend     ClusterIP   172.20.183.233   <none>        80/TCP    95s   app.kubernetes.io/name=frontend
+
+NAME                              READY   STATUS    RESTARTS   AGE   IP            NODE                          NOMINATED NODE   READINESS GATES
+pod/api-58564685f8-q94kk          1/1     Running   0          95s   10.40.0.215   ip-10-40-0-226.ec2.internal   <none>           <none>
+pod/api-58564685f8-twnzl          1/1     Running   0          95s   10.40.1.91    ip-10-40-1-209.ec2.internal   <none>           <none>
+pod/dependency-57d46946ff-dmbv7   1/1     Running   0          95s   10.40.0.39    ip-10-40-0-226.ec2.internal   <none>           <none>
+pod/dependency-57d46946ff-hj7k7   1/1     Running   0          95s   10.40.1.44    ip-10-40-1-209.ec2.internal   <none>           <none>
+pod/frontend-54b6645786-2d7qs     1/1     Running   0          95s   10.40.1.192   ip-10-40-1-209.ec2.internal   <none>           <none>
+pod/frontend-54b6645786-6wqrl     1/1     Running   0          95s   10.40.0.106   ip-10-40-0-226.ec2.internal   <none>           <none>

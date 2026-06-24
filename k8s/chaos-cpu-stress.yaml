@@ -1,0 +1,30 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: cpu-stress
+  namespace: reliability-lab
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: cpu-stress
+          image: busybox
+          command:
+            - /bin/sh
+            - -c
+            - |
+              echo "Starting CPU stress"
+              i=0
+              while [ $i -lt 300 ]; do
+                yes > /dev/null &
+                i=$((i+1))
+                sleep 1
+              done
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "128Mi"
+            limits:
+              cpu: "1000m"
+              memory: "256Mi"

@@ -286,6 +286,21 @@ Completed:
 - Reliability governance evidence capture
 - Cost-control cleanup workflow
 
+### Phase 13 — Advanced Chaos Engineering and Resilience Validation
+
+Completed:
+
+- Dependency latency injection
+- Partial service outage simulation
+- Resource exhaustion validation
+- HPA recovery after environment rebuild
+- Alert routing validation
+- MTTR measurement
+- Reliability scorecard generation
+- Operational troubleshooting documentation
+- AWS cleanup verification
+- Cost-control teardown workflow
+
 ## Completed Capabilities 
 
 The project currently includes:
@@ -403,6 +418,16 @@ The project currently includes:
 - Defined operational release policy
 - Integrated reliability governance into release decision-making
 
+### Advanced Chaos Engineering
+
+- Injected dependency latency to validate latency SLO behaviour
+- Simulated partial service outage by reducing dependency replicas
+- Ran resource exhaustion test against the cluster
+- Validated alert routing during active failure
+- Measured MTTR across multiple failure scenarios
+- Updated reliability scorecard after chaos testing
+- Documented resilience validation workflow
+
 ## Current Architecture
 
 ```txt
@@ -457,23 +482,16 @@ AWS
 ```
 ## Next Milestone
 
-Advanced Chaos Engineering and Resilience Validation
+Supply Chain Security and Deployment Trust
 
-- Inject dependency latency
-- Simulate partial service outage
-- Run resource exhaustion test
-- Validate alert routing under failure
-- Measure MTTR across failure scenarios
-- Update reliability scorecard after chaos tests
+- Generate SBOM
+- Scan container images
+- Sign images with Cosign
+- Verify image signatures
+- Document provenance
+- Prepare Sigstore-based supply chain controls
 
 ## Future Roadmap
-
-### Phase 13 — Advanced Chaos Engineering
-
-- Dependency outages
-- Latency injection
-- Resource exhaustion
-- Recovery measurement
 
 ### Phase 14 — Supply Chain Security
 
