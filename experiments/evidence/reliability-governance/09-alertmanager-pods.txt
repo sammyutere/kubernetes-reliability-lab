@@ -1,0 +1,1 @@
+alertmanager-monitoring-kube-prometheus-alertmanager-0   2/2     Running   0          3h55m

@@ -1,0 +1,4 @@
+Success ratio: NaN
+Error ratio: NaN
+p95 latency seconds: NaN
+APPROVED: SLO gate passed

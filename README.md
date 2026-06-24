@@ -273,6 +273,19 @@ Completed:
 - Progressive delivery evidence capture
 - AWS cost-control cleanup workflow
 
+### Phase 12 — Reliability Governance and SLO Enforcement
+
+Completed:
+
+- SLO recording rules
+- Expanded Prometheus alert rules
+- Alertmanager routing validation
+- SLO-based release gate
+- Reliability scorecard
+- Operational release policy
+- Reliability governance evidence capture
+- Cost-control cleanup workflow
+
 ## Completed Capabilities 
 
 The project currently includes:
@@ -379,6 +392,17 @@ The project currently includes:
 - Documented promotion and rollback criteria
 - Captured progressive delivery evidence
 
+### Reliability Governance and SLO Enforcement
+
+- Converted SLOs into enforceable release controls
+- Added Prometheus recording rules for SLO metrics
+- Expanded alerting coverage for availability, latency, errors, and dependency failures
+- Validated Alertmanager routing by severity
+- Created SLO release gate script
+- Created reliability scorecard workflow
+- Defined operational release policy
+- Integrated reliability governance into release decision-making
+
 ## Current Architecture
 
 ```txt
@@ -433,22 +457,16 @@ AWS
 ```
 ## Next Milestone
 
-Reliability Governance and SLO Enforcement
+Advanced Chaos Engineering and Resilience Validation
 
-- Convert SLOs into enforceable release controls
-- Expand Prometheus alert rules
-- Add Alertmanager routing validation
-- Create reliability scorecard
-- Define operational release policy
+- Inject dependency latency
+- Simulate partial service outage
+- Run resource exhaustion test
+- Validate alert routing under failure
+- Measure MTTR across failure scenarios
+- Update reliability scorecard after chaos tests
 
 ## Future Roadmap
-
-### Phase 12 — Reliability Governance
-
-- SLO enforcement
-- Error-budget gates
-- Release governance
-- Reliability scorecards
 
 ### Phase 13 — Advanced Chaos Engineering
 

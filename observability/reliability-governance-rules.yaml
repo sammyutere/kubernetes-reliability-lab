@@ -1,0 +1,107 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: reliability-governance-rules
+  namespace: monitoring
+  labels:
+    release: monitoring
+spec:
+  groups:
+    - name: reliability-governance.recording
+      interval: 30s
+      rules:
+        - record: frontend:request_success_ratio:5m
+          expr: |
+            sum(rate(frontend_http_requests_total{status=~"2.."}[5m]))
+            /
+            sum(rate(frontend_http_requests_total[5m]))
+
+        - record: frontend:error_ratio:5m
+          expr: |
+            (
+              sum(rate(frontend_http_requests_total{status=~"5.."}[5m]))
+              or vector(0)
+            )
+            /
+            sum(rate(frontend_http_requests_total[5m]))
+
+        - record: frontend:latency_p95_seconds:5m
+          expr: |
+            histogram_quantile(
+              0.95,
+              sum(rate(frontend_http_request_duration_seconds_bucket[5m])) by (le)
+            )
+
+        - record: api:dependency_failure_rate:5m
+          expr: |
+            sum(rate(api_dependency_failures_total[5m]))
+
+        - record: frontend:upstream_failure_rate:5m
+          expr: |
+            sum(rate(frontend_upstream_failures_total[5m]))
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: reliability-governance-alerts
+  namespace: monitoring
+  labels:
+    release: monitoring
+spec:
+  groups:
+    - name: reliability-governance.alerts
+      rules:
+        - alert: SLOAvailabilityBurnCritical
+          expr: frontend:request_success_ratio:5m < 0.99
+          for: 2m
+          labels:
+            severity: critical
+            service: frontend
+            slo: availability
+          annotations:
+            summary: "Frontend availability SLO is burning fast"
+            description: "Frontend request success ratio is below 99% for 2 minutes."
+
+        - alert: SLOErrorRateWarning
+          expr: frontend:error_ratio:5m > 0.01
+          for: 2m
+          labels:
+            severity: warning
+            service: frontend
+            slo: error-rate
+          annotations:
+            summary: "Frontend error rate above warning threshold"
+            description: "Frontend 5xx error ratio is above 1%."
+
+        - alert: SLOLatencyWarning
+          expr: frontend:latency_p95_seconds:5m > 0.5
+          for: 2m
+          labels:
+            severity: warning
+            service: frontend
+            slo: latency
+          annotations:
+            summary: "Frontend p95 latency above SLO threshold"
+            description: "Frontend p95 latency is above 500ms."
+
+        - alert: UpstreamDependencyFailures
+          expr: frontend:upstream_failure_rate:5m > 0
+          for: 2m
+          labels:
+            severity: critical
+            service: frontend
+            slo: dependency
+          annotations:
+            summary: "Frontend upstream failures detected"
+            description: "Frontend is observing upstream API failures."
+
+        - alert: ApiDependencyFailures
+          expr: api:dependency_failure_rate:5m > 0
+          for: 2m
+          labels:
+            severity: warning
+            service: api
+            slo: dependency
+          annotations:
+            summary: "API dependency failures detected"
+            description: "API is observing dependency call failures."
