@@ -1,0 +1,2 @@
+
+[{"critical":{"identity":{"docker-reference":"393864004024.dkr.ecr.us-east-1.amazonaws.com/api:0.1.0-supply-chain"},"image":{"docker-manifest-digest":"sha256:1ba5acf5935e1691d2f9bcc9006f2dd0807fd3c3185dcd024664f4535fbf3bbf"},"type":"https://sigstore.dev/cosign/sign/v1"},"optional":{}}]

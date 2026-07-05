@@ -1,0 +1,7 @@
+total 6000
+-rw-r--r--  1 macos  staff   987K  5 Jul 14:30 api-0.1.0-supply-chain.cyclonedx.json
+-rw-r--r--  1 macos  staff   8.4K  5 Jul 14:32 api-0.1.0-supply-chain.txt
+-rw-r--r--  1 macos  staff   987K  5 Jul 14:30 dependency-0.1.0-supply-chain.cyclonedx.json
+-rw-r--r--  1 macos  staff   8.4K  5 Jul 14:32 dependency-0.1.0-supply-chain.txt
+-rw-r--r--  1 macos  staff   987K  5 Jul 14:29 frontend-0.1.0-supply-chain.cyclonedx.json
+-rw-r--r--  1 macos  staff   8.4K  5 Jul 14:31 frontend-0.1.0-supply-chain.txt

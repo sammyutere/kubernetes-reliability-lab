@@ -301,6 +301,19 @@ Completed:
 - AWS cleanup verification
 - Cost-control teardown workflow
 
+### Phase 14 — Supply Chain Security and Deployment Trust
+
+Completed
+
+- Generated SBOMs using Syft
+- Scanned images using Grype
+- Published images to Amazon ECR
+- Signed images using Cosign local key pair
+- Verified image signatures
+- Created SBOM attestations
+- Documented software provenance
+- Implemented deployment trust gate
+
 ## Completed Capabilities 
 
 The project currently includes:
@@ -428,6 +441,15 @@ The project currently includes:
 - Updated reliability scorecard after chaos testing
 - Documented resilience validation workflow
 
+### Software Supply Chain Security 
+
+- Software Bill of Materials (SBOM) 
+- Vulnerability Scanning 
+- Image Signing 
+- Signature Verification 
+- Image Provenance 
+- Deployment Trust Validation
+
 ## Current Architecture
 
 ```txt
@@ -482,24 +504,15 @@ AWS
 ```
 ## Next Milestone
 
-Supply Chain Security and Deployment Trust
+Policy-as-Code and Admission Control 
 
-- Generate SBOM
-- Scan container images
-- Sign images with Cosign
-- Verify image signatures
-- Document provenance
-- Prepare Sigstore-based supply chain controls
+- Kyverno policy engine 
+- Admission Controller 
+- Signed image enforcement 
+- Resource governance 
+- Policy testing
 
 ## Future Roadmap
-
-### Phase 14 — Supply Chain Security
-
-- SBOM generation
-- Container scanning
-- Sigstore
-- Cosign signing
-- Provenance verification
 
 ### Phase 15 — Platform Engineering
 

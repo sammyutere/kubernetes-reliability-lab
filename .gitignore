@@ -42,3 +42,6 @@ kubeconfig
 # IDE
 .vscode/
 .idea/
+
+# Cosign private keys
+supply-chain/keys/*.key

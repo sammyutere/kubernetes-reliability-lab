@@ -1,0 +1,7 @@
+Image: 393864004024.dkr.ecr.us-east-1.amazonaws.com/api:0.1.0-supply-chain
+Step 1: Verifying Cosign signature...
+Signature verified.
+Step 2: Checking scan evidence...
+Expected scan file: supply-chain/scans/api-0.1.0-supply-chain-grype.json
+Vulnerability scan found.
+APPROVED: Deployment trust gate passed.

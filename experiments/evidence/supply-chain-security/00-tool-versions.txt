@@ -1,0 +1,36 @@
+Application:   syft
+Version:       1.46.0
+BuildDate:     2026-06-25T19:26:14Z
+GitCommit:     Homebrew
+GitDescription: [not provided]
+Platform:      darwin/amd64
+GoVersion:     go1.26.4
+Compiler:      gc
+SchemaVersion: 16.1.5
+Application:         grype
+Version:             0.115.0
+BuildDate:           2026-06-26T10:16:27Z
+GitCommit:           Homebrew
+GitDescription:      [not provided]
+Platform:            darwin/amd64
+GoVersion:           go1.26.4
+Compiler:            gc
+Syft Version:        v1.46.0
+Supported DB Schema: 6
+  ______   ______        _______. __    _______ .__   __.
+ /      | /  __  \      /       ||  |  /  _____||  \ |  |
+|  ,----'|  |  |  |    |   (----`|  | |  |  __  |   \|  |
+|  |     |  |  |  |     \   \    |  | |  | |_ | |  . `  |
+|  `----.|  `--'  | .----)   |   |  | |  |__| | |  |\   |
+ \______| \______/  |_______/    |__|  \______| |__| \__|
+cosign: A tool for Container Signing, Verification and Storage in an OCI registry.
+
+GitVersion:    v3.1.1
+GitCommit:     7914231b348c4057891edeb321772aad3ed04fce
+GitTreeState:  "clean"
+BuildDate:     2026-06-09T12:10:44Z
+GoVersion:     go1.26.4
+Compiler:      gc
+Platform:      darwin/amd64
+
+jq-1.8.2

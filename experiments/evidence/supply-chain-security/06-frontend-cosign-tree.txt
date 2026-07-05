@@ -1,0 +1,3 @@
+📦 Supply Chain Security Related artifacts for an image: 393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend:0.1.0-supply-chain
+└── 🔗 https://sigstore.dev/cosign/sign/v1 artifacts via OCI referrer: 393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend@sha256:891b4068d17bc6e8f8aa6603f2dca20f46e223331f0d6c167ec49991e6a44719
+   └── 🍒 sha256:d7a00728cce16e1e6136ca2ebf53ca3d2a53ebd8df0389d8c9838403963375c2
