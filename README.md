@@ -78,6 +78,7 @@ docs/             Architecture, runbooks, SLOs
 | [Production Hardening](docs/17-production-hardening.md) | HTTPS, DNS, observability refinement, and cleanup verification |
 | [Multi-Service Reliability Engineering](docs/22-multi-service-reliability-engineering.md) | Multi-service architecture, failure domains, SLOs, error budgets, MTTR, canary workflows, and chaos experiments |
 | [EKS Multi-Service Reliability](docs/23-eks-multi-service-reliability.md) | Environment reconstruction, EKS promotion, ALB ingress, observability validation, cascading failures, MTTR, and cleanup workflow |
+| [Policy-as-Code and Admission Control](docs/28-policy-as-code-admission-control.md) | Kyverno admission governance, resource policies, policy testing, deployment trust controls, and signed-image compatibility findings |
 
 ## Reliability Experiments
 
@@ -314,6 +315,27 @@ Completed
 - Documented software provenance
 - Implemented deployment trust gate
 
+### Phase 15 — Policy-as-Code and Admission Control
+
+Completed:
+
+- Kyverno policy engine installation
+- Admission-controller health validation
+- Required Kubernetes label enforcement
+- CPU and memory request/limit enforcement
+- Prohibition of the `latest` image tag
+- Negative policy testing and denial evidence
+- Mandatory pre-deployment Cosign trust gate
+- SBOM and vulnerability-scan validation before deployment
+- Signed-image admission compatibility investigation
+- Upstream limitation evidence capture
+- Cost-control cleanup workflow
+
+Deferred:
+
+- Cluster-side signed-image enforcement, pending validation against a stable
+  and compatible Kyverno release
+
 ## Completed Capabilities 
 
 The project currently includes:
@@ -450,6 +472,19 @@ The project currently includes:
 - Image Provenance 
 - Deployment Trust Validation
 
+### Policy-as-Code and Admission Governance
+
+- Installed and operated Kyverno admission controllers
+- Enforced standard Kubernetes workload labels
+- Enforced CPU and memory requests and limits
+- Blocked use of the `latest` image tag
+- Created reproducible negative policy tests
+- Implemented a mandatory pre-deployment image trust gate
+- Verified Cosign signatures, SBOMs, and vulnerability scan evidence
+- Investigated signed-image admission compatibility across Kyverno and Cosign
+- Preserved cluster stability by removing a crashing image-verification policy
+- Documented the deferred cluster-side signature-enforcement path
+
 ## Current Architecture
 
 ```txt
@@ -504,19 +539,12 @@ AWS
 ```
 ## Next Milestone
 
-Policy-as-Code and Admission Control 
+GitOps and Platform Automation
 
-- Kyverno policy engine 
-- Admission Controller 
-- Signed image enforcement 
-- Resource governance 
-- Policy testing
+- Install Argo CD
+- Manage Helm deployment declaratively from Git
+- Implement automated reconciliation
+- Demonstrate drift detection and correction
+- Integrate the pre-deployment trust gate into the delivery workflow
+- Apply Kyverno governance to GitOps-managed workloads
 
-## Future Roadmap
-
-### Phase 15 — Platform Engineering
-
-- OPA Gatekeeper
-- Kyverno
-- GitOps
-- Platform governance

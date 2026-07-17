@@ -1,0 +1,133 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"kyverno.io/v1","kind":"ClusterPolicy","metadata":{"annotations":{"policies.kyverno.io/category":"Software Supply Chain Security","policies.kyverno.io/severity":"high","policies.kyverno.io/subject":"Pod","policies.kyverno.io/title":"Verify Signed ECR Images"},"name":"verify-signed-ecr-images"},"spec":{"background":false,"failurePolicy":"Fail","rules":[{"match":{"any":[{"resources":{"kinds":["Pod"],"namespaces":["reliability-lab"]}}]},"name":"verify-frontend-api-dependency-images","verifyImages":[{"attestors":[{"entries":[{"keys":{"publicKeys":"-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEkOXloLCZmIOCsnSsgHaRFUJw6jXR\nd68OvEhylp54KUiZypRCAaUzbCV94EhSIlPY4uPgdNgRymzdNqDpODGwkg==\n-----END PUBLIC KEY-----"}}]}],"imageReferences":["393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend:*","393864004024.dkr.ecr.us-east-1.amazonaws.com/api:*","393864004024.dkr.ecr.us-east-1.amazonaws.com/dependency:*"],"mutateDigest":false,"required":true,"verifyDigest":false}]}],"validationFailureAction":"Enforce","webhookTimeoutSeconds":30}}
+    policies.kyverno.io/category: Software Supply Chain Security
+    policies.kyverno.io/severity: high
+    policies.kyverno.io/subject: Pod
+    policies.kyverno.io/title: Verify Signed ECR Images
+  creationTimestamp: "2026-07-16T12:59:51Z"
+  generation: 1
+  name: verify-signed-ecr-images
+  resourceVersion: "17586"
+  uid: 5bf6f1cc-2815-4b0f-a294-e00619bfcc8b
+spec:
+  admission: true
+  background: false
+  emitWarning: false
+  failurePolicy: Fail
+  rules:
+  - match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+          namespaces:
+          - reliability-lab
+    name: verify-frontend-api-dependency-images
+    skipBackgroundRequests: true
+    verifyImages:
+    - attestors:
+      - entries:
+        - keys:
+            publicKeys: |-
+              -----BEGIN PUBLIC KEY-----
+              MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEkOXloLCZmIOCsnSsgHaRFUJw6jXR
+              d68OvEhylp54KUiZypRCAaUzbCV94EhSIlPY4uPgdNgRymzdNqDpODGwkg==
+              -----END PUBLIC KEY-----
+            signatureAlgorithm: sha256
+          signatureAlgorithm: sha256
+      imageReferences:
+      - 393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend:*
+      - 393864004024.dkr.ecr.us-east-1.amazonaws.com/api:*
+      - 393864004024.dkr.ecr.us-east-1.amazonaws.com/dependency:*
+      mutateDigest: false
+      required: true
+      useCache: true
+      verifyDigest: false
+  validationFailureAction: Enforce
+  webhookTimeoutSeconds: 30
+status:
+  autogen:
+    rules:
+    - match:
+        any:
+        - resources:
+            kinds:
+            - apps/v1/DaemonSet
+            - apps/v1/Deployment
+            - batch/v1/Job
+            - apps/v1/ReplicaSet
+            - v1/ReplicationController
+            - apps/v1/StatefulSet
+            namespaces:
+            - reliability-lab
+        resources: {}
+      name: autogen-verify-frontend-api-dependency-images
+      skipBackgroundRequests: true
+      verifyImages:
+      - attestors:
+        - entries:
+          - keys:
+              publicKeys: |-
+                -----BEGIN PUBLIC KEY-----
+                MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEkOXloLCZmIOCsnSsgHaRFUJw6jXR
+                d68OvEhylp54KUiZypRCAaUzbCV94EhSIlPY4uPgdNgRymzdNqDpODGwkg==
+                -----END PUBLIC KEY-----
+              signatureAlgorithm: sha256
+            signatureAlgorithm: sha256
+        imageReferences:
+        - 393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend:*
+        - 393864004024.dkr.ecr.us-east-1.amazonaws.com/api:*
+        - 393864004024.dkr.ecr.us-east-1.amazonaws.com/dependency:*
+        mutateDigest: false
+        required: true
+        useCache: true
+        validate: {}
+        verifyDigest: false
+    - match:
+        any:
+        - resources:
+            kinds:
+            - batch/v1/CronJob
+            namespaces:
+            - reliability-lab
+        resources: {}
+      name: autogen-cronjob-verify-frontend-api-dependency-images
+      skipBackgroundRequests: true
+      verifyImages:
+      - attestors:
+        - entries:
+          - keys:
+              publicKeys: |-
+                -----BEGIN PUBLIC KEY-----
+                MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEkOXloLCZmIOCsnSsgHaRFUJw6jXR
+                d68OvEhylp54KUiZypRCAaUzbCV94EhSIlPY4uPgdNgRymzdNqDpODGwkg==
+                -----END PUBLIC KEY-----
+              signatureAlgorithm: sha256
+            signatureAlgorithm: sha256
+        imageReferences:
+        - 393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend:*
+        - 393864004024.dkr.ecr.us-east-1.amazonaws.com/api:*
+        - 393864004024.dkr.ecr.us-east-1.amazonaws.com/dependency:*
+        mutateDigest: false
+        required: true
+        useCache: true
+        validate: {}
+        verifyDigest: false
+  conditions:
+  - lastTransitionTime: "2026-07-16T12:59:51Z"
+    message: Ready
+    reason: Succeeded
+    status: "True"
+    type: Ready
+  rulecount:
+    generate: 0
+    mutate: 0
+    validate: 0
+    verifyimages: 1
+  validatingadmissionpolicy:
+    generated: false
+    message: ""

@@ -1,0 +1,6 @@
+Error from server: error when creating "k8s/policy-tests/latest-tag-test.yaml": admission webhook "validate.kyverno.svc-fail" denied the request: 
+
+resource Pod/reliability-lab/latest-tag-test was blocked due to the following policies 
+
+disallow-latest-image-tag:
+  block-latest-tag: 'validation failure: Images must not use the latest tag.'

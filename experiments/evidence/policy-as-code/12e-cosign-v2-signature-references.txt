@@ -1,0 +1,3 @@
+Frontend signature: 393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend:sha256-9bcec9ed40ed56231812d87bf7c406e690cacb305aa9a7038ba2af0d05746df0.sig
+API signature: 393864004024.dkr.ecr.us-east-1.amazonaws.com/api:sha256-1ba5acf5935e1691d2f9bcc9006f2dd0807fd3c3185dcd024664f4535fbf3bbf.sig
+Dependency signature: 393864004024.dkr.ecr.us-east-1.amazonaws.com/dependency:sha256-00b293f807f09d36417c617629962621d54a74f10993bb386f771b3e459805d8.sig

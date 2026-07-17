@@ -1,0 +1,12 @@
+NAME                         READY   UP-TO-DATE   AVAILABLE   AGE    CONTAINERS   IMAGES                                                                       SELECTOR
+deployment.apps/api          2/2     2            2           169m   api          393864004024.dkr.ecr.us-east-1.amazonaws.com/api:0.1.0-supply-chain          app.kubernetes.io/name=api
+deployment.apps/dependency   2/2     2            2           169m   dependency   393864004024.dkr.ecr.us-east-1.amazonaws.com/dependency:0.1.0-supply-chain   app.kubernetes.io/name=dependency
+deployment.apps/frontend     2/2     2            2           169m   frontend     393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend:0.1.0-supply-chain     app.kubernetes.io/name=frontend
+
+NAME                              READY   STATUS    RESTARTS   AGE    IP            NODE                         NOMINATED NODE   READINESS GATES
+pod/api-5d65ccd46-8p8dw           1/1     Running   0          169m   10.40.0.28    ip-10-40-0-42.ec2.internal   <none>           <none>
+pod/api-5d65ccd46-gk69s           1/1     Running   0          169m   10.40.1.172   ip-10-40-1-98.ec2.internal   <none>           <none>
+pod/dependency-5fc7d9bfd9-tntjw   1/1     Running   0          169m   10.40.1.92    ip-10-40-1-98.ec2.internal   <none>           <none>
+pod/dependency-5fc7d9bfd9-vtsjb   1/1     Running   0          169m   10.40.0.125   ip-10-40-0-42.ec2.internal   <none>           <none>
+pod/frontend-8474db7578-28fv6     1/1     Running   0          169m   10.40.1.220   ip-10-40-1-98.ec2.internal   <none>           <none>
+pod/frontend-8474db7578-99vmj     1/1     Running   0          169m   10.40.0.111   ip-10-40-0-42.ec2.internal   <none>           <none>

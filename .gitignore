@@ -10,12 +10,10 @@ venv/
 .pytest_cache/
 .coverage
 htmlcov/
-
 # Env
 .env
 *.env
 !.env.example
-
 # Secrets
 *secret*.yaml
 !secret.example.yaml
@@ -23,7 +21,6 @@ htmlcov/
 *.key
 *.tfvars
 !terraform.tfvars.example
-
 # Terraform
 .terraform/
 .terraform.lock.hcl
@@ -34,14 +31,25 @@ override.tf
 override.tf.json
 *_override.tf
 *_override.tf.json
-
 # Kubernetes
 kubeconfig
 *.kubeconfig
-
 # IDE
 .vscode/
 .idea/
-
 # Cosign private keys
 supply-chain/keys/*.key
+# Registry and Kubernetes credential files
+*dockerconfigjson*
+# Terraform state and generated plans
+**/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+tfplan
+# Terraform generated plan files
+**/tfplan
+# Local AWS-generated files
+aws/
+# Locally downloaded command-line tools
+tools/

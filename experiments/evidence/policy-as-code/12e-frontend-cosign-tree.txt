@@ -1,0 +1,7 @@
+📦 Supply Chain Security Related artifacts for an image: 393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend:0.1.0-supply-chain
+└── 🔗 https://cyclonedx.org/bom artifacts via OCI referrer: 393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend@sha256:6026ea1e464ae578a135ad176c6c73354c306625b296964e7f21ee5c0f64f5a9
+   └── 🍒 sha256:1b1c6c51ccae2409e9441b04b5c4deeb6e84b315fe8aec7d757775d7d69255f5
+└── 🔗 https://sigstore.dev/cosign/sign/v1 artifacts via OCI referrer: 393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend@sha256:891b4068d17bc6e8f8aa6603f2dca20f46e223331f0d6c167ec49991e6a44719
+   └── 🍒 sha256:d7a00728cce16e1e6136ca2ebf53ca3d2a53ebd8df0389d8c9838403963375c2
+└── 🔗 https://sigstore.dev/cosign/sign/v1 artifacts via OCI referrer: 393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend@sha256:76dccc6474fc64af58a270cffa074391c45d9caf20e5767c49d8f7e3e26ee64d
+   └── 🍒 sha256:beafac8ae1c5fcc2b1f857fba1d661bed26678281d0ac491e57ce2a2aa173b7c

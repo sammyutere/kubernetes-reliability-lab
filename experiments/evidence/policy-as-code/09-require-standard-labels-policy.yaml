@@ -1,0 +1,54 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"kyverno.io/v1","kind":"ClusterPolicy","metadata":{"annotations":{"policies.kyverno.io/category":"Best Practices","policies.kyverno.io/severity":"medium","policies.kyverno.io/title":"Require Standard Kubernetes Labels"},"name":"require-standard-labels"},"spec":{"background":true,"rules":[{"match":{"any":[{"resources":{"kinds":["Deployment"],"namespaces":["reliability-lab"]}}]},"name":"require-app-labels-on-deployments","validate":{"message":"Deployments must include app.kubernetes.io/name and app.kubernetes.io/part-of labels.","pattern":{"metadata":{"labels":{"app.kubernetes.io/name":"?*","app.kubernetes.io/part-of":"?*"}}}}}],"validationFailureAction":"Enforce"}}
+    policies.kyverno.io/category: Best Practices
+    policies.kyverno.io/severity: medium
+    policies.kyverno.io/title: Require Standard Kubernetes Labels
+  creationTimestamp: "2026-07-16T13:03:09Z"
+  generation: 1
+  name: require-standard-labels
+  resourceVersion: "18548"
+  uid: cc95f3b5-42ad-4361-95ea-bbe8d87e5464
+spec:
+  admission: true
+  background: true
+  emitWarning: false
+  rules:
+  - match:
+      any:
+      - resources:
+          kinds:
+          - Deployment
+          namespaces:
+          - reliability-lab
+    name: require-app-labels-on-deployments
+    skipBackgroundRequests: true
+    validate:
+      allowExistingViolations: true
+      message: Deployments must include app.kubernetes.io/name and app.kubernetes.io/part-of
+        labels.
+      pattern:
+        metadata:
+          labels:
+            app.kubernetes.io/name: ?*
+            app.kubernetes.io/part-of: ?*
+  validationFailureAction: Enforce
+status:
+  autogen: {}
+  conditions:
+  - lastTransitionTime: "2026-07-16T13:03:09Z"
+    message: Ready
+    reason: Succeeded
+    status: "True"
+    type: Ready
+  rulecount:
+    generate: 0
+    mutate: 0
+    validate: 1
+    verifyimages: 0
+  validatingadmissionpolicy:
+    generated: false
+    message: ""

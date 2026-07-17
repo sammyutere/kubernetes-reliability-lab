@@ -1,28 +1,53 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-IMAGE="${1:?Usage: deployment-trust-gate.sh <image>}"
+IMAGE="${1:?Usage: deployment-trust-gate.sh <registry/repository:tag>}"
+COSIGN_BIN="${COSIGN_BIN:-./tools/cosign-v2/cosign}"
+PUBLIC_KEY="${PUBLIC_KEY:-supply-chain/keys/cosign.pub}"
 
-echo "Image: $IMAGE"
-echo "Step 1: Verifying Cosign signature..."
-
-cosign verify \
-  --key supply-chain/keys/cosign.pub \
-  "$IMAGE" >/tmp/cosign-verify-output.json
-
-echo "Signature verified."
-
-SERVICE=$(basename "$IMAGE" | cut -d: -f1)
-TAG=$(basename "$IMAGE" | cut -d: -f2)
-SCAN_FILE="supply-chain/scans/${SERVICE}-${TAG}-grype.json"
-
-echo "Step 2: Checking scan evidence..."
-echo "Expected scan file: $SCAN_FILE"
-
-if [ ! -f "$SCAN_FILE" ]; then
-  echo "BLOCKED: Vulnerability scan file missing."
+if [[ ! -x "$COSIGN_BIN" ]]; then
+  echo "BLOCKED: Cosign binary not found: $COSIGN_BIN"
   exit 1
 fi
 
-echo "Vulnerability scan found."
-echo "APPROVED: Deployment trust gate passed."
+if [[ ! -f "$PUBLIC_KEY" ]]; then
+  echo "BLOCKED: Cosign public key not found: $PUBLIC_KEY"
+  exit 1
+fi
+
+echo "Image: $IMAGE"
+echo "Step 1: Verify cryptographic signature"
+
+"$COSIGN_BIN" verify \
+  --key "$PUBLIC_KEY" \
+  --insecure-ignore-tlog=true \
+  "$IMAGE" \
+  >/tmp/deployment-trust-cosign.json
+
+echo "PASS: Signature verified"
+
+IMAGE_PATH="${IMAGE##*/}"
+SERVICE="${IMAGE_PATH%%:*}"
+TAG="${IMAGE_PATH##*:}"
+
+SCAN_FILE="supply-chain/scans/${SERVICE}-${TAG}-grype.json"
+SBOM_FILE="supply-chain/sbom/${SERVICE}-${TAG}.cyclonedx.json"
+
+echo "Step 2: Validate vulnerability scan evidence"
+
+if [[ ! -s "$SCAN_FILE" ]]; then
+  echo "BLOCKED: Missing or empty scan report: $SCAN_FILE"
+  exit 1
+fi
+
+echo "PASS: Vulnerability scan evidence found"
+
+echo "Step 3: Validate SBOM evidence"
+
+if [[ ! -s "$SBOM_FILE" ]]; then
+  echo "BLOCKED: Missing or empty SBOM: $SBOM_FILE"
+  exit 1
+fi
+
+echo "PASS: SBOM evidence found"
+echo "APPROVED: Deployment trust gate passed for $IMAGE"

@@ -1,0 +1,38 @@
+=== Frontend ===
+📦 Supply Chain Security Related artifacts for an image: 393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend:0.1.0-supply-chain
+└── 🔐 Signatures for an image tag: 393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend:sha256-9bcec9ed40ed56231812d87bf7c406e690cacb305aa9a7038ba2af0d05746df0.sig
+   └── 🍒 sha256:0db641369d3bfaaa871b9a1c532b45a7af37866c6401a283be143cece209d44d
+└── 🔗 https://cyclonedx.org/bom artifacts via OCI referrer: 393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend@sha256:6026ea1e464ae578a135ad176c6c73354c306625b296964e7f21ee5c0f64f5a9
+   └── 🍒 sha256:1b1c6c51ccae2409e9441b04b5c4deeb6e84b315fe8aec7d757775d7d69255f5
+└── 🔗 https://sigstore.dev/cosign/sign/v1 artifacts via OCI referrer: 393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend@sha256:891b4068d17bc6e8f8aa6603f2dca20f46e223331f0d6c167ec49991e6a44719
+   └── 🍒 sha256:d7a00728cce16e1e6136ca2ebf53ca3d2a53ebd8df0389d8c9838403963375c2
+└── 🔗 https://sigstore.dev/cosign/sign/v1 artifacts via OCI referrer: 393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend@sha256:76dccc6474fc64af58a270cffa074391c45d9caf20e5767c49d8f7e3e26ee64d
+   └── 🍒 sha256:beafac8ae1c5fcc2b1f857fba1d661bed26678281d0ac491e57ce2a2aa173b7c
+
+=== API ===
+📦 Supply Chain Security Related artifacts for an image: 393864004024.dkr.ecr.us-east-1.amazonaws.com/api:0.1.0-supply-chain
+└── 🔐 Signatures for an image tag: 393864004024.dkr.ecr.us-east-1.amazonaws.com/api:sha256-1ba5acf5935e1691d2f9bcc9006f2dd0807fd3c3185dcd024664f4535fbf3bbf.sig
+   └── 🍒 sha256:ad9f3d9c91fad574f73d744e55888a5e92bbad270717a0db9a093f5e6db4bcf1
+└── 🔗 https://sigstore.dev/cosign/sign/v1 artifacts via OCI referrer: 393864004024.dkr.ecr.us-east-1.amazonaws.com/api@sha256:6f753698b50a72e28142eae4d6b7aa9cf43de1285b0dfa6e9b05981884a877b0
+   └── 🍒 sha256:b1e1f5b262ddf8b45a0856e62c1cd42898636fa59176eb9f6bc1e894bcfa8ebb
+└── 🔗 https://cyclonedx.org/bom artifacts via OCI referrer: 393864004024.dkr.ecr.us-east-1.amazonaws.com/api@sha256:f451695f23dc574e2c6c48057ce9e521ee7c17ba56b2dc20856a80a91dd93261
+   └── 🍒 sha256:eac16f89cb6b39e6cd94bcc29cb4e199b0eb8d5bb3f3a0fdbebacf06c3261f7d
+└── 🔗 https://sigstore.dev/cosign/sign/v1 artifacts via OCI referrer: 393864004024.dkr.ecr.us-east-1.amazonaws.com/api@sha256:162a046098b0c676e9d7f2416001730a31ae93706de93e7b199653ab2bc2921e
+   └── 🍒 sha256:2f0be8a7221dc9ce4ed141385bfe10f1207ed1e58ea58e5bf5967ad1478c1384
+└── 🔗 https://sigstore.dev/cosign/sign/v1 artifacts via OCI referrer: 393864004024.dkr.ecr.us-east-1.amazonaws.com/api@sha256:0022d2351b836820569b5b03ceafad62a4c566ca8fa67062e9e80edc7847352b
+   └── 🍒 sha256:47089462c2f7fd6768eea8a127cbe9c49cdb81a26d488abe0e1bb2799343533e
+└── 🔗 https://sigstore.dev/cosign/sign/v1 artifacts via OCI referrer: 393864004024.dkr.ecr.us-east-1.amazonaws.com/api@sha256:3d209d081dffd2aec9d26c2f0f9a973cc999db8ef59e6bb7ec591799fa9902f0
+   └── 🍒 sha256:72c446731d3e3cd2c1e80ac2315a6428f5d5a257cb9ebd38791adc5acf345d61
+
+=== Dependency ===
+📦 Supply Chain Security Related artifacts for an image: 393864004024.dkr.ecr.us-east-1.amazonaws.com/dependency:0.1.0-supply-chain
+└── 🔐 Signatures for an image tag: 393864004024.dkr.ecr.us-east-1.amazonaws.com/dependency:sha256-00b293f807f09d36417c617629962621d54a74f10993bb386f771b3e459805d8.sig
+   └── 🍒 sha256:48b189534d960c4c8d472b38b16dbfc9611e4c3801651b28ce5a72e7fa7b2f6f
+└── 🔗 https://sigstore.dev/cosign/sign/v1 artifacts via OCI referrer: 393864004024.dkr.ecr.us-east-1.amazonaws.com/dependency@sha256:fe208d9fbd92da99ee8fa42d5fb00f18e09c629112fb1481d728ca3066bcd83c
+   └── 🍒 sha256:3caffb09205cccf7cb0c03bcd6edaf1b894ca195eccf7a6a6f87bc8933a652d0
+└── 🔗 https://sigstore.dev/cosign/sign/v1 artifacts via OCI referrer: 393864004024.dkr.ecr.us-east-1.amazonaws.com/dependency@sha256:06bd0a80032244e08617dde8a02197b064d97d39815d0131a690993baadaef6a
+   └── 🍒 sha256:db5670dc64d270296ae6c63ec74a875af95c5a26d57e9a8d0b8ffa8abcc12144
+└── 🔗 https://sigstore.dev/cosign/sign/v1 artifacts via OCI referrer: 393864004024.dkr.ecr.us-east-1.amazonaws.com/dependency@sha256:6938cf40dbeddb45a0f5bc919391fac6a8376fe7cfbe46a258d4f17f388ed6e1
+   └── 🍒 sha256:ffc0e25722c218fa7b18274e371d695f6d7f902b11b1bd238af9cf0e33c4e1d6
+└── 🔗 https://cyclonedx.org/bom artifacts via OCI referrer: 393864004024.dkr.ecr.us-east-1.amazonaws.com/dependency@sha256:26fa822e5e4205a45db847e634910da9c428dcfa8e72ad600f34dbac99d099c5
+   └── 🍒 sha256:b6df6e704332582c363a27b4b9aa248716f3eb5ad89f70121116bd846ad0aee5

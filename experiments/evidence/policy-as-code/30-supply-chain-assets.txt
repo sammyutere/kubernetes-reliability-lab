@@ -1,0 +1,18 @@
+=== SBOM Files ===
+supply-chain/sbom/api-0.1.0-supply-chain.cyclonedx.json
+supply-chain/sbom/api-0.1.0-supply-chain.txt
+supply-chain/sbom/dependency-0.1.0-supply-chain.cyclonedx.json
+supply-chain/sbom/dependency-0.1.0-supply-chain.txt
+supply-chain/sbom/frontend-0.1.0-supply-chain.cyclonedx.json
+supply-chain/sbom/frontend-0.1.0-supply-chain.txt
+
+=== Vulnerability Scan Files ===
+supply-chain/scans/api-0.1.0-supply-chain-grype.json
+supply-chain/scans/api-0.1.0-supply-chain-grype.txt
+supply-chain/scans/dependency-0.1.0-supply-chain-grype.json
+supply-chain/scans/dependency-0.1.0-supply-chain-grype.txt
+supply-chain/scans/frontend-0.1.0-supply-chain-grype.json
+supply-chain/scans/frontend-0.1.0-supply-chain-grype.txt
+
+=== Provenance Files ===
+supply-chain/provenance/image-provenance-0.1.0-supply-chain.md

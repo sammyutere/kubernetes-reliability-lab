@@ -1,0 +1,23 @@
+=== Kyverno Pods ===
+NAME                                             READY   STATUS      RESTARTS   AGE
+kyverno-admission-controller-6ddcd55446-4k4l9    1/1     Running     0          168m
+kyverno-background-controller-7c9c8ccc66-9v5mc   1/1     Running     0          8h
+kyverno-cleanup-controller-646cd46fbf-qr4wd      1/1     Running     0          8h
+kyverno-migrate-resources-n8dl4                  0/1     Completed   0          5h26m
+kyverno-reports-controller-7857ddf874-tvfqx      1/1     Running     0          8h
+
+=== Kyverno Service ===
+NAME          TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+kyverno-svc   ClusterIP   172.20.85.253   <none>        443/TCP   8h
+
+=== Kyverno Endpoints ===
+NAME          ENDPOINTS         AGE
+kyverno-svc   10.40.1.11:9443   8h
+
+=== Active ClusterPolicies ===
+NAME                               ADMISSION   BACKGROUND   READY   AGE   MESSAGE
+disallow-latest-image-tag          true        true         True    8h    Ready
+require-resource-requests-limits   true        true         True    8h    Ready
+require-standard-labels            true        true         True    8h    Ready
+
+=== ImageValidatingPolicies ===

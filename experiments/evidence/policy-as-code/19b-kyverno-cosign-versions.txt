@@ -1,0 +1,35 @@
+NAME   	NAMESPACE	REVISION	UPDATED                            	STATUS  	CHART        	APP VERSION
+kyverno	kyverno  	2       	2026-07-16 16:54:23.45138 +0100 BST	deployed	kyverno-3.8.2	v1.18.2    
+reg.kyverno.io/kyverno/kyverno:v1.18.2
+  ______   ______        _______. __    _______ .__   __.
+ /      | /  __  \      /       ||  |  /  _____||  \ |  |
+|  ,----'|  |  |  |    |   (----`|  | |  |  __  |   \|  |
+|  |     |  |  |  |     \   \    |  | |  | |_ | |  . `  |
+|  `----.|  `--'  | .----)   |   |  | |  |__| | |  |\   |
+ \______| \______/  |_______/    |__|  \______| |__| \__|
+cosign: A tool for Container Signing, Verification and Storage in an OCI registry.
+
+GitVersion:    v3.1.1
+GitCommit:     7914231b348c4057891edeb321772aad3ed04fce
+GitTreeState:  "clean"
+BuildDate:     2026-06-09T12:10:44Z
+GoVersion:     go1.26.4
+Compiler:      gc
+Platform:      darwin/amd64
+
+  ______   ______        _______. __    _______ .__   __.
+ /      | /  __  \      /       ||  |  /  _____||  \ |  |
+|  ,----'|  |  |  |    |   (----`|  | |  |  __  |   \|  |
+|  |     |  |  |  |     \   \    |  | |  | |_ | |  . `  |
+|  `----.|  `--'  | .----)   |   |  | |  |__| | |  |\   |
+ \______| \______/  |_______/    |__|  \______| |__| \__|
+cosign: A tool for Container Signing, Verification and Storage in an OCI registry.
+
+GitVersion:    v2.6.1
+GitCommit:     634fabe54f9fbbab55d821a83ba93b2d25bdba5f
+GitTreeState:  clean
+BuildDate:     2025-09-26T17:24:36Z
+GoVersion:     go1.25.1
+Compiler:      gc
+Platform:      darwin/amd64
+

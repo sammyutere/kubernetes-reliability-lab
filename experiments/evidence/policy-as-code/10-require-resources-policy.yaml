@@ -1,0 +1,116 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"kyverno.io/v1","kind":"ClusterPolicy","metadata":{"annotations":{"policies.kyverno.io/category":"Best Practices","policies.kyverno.io/severity":"medium","policies.kyverno.io/title":"Require CPU and Memory Requests and Limits"},"name":"require-resource-requests-limits"},"spec":{"background":true,"rules":[{"match":{"any":[{"resources":{"kinds":["Pod"],"namespaces":["reliability-lab"]}}]},"name":"require-requests-and-limits","validate":{"message":"All containers must define CPU/memory requests and limits.","pattern":{"spec":{"containers":[{"resources":{"limits":{"cpu":"?*","memory":"?*"},"requests":{"cpu":"?*","memory":"?*"}}}]}}}}],"validationFailureAction":"Enforce"}}
+    policies.kyverno.io/category: Best Practices
+    policies.kyverno.io/severity: medium
+    policies.kyverno.io/title: Require CPU and Memory Requests and Limits
+  creationTimestamp: "2026-07-16T13:04:44Z"
+  generation: 1
+  name: require-resource-requests-limits
+  resourceVersion: "19011"
+  uid: b60d9e8e-018c-4682-90db-0a334de0143e
+spec:
+  admission: true
+  background: true
+  emitWarning: false
+  rules:
+  - match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+          namespaces:
+          - reliability-lab
+    name: require-requests-and-limits
+    skipBackgroundRequests: true
+    validate:
+      allowExistingViolations: true
+      message: All containers must define CPU/memory requests and limits.
+      pattern:
+        spec:
+          containers:
+          - resources:
+              limits:
+                cpu: ?*
+                memory: ?*
+              requests:
+                cpu: ?*
+                memory: ?*
+  validationFailureAction: Enforce
+status:
+  autogen:
+    rules:
+    - match:
+        any:
+        - resources:
+            kinds:
+            - apps/v1/DaemonSet
+            - apps/v1/Deployment
+            - batch/v1/Job
+            - apps/v1/ReplicaSet
+            - v1/ReplicationController
+            - apps/v1/StatefulSet
+            namespaces:
+            - reliability-lab
+        resources: {}
+      name: autogen-require-requests-and-limits
+      skipBackgroundRequests: true
+      validate:
+        allowExistingViolations: true
+        message: All containers must define CPU/memory requests and limits.
+        pattern:
+          spec:
+            template:
+              spec:
+                containers:
+                - resources:
+                    limits:
+                      cpu: ?*
+                      memory: ?*
+                    requests:
+                      cpu: ?*
+                      memory: ?*
+    - match:
+        any:
+        - resources:
+            kinds:
+            - batch/v1/CronJob
+            namespaces:
+            - reliability-lab
+        resources: {}
+      name: autogen-cronjob-require-requests-and-limits
+      skipBackgroundRequests: true
+      validate:
+        allowExistingViolations: true
+        message: All containers must define CPU/memory requests and limits.
+        pattern:
+          spec:
+            jobTemplate:
+              spec:
+                template:
+                  spec:
+                    containers:
+                    - resources:
+                        limits:
+                          cpu: ?*
+                          memory: ?*
+                        requests:
+                          cpu: ?*
+                          memory: ?*
+  conditions:
+  - lastTransitionTime: "2026-07-16T13:04:44Z"
+    message: Ready
+    reason: Succeeded
+    status: "True"
+    type: Ready
+  rulecount:
+    generate: 0
+    mutate: 0
+    validate: 1
+    verifyimages: 0
+  validatingadmissionpolicy:
+    generated: false
+    message: ""

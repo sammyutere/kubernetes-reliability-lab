@@ -1,0 +1,23 @@
+=== Cluster Policies ===
+NAME                               ADMISSION   BACKGROUND   READY   AGE   MESSAGE
+disallow-latest-image-tag          true        true         True    8h    Ready
+require-resource-requests-limits   true        true         True    8h    Ready
+require-standard-labels            true        true         True    8h    Ready
+
+=== Policy Reports ===
+NAMESPACE         NAME                                   KIND         NAME                          PASS   FAIL   WARN   ERROR   SKIP   AGE
+reliability-lab   1e39f94b-319c-4b3e-8658-d0483b90e982   Deployment   frontend                      3      0      0      0       0      169m
+reliability-lab   28bf1e74-f263-41d7-a4dd-2017b1b14882   Pod          dependency-5fc7d9bfd9-vtsjb   2      0      0      0       0      169m
+reliability-lab   3f103821-cda4-4d08-a940-9028a42aa0f2   ReplicaSet   dependency-5fc7d9bfd9         2      0      0      0       0      169m
+reliability-lab   446579ea-82ae-40ce-8871-4d4c97ef02a1   Deployment   api                           3      0      0      0       0      169m
+reliability-lab   51098ae3-97b4-44e8-adf6-8a0e7834d097   ReplicaSet   frontend-8474db7578           2      0      0      0       0      169m
+reliability-lab   619b485d-5dec-4b6b-aa4c-eb646af47946   Deployment   dependency                    3      0      0      0       0      169m
+reliability-lab   6d785466-fd23-46a5-87ac-923a730c4991   Pod          dependency-5fc7d9bfd9-tntjw   2      0      0      0       0      169m
+reliability-lab   91b70eb3-1165-4b46-9265-ff2c74ec1d8c   Pod          frontend-8474db7578-28fv6     2      0      0      0       0      169m
+reliability-lab   bc4a32ec-ebb2-4501-a50c-f0cca34b4605   Pod          api-5d65ccd46-8p8dw           2      0      0      0       0      169m
+reliability-lab   d08c87ee-00bb-40ab-aca3-7af228a66ba7   Pod          api-5d65ccd46-gk69s           2      0      0      0       0      169m
+reliability-lab   d4b8c974-ae18-4fa1-8e1c-9885d43f28e7   ReplicaSet   api-5d65ccd46                 2      0      0      0       0      169m
+reliability-lab   ea12b908-c5f9-46f5-ad60-8b382cde04ba   Pod          frontend-8474db7578-99vmj     2      0      0      0       0      169m
+
+=== Cluster Policy Reports ===
+No resources found

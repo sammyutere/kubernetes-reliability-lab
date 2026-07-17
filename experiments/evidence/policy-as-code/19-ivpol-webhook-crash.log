@@ -1,0 +1,1 @@
+Error from server (BadRequest): previous terminated container "kyverno-pre" in pod "kyverno-admission-controller-7fb5979687-mnrzl" not found

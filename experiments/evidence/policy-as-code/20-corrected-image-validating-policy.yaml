@@ -1,0 +1,227 @@
+apiVersion: policies.kyverno.io/v1
+kind: ImageValidatingPolicy
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"policies.kyverno.io/v1","kind":"ImageValidatingPolicy","metadata":{"annotations":{},"name":"verify-signed-ecr-images"},"spec":{"attestors":[{"cosign":{"ctlog":{"insecureIgnoreSCT":true,"insecureIgnoreTlog":true},"key":{"data":"-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEkOXloLCZmIOCsnSsgHaRFUJw6jXR\nd68OvEhylp54KUiZypRCAaUzbCV94EhSIlPY4uPgdNgRymzdNqDpODGwkg==\n-----END PUBLIC KEY-----\n"}},"name":"cosign"}],"credentials":{"providers":["amazon"],"secrets":["kyverno-ecr-credentials"]},"evaluation":{"background":{"enabled":false}},"failurePolicy":"Fail","matchConstraints":{"resourceRules":[{"apiGroups":[""],"apiVersions":["v1"],"operations":["CREATE","UPDATE"],"resources":["pods"]}]},"matchImageReferences":[{"glob":"/frontend:*"},{"glob":"/api:*"},{"glob":"/dependency:*"}],"validationActions":["Deny"],"validationConfigurations":{"mutateDigest":true,"required":true,"verifyDigest":true},"validations":[{"expression":"images.containers.map(\n  image,\n  verifyImageSignatures(image, [attestors.cosign])\n).all(result, result \u003e 0)","message":"Image signature verification failed. The image must be signed with the approved Cosign key before deployment."}],"webhookConfiguration":{"timeoutSeconds":30}}}
+  creationTimestamp: "2026-07-16T18:13:50Z"
+  generation: 1
+  name: verify-signed-ecr-images
+  resourceVersion: "114366"
+  uid: 78e7d96d-e8e0-4806-8b3d-6bfccd6bc101
+spec:
+  attestors:
+  - cosign:
+      ctlog:
+        insecureIgnoreSCT: true
+        insecureIgnoreTlog: true
+      key:
+        data: |
+          -----BEGIN PUBLIC KEY-----
+          MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEkOXloLCZmIOCsnSsgHaRFUJw6jXR
+          d68OvEhylp54KUiZypRCAaUzbCV94EhSIlPY4uPgdNgRymzdNqDpODGwkg==
+          -----END PUBLIC KEY-----
+    name: cosign
+  credentials:
+    providers:
+    - amazon
+    secrets:
+    - kyverno-ecr-credentials
+  evaluation:
+    background:
+      enabled: false
+  failurePolicy: Fail
+  matchConstraints:
+    resourceRules:
+    - apiGroups:
+      - ""
+      apiVersions:
+      - v1
+      operations:
+      - CREATE
+      - UPDATE
+      resources:
+      - pods
+  matchImageReferences:
+  - glob: /frontend:*
+  - glob: /api:*
+  - glob: /dependency:*
+  validationActions:
+  - Deny
+  validationConfigurations:
+    mutateDigest: true
+    required: true
+    verifyDigest: true
+  validations:
+  - expression: |-
+      images.containers.map(
+        image,
+        verifyImageSignatures(image, [attestors.cosign])
+      ).all(result, result > 0)
+    message: Image signature verification failed. The image must be signed with the
+      approved Cosign key before deployment.
+  webhookConfiguration:
+    timeoutSeconds: 30
+status:
+  autogen:
+    configs:
+      cronjobs:
+        spec:
+          attestors:
+          - cosign:
+              ctlog:
+                insecureIgnoreSCT: true
+                insecureIgnoreTlog: true
+              key:
+                data: |
+                  -----BEGIN PUBLIC KEY-----
+                  MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEkOXloLCZmIOCsnSsgHaRFUJw6jXR
+                  d68OvEhylp54KUiZypRCAaUzbCV94EhSIlPY4uPgdNgRymzdNqDpODGwkg==
+                  -----END PUBLIC KEY-----
+            name: cosign
+          credentials:
+            providers:
+            - amazon
+            secrets:
+            - kyverno-ecr-credentials
+          evaluation:
+            background:
+              enabled: false
+          failurePolicy: Fail
+          matchConstraints:
+            resourceRules:
+            - apiGroups:
+              - batch
+              apiVersions:
+              - v1
+              operations:
+              - CREATE
+              - UPDATE
+              resources:
+              - cronjobs
+          matchImageReferences:
+          - glob: /frontend:*
+          - glob: /api:*
+          - glob: /dependency:*
+          validationActions:
+          - Deny
+          validationConfigurations:
+            mutateDigest: true
+            required: true
+            verifyDigest: true
+          validations:
+          - expression: |-
+              images.containers.map(
+                image,
+                verifyImageSignatures(image, [attestors.cosign])
+              ).all(result, result > 0)
+            message: Image signature verification failed. The image must be signed
+              with the approved Cosign key before deployment.
+          webhookConfiguration:
+            timeoutSeconds: 30
+        targets:
+        - group: batch
+          kind: CronJob
+          resource: cronjobs
+          version: v1
+      defaults:
+        spec:
+          attestors:
+          - cosign:
+              ctlog:
+                insecureIgnoreSCT: true
+                insecureIgnoreTlog: true
+              key:
+                data: |
+                  -----BEGIN PUBLIC KEY-----
+                  MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEkOXloLCZmIOCsnSsgHaRFUJw6jXR
+                  d68OvEhylp54KUiZypRCAaUzbCV94EhSIlPY4uPgdNgRymzdNqDpODGwkg==
+                  -----END PUBLIC KEY-----
+            name: cosign
+          credentials:
+            providers:
+            - amazon
+            secrets:
+            - kyverno-ecr-credentials
+          evaluation:
+            background:
+              enabled: false
+          failurePolicy: Fail
+          matchConstraints:
+            resourceRules:
+            - apiGroups:
+              - apps
+              apiVersions:
+              - v1
+              operations:
+              - CREATE
+              - UPDATE
+              resources:
+              - daemonsets
+              - deployments
+              - replicasets
+              - statefulsets
+            - apiGroups:
+              - batch
+              apiVersions:
+              - v1
+              operations:
+              - CREATE
+              - UPDATE
+              resources:
+              - jobs
+          matchImageReferences:
+          - glob: /frontend:*
+          - glob: /api:*
+          - glob: /dependency:*
+          validationActions:
+          - Deny
+          validationConfigurations:
+            mutateDigest: true
+            required: true
+            verifyDigest: true
+          validations:
+          - expression: |-
+              images.containers.map(
+                image,
+                verifyImageSignatures(image, [attestors.cosign])
+              ).all(result, result > 0)
+            message: Image signature verification failed. The image must be signed
+              with the approved Cosign key before deployment.
+          webhookConfiguration:
+            timeoutSeconds: 30
+        targets:
+        - group: apps
+          kind: DaemonSet
+          resource: daemonsets
+          version: v1
+        - group: apps
+          kind: Deployment
+          resource: deployments
+          version: v1
+        - group: apps
+          kind: ReplicaSet
+          resource: replicasets
+          version: v1
+        - group: apps
+          kind: StatefulSet
+          resource: statefulsets
+          version: v1
+        - group: batch
+          kind: Job
+          resource: jobs
+          version: v1
+  conditionStatus:
+    conditions:
+    - lastTransitionTime: "2026-07-16T18:13:50Z"
+      message: Webhook configured.
+      reason: Succeeded
+      status: "True"
+      type: WebhookConfigured
+    - lastTransitionTime: "2026-07-16T18:13:50Z"
+      message: Policy is ready for reporting.
+      reason: Succeeded
+      status: "True"
+      type: RBACPermissionsGranted
+    message: ""
+    ready: true

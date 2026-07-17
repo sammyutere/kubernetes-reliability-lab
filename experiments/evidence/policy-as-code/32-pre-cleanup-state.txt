@@ -1,0 +1,36 @@
+=== Helm Releases ===
+NAME             	NAMESPACE      	REVISION	UPDATED                             	STATUS  	CHART                  	APP VERSION
+kyverno          	kyverno        	2       	2026-07-16 16:54:23.45138 +0100 BST 	deployed	kyverno-3.8.2          	v1.18.2    
+multi-service-app	reliability-lab	8       	2026-07-16 19:37:56.424302 +0100 BST	deployed	multi-service-app-0.1.0	0.1.0      
+
+=== Reliability Namespace ===
+NAME                              READY   STATUS    RESTARTS   AGE
+pod/api-5d65ccd46-8p8dw           1/1     Running   0          3h16m
+pod/api-5d65ccd46-gk69s           1/1     Running   0          3h16m
+pod/dependency-5fc7d9bfd9-tntjw   1/1     Running   0          3h16m
+pod/dependency-5fc7d9bfd9-vtsjb   1/1     Running   0          3h16m
+pod/frontend-8474db7578-28fv6     1/1     Running   0          3h16m
+pod/frontend-8474db7578-99vmj     1/1     Running   0          3h16m
+
+NAME                 TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)   AGE
+service/api          ClusterIP   172.20.149.114   <none>        80/TCP    8h
+service/dependency   ClusterIP   172.20.82.91     <none>        80/TCP    8h
+service/frontend     ClusterIP   172.20.73.247    <none>        80/TCP    8h
+
+NAME                         READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/api          2/2     2            2           3h16m
+deployment.apps/dependency   2/2     2            2           3h16m
+deployment.apps/frontend     2/2     2            2           3h16m
+
+NAME                                    DESIRED   CURRENT   READY   AGE
+replicaset.apps/api-5d65ccd46           2         2         2       3h16m
+replicaset.apps/dependency-5fc7d9bfd9   2         2         2       3h16m
+replicaset.apps/frontend-8474db7578     2         2         2       3h16m
+
+=== Kyverno Namespace ===
+NAME                                             READY   STATUS      RESTARTS   AGE
+kyverno-admission-controller-6ddcd55446-4k4l9    1/1     Running     0          3h20m
+kyverno-background-controller-7c9c8ccc66-9v5mc   1/1     Running     0          9h
+kyverno-cleanup-controller-646cd46fbf-qr4wd      1/1     Running     0          9h
+kyverno-migrate-resources-n8dl4                  0/1     Completed   0          5h59m
+kyverno-reports-controller-7857ddf874-tvfqx      1/1     Running     0          9h

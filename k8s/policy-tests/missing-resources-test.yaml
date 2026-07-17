@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: missing-resources-test
+  namespace: reliability-lab
+  labels:
+    app.kubernetes.io/name: missing-resources-test
+    app.kubernetes.io/part-of: kubernetes-reliability-lab
+spec:
+  restartPolicy: Never
+  containers:
+    - name: frontend
+      image: 393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend:0.1.0-supply-chain

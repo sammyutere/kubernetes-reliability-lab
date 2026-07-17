@@ -1,0 +1,26 @@
+Image: 393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend:0.1.0-supply-chain
+Step 1: Verify cryptographic signature
+PASS: Signature verified
+Step 2: Validate vulnerability scan evidence
+PASS: Vulnerability scan evidence found
+Step 3: Validate SBOM evidence
+PASS: SBOM evidence found
+APPROVED: Deployment trust gate passed for 393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend:0.1.0-supply-chain
+
+Image: 393864004024.dkr.ecr.us-east-1.amazonaws.com/api:0.1.0-supply-chain
+Step 1: Verify cryptographic signature
+PASS: Signature verified
+Step 2: Validate vulnerability scan evidence
+PASS: Vulnerability scan evidence found
+Step 3: Validate SBOM evidence
+PASS: SBOM evidence found
+APPROVED: Deployment trust gate passed for 393864004024.dkr.ecr.us-east-1.amazonaws.com/api:0.1.0-supply-chain
+
+Image: 393864004024.dkr.ecr.us-east-1.amazonaws.com/dependency:0.1.0-supply-chain
+Step 1: Verify cryptographic signature
+PASS: Signature verified
+Step 2: Validate vulnerability scan evidence
+PASS: Vulnerability scan evidence found
+Step 3: Validate SBOM evidence
+PASS: SBOM evidence found
+APPROVED: Deployment trust gate passed for 393864004024.dkr.ecr.us-east-1.amazonaws.com/dependency:0.1.0-supply-chain

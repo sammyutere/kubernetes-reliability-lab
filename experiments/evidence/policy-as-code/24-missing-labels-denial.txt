@@ -1,0 +1,8 @@
+Error from server: error when creating "k8s/policy-tests/missing-labels-test.yaml": admission webhook "validate.kyverno.svc-fail" denied the request: 
+
+resource Deployment/reliability-lab/missing-labels-test was blocked due to the following policies 
+
+require-standard-labels:
+  require-app-labels-on-deployments: 'validation error: Deployments must include app.kubernetes.io/name
+    and app.kubernetes.io/part-of labels. rule require-app-labels-on-deployments failed
+    at path /metadata/labels/'
