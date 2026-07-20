@@ -1,0 +1,7 @@
+=== Application Controller Scheduling ===
+Events:
+  Type     Reason            Age                 From               Message
+  ----     ------            ----                ----               -------
+  Warning  FailedScheduling  6s (x25 over 120m)  default-scheduler  0/2 nodes are available: 2 Too many pods. no new claims to deallocate, preemption: 0/2 nodes are available: 2 No preemption victims found for incoming pod.
+
+=== Argo CD Server Scheduling ===

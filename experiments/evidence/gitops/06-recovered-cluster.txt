@@ -1,0 +1,20 @@
+=== Context ===
+arn:aws:eks:us-east-1:393864004024:cluster/reliability-lab-dev
+
+=== Cluster ===
+Kubernetes control plane is running at https://359FA17672C881677B9C03706AE4DD4F.gr7.us-east-1.eks.amazonaws.com
+CoreDNS is running at https://359FA17672C881677B9C03706AE4DD4F.gr7.us-east-1.eks.amazonaws.com/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+
+=== Nodes ===
+NAME                          STATUS   ROLES    AGE   VERSION               INTERNAL-IP   EXTERNAL-IP     OS-IMAGE                        KERNEL-VERSION                    CONTAINER-RUNTIME
+ip-10-40-0-91.ec2.internal    Ready    <none>   17m   v1.34.9-eks-8f14419   10.40.0.91    3.235.136.125   Amazon Linux 2023.12.20260611   6.12.90-120.164.amzn2023.x86_64   containerd://2.2.4+unknown
+ip-10-40-1-212.ec2.internal   Ready    <none>   17m   v1.34.9-eks-8f14419   10.40.1.212   54.86.197.24    Amazon Linux 2023.12.20260611   6.12.90-120.164.amzn2023.x86_64   containerd://2.2.4+unknown
+
+=== Namespaces ===
+NAME              STATUS   AGE
+default           Active   21m
+kube-node-lease   Active   21m
+kube-public       Active   21m
+kube-system       Active   21m

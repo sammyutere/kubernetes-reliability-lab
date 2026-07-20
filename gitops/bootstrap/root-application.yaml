@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: reliability-platform-bootstrap
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+
+  sources:
+    - repoURL: https://github.com/sammyutere/kubernetes-reliability-lab.git
+      targetRevision: main
+      path: gitops/projects
+
+    - repoURL: https://github.com/sammyutere/kubernetes-reliability-lab.git
+      targetRevision: main
+      path: gitops/applications
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+
+  syncPolicy:
+    automated:
+      enabled: true
+      prune: true
+      selfHeal: true
+      allowEmpty: false
+
+    syncOptions:
+      - PruneLast=true
+      - ApplyOutOfSyncOnly=true

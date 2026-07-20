@@ -1,0 +1,16 @@
+=== Kyverno Chart ===
+NAME   	NAMESPACE	REVISION	UPDATED                             	STATUS  	CHART        	APP VERSION
+kyverno	kyverno  	1       	2026-07-18 00:26:31.338379 +0100 BST	deployed	kyverno-3.8.2	v1.18.2    
+
+=== Kyverno Pods ===
+NAME                                             READY   STATUS    RESTARTS   AGE
+kyverno-admission-controller-764b886d88-56pq7    1/1     Running   0          5m2s
+kyverno-background-controller-7c9c8ccc66-6wd4v   1/1     Running   0          5m2s
+kyverno-cleanup-controller-646cd46fbf-jrq4k      1/1     Running   0          5m2s
+kyverno-reports-controller-7857ddf874-p8vgf      1/1     Running   0          5m2s
+
+=== Policies ===
+NAME                               ADMISSION   BACKGROUND   READY   AGE   MESSAGE
+disallow-latest-image-tag          true        true         True    54s   Ready
+require-resource-requests-limits   true        true         True    62s   Ready
+require-standard-labels            true        true         True    63s   Ready

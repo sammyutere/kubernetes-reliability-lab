@@ -1,0 +1,118 @@
+=== Previous Dex Logs ===
+Error from server (BadRequest): previous terminated container "copyutil" in pod "argocd-dex-server-779bbb6b9d-qhl2v" not found
+
+=== Current Dex Logs ===
+{"built":"2026-07-09T16:15:22Z","commit":"564b94973b284b8de98da7cee6eeade2cb941e46","level":"info","msg":"ArgoCD Dex Server is starting","namespace":"argocd","time":"2026-07-19T18:01:59Z","version":"v3.4.5"}
+{"level":"info","msg":"Generating self-signed TLS certificate for this session","time":"2026-07-19T18:01:59Z"}
+{"level":"info","msg":"Starting configmap/secret informers","time":"2026-07-19T18:01:59Z"}
+{"level":"info","msg":"Configmap/secret informer synced","time":"2026-07-19T18:01:59Z"}
+{"level":"info","msg":"Cluster cache informer synced","time":"2026-07-19T18:01:59Z"}
+{"level":"fatal","msg":"server.secretkey is missing","time":"2026-07-19T18:01:59Z"}
+cp: warning: behavior of -n is non-portable and may change in future; use --update=none instead
+
+=== Dex Pod Description ===
+Name:             argocd-dex-server-779bbb6b9d-qhl2v
+Namespace:        argocd
+Priority:         0
+Service Account:  argocd-dex-server
+Node:             ip-10-40-0-91.ec2.internal/10.40.0.91
+Start Time:       Sun, 19 Jul 2026 17:02:36 +0100
+Labels:           app.kubernetes.io/name=argocd-dex-server
+                  pod-template-hash=779bbb6b9d
+Annotations:      <none>
+Status:           Running
+IP:               10.40.0.152
+IPs:
+  IP:           10.40.0.152
+Controlled By:  ReplicaSet/argocd-dex-server-779bbb6b9d
+Init Containers:
+  copyutil:
+    Container ID:    containerd://58c693af0fb790cde4206a2b42b1032919f90d062a05890ba8e0e707e369c97d
+    Image:           quay.io/argoproj/argocd:v3.4.5
+    Image ID:        quay.io/argoproj/argocd@sha256:224e454cfd8c1818fec3ed17b72b2034c9a3915fa819e1dcccafc753776d446a
+    Port:            <none>
+    Host Port:       <none>
+    SeccompProfile:  RuntimeDefault
+    Command:
+      /bin/cp
+      -n
+      /usr/local/bin/argocd
+      /shared/argocd-dex
+    State:          Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Sun, 19 Jul 2026 17:02:46 +0100
+      Finished:     Sun, 19 Jul 2026 17:02:48 +0100
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /shared from static-files (rw)
+      /tmp from dexconfig (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-6tnz7 (ro)
+Containers:
+  dex:
+    Container ID:    containerd://ff76fa52779adf344eb129b3365ab74c822dcbbcb499053692ac161d3b738399
+    Image:           ghcr.io/dexidp/dex:v2.45.0
+    Image ID:        ghcr.io/dexidp/dex@sha256:b8469881d3cb3a73001506f0d3aaefecb9c45d2311c1e0f405d8ac538316c59d
+    Ports:           5556/TCP, 5557/TCP, 5558/TCP
+    Host Ports:      0/TCP, 0/TCP, 0/TCP
+    SeccompProfile:  RuntimeDefault
+    Command:
+      /shared/argocd-dex
+      rundex
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       Error
+      Exit Code:    20
+      Started:      Sun, 19 Jul 2026 19:01:58 +0100
+      Finished:     Sun, 19 Jul 2026 19:01:59 +0100
+    Ready:          False
+    Restart Count:  28
+    Environment:
+      ARGOCD_DEX_SERVER_LOGFORMAT:        <set to the key 'dexserver.log.format' of config map 'argocd-cmd-params-cm'>                  Optional: true
+      ARGOCD_DEX_SERVER_LOGLEVEL:         <set to the key 'dexserver.log.level' of config map 'argocd-cmd-params-cm'>                   Optional: true
+      ARGOCD_LOG_FORMAT_TIMESTAMP:        <set to the key 'log.format.timestamp' of config map 'argocd-cmd-params-cm'>                  Optional: true
+      ARGOCD_DEX_SERVER_DISABLE_TLS:      <set to the key 'dexserver.disable.tls' of config map 'argocd-cmd-params-cm'>                 Optional: true
+      DEX_CONTINUE_ON_CONNECTOR_FAILURE:  <set to the key 'dexserver.connector.failure.continue' of config map 'argocd-cmd-params-cm'>  Optional: true
+    Mounts:
+      /shared from static-files (rw)
+      /tls from argocd-dex-server-tls (rw)
+      /tmp from dexconfig (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-6tnz7 (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       False 
+  ContainersReady             False 
+  PodScheduled                True 
+Volumes:
+  static-files:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:     
+    SizeLimit:  <unset>
+  dexconfig:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:     
+    SizeLimit:  <unset>
+  argocd-dex-server-tls:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  argocd-dex-server-tls
+    Optional:    true
+  kube-api-access-6tnz7:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              kubernetes.io/os=linux
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason   Age                     From     Message
+  ----     ------   ----                    ----     -------
+  Normal   Pulling  4m31s (x29 over 123m)   kubelet  Pulling image "ghcr.io/dexidp/dex:v2.45.0"
+  Warning  BackOff  3m27s (x548 over 123m)  kubelet  Back-off restarting failed container dex in pod argocd-dex-server-779bbb6b9d-qhl2v_argocd(cfa6f438-cc6e-49a6-b387-6a5108a953ae)
