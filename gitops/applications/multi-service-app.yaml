@@ -10,7 +10,6 @@ metadata:
     app.kubernetes.io/part-of: kubernetes-reliability-lab
 spec:
   project: reliability-platform
-
   source:
     repoURL: https://github.com/sammyutere/kubernetes-reliability-lab.git
     targetRevision: main
@@ -19,23 +18,19 @@ spec:
       releaseName: multi-service-app
       valueFiles:
         - values-eks.yaml
-
   destination:
     server: https://kubernetes.default.svc
     namespace: reliability-lab
-
   syncPolicy:
     automated:
       enabled: true
       prune: true
-      selfHeal: true
+      selfHeal: false
       allowEmpty: false
-
     syncOptions:
       - CreateNamespace=true
       - PruneLast=true
       - ApplyOutOfSyncOnly=true
-
     retry:
       limit: 5
       backoff:
