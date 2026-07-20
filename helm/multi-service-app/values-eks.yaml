@@ -2,7 +2,6 @@ global:
   imageRegistry: "393864004024.dkr.ecr.us-east-1.amazonaws.com"
   imageTag: "0.1.0"
   imagePullPolicy: IfNotPresent
-
 services:
   frontend:
     replicas: 2
@@ -11,7 +10,6 @@ services:
     env:
       API_URL: http://api:80
       REQUEST_TIMEOUT_SECONDS: "2"
-
   api:
     replicas: 2
     image: api
@@ -19,7 +17,6 @@ services:
     env:
       DEPENDENCY_URL: http://dependency:80
       REQUEST_TIMEOUT_SECONDS: "2"
-
   dependency:
     replicas: 2
     image: dependency
@@ -27,9 +24,9 @@ services:
     env:
       FAILURE_MODE: none
       LATENCY_MS: "0"
-
 ingress:
   enabled: false
-
 serviceMonitor:
   enabled: true
+frontend:
+  replicaCount: 4
