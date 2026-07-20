@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kyverno-gitops-denial-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kyverno-gitops-denial-test
+  template:
+    metadata:
+      labels:
+        app: kyverno-gitops-denial-test
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest
