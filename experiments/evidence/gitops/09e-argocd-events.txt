@@ -1,0 +1,5 @@
+LAST SEEN   TYPE      REASON             OBJECT                                   MESSAGE
+4m50s       Warning   BackOff            pod/argocd-dex-server-779bbb6b9d-qhl2v   Back-off restarting failed container dex in pod argocd-dex-server-779bbb6b9d-qhl2v_argocd(cfa6f438-cc6e-49a6-b387-6a5108a953ae)
+46s         Normal    Pulling            pod/argocd-dex-server-779bbb6b9d-qhl2v   Pulling image "ghcr.io/dexidp/dex:v2.45.0"
+5s          Warning   FailedScheduling   pod/argocd-application-controller-0      0/2 nodes are available: 2 Too many pods. no new claims to deallocate, preemption: 0/2 nodes are available: 2 No preemption victims found for incoming pod.
+5s          Warning   FailedScheduling   pod/argocd-server-fbfc499cf-b9z4q        0/2 nodes are available: 2 Too many pods. no new claims to deallocate, preemption: 0/2 nodes are available: 2 No preemption victims found for incoming pod.

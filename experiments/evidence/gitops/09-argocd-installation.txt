@@ -1,0 +1,25 @@
+=== Argo CD Pods ===
+NAME                                                READY   STATUS    RESTARTS       AGE    IP            NODE                          NOMINATED NODE   READINESS GATES
+argocd-application-controller-0                     1/1     Running   0              172m   10.40.1.161   ip-10-40-1-239.ec2.internal   <none>           <none>
+argocd-applicationset-controller-69bddf5587-kjwh7   1/1     Running   0              172m   10.40.1.179   ip-10-40-1-212.ec2.internal   <none>           <none>
+argocd-dex-server-779bbb6b9d-qhl2v                  1/1     Running   36 (17m ago)   172m   10.40.0.152   ip-10-40-0-91.ec2.internal    <none>           <none>
+argocd-notifications-controller-7494d5f69f-r5b9g    1/1     Running   0              172m   10.40.1.88    ip-10-40-1-212.ec2.internal   <none>           <none>
+argocd-redis-74d7d69cc8-brgsm                       1/1     Running   0              172m   10.40.0.66    ip-10-40-0-91.ec2.internal    <none>           <none>
+argocd-repo-server-674d585b64-sn6tx                 1/1     Running   0              172m   10.40.0.237   ip-10-40-0-91.ec2.internal    <none>           <none>
+argocd-server-fbfc499cf-b9z4q                       1/1     Running   0              172m   10.40.1.136   ip-10-40-1-239.ec2.internal   <none>           <none>
+
+=== Argo CD Services ===
+NAME                                      TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
+argocd-applicationset-controller          ClusterIP   172.20.235.234   <none>        7000/TCP,8080/TCP            172m
+argocd-dex-server                         ClusterIP   172.20.243.50    <none>        5556/TCP,5557/TCP,5558/TCP   172m
+argocd-metrics                            ClusterIP   172.20.162.159   <none>        8082/TCP                     172m
+argocd-notifications-controller-metrics   ClusterIP   172.20.77.179    <none>        9001/TCP                     172m
+argocd-redis                              ClusterIP   172.20.75.73     <none>        6379/TCP                     172m
+argocd-repo-server                        ClusterIP   172.20.191.87    <none>        8081/TCP,8084/TCP            172m
+argocd-server                             ClusterIP   172.20.133.195   <none>        80/TCP,443/TCP               172m
+argocd-server-metrics                     ClusterIP   172.20.151.167   <none>        8083/TCP                     172m
+
+=== Argo CD CRDs ===
+applications.argoproj.io                                2026-07-19T16:02:26Z
+applicationsets.argoproj.io                             2026-07-19T16:02:28Z
+appprojects.argoproj.io                                 2026-07-19T16:02:28Z

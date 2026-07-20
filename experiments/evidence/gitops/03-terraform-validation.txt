@@ -1,0 +1,8 @@
+Terraform v1.15.2
+on darwin_amd64
++ provider registry.terraform.io/hashicorp/aws v5.100.0
+
+Your version of Terraform is out of date! The latest version
+is 1.15.8. You can update by downloading from https://developer.hashicorp.com/terraform/install
+[32m[1mSuccess![0m The configuration is valid.
+[0m

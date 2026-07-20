@@ -2,7 +2,16 @@
 set -euo pipefail
 
 IMAGE="${1:?Usage: deployment-trust-gate.sh <registry/repository:tag>}"
-COSIGN_BIN="${COSIGN_BIN:-./tools/cosign-v2/cosign}"
+if [[ -n "${COSIGN_BIN:-}" ]]; then
+  :
+elif [[ -x "./tools/cosign-v2/cosign" ]]; then
+  COSIGN_BIN="./tools/cosign-v2/cosign"
+elif command -v cosign >/dev/null 2>&1; then
+  COSIGN_BIN="$(command -v cosign)"
+else
+  echo "BLOCKED: Cosign was not found in ./tools/cosign-v2 or PATH"
+  exit 1
+fi
 PUBLIC_KEY="${PUBLIC_KEY:-supply-chain/keys/cosign.pub}"
 
 if [[ ! -x "$COSIGN_BIN" ]]; then

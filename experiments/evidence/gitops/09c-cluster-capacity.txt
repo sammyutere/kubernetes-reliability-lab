@@ -1,0 +1,33 @@
+=== Nodes ===
+NAME                          STATUS   ROLES    AGE    VERSION               INTERNAL-IP   EXTERNAL-IP     OS-IMAGE                        KERNEL-VERSION                    CONTAINER-RUNTIME
+ip-10-40-0-91.ec2.internal    Ready    <none>   2d2h   v1.34.9-eks-8f14419   10.40.0.91    3.235.136.125   Amazon Linux 2023.12.20260611   6.12.90-120.164.amzn2023.x86_64   containerd://2.2.4+unknown
+ip-10-40-1-212.ec2.internal   Ready    <none>   2d2h   v1.34.9-eks-8f14419   10.40.1.212   54.86.197.24    Amazon Linux 2023.12.20260611   6.12.90-120.164.amzn2023.x86_64   containerd://2.2.4+unknown
+
+=== Node Utilisation ===
+error: Metrics API not available
+
+=== Allocated Resources ===
+
+===== node/ip-10-40-0-91.ec2.internal =====
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests     Limits
+  --------           --------     ------
+  cpu                450m (23%)   100m (5%)
+  memory             256Mi (17%)  640Mi (44%)
+  ephemeral-storage  0 (0%)       0 (0%)
+  hugepages-1Gi      0 (0%)       0 (0%)
+  hugepages-2Mi      0 (0%)       0 (0%)
+Events:              <none>
+
+===== node/ip-10-40-1-212.ec2.internal =====
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests     Limits
+  --------           --------     ------
+  cpu                450m (23%)   0 (0%)
+  memory             404Mi (28%)  468Mi (32%)
+  ephemeral-storage  0 (0%)       0 (0%)
+  hugepages-1Gi      0 (0%)       0 (0%)
+  hugepages-2Mi      0 (0%)       0 (0%)
+Events:              <none>
