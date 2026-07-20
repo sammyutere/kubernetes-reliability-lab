@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: gitops-prune-test
-  labels:
-    app.kubernetes.io/name: gitops-prune-test
-    app.kubernetes.io/part-of: kubernetes-reliability-lab
-data:
-  purpose: demonstrate-argocd-automated-pruning
