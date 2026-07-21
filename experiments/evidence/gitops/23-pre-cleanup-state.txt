@@ -1,0 +1,40 @@
+NAME      	NAMESPACE 	REVISION	UPDATED                             	STATUS  	CHART                        	APP VERSION
+kyverno   	kyverno   	1       	2026-07-18 00:26:31.338379 +0100 BST	deployed	kyverno-3.8.2                	v1.18.2    
+monitoring	monitoring	1       	2026-07-18 23:19:21.550384 +0100 BST	deployed	kube-prometheus-stack-87.17.0	v0.92.1    
+
+NAME                             SYNC STATUS   HEALTH STATUS
+multi-service-app                OutOfSync     Healthy
+reliability-platform-bootstrap   Synced        Healthy
+
+NAME                         READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/api          2/2     2            2           15h
+deployment.apps/dependency   2/2     2            2           15h
+deployment.apps/frontend     2/2     2            2           15h
+
+NAME                              READY   STATUS    RESTARTS   AGE
+pod/api-58564685f8-5s5t5          1/1     Running   0          15h
+pod/api-58564685f8-kcc4b          1/1     Running   0          15h
+pod/dependency-57d46946ff-5bcxh   1/1     Running   0          15h
+pod/dependency-57d46946ff-gfmdg   1/1     Running   0          15h
+pod/frontend-54b6645786-5rphb     1/1     Running   0          15h
+pod/frontend-54b6645786-tcc4s     1/1     Running   0          15h
+
+NAME                 TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+service/api          ClusterIP   172.20.41.124   <none>        80/TCP    15h
+service/dependency   ClusterIP   172.20.196.4    <none>        80/TCP    15h
+service/frontend     ClusterIP   172.20.5.81     <none>        80/TCP    15h
+
+NAME                                             READY   STATUS    RESTARTS   AGE
+kyverno-admission-controller-764b886d88-56pq7    1/1     Running   0          3d1h
+kyverno-background-controller-7c9c8ccc66-6wd4v   1/1     Running   0          3d1h
+kyverno-cleanup-controller-646cd46fbf-jrq4k      1/1     Running   0          3d1h
+kyverno-reports-controller-7857ddf874-p8vgf      1/1     Running   0          3d1h
+
+NAME                                                READY   STATUS    RESTARTS       AGE
+argocd-application-controller-0                     1/1     Running   0              29h
+argocd-applicationset-controller-69bddf5587-kjwh7   1/1     Running   0              32h
+argocd-dex-server-779bbb6b9d-qhl2v                  1/1     Running   36 (30h ago)   32h
+argocd-notifications-controller-7494d5f69f-r5b9g    1/1     Running   0              32h
+argocd-redis-74d7d69cc8-brgsm                       1/1     Running   0              32h
+argocd-repo-server-64cb94d595-46zrl                 1/1     Running   0              29h
+argocd-server-85f878f664-6v9bl                      1/1     Running   0              29h
