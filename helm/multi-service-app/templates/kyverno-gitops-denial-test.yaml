@@ -1,17 +1,19 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Pod
 metadata:
   name: kyverno-gitops-denial-test
+  labels:
+    app.kubernetes.io/name: kyverno-gitops-denial-test
+    app.kubernetes.io/part-of: kubernetes-reliability-lab
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: kyverno-gitops-denial-test
-  template:
-    metadata:
-      labels:
-        app: kyverno-gitops-denial-test
-    spec:
-      containers:
-        - name: nginx
-          image: nginx:latest
+  restartPolicy: Never
+  containers:
+    - name: nginx
+      image: nginx:latest
+      resources:
+        requests:
+          cpu: 25m
+          memory: 32Mi
+        limits:
+          cpu: 50m
+          memory: 64Mi

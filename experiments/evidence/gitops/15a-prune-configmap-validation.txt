@@ -1,0 +1,1 @@
+configmap/gitops-prune-test configured (server dry run)

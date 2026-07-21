@@ -79,6 +79,7 @@ docs/             Architecture, runbooks, SLOs
 | [Multi-Service Reliability Engineering](docs/22-multi-service-reliability-engineering.md) | Multi-service architecture, failure domains, SLOs, error budgets, MTTR, canary workflows, and chaos experiments |
 | [EKS Multi-Service Reliability](docs/23-eks-multi-service-reliability.md) | Environment reconstruction, EKS promotion, ALB ingress, observability validation, cascading failures, MTTR, and cleanup workflow |
 | [Policy-as-Code and Admission Control](docs/28-policy-as-code-admission-control.md) | Kyverno admission governance, resource policies, policy testing, deployment trust controls, and signed-image compatibility findings |
+| [GitOps and Platform Automation](docs/29-gitops-and-platform-automation.md) | Argo CD, declarative Helm delivery, automated reconciliation, drift correction, trust-gated promotion and Kyverno-governed GitOps |
 
 ## Reliability Experiments
 
@@ -336,6 +337,12 @@ Deferred:
 - Cluster-side signed-image enforcement, pending validation against a stable
   and compatible Kyverno release
 
+### Phase 16 — GitOps and Platform Automation
+
+Implemented a declarative, continuously reconciled and policy-governed Kubernetes delivery workflow using Argo CD, Helm, Kyverno, Cosign, Amazon ECR and Amazon EKS.
+
+This phase moved application deployment from direct kubectl and Helm operations to a Git-managed delivery model in which Git defines the approved desired state, Argo CD performs continuous reconciliation, Kyverno governs Kubernetes admission and the deployment trust gate controls release promotion.
+
 ## Completed Capabilities 
 
 The project currently includes:
@@ -485,6 +492,104 @@ The project currently includes:
 - Preserved cluster stability by removing a crashing image-verification policy
 - Documented the deferred cluster-side signature-enforcement path
 
+### Gitops and Platform Automation
+
+- Recovered the Terraform-managed AWS and Amazon EKS development environment after cost-control cleanup
+- Restored the EKS kubeconfig and validated cluster connectivity and worker-node readiness
+- Restored kube-prometheus-stack and the Prometheus Operator CRDs required by the application ServiceMonitor resources
+- Reinstalled the stable Kyverno governance policies
+- Increased the EKS managed-node-group capacity from two to three desired t3.medium worker nodes
+- Installed and stabilised a pinned Argo CD release
+- Configured local Argo CD access through Kubernetes port forwarding
+- Configured annotation-based Argo CD resource tracking
+- Created the reliability-platform Argo CD AppProject
+- Created the declarative multi-service-app Argo CD Application
+- Added a root bootstrap Application using the app-of-apps pattern
+- Configured Argo CD to render the existing multi-service Helm chart from Git
+- Configured the Application to track the main branch and values-eks.yaml
+- Enabled automated synchronisation
+- Enabled automatic namespace creation
+- Enabled self-healing
+- Enabled automated pruning
+- Enabled retry backoff for transient reconciliation failures
+- Proved that Argo CD successfully reconciled the frontend, API and dependency Services
+- Proved that Argo CD successfully reconciled the frontend, API and dependency Deployments
+- Proved that Argo CD successfully reconciled the three application ServiceMonitors
+- Captured the final Synced and Healthy Application state
+- Demonstrated deterministic OutOfSync detection by temporarily disabling self-healing through Git
+- Demonstrated restoration of a Git-managed Deployment label
+- Demonstrated automatic correction of a Git-managed Service label
+- Demonstrated automated pruning of a previously Argo CD-managed ConfigMap after its removal from Git
+- Demonstrated Git-driven application configuration changes without direct Helm deployment
+- Corrected the disallow-latest-image-tag Kyverno ClusterPolicy
+- Configured rule-level failureAction: Enforce
+- Configured the policy to match Pods in the reliability-lab namespace
+- Extended latest-tag validation to normal containers, init containers and ephemeral containers
+- Enabled Kyverno autogeneration for supported Pod controllers
+- Proved that nginx:latest was denied
+- Proved that a fixed image tag was permitted
+- Proved that an init container using latest was denied
+- Demonstrated that Argo CD could render a non-compliant Git workload but could not bypass Kyverno admission governance
+- Confirmed that the invalid GitOps-managed Pod was never created
+- Restored automated synchronisation after the policy-governance test
+- Integrated Cosign signature verification into the GitOps promotion workflow
+- Integrated SBOM evidence validation into the GitOps promotion workflow
+- Integrated vulnerability-scan evidence validation into the GitOps promotion workflow
+- Added automatic Amazon ECR authentication renewal before trust verification
+- Added pipeline failure propagation with set -o pipefail
+- Verified the frontend, API and dependency release images before promotion
+- Demonstrated that an unavailable or untrusted image could not pass the promotion gate
+- Preserved human review between automated values-file modification and Git commit
+- Documented the local-key Cosign transparency-log limitation
+- Captured implementation, failure, recovery and final-state evidence under experiments/evidence/gitops/
+
+### Final Platform Control Flow
+
+```txt
+Application Change
+  ↓
+Build Container Images
+  ↓
+Generate SBOMs
+  ↓
+Scan Images
+  ↓
+Sign Images
+  ↓
+Refresh Amazon ECR Authentication
+  ↓
+Run Deployment Trust Gate
+  ↓
+Update Git Desired State
+  ↓
+Review and Commit
+  ↓
+Push to Main
+  ↓
+Argo CD Reconciliation
+  ↓
+Kubernetes API Admission
+  ↓
+Kyverno Governance
+  ↓
+Amazon EKS Deployment
+  ↓
+Argo CD Health Monitoring
+```
+### Phase Outcome
+
+The Kubernetes Reliability Lab now provides a complete GitOps delivery control plane:
+
+- Terraform creates and manages the AWS infrastructure.
+- Git records the approved desired state.
+- Helm renders the application resources.
+- Argo CD continuously reconciles Git with Kubernetes.
+- Kyverno enforces admission governance.
+- The deployment trust gate controls which signed and evidenced images may be promoted.
+- Amazon EKS runs the approved workloads.
+
+The project has progressed from manually operated Kubernetes deployments to an auditable, self-healing and policy-governed platform-delivery model.
+
 ## Current Architecture
 
 ```txt
@@ -537,14 +642,24 @@ AWS
 ├── AWS Load Balancer Controller
 └── ALB
 ```
-## Next Milestone
+## Next Milestone — Final Reliability Capstone and Portfolio Packaging
 
-GitOps and Platform Automation
+The final milestone will consolidate the technical implementation into a
+portfolio-ready reliability engineering case study.
 
-- Install Argo CD
-- Manage Helm deployment declaratively from Git
-- Implement automated reconciliation
-- Demonstrate drift detection and correction
-- Integrate the pre-deployment trust gate into the delivery workflow
-- Apply Kyverno governance to GitOps-managed workloads
+It will not introduce a large new platform build. Instead, it will produce the
+final proof, documentation and presentation layer.
+
+Planned deliverables include:
+
+- Final platform architecture diagram
+- Final GitOps workflow diagram
+- Complete README rewrite
+- Evidence index
+- Curated screenshots folder
+- Runbook index
+- Incident and postmortem examples
+- AWS cost summary
+- Known limitations
+- Production improvement recommendations
 

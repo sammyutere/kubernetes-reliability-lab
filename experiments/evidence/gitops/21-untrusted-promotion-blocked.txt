@@ -1,0 +1,5 @@
+Image: 393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend:unsigned-test
+Step 1: Verify cryptographic signature
+WARNING: Skipping tlog verification is an insecure practice that lacks transparency and auditability verification for the signature.
+Error: image tag not found: GET https://393864004024.dkr.ecr.us-east-1.amazonaws.com/v2/frontend/manifests/unsigned-test: MANIFEST_UNKNOWN: Requested image not found
+error during command execution: image tag not found: GET https://393864004024.dkr.ecr.us-east-1.amazonaws.com/v2/frontend/manifests/unsigned-test: MANIFEST_UNKNOWN: Requested image not found

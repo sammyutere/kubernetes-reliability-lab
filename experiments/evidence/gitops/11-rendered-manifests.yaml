@@ -1,0 +1,318 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    argocd.argoproj.io/tracking-id: multi-service-app:/Service:reliability-lab/api
+  labels:
+    app.kubernetes.io/instance: multi-service-app
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: api
+    app.kubernetes.io/part-of: multi-service-reliability-lab
+    monitoring: enabled
+  name: api
+  namespace: reliability-lab
+spec:
+  ports:
+  - name: http
+    port: 80
+    targetPort: http
+  selector:
+    app.kubernetes.io/name: api
+  type: ClusterIP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    argocd.argoproj.io/tracking-id: multi-service-app:/Service:reliability-lab/dependency
+  labels:
+    app.kubernetes.io/instance: multi-service-app
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: dependency
+    app.kubernetes.io/part-of: multi-service-reliability-lab
+    monitoring: enabled
+  name: dependency
+  namespace: reliability-lab
+spec:
+  ports:
+  - name: http
+    port: 80
+    targetPort: http
+  selector:
+    app.kubernetes.io/name: dependency
+  type: ClusterIP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    argocd.argoproj.io/tracking-id: multi-service-app:/Service:reliability-lab/frontend
+  labels:
+    app.kubernetes.io/instance: multi-service-app
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: frontend
+    app.kubernetes.io/part-of: multi-service-reliability-lab
+    monitoring: enabled
+  name: frontend
+  namespace: reliability-lab
+spec:
+  ports:
+  - name: http
+    port: 80
+    targetPort: http
+  selector:
+    app.kubernetes.io/name: frontend
+  type: ClusterIP
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    argocd.argoproj.io/tracking-id: multi-service-app:apps/Deployment:reliability-lab/api
+  labels:
+    app.kubernetes.io/instance: multi-service-app
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: api
+    app.kubernetes.io/part-of: multi-service-reliability-lab
+  name: api
+  namespace: reliability-lab
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: api
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: multi-service-app
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: api
+        app.kubernetes.io/part-of: multi-service-reliability-lab
+    spec:
+      containers:
+      - env:
+        - name: DEPENDENCY_URL
+          value: http://dependency:80
+        - name: REQUEST_TIMEOUT_SECONDS
+          value: "2"
+        image: 393864004024.dkr.ecr.us-east-1.amazonaws.com/api:0.1.0
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: http
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        name: api
+        ports:
+        - containerPort: 8000
+          name: http
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: http
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        resources:
+          limits:
+            cpu: 500m
+            memory: 256Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    argocd.argoproj.io/tracking-id: multi-service-app:apps/Deployment:reliability-lab/dependency
+  labels:
+    app.kubernetes.io/instance: multi-service-app
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: dependency
+    app.kubernetes.io/part-of: multi-service-reliability-lab
+  name: dependency
+  namespace: reliability-lab
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: dependency
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: multi-service-app
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: dependency
+        app.kubernetes.io/part-of: multi-service-reliability-lab
+    spec:
+      containers:
+      - env:
+        - name: FAILURE_MODE
+          value: none
+        - name: LATENCY_MS
+          value: "0"
+        image: 393864004024.dkr.ecr.us-east-1.amazonaws.com/dependency:0.1.0
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: http
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        name: dependency
+        ports:
+        - containerPort: 8000
+          name: http
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: http
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        resources:
+          limits:
+            cpu: 500m
+            memory: 256Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    argocd.argoproj.io/tracking-id: multi-service-app:apps/Deployment:reliability-lab/frontend
+  labels:
+    app.kubernetes.io/instance: multi-service-app
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: frontend
+    app.kubernetes.io/part-of: multi-service-reliability-lab
+  name: frontend
+  namespace: reliability-lab
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: frontend
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: multi-service-app
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: frontend
+        app.kubernetes.io/part-of: multi-service-reliability-lab
+    spec:
+      containers:
+      - env:
+        - name: API_URL
+          value: http://api:80
+        - name: REQUEST_TIMEOUT_SECONDS
+          value: "2"
+        image: 393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend:0.1.0
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: http
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        name: frontend
+        ports:
+        - containerPort: 8000
+          name: http
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: http
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        resources:
+          limits:
+            cpu: 500m
+            memory: 256Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  annotations:
+    argocd.argoproj.io/tracking-id: multi-service-app:monitoring.coreos.com/ServiceMonitor:reliability-lab/api
+  labels:
+    app.kubernetes.io/name: api
+    app.kubernetes.io/part-of: multi-service-reliability-lab
+    release: monitoring
+  name: api
+  namespace: reliability-lab
+spec:
+  endpoints:
+  - interval: 15s
+    path: /metrics
+    port: http
+  namespaceSelector:
+    matchNames:
+    - reliability-lab
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: api
+      monitoring: enabled
+
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  annotations:
+    argocd.argoproj.io/tracking-id: multi-service-app:monitoring.coreos.com/ServiceMonitor:reliability-lab/dependency
+  labels:
+    app.kubernetes.io/name: dependency
+    app.kubernetes.io/part-of: multi-service-reliability-lab
+    release: monitoring
+  name: dependency
+  namespace: reliability-lab
+spec:
+  endpoints:
+  - interval: 15s
+    path: /metrics
+    port: http
+  namespaceSelector:
+    matchNames:
+    - reliability-lab
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: dependency
+      monitoring: enabled
+
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  annotations:
+    argocd.argoproj.io/tracking-id: multi-service-app:monitoring.coreos.com/ServiceMonitor:reliability-lab/frontend
+  labels:
+    app.kubernetes.io/name: frontend
+    app.kubernetes.io/part-of: multi-service-reliability-lab
+    release: monitoring
+  name: frontend
+  namespace: reliability-lab
+spec:
+  endpoints:
+  - interval: 15s
+    path: /metrics
+    port: http
+  namespaceSelector:
+    matchNames:
+    - reliability-lab
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: frontend
+      monitoring: enabled
+

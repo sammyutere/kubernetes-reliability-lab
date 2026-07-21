@@ -1,0 +1,19 @@
+prometheus:
+  prometheusSpec:
+    # Discover ServiceMonitors regardless of their Helm release label.
+    serviceMonitorSelector: {}
+    serviceMonitorSelectorNilUsesHelmValues: false
+
+    # Discover ServiceMonitors in all namespaces, including reliability-lab.
+    serviceMonitorNamespaceSelector: {}
+
+    # Permit the same discovery model for PodMonitor resources.
+    podMonitorSelector: {}
+    podMonitorSelectorNilUsesHelmValues: false
+    podMonitorNamespaceSelector: {}
+
+grafana:
+  enabled: true
+
+alertmanager:
+  enabled: true

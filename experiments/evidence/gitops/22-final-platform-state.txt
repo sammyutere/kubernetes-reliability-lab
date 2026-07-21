@@ -1,0 +1,110 @@
+=== Timestamp ===
+Mon 20 Jul 2026 23:55:00 UTC
+
+=== Git Commit ===
+9a77141ef45ecf0aed1384ae1c82f8f9be67bd5e
+
+=== Argo CD Applications ===
+NAME                                   CLUSTER                         NAMESPACE        PROJECT               STATUS     HEALTH   SYNCPOLICY  CONDITIONS  REPO                                                          PATH                    TARGET
+argocd/multi-service-app               https://kubernetes.default.svc  reliability-lab  reliability-platform  OutOfSync  Healthy  Auto-Prune  SyncError   https://github.com/sammyutere/kubernetes-reliability-lab.git  helm/multi-service-app  main
+argocd/reliability-platform-bootstrap  https://kubernetes.default.svc  argocd           default               Synced     Healthy  Auto-Prune  <none>      https://github.com/sammyutere/kubernetes-reliability-lab.git  gitops/projects         main
+
+=== Multi-Service App ===
+Name:               argocd/multi-service-app
+Project:            reliability-platform
+Server:             https://kubernetes.default.svc
+Namespace:          reliability-lab
+URL:                https://localhost:8080/applications/multi-service-app
+Source:
+- Repo:             https://github.com/sammyutere/kubernetes-reliability-lab.git
+  Target:           main
+  Path:             helm/multi-service-app
+  Helm Values:      values-eks.yaml
+SyncWindow:         Sync Allowed
+Sync Policy:        Automated (Prune)
+Sync Status:        OutOfSync from main (9a77141)
+Health Status:      Healthy
+
+CONDITION  MESSAGE  LAST TRANSITION
+SyncError  Failed last sync attempt to [9a77141ef45ecf0aed1384ae1c82f8f9be67bd5e]: one or more objects failed to apply, reason: admission webhook "validate.kyverno.svc-fail" denied the request: 
+
+resource Deployment/reliability-lab/kyverno-gitops-denial-test was blocked due to the following policies 
+
+disallow-latest-image-tag:
+  autogen-block-latest-tag: 'validation failure: Images must not use the latest tag.'
+require-resource-requests-limits:
+  autogen-require-requests-and-limits: 'validation error: All containers must define
+    CPU/memory requests and limits. rule autogen-require-requests-and-limits failed
+    at path /spec/template/spec/containers/0/resources/limits/'
+require-standard-labels:
+  require-app-labels-on-deployments: 'validation error: Deployments must include app.kubernetes.io/name
+    and app.kubernetes.io/part-of labels. rule require-app-labels-on-deployments failed
+    at path /metadata/labels/' (retried 5 times).  2026-07-20 23:46:19 +0100 BST
+
+
+GROUP  KIND        NAMESPACE        NAME                        STATUS     HEALTH   HOOK  MESSAGE
+apps   Deployment  reliability-lab  kyverno-gitops-denial-test  OutOfSync  Missing        admission webhook "validate.kyverno.svc-fail" denied the request: 
+
+resource Deployment/reliability-lab/kyverno-gitops-denial-test was blocked due to the following policies 
+
+disallow-latest-image-tag:
+  autogen-block-latest-tag: 'validation failure: Images must not use the latest tag.'
+require-resource-requests-limits:
+  autogen-require-requests-and-limits: 'validation error: All containers must define
+    CPU/memory requests and limits. rule autogen-require-requests-and-limits failed
+    at path /spec/template/spec/containers/0/resources/limits/'
+require-standard-labels:
+  require-app-labels-on-deployments: 'validation error: Deployments must include app.kubernetes.io/name
+    and app.kubernetes.io/part-of labels. rule require-app-labels-on-deployments failed
+    at path /metadata/labels/'
+                       Service         reliability-lab  api         Synced  Healthy    
+                       Service         reliability-lab  dependency  Synced  Healthy    
+                       Service         reliability-lab  frontend    Synced  Healthy    
+apps                   Deployment      reliability-lab  api         Synced  Healthy    
+apps                   Deployment      reliability-lab  dependency  Synced  Healthy    
+apps                   Deployment      reliability-lab  frontend    Synced  Healthy    
+monitoring.coreos.com  ServiceMonitor  reliability-lab  api         Synced             
+monitoring.coreos.com  ServiceMonitor  reliability-lab  dependency  Synced             
+monitoring.coreos.com  ServiceMonitor  reliability-lab  frontend    Synced             
+
+=== Workloads ===
+NAME                         READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS   IMAGES                                                          SELECTOR
+deployment.apps/api          2/2     2            2           14h   api          393864004024.dkr.ecr.us-east-1.amazonaws.com/api:0.1.0          app.kubernetes.io/name=api
+deployment.apps/dependency   2/2     2            2           14h   dependency   393864004024.dkr.ecr.us-east-1.amazonaws.com/dependency:0.1.0   app.kubernetes.io/name=dependency
+deployment.apps/frontend     2/2     2            2           14h   frontend     393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend:0.1.0     app.kubernetes.io/name=frontend
+
+NAME                              READY   STATUS    RESTARTS   AGE   IP            NODE                          NOMINATED NODE   READINESS GATES
+pod/api-58564685f8-5s5t5          1/1     Running   0          14h   10.40.1.172   ip-10-40-1-239.ec2.internal   <none>           <none>
+pod/api-58564685f8-kcc4b          1/1     Running   0          14h   10.40.1.14    ip-10-40-1-239.ec2.internal   <none>           <none>
+pod/dependency-57d46946ff-5bcxh   1/1     Running   0          14h   10.40.1.161   ip-10-40-1-239.ec2.internal   <none>           <none>
+pod/dependency-57d46946ff-gfmdg   1/1     Running   0          14h   10.40.1.60    ip-10-40-1-239.ec2.internal   <none>           <none>
+pod/frontend-54b6645786-5rphb     1/1     Running   0          14h   10.40.0.237   ip-10-40-0-91.ec2.internal    <none>           <none>
+pod/frontend-54b6645786-tcc4s     1/1     Running   0          14h   10.40.1.136   ip-10-40-1-239.ec2.internal   <none>           <none>
+
+NAME                 TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE   SELECTOR
+service/api          ClusterIP   172.20.41.124   <none>        80/TCP    14h   app.kubernetes.io/name=api
+service/dependency   ClusterIP   172.20.196.4    <none>        80/TCP    14h   app.kubernetes.io/name=dependency
+service/frontend     ClusterIP   172.20.5.81     <none>        80/TCP    14h   app.kubernetes.io/name=frontend
+
+=== Kyverno Policies ===
+NAME                               ADMISSION   BACKGROUND   READY   AGE   MESSAGE
+disallow-latest-image-tag          true        true         True    3d    Ready
+require-resource-requests-limits   true        true         True    3d    Ready
+require-standard-labels            true        true         True    3d    Ready
+
+=== Argo CD Pods ===
+NAME                                                READY   STATUS    RESTARTS       AGE
+argocd-application-controller-0                     1/1     Running   0              28h
+argocd-applicationset-controller-69bddf5587-kjwh7   1/1     Running   0              31h
+argocd-dex-server-779bbb6b9d-qhl2v                  1/1     Running   36 (29h ago)   31h
+argocd-notifications-controller-7494d5f69f-r5b9g    1/1     Running   0              31h
+argocd-redis-74d7d69cc8-brgsm                       1/1     Running   0              31h
+argocd-repo-server-64cb94d595-46zrl                 1/1     Running   0              28h
+argocd-server-85f878f664-6v9bl                      1/1     Running   0              28h
+
+=== Kyverno Pods ===
+NAME                                             READY   STATUS    RESTARTS   AGE
+kyverno-admission-controller-764b886d88-56pq7    1/1     Running   0          3d
+kyverno-background-controller-7c9c8ccc66-6wd4v   1/1     Running   0          3d
+kyverno-cleanup-controller-646cd46fbf-jrq4k      1/1     Running   0          3d
+kyverno-reports-controller-7857ddf874-p8vgf      1/1     Running   0          3d

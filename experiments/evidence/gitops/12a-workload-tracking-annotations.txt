@@ -1,0 +1,12 @@
+=== Deployment: frontend ===
+Name: frontend
+Tracking ID: multi-service-app:apps/Deployment:reliability-lab/frontend
+
+=== Deployment: api ===
+Name: api
+Tracking ID: multi-service-app:apps/Deployment:reliability-lab/api
+
+=== Deployment: dependency ===
+Name: dependency
+Tracking ID: multi-service-app:apps/Deployment:reliability-lab/dependency
+

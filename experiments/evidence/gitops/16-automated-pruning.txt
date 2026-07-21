@@ -1,0 +1,28 @@
+=== ConfigMap Check ===
+
+=== Argo CD State ===
+Name:               argocd/multi-service-app
+Project:            reliability-platform
+Server:             https://kubernetes.default.svc
+Namespace:          reliability-lab
+URL:                https://localhost:8080/applications/multi-service-app
+Source:
+- Repo:             https://github.com/sammyutere/kubernetes-reliability-lab.git
+  Target:           main
+  Path:             helm/multi-service-app
+  Helm Values:      values-eks.yaml
+SyncWindow:         Sync Allowed
+Sync Policy:        Automated (Prune)
+Sync Status:        Synced to main (a483f75)
+Health Status:      Healthy
+
+GROUP                  KIND            NAMESPACE        NAME        STATUS  HEALTH   HOOK  MESSAGE
+                       Service         reliability-lab  api         Synced  Healthy        
+                       Service         reliability-lab  dependency  Synced  Healthy        
+                       Service         reliability-lab  frontend    Synced  Healthy        
+apps                   Deployment      reliability-lab  api         Synced  Healthy        
+apps                   Deployment      reliability-lab  dependency  Synced  Healthy        
+apps                   Deployment      reliability-lab  frontend    Synced  Healthy        
+monitoring.coreos.com  ServiceMonitor  reliability-lab  api         Synced                 
+monitoring.coreos.com  ServiceMonitor  reliability-lab  dependency  Synced                 
+monitoring.coreos.com  ServiceMonitor  reliability-lab  frontend    Synced                 

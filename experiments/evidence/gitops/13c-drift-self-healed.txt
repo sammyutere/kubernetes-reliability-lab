@@ -1,0 +1,52 @@
+=== Timestamp ===
+Mon 20 Jul 2026 21:02:09 UTC
+
+=== Self-Healing Configuration ===
+selfHeal=true
+
+=== Application After Self-Healing ===
+Name:               argocd/multi-service-app
+Project:            reliability-platform
+Server:             https://kubernetes.default.svc
+Namespace:          reliability-lab
+URL:                https://localhost:8080/applications/multi-service-app
+Source:
+- Repo:             https://github.com/sammyutere/kubernetes-reliability-lab.git
+  Target:           main
+  Path:             helm/multi-service-app
+  Helm Values:      values-eks.yaml
+SyncWindow:         Sync Allowed
+Sync Policy:        Automated (Prune)
+Sync Status:        Synced to main (137402e)
+Health Status:      Healthy
+
+GROUP                  KIND            NAMESPACE        NAME        STATUS  HEALTH   HOOK  MESSAGE
+apps                   Deployment      reliability-lab  frontend    Synced  Healthy        deployment.apps/frontend configured
+                       Service         reliability-lab  api         Synced  Healthy        
+                       Service         reliability-lab  dependency  Synced  Healthy        
+                       Service         reliability-lab  frontend    Synced  Healthy        
+apps                   Deployment      reliability-lab  api         Synced  Healthy        
+apps                   Deployment      reliability-lab  dependency  Synced  Healthy        
+monitoring.coreos.com  ServiceMonitor  reliability-lab  api         Synced                 
+monitoring.coreos.com  ServiceMonitor  reliability-lab  dependency  Synced                 
+monitoring.coreos.com  ServiceMonitor  reliability-lab  frontend    Synced                 
+
+=== Restored Frontend Label ===
+multi-service-reliability-lab
+
+=== Recent Application History ===
+SOURCE  https://github.com/sammyutere/kubernetes-reliability-lab.git
+ID      DATE                           REVISION
+0       2026-07-20 10:16:23 +0100 BST  main (7071c4d)
+1       2026-07-20 13:16:48 +0100 BST  main (41de4fb)
+2       2026-07-20 21:58:38 +0100 BST  main (137402e)
+
+=== Recent Argo CD Events ===
+LAST SEEN   TYPE     REASON               OBJECT                                       MESSAGE
+3m40s       Normal   OperationStarted     application/reliability-platform-bootstrap   Initiated automated sync to '137402e103749bba9cfb5bd78cc7f60261a80e40, 137402e103749bba9cfb5bd78cc7f60261a80e40'
+3m40s       Normal   ResourceUpdated      application/reliability-platform-bootstrap   Updated sync status: Synced -> OutOfSync
+3m39s       Normal   OperationStarted     application/multi-service-app                Initiated automated sync to '137402e103749bba9cfb5bd78cc7f60261a80e40'
+3m39s       Normal   OperationCompleted   application/multi-service-app                Sync operation to 137402e103749bba9cfb5bd78cc7f60261a80e40 succeeded
+3m39s       Normal   ResourceUpdated      application/multi-service-app                Updated sync status: OutOfSync -> Synced
+3m39s       Normal   OperationCompleted   application/reliability-platform-bootstrap   Sync operation to  succeeded
+3m39s       Normal   ResourceUpdated      application/reliability-platform-bootstrap   Updated sync status: OutOfSync -> Synced

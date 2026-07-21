@@ -1,0 +1,8 @@
+Error from server: error when creating "STDIN": admission webhook "validate.kyverno.svc-fail" denied the request: 
+
+resource Pod/reliability-lab/latest-tag-policy-test was blocked due to the following policies 
+
+disallow-latest-image-tag:
+  disallow-latest-tag: 'validation failure: validation error: The mutable image tag
+    ''latest'' is prohibited. Use a versioned image tag or immutable digest instead.
+    rule disallow-latest-tag failed at path /image/'

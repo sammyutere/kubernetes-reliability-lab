@@ -1,0 +1,104 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"kyverno.io/v1","kind":"ClusterPolicy","metadata":{"annotations":{"policies.kyverno.io/category":"Best Practices","policies.kyverno.io/severity":"medium","policies.kyverno.io/title":"Disallow Latest Image Tag"},"name":"disallow-latest-image-tag"},"spec":{"background":true,"rules":[{"match":{"any":[{"resources":{"kinds":["Pod"],"namespaces":["reliability-lab"]}}]},"name":"block-latest-tag","validate":{"foreach":[{"deny":{"conditions":{"any":[{"key":"{{ element.image }}","operator":"Equals","value":"*:latest"}]}},"list":"request.object.spec.containers"}],"message":"Images must not use the latest tag."}}],"validationFailureAction":"Enforce"}}
+    policies.kyverno.io/category: Best Practices
+    policies.kyverno.io/severity: medium
+    policies.kyverno.io/title: Disallow Latest Image Tag
+  creationTimestamp: "2026-07-17T23:31:00Z"
+  generation: 1
+  name: disallow-latest-image-tag
+  resourceVersion: "76535"
+  uid: 43be4fd4-7019-4566-8d24-ea55f0019eab
+spec:
+  admission: true
+  background: true
+  emitWarning: false
+  rules:
+  - match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+          namespaces:
+          - reliability-lab
+    name: block-latest-tag
+    skipBackgroundRequests: true
+    validate:
+      allowExistingViolations: true
+      foreach:
+      - deny:
+          conditions:
+            any:
+            - key: '{{ element.image }}'
+              operator: Equals
+              value: '*:latest'
+        list: request.object.spec.containers
+      message: Images must not use the latest tag.
+  validationFailureAction: Enforce
+status:
+  autogen:
+    rules:
+    - match:
+        any:
+        - resources:
+            kinds:
+            - apps/v1/DaemonSet
+            - apps/v1/Deployment
+            - batch/v1/Job
+            - apps/v1/ReplicaSet
+            - v1/ReplicationController
+            - apps/v1/StatefulSet
+            namespaces:
+            - reliability-lab
+        resources: {}
+      name: autogen-block-latest-tag
+      skipBackgroundRequests: true
+      validate:
+        allowExistingViolations: true
+        foreach:
+        - deny:
+            conditions:
+              any:
+              - key: '{{ element.image }}'
+                operator: Equals
+                value: '*:latest'
+          list: request.object.spec.template.spec.containers
+        message: Images must not use the latest tag.
+    - match:
+        any:
+        - resources:
+            kinds:
+            - batch/v1/CronJob
+            namespaces:
+            - reliability-lab
+        resources: {}
+      name: autogen-cronjob-block-latest-tag
+      skipBackgroundRequests: true
+      validate:
+        allowExistingViolations: true
+        foreach:
+        - deny:
+            conditions:
+              any:
+              - key: '{{ element.image }}'
+                operator: Equals
+                value: '*:latest'
+          list: request.object.spec.jobTemplate.spec.template.spec.containers
+        message: Images must not use the latest tag.
+  conditions:
+  - lastTransitionTime: "2026-07-17T23:31:00Z"
+    message: Ready
+    reason: Succeeded
+    status: "True"
+    type: Ready
+  rulecount:
+    generate: 0
+    mutate: 0
+    validate: 1
+    verifyimages: 0
+  validatingadmissionpolicy:
+    generated: false
+    message: ""

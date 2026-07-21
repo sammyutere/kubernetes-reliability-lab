@@ -1,0 +1,17 @@
+apiVersion: v1
+data:
+  purpose: demonstrate-argocd-automated-pruning
+kind: ConfigMap
+metadata:
+  annotations:
+    argocd.argoproj.io/tracking-id: multi-service-app:/ConfigMap:reliability-lab/gitops-prune-test
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"purpose":"demonstrate-argocd-automated-pruning"},"kind":"ConfigMap","metadata":{"annotations":{"argocd.argoproj.io/tracking-id":"multi-service-app:/ConfigMap:reliability-lab/gitops-prune-test"},"labels":{"app.kubernetes.io/name":"gitops-prune-test","app.kubernetes.io/part-of":"kubernetes-reliability-lab"},"name":"gitops-prune-test","namespace":"reliability-lab"}}
+  creationTimestamp: "2026-07-20T22:01:16Z"
+  labels:
+    app.kubernetes.io/name: gitops-prune-test
+    app.kubernetes.io/part-of: kubernetes-reliability-lab
+  name: gitops-prune-test
+  namespace: reliability-lab
+  resourceVersion: "1316319"
+  uid: a6b91cfa-a758-4195-84c9-2293606f58e0

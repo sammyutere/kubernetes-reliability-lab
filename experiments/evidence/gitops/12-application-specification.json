@@ -1,0 +1,85 @@
+{
+  "metadata": {
+    "name": "multi-service-app",
+    "namespace": "argocd",
+    "labels": {
+      "app.kubernetes.io/name": "multi-service-app",
+      "app.kubernetes.io/part-of": "kubernetes-reliability-lab"
+    },
+    "trackingAnnotation": "reliability-platform-bootstrap:argoproj.io/Application:argocd/multi-service-app"
+  },
+  "spec": {
+    "source": {
+      "repoURL": "https://github.com/sammyutere/kubernetes-reliability-lab.git",
+      "path": "helm/multi-service-app",
+      "targetRevision": "main",
+      "helm": {
+        "valueFiles": [
+          "values-eks.yaml"
+        ],
+        "releaseName": "multi-service-app"
+      }
+    },
+    "destination": {
+      "server": "https://kubernetes.default.svc",
+      "namespace": "reliability-lab"
+    },
+    "project": "reliability-platform",
+    "syncPolicy": {
+      "automated": {
+        "prune": true,
+        "selfHeal": true,
+        "allowEmpty": false,
+        "enabled": true
+      },
+      "syncOptions": [
+        "CreateNamespace=true",
+        "PruneLast=true",
+        "ApplyOutOfSyncOnly=true"
+      ],
+      "retry": {
+        "limit": 5,
+        "backoff": {
+          "duration": "10s",
+          "factor": 2,
+          "maxDuration": "3m"
+        }
+      }
+    }
+  },
+  "status": {
+    "sync": {
+      "status": "Synced",
+      "comparedTo": {
+        "source": {
+          "repoURL": "https://github.com/sammyutere/kubernetes-reliability-lab.git",
+          "path": "helm/multi-service-app",
+          "targetRevision": "main",
+          "helm": {
+            "valueFiles": [
+              "values-eks.yaml"
+            ],
+            "releaseName": "multi-service-app"
+          }
+        },
+        "destination": {
+          "server": "https://kubernetes.default.svc",
+          "namespace": "reliability-lab"
+        }
+      },
+      "revision": "7071c4d318fdea90ea1f9a30b693dfdf8451a504"
+    },
+    "health": {
+      "status": "Healthy",
+      "lastTransitionTime": "2026-07-20T09:16:46Z"
+    },
+    "sourceType": "Helm",
+    "images": [
+      "393864004024.dkr.ecr.us-east-1.amazonaws.com/api:0.1.0",
+      "393864004024.dkr.ecr.us-east-1.amazonaws.com/dependency:0.1.0",
+      "393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend:0.1.0"
+    ],
+    "operationPhase": "Succeeded",
+    "operationMessage": "successfully synced (all tasks run)"
+  }
+}

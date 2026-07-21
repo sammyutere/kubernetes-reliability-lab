@@ -1,0 +1,17 @@
+=== Root Application ===
+NAME                             SYNC STATUS   HEALTH STATUS   REVISION   PROJECT
+reliability-platform-bootstrap   Synced        Healthy                    default
+
+=== Argo CD Project ===
+NAME                   AGE
+reliability-platform   11h
+
+=== All Applications ===
+NAME                             SYNC STATUS   HEALTH STATUS
+multi-service-app                Synced        Healthy
+reliability-platform-bootstrap   Synced        Healthy
+
+=== Argo CD Application List ===
+NAME                                   CLUSTER                         NAMESPACE        PROJECT               STATUS  HEALTH   SYNCPOLICY  CONDITIONS  REPO                                                          PATH                    TARGET
+argocd/multi-service-app               https://kubernetes.default.svc  reliability-lab  reliability-platform  Synced  Healthy  Auto-Prune  <none>      https://github.com/sammyutere/kubernetes-reliability-lab.git  helm/multi-service-app  main
+argocd/reliability-platform-bootstrap  https://kubernetes.default.svc  argocd           default               Synced  Healthy  Auto-Prune  <none>      https://github.com/sammyutere/kubernetes-reliability-lab.git  gitops/projects         main
