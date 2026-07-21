@@ -1,0 +1,622 @@
+[0m[1mdata.aws_availability_zones.available: Reading...[0m[0m
+[0m[1maws_iam_role.eks_cluster: Refreshing state... [id=reliability-lab-dev-cluster-role][0m
+[0m[1maws_iam_role.eks_node: Refreshing state... [id=reliability-lab-dev-node-role][0m
+[0m[1maws_vpc.this: Refreshing state... [id=vpc-03988098608825e31][0m
+[0m[1maws_ecr_repository.app: Refreshing state... [id=reliability-app][0m
+[0m[1mdata.aws_availability_zones.available: Read complete after 1s [id=us-east-1][0m
+[0m[1maws_iam_role_policy_attachment.eks_cluster_policy: Refreshing state... [id=reliability-lab-dev-cluster-role-20260717154640949700000004][0m
+[0m[1maws_iam_role_policy_attachment.node_ecr: Refreshing state... [id=reliability-lab-dev-node-role-20260717154640767700000002][0m
+[0m[1maws_iam_role_policy_attachment.node_worker: Refreshing state... [id=reliability-lab-dev-node-role-20260717154640910700000003][0m
+[0m[1maws_iam_role_policy_attachment.node_cni: Refreshing state... [id=reliability-lab-dev-node-role-20260717154640734800000001][0m
+[0m[1maws_internet_gateway.this: Refreshing state... [id=igw-0ef3014dbf46e89c2][0m
+[0m[1maws_route_table.public: Refreshing state... [id=rtb-0be8a6b841c7e7d52][0m
+[0m[1maws_subnet.public["1"]: Refreshing state... [id=subnet-0c886a8769b228acc][0m
+[0m[1maws_subnet.public["0"]: Refreshing state... [id=subnet-044747509550beda2][0m
+[0m[1maws_route.public_internet: Refreshing state... [id=r-rtb-0be8a6b841c7e7d521080289494][0m
+[0m[1maws_route_table_association.public["1"]: Refreshing state... [id=rtbassoc-0d7e0de16737d138c][0m
+[0m[1maws_route_table_association.public["0"]: Refreshing state... [id=rtbassoc-0d43d320cf7fe74c4][0m
+[0m[1maws_eks_cluster.this: Refreshing state... [id=reliability-lab-dev][0m
+[0m[1maws_eks_node_group.this: Refreshing state... [id=reliability-lab-dev:reliability-lab-dev-nodes][0m
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  [31m-[0m destroy[0m
+
+Terraform will perform the following actions:
+
+[1m  # aws_ecr_repository.app[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_ecr_repository" "app" {
+      [31m-[0m[0m arn                  = "arn:aws:ecr:us-east-1:393864004024:repository/reliability-app" [90m-> null[0m[0m
+      [31m-[0m[0m force_delete         = true [90m-> null[0m[0m
+      [31m-[0m[0m id                   = "reliability-app" [90m-> null[0m[0m
+      [31m-[0m[0m image_tag_mutability = "MUTABLE" [90m-> null[0m[0m
+      [31m-[0m[0m name                 = "reliability-app" [90m-> null[0m[0m
+      [31m-[0m[0m registry_id          = "393864004024" [90m-> null[0m[0m
+      [31m-[0m[0m repository_url       = "393864004024.dkr.ecr.us-east-1.amazonaws.com/reliability-app" [90m-> null[0m[0m
+      [31m-[0m[0m tags                 = {
+          [31m-[0m[0m "Environment" = "dev"
+          [31m-[0m[0m "ManagedBy"   = "terraform"
+          [31m-[0m[0m "Project"     = "kubernetes-reliability-lab"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m tags_all             = {
+          [31m-[0m[0m "Environment" = "dev"
+          [31m-[0m[0m "ManagedBy"   = "terraform"
+          [31m-[0m[0m "Project"     = "kubernetes-reliability-lab"
+        } [90m-> null[0m[0m
+
+      [31m-[0m[0m encryption_configuration {
+          [31m-[0m[0m encryption_type = "AES256" [90m-> null[0m[0m
+            [90m# (1 unchanged attribute hidden)[0m[0m
+        }
+
+      [31m-[0m[0m image_scanning_configuration {
+          [31m-[0m[0m scan_on_push = true [90m-> null[0m[0m
+        }
+    }
+
+[1m  # aws_eks_cluster.this[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_eks_cluster" "this" {
+      [31m-[0m[0m arn                           = "arn:aws:eks:us-east-1:393864004024:cluster/reliability-lab-dev" [90m-> null[0m[0m
+      [31m-[0m[0m bootstrap_self_managed_addons = true [90m-> null[0m[0m
+      [31m-[0m[0m certificate_authority         = [
+          [31m-[0m[0m {
+              [31m-[0m[0m data = "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURCVENDQWUyZ0F3SUJBZ0lJSDhWTC9mV2NidmN3RFFZSktvWklodmNOQVFFTEJRQXdGVEVUTUJFR0ExVUUKQXhNS2EzVmlaWEp1WlhSbGN6QWVGdzB5TmpBM01UY3hOVFE0TlRsYUZ3MHpOakEzTVRReE5UVXpOVGxhTUJVeApFekFSQmdOVkJBTVRDbXQxWW1WeWJtVjBaWE13Z2dFaU1BMEdDU3FHU0liM0RRRUJBUVVBQTRJQkR3QXdnZ0VLCkFvSUJBUURGY01TQ3cwb3c2R3V2bkZqRHdaU2dQTDVLSEFNQ3hBRUVyNW1CWjJzb2pLQ1JENkdleVZXb21wRHIKa3VFcEc1R2lwS2hpRC9Vb2JwTGFJQ1NiM2s3TkFCc3N4ZEVkY0M2dkZQRG81TzhRWC93SUxKNDdaRHlsUHZMSgpGclR5aElVZWpNaktaUko0c3VGaDdOUHpYeU9kMDd6UTBPa0ZQejJvVFN3VHVBdU9pVU5TRVVLeGMxNWdzZ0dTClhaUnFrSXdQNEtBRVdPaWN4SVp6aVoyaFZUMTZsT2hpaEpFNjBZOHpONUxIaEJRNmRCenRrNVBqV3NhQWx4bU0KdnkzN2hOUUV1eXI1TFJUYnJwMXJzSmJpWWFoc3pDQkU0T2ZFUzNUZFVvb0dGcWhSU2dSVmM3QTQ0ckVtK05jQQpVeU9LaUg0NVBDTkVUNFRqTHJRR1FJUWZsMi9MQWdNQkFBR2pXVEJYTUE0R0ExVWREd0VCL3dRRUF3SUNwREFQCkJnTlZIUk1CQWY4RUJUQURBUUgvTUIwR0ExVWREZ1FXQkJTNXVIWTdoSkdzTGQ5MlFHdFUvaFBXY3k3VGJ6QVYKQmdOVkhSRUVEakFNZ2dwcmRXSmxjbTVsZEdWek1BMEdDU3FHU0liM0RRRUJDd1VBQTRJQkFRQUJ0RU9JYmpsQwpFU2g1Z2FIUWNGOUFlM2JaSnhlS3ZqeDNyeXhCOVZZejhrSjloMHFWMm1qTFEwbll4dEpOL1pUdU85R09MUW9rCkc1OTVjbER3ZHFuYmdJMStGUnI4L1M1STd0TVNqRmZZU2U4LzdQdTdFVG1tU1lqQzB6THFNcndEc2xqVmppT1kKWkdwOFZvd0hMMXdnMitGMGlVdVpndWF4c0VnVXZmMEtaeDlSYldlZDZPNGg2L3Z3QTdmdy9UWkhuNTdJNUQ1MwpXRUxLd3BSVWd4NTdMN2JRRU5KZGxwZFQzbm95ZTFOY1pzTnBSL2tuVEZWQmxEd1pwTkVMVmNyd0lwT2VzYUVUCms1K2hoSmtwVVNnVGZMam9UV2NValRIem82c0ZoYVBNc2NKWlk4Z1p4b1NPeEE5bzdLTFhDbVNtK0NzZjVoMCsKakQvRUJSOTBzMFZ4Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K"
+            },
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m created_at                    = "2026-07-17T15:47:08Z" [90m-> null[0m[0m
+      [31m-[0m[0m enabled_cluster_log_types     = [] [90m-> null[0m[0m
+      [31m-[0m[0m endpoint                      = "https://359FA17672C881677B9C03706AE4DD4F.gr7.us-east-1.eks.amazonaws.com" [90m-> null[0m[0m
+      [31m-[0m[0m id                            = "reliability-lab-dev" [90m-> null[0m[0m
+      [31m-[0m[0m identity                      = [
+          [31m-[0m[0m {
+              [31m-[0m[0m oidc = [
+                  [31m-[0m[0m {
+                      [31m-[0m[0m issuer = "https://oidc.eks.us-east-1.amazonaws.com/id/359FA17672C881677B9C03706AE4DD4F"
+                    },
+                ]
+            },
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m name                          = "reliability-lab-dev" [90m-> null[0m[0m
+      [31m-[0m[0m platform_version              = "eks.28" [90m-> null[0m[0m
+      [31m-[0m[0m role_arn                      = "arn:aws:iam::393864004024:role/reliability-lab-dev-cluster-role" [90m-> null[0m[0m
+      [31m-[0m[0m status                        = "ACTIVE" [90m-> null[0m[0m
+      [31m-[0m[0m tags                          = {
+          [31m-[0m[0m "Environment" = "dev"
+          [31m-[0m[0m "ManagedBy"   = "terraform"
+          [31m-[0m[0m "Project"     = "kubernetes-reliability-lab"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m tags_all                      = {
+          [31m-[0m[0m "Environment" = "dev"
+          [31m-[0m[0m "ManagedBy"   = "terraform"
+          [31m-[0m[0m "Project"     = "kubernetes-reliability-lab"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m version                       = "1.34" [90m-> null[0m[0m
+
+      [31m-[0m[0m access_config {
+          [31m-[0m[0m authentication_mode                         = "CONFIG_MAP" [90m-> null[0m[0m
+          [31m-[0m[0m bootstrap_cluster_creator_admin_permissions = true [90m-> null[0m[0m
+        }
+
+      [31m-[0m[0m kubernetes_network_config {
+          [31m-[0m[0m ip_family         = "ipv4" [90m-> null[0m[0m
+          [31m-[0m[0m service_ipv4_cidr = "172.20.0.0/16" [90m-> null[0m[0m
+            [90m# (1 unchanged attribute hidden)[0m[0m
+
+          [31m-[0m[0m elastic_load_balancing {
+              [31m-[0m[0m enabled = false [90m-> null[0m[0m
+            }
+        }
+
+      [31m-[0m[0m upgrade_policy {
+          [31m-[0m[0m support_type = "EXTENDED" [90m-> null[0m[0m
+        }
+
+      [31m-[0m[0m vpc_config {
+          [31m-[0m[0m cluster_security_group_id = "sg-04cc9f1638223faeb" [90m-> null[0m[0m
+          [31m-[0m[0m endpoint_private_access   = false [90m-> null[0m[0m
+          [31m-[0m[0m endpoint_public_access    = true [90m-> null[0m[0m
+          [31m-[0m[0m public_access_cidrs       = [
+              [31m-[0m[0m "0.0.0.0/0",
+            ] [90m-> null[0m[0m
+          [31m-[0m[0m security_group_ids        = [] [90m-> null[0m[0m
+          [31m-[0m[0m subnet_ids                = [
+              [31m-[0m[0m "subnet-044747509550beda2",
+              [31m-[0m[0m "subnet-0c886a8769b228acc",
+            ] [90m-> null[0m[0m
+          [31m-[0m[0m vpc_id                    = "vpc-03988098608825e31" [90m-> null[0m[0m
+        }
+    }
+
+[1m  # aws_eks_node_group.this[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_eks_node_group" "this" {
+      [31m-[0m[0m ami_type               = "AL2023_x86_64_STANDARD" [90m-> null[0m[0m
+      [31m-[0m[0m arn                    = "arn:aws:eks:us-east-1:393864004024:nodegroup/reliability-lab-dev/reliability-lab-dev-nodes/5ccfb865-3e7f-6ff0-a561-6cb84912d956" [90m-> null[0m[0m
+      [31m-[0m[0m capacity_type          = "ON_DEMAND" [90m-> null[0m[0m
+      [31m-[0m[0m cluster_name           = "reliability-lab-dev" [90m-> null[0m[0m
+      [31m-[0m[0m disk_size              = 20 [90m-> null[0m[0m
+      [31m-[0m[0m id                     = "reliability-lab-dev:reliability-lab-dev-nodes" [90m-> null[0m[0m
+      [31m-[0m[0m instance_types         = [
+          [31m-[0m[0m "t3.small",
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m labels                 = {} [90m-> null[0m[0m
+      [31m-[0m[0m node_group_name        = "reliability-lab-dev-nodes" [90m-> null[0m[0m
+      [31m-[0m[0m node_role_arn          = "arn:aws:iam::393864004024:role/reliability-lab-dev-node-role" [90m-> null[0m[0m
+      [31m-[0m[0m release_version        = "1.34.9-20260709" [90m-> null[0m[0m
+      [31m-[0m[0m resources              = [
+          [31m-[0m[0m {
+              [31m-[0m[0m autoscaling_groups              = [
+                  [31m-[0m[0m {
+                      [31m-[0m[0m name = "eks-reliability-lab-dev-nodes-5ccfb865-3e7f-6ff0-a561-6cb84912d956"
+                    },
+                ]
+                [90m# (1 unchanged attribute hidden)[0m[0m
+            },
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m status                 = "ACTIVE" [90m-> null[0m[0m
+      [31m-[0m[0m subnet_ids             = [
+          [31m-[0m[0m "subnet-044747509550beda2",
+          [31m-[0m[0m "subnet-0c886a8769b228acc",
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m tags                   = {
+          [31m-[0m[0m "Environment" = "dev"
+          [31m-[0m[0m "ManagedBy"   = "terraform"
+          [31m-[0m[0m "Project"     = "kubernetes-reliability-lab"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m tags_all               = {
+          [31m-[0m[0m "Environment" = "dev"
+          [31m-[0m[0m "ManagedBy"   = "terraform"
+          [31m-[0m[0m "Project"     = "kubernetes-reliability-lab"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m version                = "1.34" [90m-> null[0m[0m
+        [90m# (1 unchanged attribute hidden)[0m[0m
+
+      [31m-[0m[0m scaling_config {
+          [31m-[0m[0m desired_size = 3 [90m-> null[0m[0m
+          [31m-[0m[0m max_size     = 3 [90m-> null[0m[0m
+          [31m-[0m[0m min_size     = 2 [90m-> null[0m[0m
+        }
+
+      [31m-[0m[0m update_config {
+          [31m-[0m[0m max_unavailable            = 1 [90m-> null[0m[0m
+          [31m-[0m[0m max_unavailable_percentage = 0 [90m-> null[0m[0m
+        }
+    }
+
+[1m  # aws_iam_role.eks_cluster[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_iam_role" "eks_cluster" {
+      [31m-[0m[0m arn                   = "arn:aws:iam::393864004024:role/reliability-lab-dev-cluster-role" [90m-> null[0m[0m
+      [31m-[0m[0m assume_role_policy    = jsonencode(
+            {
+              [31m-[0m[0m Statement = [
+                  [31m-[0m[0m {
+                      [31m-[0m[0m Action    = "sts:AssumeRole"
+                      [31m-[0m[0m Effect    = "Allow"
+                      [31m-[0m[0m Principal = {
+                          [31m-[0m[0m Service = "eks.amazonaws.com"
+                        }
+                    },
+                ]
+              [31m-[0m[0m Version   = "2012-10-17"
+            }
+        ) [90m-> null[0m[0m
+      [31m-[0m[0m create_date           = "2026-07-17T15:46:40Z" [90m-> null[0m[0m
+      [31m-[0m[0m force_detach_policies = false [90m-> null[0m[0m
+      [31m-[0m[0m id                    = "reliability-lab-dev-cluster-role" [90m-> null[0m[0m
+      [31m-[0m[0m managed_policy_arns   = [
+          [31m-[0m[0m "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy",
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m max_session_duration  = 3600 [90m-> null[0m[0m
+      [31m-[0m[0m name                  = "reliability-lab-dev-cluster-role" [90m-> null[0m[0m
+      [31m-[0m[0m path                  = "/" [90m-> null[0m[0m
+      [31m-[0m[0m tags                  = {
+          [31m-[0m[0m "Environment" = "dev"
+          [31m-[0m[0m "ManagedBy"   = "terraform"
+          [31m-[0m[0m "Project"     = "kubernetes-reliability-lab"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m tags_all              = {
+          [31m-[0m[0m "Environment" = "dev"
+          [31m-[0m[0m "ManagedBy"   = "terraform"
+          [31m-[0m[0m "Project"     = "kubernetes-reliability-lab"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m unique_id             = "AROAVXNA7YG4BN3EMKJGU" [90m-> null[0m[0m
+        [90m# (3 unchanged attributes hidden)[0m[0m
+    }
+
+[1m  # aws_iam_role.eks_node[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_iam_role" "eks_node" {
+      [31m-[0m[0m arn                   = "arn:aws:iam::393864004024:role/reliability-lab-dev-node-role" [90m-> null[0m[0m
+      [31m-[0m[0m assume_role_policy    = jsonencode(
+            {
+              [31m-[0m[0m Statement = [
+                  [31m-[0m[0m {
+                      [31m-[0m[0m Action    = "sts:AssumeRole"
+                      [31m-[0m[0m Effect    = "Allow"
+                      [31m-[0m[0m Principal = {
+                          [31m-[0m[0m Service = "ec2.amazonaws.com"
+                        }
+                    },
+                ]
+              [31m-[0m[0m Version   = "2012-10-17"
+            }
+        ) [90m-> null[0m[0m
+      [31m-[0m[0m create_date           = "2026-07-17T15:46:40Z" [90m-> null[0m[0m
+      [31m-[0m[0m force_detach_policies = false [90m-> null[0m[0m
+      [31m-[0m[0m id                    = "reliability-lab-dev-node-role" [90m-> null[0m[0m
+      [31m-[0m[0m managed_policy_arns   = [
+          [31m-[0m[0m "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+          [31m-[0m[0m "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy",
+          [31m-[0m[0m "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m max_session_duration  = 3600 [90m-> null[0m[0m
+      [31m-[0m[0m name                  = "reliability-lab-dev-node-role" [90m-> null[0m[0m
+      [31m-[0m[0m path                  = "/" [90m-> null[0m[0m
+      [31m-[0m[0m tags                  = {
+          [31m-[0m[0m "Environment" = "dev"
+          [31m-[0m[0m "ManagedBy"   = "terraform"
+          [31m-[0m[0m "Project"     = "kubernetes-reliability-lab"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m tags_all              = {
+          [31m-[0m[0m "Environment" = "dev"
+          [31m-[0m[0m "ManagedBy"   = "terraform"
+          [31m-[0m[0m "Project"     = "kubernetes-reliability-lab"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m unique_id             = "AROAVXNA7YG4PGN55B3P4" [90m-> null[0m[0m
+        [90m# (3 unchanged attributes hidden)[0m[0m
+    }
+
+[1m  # aws_iam_role_policy_attachment.eks_cluster_policy[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_iam_role_policy_attachment" "eks_cluster_policy" {
+      [31m-[0m[0m id         = "reliability-lab-dev-cluster-role-20260717154640949700000004" [90m-> null[0m[0m
+      [31m-[0m[0m policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy" [90m-> null[0m[0m
+      [31m-[0m[0m role       = "reliability-lab-dev-cluster-role" [90m-> null[0m[0m
+    }
+
+[1m  # aws_iam_role_policy_attachment.node_cni[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_iam_role_policy_attachment" "node_cni" {
+      [31m-[0m[0m id         = "reliability-lab-dev-node-role-20260717154640734800000001" [90m-> null[0m[0m
+      [31m-[0m[0m policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy" [90m-> null[0m[0m
+      [31m-[0m[0m role       = "reliability-lab-dev-node-role" [90m-> null[0m[0m
+    }
+
+[1m  # aws_iam_role_policy_attachment.node_ecr[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_iam_role_policy_attachment" "node_ecr" {
+      [31m-[0m[0m id         = "reliability-lab-dev-node-role-20260717154640767700000002" [90m-> null[0m[0m
+      [31m-[0m[0m policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly" [90m-> null[0m[0m
+      [31m-[0m[0m role       = "reliability-lab-dev-node-role" [90m-> null[0m[0m
+    }
+
+[1m  # aws_iam_role_policy_attachment.node_worker[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_iam_role_policy_attachment" "node_worker" {
+      [31m-[0m[0m id         = "reliability-lab-dev-node-role-20260717154640910700000003" [90m-> null[0m[0m
+      [31m-[0m[0m policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy" [90m-> null[0m[0m
+      [31m-[0m[0m role       = "reliability-lab-dev-node-role" [90m-> null[0m[0m
+    }
+
+[1m  # aws_internet_gateway.this[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_internet_gateway" "this" {
+      [31m-[0m[0m arn      = "arn:aws:ec2:us-east-1:393864004024:internet-gateway/igw-0ef3014dbf46e89c2" [90m-> null[0m[0m
+      [31m-[0m[0m id       = "igw-0ef3014dbf46e89c2" [90m-> null[0m[0m
+      [31m-[0m[0m owner_id = "393864004024" [90m-> null[0m[0m
+      [31m-[0m[0m tags     = {
+          [31m-[0m[0m "Environment" = "dev"
+          [31m-[0m[0m "ManagedBy"   = "terraform"
+          [31m-[0m[0m "Name"        = "reliability-lab-dev-igw"
+          [31m-[0m[0m "Project"     = "kubernetes-reliability-lab"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m tags_all = {
+          [31m-[0m[0m "Environment" = "dev"
+          [31m-[0m[0m "ManagedBy"   = "terraform"
+          [31m-[0m[0m "Name"        = "reliability-lab-dev-igw"
+          [31m-[0m[0m "Project"     = "kubernetes-reliability-lab"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m vpc_id   = "vpc-03988098608825e31" [90m-> null[0m[0m
+    }
+
+[1m  # aws_route.public_internet[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_route" "public_internet" {
+      [31m-[0m[0m destination_cidr_block      = "0.0.0.0/0" [90m-> null[0m[0m
+      [31m-[0m[0m gateway_id                  = "igw-0ef3014dbf46e89c2" [90m-> null[0m[0m
+      [31m-[0m[0m id                          = "r-rtb-0be8a6b841c7e7d521080289494" [90m-> null[0m[0m
+      [31m-[0m[0m origin                      = "CreateRoute" [90m-> null[0m[0m
+      [31m-[0m[0m route_table_id              = "rtb-0be8a6b841c7e7d52" [90m-> null[0m[0m
+      [31m-[0m[0m state                       = "active" [90m-> null[0m[0m
+        [90m# (13 unchanged attributes hidden)[0m[0m
+    }
+
+[1m  # aws_route_table.public[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_route_table" "public" {
+      [31m-[0m[0m arn              = "arn:aws:ec2:us-east-1:393864004024:route-table/rtb-0be8a6b841c7e7d52" [90m-> null[0m[0m
+      [31m-[0m[0m id               = "rtb-0be8a6b841c7e7d52" [90m-> null[0m[0m
+      [31m-[0m[0m owner_id         = "393864004024" [90m-> null[0m[0m
+      [31m-[0m[0m propagating_vgws = [] [90m-> null[0m[0m
+      [31m-[0m[0m route            = [
+          [31m-[0m[0m {
+              [31m-[0m[0m cidr_block                 = "0.0.0.0/0"
+              [31m-[0m[0m gateway_id                 = "igw-0ef3014dbf46e89c2"
+                [90m# (11 unchanged attributes hidden)[0m[0m
+            },
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m tags             = {
+          [31m-[0m[0m "Environment" = "dev"
+          [31m-[0m[0m "ManagedBy"   = "terraform"
+          [31m-[0m[0m "Name"        = "reliability-lab-dev-public-rt"
+          [31m-[0m[0m "Project"     = "kubernetes-reliability-lab"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m tags_all         = {
+          [31m-[0m[0m "Environment" = "dev"
+          [31m-[0m[0m "ManagedBy"   = "terraform"
+          [31m-[0m[0m "Name"        = "reliability-lab-dev-public-rt"
+          [31m-[0m[0m "Project"     = "kubernetes-reliability-lab"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m vpc_id           = "vpc-03988098608825e31" [90m-> null[0m[0m
+    }
+
+[1m  # aws_route_table_association.public["0"][0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_route_table_association" "public" {
+      [31m-[0m[0m id             = "rtbassoc-0d43d320cf7fe74c4" [90m-> null[0m[0m
+      [31m-[0m[0m route_table_id = "rtb-0be8a6b841c7e7d52" [90m-> null[0m[0m
+      [31m-[0m[0m subnet_id      = "subnet-044747509550beda2" [90m-> null[0m[0m
+        [90m# (1 unchanged attribute hidden)[0m[0m
+    }
+
+[1m  # aws_route_table_association.public["1"][0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_route_table_association" "public" {
+      [31m-[0m[0m id             = "rtbassoc-0d7e0de16737d138c" [90m-> null[0m[0m
+      [31m-[0m[0m route_table_id = "rtb-0be8a6b841c7e7d52" [90m-> null[0m[0m
+      [31m-[0m[0m subnet_id      = "subnet-0c886a8769b228acc" [90m-> null[0m[0m
+        [90m# (1 unchanged attribute hidden)[0m[0m
+    }
+
+[1m  # aws_subnet.public["0"][0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_subnet" "public" {
+      [31m-[0m[0m arn                                            = "arn:aws:ec2:us-east-1:393864004024:subnet/subnet-044747509550beda2" [90m-> null[0m[0m
+      [31m-[0m[0m assign_ipv6_address_on_creation                = false [90m-> null[0m[0m
+      [31m-[0m[0m availability_zone                              = "us-east-1a" [90m-> null[0m[0m
+      [31m-[0m[0m availability_zone_id                           = "use1-az1" [90m-> null[0m[0m
+      [31m-[0m[0m cidr_block                                     = "10.40.0.0/24" [90m-> null[0m[0m
+      [31m-[0m[0m enable_dns64                                   = false [90m-> null[0m[0m
+      [31m-[0m[0m enable_lni_at_device_index                     = 0 [90m-> null[0m[0m
+      [31m-[0m[0m enable_resource_name_dns_a_record_on_launch    = false [90m-> null[0m[0m
+      [31m-[0m[0m enable_resource_name_dns_aaaa_record_on_launch = false [90m-> null[0m[0m
+      [31m-[0m[0m id                                             = "subnet-044747509550beda2" [90m-> null[0m[0m
+      [31m-[0m[0m ipv6_native                                    = false [90m-> null[0m[0m
+      [31m-[0m[0m map_customer_owned_ip_on_launch                = false [90m-> null[0m[0m
+      [31m-[0m[0m map_public_ip_on_launch                        = true [90m-> null[0m[0m
+      [31m-[0m[0m owner_id                                       = "393864004024" [90m-> null[0m[0m
+      [31m-[0m[0m private_dns_hostname_type_on_launch            = "ip-name" [90m-> null[0m[0m
+      [31m-[0m[0m tags                                           = {
+          [31m-[0m[0m "Environment"                               = "dev"
+          [31m-[0m[0m "ManagedBy"                                 = "terraform"
+          [31m-[0m[0m "Name"                                      = "reliability-lab-dev-public-us-east-1a"
+          [31m-[0m[0m "Project"                                   = "kubernetes-reliability-lab"
+          [31m-[0m[0m "kubernetes.io/cluster/reliability-lab-dev" = "shared"
+          [31m-[0m[0m "kubernetes.io/role/elb"                    = "1"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m tags_all                                       = {
+          [31m-[0m[0m "Environment"                               = "dev"
+          [31m-[0m[0m "ManagedBy"                                 = "terraform"
+          [31m-[0m[0m "Name"                                      = "reliability-lab-dev-public-us-east-1a"
+          [31m-[0m[0m "Project"                                   = "kubernetes-reliability-lab"
+          [31m-[0m[0m "kubernetes.io/cluster/reliability-lab-dev" = "shared"
+          [31m-[0m[0m "kubernetes.io/role/elb"                    = "1"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m vpc_id                                         = "vpc-03988098608825e31" [90m-> null[0m[0m
+        [90m# (4 unchanged attributes hidden)[0m[0m
+    }
+
+[1m  # aws_subnet.public["1"][0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_subnet" "public" {
+      [31m-[0m[0m arn                                            = "arn:aws:ec2:us-east-1:393864004024:subnet/subnet-0c886a8769b228acc" [90m-> null[0m[0m
+      [31m-[0m[0m assign_ipv6_address_on_creation                = false [90m-> null[0m[0m
+      [31m-[0m[0m availability_zone                              = "us-east-1b" [90m-> null[0m[0m
+      [31m-[0m[0m availability_zone_id                           = "use1-az2" [90m-> null[0m[0m
+      [31m-[0m[0m cidr_block                                     = "10.40.1.0/24" [90m-> null[0m[0m
+      [31m-[0m[0m enable_dns64                                   = false [90m-> null[0m[0m
+      [31m-[0m[0m enable_lni_at_device_index                     = 0 [90m-> null[0m[0m
+      [31m-[0m[0m enable_resource_name_dns_a_record_on_launch    = false [90m-> null[0m[0m
+      [31m-[0m[0m enable_resource_name_dns_aaaa_record_on_launch = false [90m-> null[0m[0m
+      [31m-[0m[0m id                                             = "subnet-0c886a8769b228acc" [90m-> null[0m[0m
+      [31m-[0m[0m ipv6_native                                    = false [90m-> null[0m[0m
+      [31m-[0m[0m map_customer_owned_ip_on_launch                = false [90m-> null[0m[0m
+      [31m-[0m[0m map_public_ip_on_launch                        = true [90m-> null[0m[0m
+      [31m-[0m[0m owner_id                                       = "393864004024" [90m-> null[0m[0m
+      [31m-[0m[0m private_dns_hostname_type_on_launch            = "ip-name" [90m-> null[0m[0m
+      [31m-[0m[0m tags                                           = {
+          [31m-[0m[0m "Environment"                               = "dev"
+          [31m-[0m[0m "ManagedBy"                                 = "terraform"
+          [31m-[0m[0m "Name"                                      = "reliability-lab-dev-public-us-east-1b"
+          [31m-[0m[0m "Project"                                   = "kubernetes-reliability-lab"
+          [31m-[0m[0m "kubernetes.io/cluster/reliability-lab-dev" = "shared"
+          [31m-[0m[0m "kubernetes.io/role/elb"                    = "1"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m tags_all                                       = {
+          [31m-[0m[0m "Environment"                               = "dev"
+          [31m-[0m[0m "ManagedBy"                                 = "terraform"
+          [31m-[0m[0m "Name"                                      = "reliability-lab-dev-public-us-east-1b"
+          [31m-[0m[0m "Project"                                   = "kubernetes-reliability-lab"
+          [31m-[0m[0m "kubernetes.io/cluster/reliability-lab-dev" = "shared"
+          [31m-[0m[0m "kubernetes.io/role/elb"                    = "1"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m vpc_id                                         = "vpc-03988098608825e31" [90m-> null[0m[0m
+        [90m# (4 unchanged attributes hidden)[0m[0m
+    }
+
+[1m  # aws_vpc.this[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_vpc" "this" {
+      [31m-[0m[0m arn                                  = "arn:aws:ec2:us-east-1:393864004024:vpc/vpc-03988098608825e31" [90m-> null[0m[0m
+      [31m-[0m[0m assign_generated_ipv6_cidr_block     = false [90m-> null[0m[0m
+      [31m-[0m[0m cidr_block                           = "10.40.0.0/16" [90m-> null[0m[0m
+      [31m-[0m[0m default_network_acl_id               = "acl-060405d6783880c22" [90m-> null[0m[0m
+      [31m-[0m[0m default_route_table_id               = "rtb-0b778d6599e41776e" [90m-> null[0m[0m
+      [31m-[0m[0m default_security_group_id            = "sg-0cbbf42261dc89e44" [90m-> null[0m[0m
+      [31m-[0m[0m dhcp_options_id                      = "dopt-0244d1193d814bcc9" [90m-> null[0m[0m
+      [31m-[0m[0m enable_dns_hostnames                 = true [90m-> null[0m[0m
+      [31m-[0m[0m enable_dns_support                   = true [90m-> null[0m[0m
+      [31m-[0m[0m enable_network_address_usage_metrics = false [90m-> null[0m[0m
+      [31m-[0m[0m id                                   = "vpc-03988098608825e31" [90m-> null[0m[0m
+      [31m-[0m[0m instance_tenancy                     = "default" [90m-> null[0m[0m
+      [31m-[0m[0m ipv6_netmask_length                  = 0 [90m-> null[0m[0m
+      [31m-[0m[0m main_route_table_id                  = "rtb-0b778d6599e41776e" [90m-> null[0m[0m
+      [31m-[0m[0m owner_id                             = "393864004024" [90m-> null[0m[0m
+      [31m-[0m[0m tags                                 = {
+          [31m-[0m[0m "Environment" = "dev"
+          [31m-[0m[0m "ManagedBy"   = "terraform"
+          [31m-[0m[0m "Name"        = "reliability-lab-dev-vpc"
+          [31m-[0m[0m "Project"     = "kubernetes-reliability-lab"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m tags_all                             = {
+          [31m-[0m[0m "Environment" = "dev"
+          [31m-[0m[0m "ManagedBy"   = "terraform"
+          [31m-[0m[0m "Name"        = "reliability-lab-dev-vpc"
+          [31m-[0m[0m "Project"     = "kubernetes-reliability-lab"
+        } [90m-> null[0m[0m
+        [90m# (4 unchanged attributes hidden)[0m[0m
+    }
+
+[1mPlan:[0m [0m0 to add, 0 to change, 17 to destroy.
+
+Changes to Outputs:
+  [31m-[0m[0m aws_region         = "us-east-1" [90m-> null[0m[0m
+  [31m-[0m[0m cluster_endpoint   = "https://359FA17672C881677B9C03706AE4DD4F.gr7.us-east-1.eks.amazonaws.com" [90m-> null[0m[0m
+  [31m-[0m[0m cluster_name       = "reliability-lab-dev" [90m-> null[0m[0m
+  [31m-[0m[0m ecr_repository_url = "393864004024.dkr.ecr.us-east-1.amazonaws.com/reliability-app" [90m-> null[0m[0m
+[0m[1m
+Do you really want to destroy all resources?[0m
+  Terraform will destroy all your managed infrastructure, as shown above.
+  There is no undo. Only 'yes' will be accepted to confirm.
+
+  [1mEnter a value:[0m [0m
+[0m[1maws_route_table_association.public["0"]: Destroying... [id=rtbassoc-0d43d320cf7fe74c4][0m[0m
+[0m[1maws_route_table_association.public["1"]: Destroying... [id=rtbassoc-0d7e0de16737d138c][0m[0m
+[0m[1maws_route.public_internet: Destroying... [id=r-rtb-0be8a6b841c7e7d521080289494][0m[0m
+[0m[1maws_ecr_repository.app: Destroying... [id=reliability-app][0m[0m
+[0m[1maws_eks_node_group.this: Destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes][0m[0m
+[0m[1maws_ecr_repository.app: Destruction complete after 1s[0m
+[0m[1maws_route_table_association.public["1"]: Destruction complete after 1s[0m
+[0m[1maws_route_table_association.public["0"]: Destruction complete after 1s[0m
+[0m[1maws_route.public_internet: Destruction complete after 1s[0m
+[0m[1maws_internet_gateway.this: Destroying... [id=igw-0ef3014dbf46e89c2][0m[0m
+[0m[1maws_route_table.public: Destroying... [id=rtb-0be8a6b841c7e7d52][0m[0m
+[0m[1maws_route_table.public: Destruction complete after 1s[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 00m10s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Still destroying... [id=igw-0ef3014dbf46e89c2, 00m10s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 00m20s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Still destroying... [id=igw-0ef3014dbf46e89c2, 00m20s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 00m30s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Still destroying... [id=igw-0ef3014dbf46e89c2, 00m30s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 00m40s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Still destroying... [id=igw-0ef3014dbf46e89c2, 00m40s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 00m50s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Still destroying... [id=igw-0ef3014dbf46e89c2, 00m50s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 01m00s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Still destroying... [id=igw-0ef3014dbf46e89c2, 01m00s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 01m10s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Still destroying... [id=igw-0ef3014dbf46e89c2, 01m10s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 01m20s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Still destroying... [id=igw-0ef3014dbf46e89c2, 01m20s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 01m30s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Still destroying... [id=igw-0ef3014dbf46e89c2, 01m30s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 01m40s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Still destroying... [id=igw-0ef3014dbf46e89c2, 01m40s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 01m50s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Still destroying... [id=igw-0ef3014dbf46e89c2, 01m50s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 02m00s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Still destroying... [id=igw-0ef3014dbf46e89c2, 02m00s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 02m10s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Still destroying... [id=igw-0ef3014dbf46e89c2, 02m10s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 02m20s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Still destroying... [id=igw-0ef3014dbf46e89c2, 02m20s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 02m30s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Still destroying... [id=igw-0ef3014dbf46e89c2, 02m30s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 02m40s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Still destroying... [id=igw-0ef3014dbf46e89c2, 02m40s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 02m50s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Still destroying... [id=igw-0ef3014dbf46e89c2, 02m50s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 03m00s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Still destroying... [id=igw-0ef3014dbf46e89c2, 03m00s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 03m10s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Still destroying... [id=igw-0ef3014dbf46e89c2, 03m10s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 03m20s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Still destroying... [id=igw-0ef3014dbf46e89c2, 03m20s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 03m30s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Still destroying... [id=igw-0ef3014dbf46e89c2, 03m30s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 03m40s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Still destroying... [id=igw-0ef3014dbf46e89c2, 03m40s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 03m50s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Still destroying... [id=igw-0ef3014dbf46e89c2, 03m50s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 04m00s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Still destroying... [id=igw-0ef3014dbf46e89c2, 04m00s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 04m10s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Still destroying... [id=igw-0ef3014dbf46e89c2, 04m10s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 04m20s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Still destroying... [id=igw-0ef3014dbf46e89c2, 04m20s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 04m30s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Still destroying... [id=igw-0ef3014dbf46e89c2, 04m30s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 04m40s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Still destroying... [id=igw-0ef3014dbf46e89c2, 04m40s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 04m50s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Still destroying... [id=igw-0ef3014dbf46e89c2, 04m50s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 05m00s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Still destroying... [id=igw-0ef3014dbf46e89c2, 05m00s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 05m10s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Still destroying... [id=igw-0ef3014dbf46e89c2, 05m10s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 05m20s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Still destroying... [id=igw-0ef3014dbf46e89c2, 05m20s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 05m30s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Still destroying... [id=igw-0ef3014dbf46e89c2, 05m30s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 05m40s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Still destroying... [id=igw-0ef3014dbf46e89c2, 05m40s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 05m50s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Still destroying... [id=igw-0ef3014dbf46e89c2, 05m50s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 06m00s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Still destroying... [id=igw-0ef3014dbf46e89c2, 06m00s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 06m10s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Still destroying... [id=igw-0ef3014dbf46e89c2, 06m10s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 06m20s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Still destroying... [id=igw-0ef3014dbf46e89c2, 06m20s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 06m30s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Still destroying... [id=igw-0ef3014dbf46e89c2, 06m30s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 06m40s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Still destroying... [id=igw-0ef3014dbf46e89c2, 06m40s elapsed][0m[0m
+[0m[1maws_internet_gateway.this: Destruction complete after 6m43s[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 06m50s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 07m00s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 07m10s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 07m20s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 07m30s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 07m40s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 07m50s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 08m00s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Still destroying... [id=reliability-lab-dev:reliability-lab-dev-nodes, 08m10s elapsed][0m[0m
+[0m[1maws_eks_node_group.this: Destruction complete after 8m15s[0m
+[0m[1maws_iam_role_policy_attachment.node_cni: Destroying... [id=reliability-lab-dev-node-role-20260717154640734800000001][0m[0m
+[0m[1maws_iam_role_policy_attachment.node_worker: Destroying... [id=reliability-lab-dev-node-role-20260717154640910700000003][0m[0m
+[0m[1maws_iam_role_policy_attachment.node_ecr: Destroying... [id=reliability-lab-dev-node-role-20260717154640767700000002][0m[0m
+[0m[1maws_eks_cluster.this: Destroying... [id=reliability-lab-dev][0m[0m
+[0m[1maws_iam_role_policy_attachment.node_ecr: Destruction complete after 1s[0m
+[0m[1maws_iam_role_policy_attachment.node_worker: Destruction complete after 1s[0m
+[0m[1maws_iam_role_policy_attachment.node_cni: Destruction complete after 1s[0m
+[0m[1maws_iam_role.eks_node: Destroying... [id=reliability-lab-dev-node-role][0m[0m
+[0m[1maws_iam_role.eks_node: Destruction complete after 0s[0m
+[0m[1maws_eks_cluster.this: Still destroying... [id=reliability-lab-dev, 00m10s elapsed][0m[0m
+[0m[1maws_eks_cluster.this: Still destroying... [id=reliability-lab-dev, 00m20s elapsed][0m[0m
+[0m[1maws_eks_cluster.this: Still destroying... [id=reliability-lab-dev, 00m30s elapsed][0m[0m
+[0m[1maws_eks_cluster.this: Still destroying... [id=reliability-lab-dev, 00m40s elapsed][0m[0m
+[0m[1maws_eks_cluster.this: Still destroying... [id=reliability-lab-dev, 00m50s elapsed][0m[0m
+[0m[1maws_eks_cluster.this: Still destroying... [id=reliability-lab-dev, 01m00s elapsed][0m[0m
+[0m[1maws_eks_cluster.this: Still destroying... [id=reliability-lab-dev, 01m10s elapsed][0m[0m
+[0m[1maws_eks_cluster.this: Still destroying... [id=reliability-lab-dev, 01m20s elapsed][0m[0m
+[0m[1maws_eks_cluster.this: Still destroying... [id=reliability-lab-dev, 01m30s elapsed][0m[0m
+[0m[1maws_eks_cluster.this: Destruction complete after 1m35s[0m
+[0m[1maws_iam_role_policy_attachment.eks_cluster_policy: Destroying... [id=reliability-lab-dev-cluster-role-20260717154640949700000004][0m[0m
+[0m[1maws_subnet.public["1"]: Destroying... [id=subnet-0c886a8769b228acc][0m[0m
+[0m[1maws_subnet.public["0"]: Destroying... [id=subnet-044747509550beda2][0m[0m
+[0m[1maws_iam_role_policy_attachment.eks_cluster_policy: Destruction complete after 0s[0m
+[0m[1maws_iam_role.eks_cluster: Destroying... [id=reliability-lab-dev-cluster-role][0m[0m
+[0m[1maws_iam_role.eks_cluster: Destruction complete after 1s[0m
+[0m[1maws_subnet.public["0"]: Destruction complete after 1s[0m
+[0m[1maws_subnet.public["1"]: Destruction complete after 1s[0m
+[0m[1maws_vpc.this: Destroying... [id=vpc-03988098608825e31][0m[0m
+[0m[1maws_vpc.this: Destruction complete after 1s[0m
+[0m[1m[32m
+Destroy complete! Resources: 17 destroyed.[0m
