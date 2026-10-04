@@ -1,0 +1,5 @@
+=== Before trusted GitOps promotion ===
+Sun  4 Oct 2026 21:10:18 UTC
+api: 393864004024.dkr.ecr.us-east-1.amazonaws.com/api:0.1.0
+dependency: 393864004024.dkr.ecr.us-east-1.amazonaws.com/dependency:0.1.0
+frontend: 393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend:0.1.0
