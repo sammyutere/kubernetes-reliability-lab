@@ -1,0 +1,20 @@
+=== Final Argo CD and EKS Screenshot State ===
+Sun  4 Oct 2026 22:39:57 UTC
+
+=== Applications ===
+NAME                             SYNC     HEALTH    REVISION
+multi-service-app                Synced   Healthy   0ee6db903c504350bc7469df6dacab821b0068d8
+reliability-platform-bootstrap   Synced   Healthy   <none>
+
+=== Nodes ===
+NAME                          STATUS   ROLES    AGE    VERSION                INTERNAL-IP   EXTERNAL-IP      OS-IMAGE                        KERNEL-VERSION                     CONTAINER-RUNTIME
+ip-10-40-0-203.ec2.internal   Ready    <none>   2d4h   v1.34.11-eks-3b4a6ca   10.40.0.203   3.239.205.72     Amazon Linux 2023.12.20260928   6.12.110-135.201.amzn2023.x86_64   containerd://2.2.7+unknown
+ip-10-40-0-73.ec2.internal    Ready    <none>   2d4h   v1.34.11-eks-3b4a6ca   10.40.0.73    100.24.120.101   Amazon Linux 2023.12.20260928   6.12.110-135.201.amzn2023.x86_64   containerd://2.2.7+unknown
+ip-10-40-1-144.ec2.internal   Ready    <none>   2d4h   v1.34.11-eks-3b4a6ca   10.40.1.144   52.54.218.231    Amazon Linux 2023.12.20260928   6.12.110-135.201.amzn2023.x86_64   containerd://2.2.7+unknown
+ip-10-40-1-235.ec2.internal   Ready    <none>   30m    v1.34.11-eks-3b4a6ca   10.40.1.235   44.202.12.100    Amazon Linux 2023.12.20260928   6.12.110-135.201.amzn2023.x86_64   containerd://2.2.7+unknown
+
+=== Trusted Deployments ===
+NAME         READY   DESIRED   IMAGE
+api          2       2         393864004024.dkr.ecr.us-east-1.amazonaws.com/api:0.1.0-supply-chain
+dependency   2       2         393864004024.dkr.ecr.us-east-1.amazonaws.com/dependency:0.1.0-supply-chain
+frontend     2       2         393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend:0.1.0-supply-chain

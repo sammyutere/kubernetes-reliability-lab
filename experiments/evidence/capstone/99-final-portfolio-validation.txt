@@ -1,0 +1,39 @@
+=== Milestone 17 Final Portfolio Validation ===
+Mon  5 Oct 2026 17:23:45 UTC
+
+=== Nodes ===
+NAME                          STATUS   ROLES    AGE     VERSION
+ip-10-40-0-203.ec2.internal   Ready    <none>   2d23h   v1.34.11-eks-3b4a6ca
+ip-10-40-0-73.ec2.internal    Ready    <none>   2d23h   v1.34.11-eks-3b4a6ca
+ip-10-40-1-144.ec2.internal   Ready    <none>   2d23h   v1.34.11-eks-3b4a6ca
+ip-10-40-1-235.ec2.internal   Ready    <none>   19h     v1.34.11-eks-3b4a6ca
+
+=== Argo CD ===
+NAME                             SYNC     HEALTH    REVISION
+multi-service-app                Synced   Healthy   0ee6db903c504350bc7469df6dacab821b0068d8
+reliability-platform-bootstrap   Synced   Healthy   <none>
+
+=== Deployments ===
+NAME         READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS   IMAGES                                                                       SELECTOR
+api          2/2     2            2           21h   api          393864004024.dkr.ecr.us-east-1.amazonaws.com/api:0.1.0-supply-chain          app.kubernetes.io/name=api
+dependency   2/2     2            2           21h   dependency   393864004024.dkr.ecr.us-east-1.amazonaws.com/dependency:0.1.0-supply-chain   app.kubernetes.io/name=dependency
+frontend     2/2     2            2           21h   frontend     393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend:0.1.0-supply-chain     app.kubernetes.io/name=frontend
+
+=== Trusted Images ===
+api: 393864004024.dkr.ecr.us-east-1.amazonaws.com/api:0.1.0-supply-chain
+dependency: 393864004024.dkr.ecr.us-east-1.amazonaws.com/dependency:0.1.0-supply-chain
+frontend: 393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend:0.1.0-supply-chain
+
+=== ServiceMonitors ===
+NAME         AGE
+api          21h
+dependency   21h
+frontend     21h
+
+=== Kyverno ===
+NAME                               ADMISSION   BACKGROUND   READY   AGE   MESSAGE
+disallow-latest-image-tag          true        true         True    28h   Ready
+require-resource-requests-limits   true        true         True    28h   Ready
+require-standard-labels            true        true         True    28h   Ready
+
+PASS: Final Milestone 17 platform validation completed.

@@ -1,665 +1,511 @@
-# Production-Grade Kubernetes Reliability Lab
+# Kubernetes Reliability Lab
 
-A hands-on Kubernetes reliability engineering project using local kind and AWS EKS.
+A production-style **Platform Engineering, DevOps and Site Reliability Engineering** project demonstrating how to provision, deploy, observe, govern, secure and recover a multi-service Kubernetes platform on Amazon EKS.
 
-## Goals
+The repository is designed as an engineering case study with implementation, failure evidence, recovery evidence, runbooks, incident records and production trade-offs—not simply as a collection of Kubernetes tutorials.
 
-- Build hands-on competency in production-grade Kubernetes operations, reliability engineering, and platform tooling.
-- Deploy a production-style application locally and on EKS.
-- Use Helm, Terraform, observability, autoscaling, and reliability experiments.
-- Build a portfolio-quality DevOps/SRE project.
+---
 
-## Engineering Areas Demonstrated
+## Project Summary
 
-- Kubernetes Administration
-- Helm Release Management
-- Terraform Infrastructure as Code
-- Amazon EKS Operations
-- Amazon ECR Image Management
-- IAM OIDC Provider Integration
-- IAM Roles for Service Accounts (IRSA)
-- AWS Load Balancer Controller
-- ALB Ingress Management
-- Prometheus Monitoring
-- Grafana Dashboards
-- Alertmanager Integration
-- Horizontal Pod Autoscaling (HPA)
-- Pod Disruption Budgets (PDB)
-- Reliability Engineering
-- Failure Domain Modelling
-- SLI/SLO Design
-- Error Budget Management
-- MTTR Measurement
-- Cloud Cost Management
+The project implements the operational path from infrastructure provisioning to trusted GitOps deployment:
 
-## Tech Stack
+```text
+Terraform
+   ↓
+AWS / Amazon EKS
+   ↓
+Container Build / Amazon ECR
+   ↓
+Cosign + Grype + SBOM Trust Gate
+   ↓
+Git Desired State
+   ↓
+Argo CD
+   ↓
+Kyverno Admission Governance
+   ↓
+Kubernetes Workloads
+   ↓
+Prometheus / Grafana / Alertmanager
+   ↓
+Incident Detection / Recovery / Evidence
+```
 
-- Python FastAPI
-- Docker
-- Kubernetes
-- kind
-- kubectl
-- Helm
-- Terraform
-- AWS EKS
+The application consists of:
+
+- frontend
+- API
+- dependency
+
+The platform demonstrates:
+
+- Infrastructure as Code
+- Helm application packaging
+- GitOps reconciliation
+- drift detection and self-healing
+- automated pruning
+- policy-as-code
+- software-supply-chain verification
+- observability
+- SLI/SLO engineering
+- controlled reliability experiments
+- incident response
+- platform-capacity remediation
+- operational documentation
+
+---
+
+## Engineering Problem
+
+Running an application on Kubernetes is not enough to demonstrate reliable platform engineering.
+
+A production-style platform must answer:
+
+- How is infrastructure recreated?
+- How is desired state reviewed and approved?
+- How are applications deployed without configuration drift?
+- How are unsafe Kubernetes resources blocked?
+- How are container images verified before release?
+- How is runtime health observed?
+- How are failures diagnosed and recovered?
+- How is operational evidence retained?
+- How are platform costs controlled?
+
+This repository implements and documents those controls.
+
+---
+
+## Final Platform Architecture
+
+See:
+
+**[Final Platform Architecture](docs/architecture/final-platform-architecture.md)**
+
+The final architecture separates responsibility across:
+
+| Component | Responsibility |
+|---|---|
+| Terraform | AWS and EKS infrastructure |
+| Git | Approved desired state |
+| Helm | Kubernetes manifest rendering |
+| Argo CD | Continuous reconciliation |
+| Kyverno | Kubernetes admission governance |
+| Cosign | Image signature verification |
+| Grype | Vulnerability evidence |
+| Syft / CycloneDX | SBOM evidence |
+| Prometheus | Metrics and alert evaluation |
+| Grafana | Operational visualisation |
+| Alertmanager | Alert routing |
+| Amazon EKS | Workload runtime |
+
+---
+
+## Final GitOps Workflow
+
+See:
+
+**[Final GitOps Workflow](docs/architecture/final-gitops-workflow.md)**
+
+The release path is:
+
+```text
+Build
+  ↓
+Push to Amazon ECR
+  ↓
+Generate SBOM
+  ↓
+Generate vulnerability evidence
+  ↓
+Sign image
+  ↓
+Verify deployment trust gate
+  ↓
+Update Helm desired state
+  ↓
+Review Git diff
+  ↓
+Commit / merge to main
+  ↓
+Argo CD reconciliation
+  ↓
+Kyverno admission
+  ↓
+EKS rolling deployment
+  ↓
+Prometheus / Grafana observation
+```
+
+---
+
+## Core Platform Capabilities
+
+### Infrastructure
+
+- Terraform-managed AWS infrastructure
+- Amazon EKS
+- EKS managed node groups
+- Amazon ECR
+- reproducible environment lifecycle
+- Terraform-managed capacity changes
+- final four-node recovery state during evidence capture
+
+### Kubernetes
+
+- frontend, API and dependency Deployments
+- Services
+- ServiceMonitors
+- readiness and liveness controls
+- resource requests and limits
+- rolling deployments
+- scaling and failure experiments
+- Helm packaging
+- environment-specific values
+
+### GitOps
+
+- Argo CD
+- root bootstrap Application
+- AppProject governance
+- child Application
+- app-of-apps pattern
+- automated sync
+- self-healing
+- automated pruning
+- annotation-based resource tracking
+- Git-driven configuration promotion
+
+### Policy Governance
+
+Kyverno enforces:
+
+- required standard labels
+- resource requests and limits
+- prohibition of the mutable `latest` image tag
+
+The lab demonstrates that an Argo CD deployment cannot bypass Kubernetes admission policy.
+
+### Software Supply Chain
+
+The trusted release workflow demonstrates:
+
+- SBOM generation
+- Grype vulnerability evidence
+- Cosign signing
+- signature verification
+- Amazon ECR authentication
+- fail-closed promotion
+- trust-gated Git promotion
+
+The final trusted release uses:
+
+```text
+0.1.0-supply-chain
+```
+
+for frontend, API and dependency.
+
+### Observability
+
 - Prometheus
 - Grafana
-- GitHub Actions
+- Alertmanager
+- Prometheus Operator
+- ServiceMonitor discovery
+- application targets
+- recording rules
+- alerting
+- SLI/SLO work
+- error-budget concepts
+- reliability dashboards
 
-## Project Structure
+---
 
-```txt
-app/              Application source code
-k8s/              Raw Kubernetes manifests
-helm/             Helm chart
-terraform/        AWS infrastructure as code
-observability/    Monitoring, dashboards, alerts
-experiments/      Reliability experiments
-docs/             Architecture, runbooks, SLOs
-.github/          CI workflows
+## Reliability Engineering
+
+The project includes controlled reliability work covering:
+
+- Pod deletion
+- rollout failure
+- rollback
+- CPU pressure
+- scaling
+- node operations
+- GitOps drift
+- self-healing
+- automated pruning
+- Kyverno admission denial
+- software-supply-chain trust failure
+- platform-capacity exhaustion
+
+---
+
+## Final Reliability Incident
+
+During the final trusted GitOps release, all three replacement Pods remained Pending and all three Deployments exceeded their progress deadlines.
+
+Kubernetes reported:
+
+```text
+0/3 nodes are available: 3 Too many pods.
 ```
-## Documentation
 
-| Document | Purpose |
-|---|---|
-| [Architecture](docs/00-architecture.md) | Current system architecture and component relationships |
-| [Kubernetes Fundamentals](docs/01-kubernetes-fundamentals.md) | Kubernetes concepts learned through the project |
-| [Observability](docs/04-observability.md) | Prometheus, Grafana, and metrics documentation |
-| [Runbooks](docs/06-runbooks.md) | Operational recovery procedures |
-| [Helm](docs/09-helm.md) | Helm packaging and release workflow |
-| [Alerting](docs/10-alerting.md) | Prometheus alerting rules and validation notes |
-| [Phase 6 Review](docs/11-phase-6-review.md) | Reliability experiment review |
-| [EKS Readiness](docs/12-eks-readiness.md) | Preparation notes for AWS EKS phase |
-| [AWS Cleanup](docs/13-aws-cleanup.md) | AWS resource cleanup and cost control workflow |
-| [EKS Ingress](docs/14-eks-ingress.md) | AWS Load Balancer Controller and ALB Ingress exposure |
-| [Makefile Reference](docs/15-makefile-reference.md) | Operational shortcuts and required variables |
-| [Architecture](docs/00-architecture.md) | Current architecture and component relationships |
-| [Project Roadmap](docs/16-project-roadmap.md) | Historical implementation journey |
-| [Production Hardening](docs/17-production-hardening.md) | HTTPS, DNS, observability refinement, and cleanup verification |
-| [Multi-Service Reliability Engineering](docs/22-multi-service-reliability-engineering.md) | Multi-service architecture, failure domains, SLOs, error budgets, MTTR, canary workflows, and chaos experiments |
-| [EKS Multi-Service Reliability](docs/23-eks-multi-service-reliability.md) | Environment reconstruction, EKS promotion, ALB ingress, observability validation, cascading failures, MTTR, and cleanup workflow |
-| [Policy-as-Code and Admission Control](docs/28-policy-as-code-admission-control.md) | Kyverno admission governance, resource policies, policy testing, deployment trust controls, and signed-image compatibility findings |
-| [GitOps and Platform Automation](docs/29-gitops-and-platform-automation.md) | Argo CD, declarative Helm delivery, automated reconciliation, drift correction, trust-gated promotion and Kyverno-governed GitOps |
+The failure was traced to **Pod-density exhaustion**, not CPU, memory, image availability, Kyverno, or application health.
 
-## Reliability Experiments
+Terraform increased the managed node group from three to four `t3.medium` workers.
 
-| Experiment | Outcome |
-|---|---|
-| Kill Pod | Deployment self-healing validated |
-| Bad Rollout | Failure detection and recovery validated |
-| CPU Spike & HPA | Autoscaling behaviour evaluated |
-| Node Drain | Planned maintenance behaviour validated |
-| NetworkPolicy | Traffic control behaviour validated |
+After the fourth worker became Ready:
 
-## Reliability Engineering Journey
+- Pending Pods scheduled automatically
+- all three Deployments completed
+- all six application Pods became Ready
+- trusted `0.1.0-supply-chain` images were running
+- Argo CD returned to `Synced / Healthy`
 
-```txt
-Local kind
-    ↓
-Helm
-    ↓
-Monitoring
-    ↓
-Reliability Experiments
-    ↓
-Terraform
-    ↓
-Amazon EKS
-    ↓
-IRSA
-    ↓
-AWS Load Balancer Controller
-    ↓
-ALB Ingress
-    ↓
-Multi-Service Architecture
-    ↓
-Cascading Failure Analysis
-    ↓
-MTTR Measurement
+See:
+
+- **[Incident](docs/incidents/trusted-release-pod-capacity-incident.md)**
+- **[Postmortem](docs/postmortems/trusted-release-pod-density-postmortem.md)**
+- **[Recovery Runbook](docs/runbooks/pod-density-rollout-recovery.md)**
+
+This incident demonstrates an important reliability principle:
+
+> Steady-state capacity is not sufficient; a Kubernetes platform also needs deployment and failure headroom.
+
+---
+
+## Evidence
+
+The repository contains raw command outputs, JSON, YAML, logs and curated screenshots proving the implemented capabilities.
+
+- **[Evidence Index](docs/evidence-index.md)**
+- **[Runbook Index](docs/runbooks/index.md)**
+- `docs/screenshots/`
+- `experiments/evidence/`
+
+The evidence layer allows reviewers to verify engineering claims rather than relying only on technology names in the README.
+
+---
+
+## Operational Documentation
+
+### Incident and Recovery
+
+- [Trusted release Pod-capacity incident](docs/incidents/trusted-release-pod-capacity-incident.md)
+- [Trusted release Pod-density postmortem](docs/postmortems/trusted-release-pod-density-postmortem.md)
+- [Pod-density rollout recovery runbook](docs/runbooks/pod-density-rollout-recovery.md)
+
+### GitOps
+
+- [GitOps and Platform Automation](docs/29-gitops-and-platform-automation.md)
+
+### Final Capstone
+
+- [Evidence Index](docs/evidence-index.md)
+- [Runbook Index](docs/runbooks/index.md)
+- [Final Platform Architecture](docs/architecture/final-platform-architecture.md)
+- [Final GitOps Workflow](docs/architecture/final-gitops-workflow.md)
+
+---
+
+## AWS Cost Engineering
+
+See:
+
+**[AWS Cost Summary](docs/cost-summary.md)**
+
+Cost-control practices include:
+
+- Terraform-managed lifecycle
+- development-sized workers
+- no permanent public Argo CD load balancer
+- local port forwarding
+- environment destruction after evidence capture
+- ECR lifecycle awareness
+- cost evidence captured before cleanup
+
+---
+
+## Known Limitations
+
+See:
+
+**[Known Limitations and Production Improvements](docs/limitations.md)**
+
+Important boundaries include:
+
+- single development environment
+- local execution of parts of the release workflow
+- local-key Cosign signing
+- transparency-log verification limitation
+- signed-image admission enforcement deferred
+- version tags rather than digest-only deployment
+- static worker capacity
+- non-HA platform controllers
+- local Argo CD access
+- limited production secrets management
+- single-region deployment
+- partly manual evidence capture
+
+---
+
+## What I Would Improve in Production
+
+Highest-priority improvements:
+
+1. CI-based build, scan, signing and promotion
+2. short-lived workload identity
+3. keyless Cosign signing
+4. Rekor transparency-log verification
+5. immutable digest-based deployment
+6. stable admission-time signature enforcement
+7. separate AWS accounts and environments
+8. highly available Argo CD and monitoring
+9. Karpenter or Cluster Autoscaler
+10. AWS Secrets Manager and External Secrets
+11. formal disaster-recovery design
+12. automated release evidence and audit capture
+
+---
+
+## Repository Structure
+
+```text
+.
+├── app/                       application source
+├── docs/                      architecture and operational documentation
+│   ├── architecture/
+│   ├── incidents/
+│   ├── postmortems/
+│   ├── runbooks/
+│   └── screenshots/
+├── experiments/
+│   └── evidence/              technical proof
+├── gitops/                    Argo CD projects, applications and bootstrap
+├── helm/                      application Helm chart
+├── monitoring/                observability configuration
+├── policies/                  Kyverno policy-as-code
+├── scripts/                   operational and trust automation
+├── supply-chain/              SBOM and vulnerability evidence
+└── terraform/                 AWS and EKS infrastructure
 ```
-This repository demonstrates the progression from local Kubernetes administration to cloud-hosted reliability engineering practices.
 
-## Implementation Progress
+---
+
+## Skills Demonstrated
+
+### Platform Engineering
+
+- Kubernetes platform design
+- Helm
+- Terraform
+- GitOps
+- Argo CD
+- Kyverno
+- capacity engineering
+- platform ownership boundaries
+
+### Site Reliability Engineering
+
+- SLIs and SLOs
+- error-budget concepts
+- observability
+- failure testing
+- incident response
+- postmortems
+- recovery validation
+- capacity failure diagnosis
+
+### DevOps
+
+- Git-based delivery
+- container registries
+- release promotion
+- infrastructure automation
+- deployment trust gates
+- environment recovery
+
+### Cloud Engineering
+
+- AWS
+- Amazon EKS
+- Amazon ECR
+- IAM concepts
+- VPC/networking
+- EC2 worker capacity
+- AWS cost control
+
+### Security Engineering
+
+- Cosign signing
+- SBOM generation
+- vulnerability scanning
+- Kubernetes admission policy
+- supply-chain trust gates
+- fail-closed release controls
+
+---
+
+## Implementation Journey
+
+The project progressed through seventeen structured milestones covering:
+
+1. Kubernetes fundamentals
+2. application containerisation
+3. Kubernetes deployment
+4. configuration and secrets
+5. reliability controls
+6. Helm packaging
+7. monitoring and alerting
+8. reliability experiments
+9. Terraform-managed AWS infrastructure
+10. Amazon EKS deployment
+11. SLI/SLO and error-budget engineering
+12. progressive delivery and failure recovery
+13. production hardening
+14. software-supply-chain security
+15. Kyverno governance
+16. GitOps and platform automation
+17. final reliability capstone and portfolio packaging
+
+The implementation journey remains documented in detail throughout `docs/`.
+
+---
+
+## Recruiter-Facing Summary
+
+Designed and implemented a production-style Kubernetes reliability platform across Amazon EKS.
+
+The project demonstrates:
+
+- Terraform-managed AWS infrastructure
+- Helm-based multi-service deployment
+- Argo CD GitOps reconciliation
+- Kyverno admission governance
+- Prometheus and Grafana observability
+- SLI/SLO and reliability engineering
+- Cosign, SBOM and vulnerability trust controls
+- incident response and recovery
+- Kubernetes capacity diagnosis
+- AWS cost-control practices
+
+The repository provides implementation evidence and failure/recovery proof rather than relying only on technology claims.
 
-### Phase 1 — Application Foundation
+---
 
-Completed:
+## Final Project Outcome
 
-- Repository bootstrap and project structure
-- Python reliability application development
-- Health endpoints (`/healthz`, `/readyz`)
-- Configuration management support
-- Containerisation with Docker
+The Kubernetes Reliability Lab evolved from a manually operated Kubernetes application into an auditable, self-healing, policy-governed and trust-gated platform-delivery case study.
 
-### Phase 2 — Kubernetes Fundamentals (Local kind)
+The final control model is:
 
-Completed:
+- **Terraform owns infrastructure.**
+- **Git owns approved desired state.**
+- **Argo CD owns reconciliation.**
+- **Kyverno owns Kubernetes admission governance.**
+- **The deployment trust gate controls release promotion.**
+- **Prometheus and Grafana provide runtime visibility.**
+- **Runbooks, incidents and postmortems document operational recovery.**
 
-- Local multi-node kind cluster
-- Namespace isolation
-- Deployment creation and management
-- Service creation and traffic routing
-- Container image loading into kind
-
-### Phase 3 — Reliability Foundations
-
-Completed:
-
-- ConfigMap configuration management
-- Secret management
-- PodDisruptionBudget (PDB)
-- HorizontalPodAutoscaler (HPA)
-- NetworkPolicy implementation
-- Metrics Server validation
-
-### Phase 4 — Helm Packaging
-
-Completed:
-
-- Helm chart creation
-- Helm values management
-- Local Helm deployment workflow
-- Helm upgrade workflow
-- Helm rollback investigation
-- Helm ownership conflict troubleshooting
-
-### Phase 5 — Observability and Alerting
-
-Completed:
-
-- Prometheus installation
-- Grafana installation
-- PrometheusRule alerting
-- Alert validation workflow
-- Monitoring evidence capture
-- Observability documentation
-
-### Phase 6 — Reliability Engineering Experiments
-
-Completed:
-
-- Pod self-healing validation
-- Bad rollout experiment
-- Rollback and recovery testing
-- CPU spike and HPA experiment
-- Node drain experiment
-- Reliability runbooks
-- Evidence-driven reliability testing
-- Phase 6 operational review
-
-### Phase 7 — AWS Infrastructure
-
-Completed:
-
-- Terraform infrastructure provisioning
-- Amazon VPC deployment
-- Amazon EKS cluster deployment
-- Managed node group deployment
-- Amazon ECR repository creation
-- EKS kubeconfig integration
-- Infrastructure lifecycle management
-
-### Phase 8 — Cloud-Native Deployment
-
-Completed:
-
-- Container image publishing to ECR
-- Helm deployment to EKS
-- EKS workload validation
-- Environment-specific Helm values
-- AWS cleanup workflow
-- EKS readiness documentation
-
-### Phase 9 — Production-Style Exposure
-
-Completed:
-
-- AWS Load Balancer Controller installation
-- IAM Roles for Service Accounts (IRSA)
-- Manual IAM role creation and troubleshooting
-- Service account annotation troubleshooting
-- ALB-backed Kubernetes Ingress
-- Public application exposure through AWS ALB
-- EKS ingress monitoring validation
-- Ingress evidence capture
-
-### Phase 10A — Multi-Service Reliability Engineering
-
-Completed:
-
-- Local multi-service architecture on kind
-- Frontend, API, and dependency services
-- Service dependency chain validation
-- Failure domain modelling
-- SLI/SLO/error budget documentation
-- Cascading failure experiment
-- MTTR tracking framework
-- Canary deployment workflow
-- Error budget gating script
-- Expanded chaos experiment scripts
-- Multi-service reliability evidence capture
-
-## Current Milestone
-
-### Phase 10B — EKS Multi-Service Reliability Promotion
-
-Objectives:
-
-- Environment reconstruction after AWS cleanup
-- Terraform-based infrastructure recovery
-- OIDC and IRSA validation
-- AWS Load Balancer Controller recovery
-- Monitoring stack recovery
-- ECR image promotion
-- Multi-service deployment to EKS
-- Capacity tuning and rollout troubleshooting
-- ALB ingress validation
-- Observability validation
-- Cascading failure experimentation
-- MTTR measurement
-- AWS cost-control cleanup workflow
-
-### Phase 11 — Progressive Delivery and Release Risk Control
-
-Completed:
-
-- Stable and canary deployment strategy
-- ALB weighted traffic shifting
-- 90/10, 50/50 and promotion workflows
-- Release health validation
-- Error-budget release gating
-- Failed-canary simulation
-- Automated rollback validation
-- Release decision criteria
-- Progressive delivery evidence capture
-- AWS cost-control cleanup workflow
-
-### Phase 12 — Reliability Governance and SLO Enforcement
-
-Completed:
-
-- SLO recording rules
-- Expanded Prometheus alert rules
-- Alertmanager routing validation
-- SLO-based release gate
-- Reliability scorecard
-- Operational release policy
-- Reliability governance evidence capture
-- Cost-control cleanup workflow
-
-### Phase 13 — Advanced Chaos Engineering and Resilience Validation
-
-Completed:
-
-- Dependency latency injection
-- Partial service outage simulation
-- Resource exhaustion validation
-- HPA recovery after environment rebuild
-- Alert routing validation
-- MTTR measurement
-- Reliability scorecard generation
-- Operational troubleshooting documentation
-- AWS cleanup verification
-- Cost-control teardown workflow
-
-### Phase 14 — Supply Chain Security and Deployment Trust
-
-Completed
-
-- Generated SBOMs using Syft
-- Scanned images using Grype
-- Published images to Amazon ECR
-- Signed images using Cosign local key pair
-- Verified image signatures
-- Created SBOM attestations
-- Documented software provenance
-- Implemented deployment trust gate
-
-### Phase 15 — Policy-as-Code and Admission Control
-
-Completed:
-
-- Kyverno policy engine installation
-- Admission-controller health validation
-- Required Kubernetes label enforcement
-- CPU and memory request/limit enforcement
-- Prohibition of the `latest` image tag
-- Negative policy testing and denial evidence
-- Mandatory pre-deployment Cosign trust gate
-- SBOM and vulnerability-scan validation before deployment
-- Signed-image admission compatibility investigation
-- Upstream limitation evidence capture
-- Cost-control cleanup workflow
-
-Deferred:
-
-- Cluster-side signed-image enforcement, pending validation against a stable
-  and compatible Kyverno release
-
-### Phase 16 — GitOps and Platform Automation
-
-Implemented a declarative, continuously reconciled and policy-governed Kubernetes delivery workflow using Argo CD, Helm, Kyverno, Cosign, Amazon ECR and Amazon EKS.
-
-This phase moved application deployment from direct kubectl and Helm operations to a Git-managed delivery model in which Git defines the approved desired state, Argo CD performs continuous reconciliation, Kyverno governs Kubernetes admission and the deployment trust gate controls release promotion.
-
-## Completed Capabilities 
-
-The project currently includes:
-
-### Kubernetes Platform Capabilities
-
-- Containerised Python application
-- Kubernetes Deployments
-- Services
-- ConfigMaps
-- Secrets
-- PodDisruptionBudgets
-- HorizontalPodAutoscalers
-- NetworkPolicies
-- Helm packaging and deployment
-- Prometheus and Grafana monitoring
-- Reliability experiments and runbooks
-
-### Cloud Platform Capabilities
-
-- Terraform-based infrastructure provisioning
-- Amazon EKS cluster administration
-- Amazon ECR image management
-- Helm-based application deployment
-- Kubernetes workload migration from local to cloud environments
-- AWS cost-aware lab operations
-- Infrastructure lifecycle management (create, validate, destroy)
-- Installed AWS Load Balancer Controller on EKS
-- Exposed the reliability app through an ALB-backed Kubernetes Ingress
-- Validated public HTTP access through AWS Application Load Balancer
-- Captured EKS ingress and ALB evidence
-- Documented optional DNS and HTTPS path
-- Troubleshot EKS deployment failures caused by missing ECR images
-- Created and validated IAM roles for AWS Load Balancer Controller
-- Configured IAM Roles for Service Accounts (IRSA)
-- Resolved service account annotation and controller authentication issues
-- Diagnosed and resolved ALB provisioning failures using Kubernetes events
-- Validated end-to-end AWS Load Balancer Controller integration with EKS
-- Centralised operational command reference
-- Standardised Makefile-based workflow execution
-- Operator-focused documentation for common infrastructure tasks
-
-### Production Hardening
-
-- HTTPS-ready ALB ingress architecture
-- ACM certificate integration workflow
-- Route 53 DNS integration workflow
-- EKS observability validation
-- Grafana dashboard validation
-- Prometheus metrics validation
-- AWS cleanup verification
-- Cost-aware platform management
-
-### Platform Recovery and Troubleshooting
-
-- Rebuilt EKS platform after full AWS cleanup
-- Restored Terraform-managed infrastructure
-- Revalidated ECR image supply chain
-- Recreated AWS Load Balancer Controller
-- Configured IRSA manually
-- Resolved service account annotation issues
-- Associated EKS IAM OIDC provider
-- Resolved controller VPC discovery failure
-- Diagnosed ALB provisioning failures
-- Resolved service account annotation issues
-- Recovered monitoring stack after infrastructure rebuild
-
-### Multi-Service Reliability Engineering
-
-- Modelled service dependency failure domains
-- Simulated cascading dependency failure
-- Validated frontend → api → dependency request path
-- Documented SLIs, SLOs, and error budget policy
-- Added MTTR tracking framework
-- Added local canary deployment workflow
-- Added error budget gating simulation
-- Added chaos helper scripts for dependency outage and recovery
-
-### EKS Multi-Service Reliability Promotion
-
-- Rebuilt EKS environments after full AWS cleanup
-- Restored Terraform-managed infrastructure
-- Revalidated ECR image supply chain
-- Associated IAM OIDC provider
-- Configured IAM Roles for Service Accounts (IRSA)
-- Recreated AWS Load Balancer Controller
-- Diagnosed controller VPC discovery failures
-- Recovered Prometheus, Grafana, and Alertmanager
-- Promoted multi-service workloads to EKS
-- Tuned workload capacity to resolve rollout failures
-- Validated ALB ingress exposure
-- Executed cloud-hosted cascading failure experiments
-- Measured MTTR in EKS
-- Implemented cost-control cleanup workflows
-
-### Progressive Delivery and Release Risk Control
-
-- Implemented canary deployment on EKS
-- Introduced controlled ALB traffic shifting
-- Validated release health before promotion
-- Simulated failed canary release
-- Automated rollback to stable traffic
-- Integrated error-budget release gate
-- Documented promotion and rollback criteria
-- Captured progressive delivery evidence
-
-### Reliability Governance and SLO Enforcement
-
-- Converted SLOs into enforceable release controls
-- Added Prometheus recording rules for SLO metrics
-- Expanded alerting coverage for availability, latency, errors, and dependency failures
-- Validated Alertmanager routing by severity
-- Created SLO release gate script
-- Created reliability scorecard workflow
-- Defined operational release policy
-- Integrated reliability governance into release decision-making
-
-### Advanced Chaos Engineering
-
-- Injected dependency latency to validate latency SLO behaviour
-- Simulated partial service outage by reducing dependency replicas
-- Ran resource exhaustion test against the cluster
-- Validated alert routing during active failure
-- Measured MTTR across multiple failure scenarios
-- Updated reliability scorecard after chaos testing
-- Documented resilience validation workflow
-
-### Software Supply Chain Security 
-
-- Software Bill of Materials (SBOM) 
-- Vulnerability Scanning 
-- Image Signing 
-- Signature Verification 
-- Image Provenance 
-- Deployment Trust Validation
-
-### Policy-as-Code and Admission Governance
-
-- Installed and operated Kyverno admission controllers
-- Enforced standard Kubernetes workload labels
-- Enforced CPU and memory requests and limits
-- Blocked use of the `latest` image tag
-- Created reproducible negative policy tests
-- Implemented a mandatory pre-deployment image trust gate
-- Verified Cosign signatures, SBOMs, and vulnerability scan evidence
-- Investigated signed-image admission compatibility across Kyverno and Cosign
-- Preserved cluster stability by removing a crashing image-verification policy
-- Documented the deferred cluster-side signature-enforcement path
-
-### Gitops and Platform Automation
-
-- Recovered the Terraform-managed AWS and Amazon EKS development environment after cost-control cleanup
-- Restored the EKS kubeconfig and validated cluster connectivity and worker-node readiness
-- Restored kube-prometheus-stack and the Prometheus Operator CRDs required by the application ServiceMonitor resources
-- Reinstalled the stable Kyverno governance policies
-- Increased the EKS managed-node-group capacity from two to three desired t3.medium worker nodes
-- Installed and stabilised a pinned Argo CD release
-- Configured local Argo CD access through Kubernetes port forwarding
-- Configured annotation-based Argo CD resource tracking
-- Created the reliability-platform Argo CD AppProject
-- Created the declarative multi-service-app Argo CD Application
-- Added a root bootstrap Application using the app-of-apps pattern
-- Configured Argo CD to render the existing multi-service Helm chart from Git
-- Configured the Application to track the main branch and values-eks.yaml
-- Enabled automated synchronisation
-- Enabled automatic namespace creation
-- Enabled self-healing
-- Enabled automated pruning
-- Enabled retry backoff for transient reconciliation failures
-- Proved that Argo CD successfully reconciled the frontend, API and dependency Services
-- Proved that Argo CD successfully reconciled the frontend, API and dependency Deployments
-- Proved that Argo CD successfully reconciled the three application ServiceMonitors
-- Captured the final Synced and Healthy Application state
-- Demonstrated deterministic OutOfSync detection by temporarily disabling self-healing through Git
-- Demonstrated restoration of a Git-managed Deployment label
-- Demonstrated automatic correction of a Git-managed Service label
-- Demonstrated automated pruning of a previously Argo CD-managed ConfigMap after its removal from Git
-- Demonstrated Git-driven application configuration changes without direct Helm deployment
-- Corrected the disallow-latest-image-tag Kyverno ClusterPolicy
-- Configured rule-level failureAction: Enforce
-- Configured the policy to match Pods in the reliability-lab namespace
-- Extended latest-tag validation to normal containers, init containers and ephemeral containers
-- Enabled Kyverno autogeneration for supported Pod controllers
-- Proved that nginx:latest was denied
-- Proved that a fixed image tag was permitted
-- Proved that an init container using latest was denied
-- Demonstrated that Argo CD could render a non-compliant Git workload but could not bypass Kyverno admission governance
-- Confirmed that the invalid GitOps-managed Pod was never created
-- Restored automated synchronisation after the policy-governance test
-- Integrated Cosign signature verification into the GitOps promotion workflow
-- Integrated SBOM evidence validation into the GitOps promotion workflow
-- Integrated vulnerability-scan evidence validation into the GitOps promotion workflow
-- Added automatic Amazon ECR authentication renewal before trust verification
-- Added pipeline failure propagation with set -o pipefail
-- Verified the frontend, API and dependency release images before promotion
-- Demonstrated that an unavailable or untrusted image could not pass the promotion gate
-- Preserved human review between automated values-file modification and Git commit
-- Documented the local-key Cosign transparency-log limitation
-- Captured implementation, failure, recovery and final-state evidence under experiments/evidence/gitops/
-
-### Final Platform Control Flow
-
-```txt
-Application Change
-  ↓
-Build Container Images
-  ↓
-Generate SBOMs
-  ↓
-Scan Images
-  ↓
-Sign Images
-  ↓
-Refresh Amazon ECR Authentication
-  ↓
-Run Deployment Trust Gate
-  ↓
-Update Git Desired State
-  ↓
-Review and Commit
-  ↓
-Push to Main
-  ↓
-Argo CD Reconciliation
-  ↓
-Kubernetes API Admission
-  ↓
-Kyverno Governance
-  ↓
-Amazon EKS Deployment
-  ↓
-Argo CD Health Monitoring
-```
-### Phase Outcome
-
-The Kubernetes Reliability Lab now provides a complete GitOps delivery control plane:
-
-- Terraform creates and manages the AWS infrastructure.
-- Git records the approved desired state.
-- Helm renders the application resources.
-- Argo CD continuously reconciles Git with Kubernetes.
-- Kyverno enforces admission governance.
-- The deployment trust gate controls which signed and evidenced images may be promoted.
-- Amazon EKS runs the approved workloads.
-
-The project has progressed from manually operated Kubernetes deployments to an auditable, self-healing and policy-governed platform-delivery model.
-
-## Current Architecture
-
-```txt
-
-                         Internet
-                             │
-                             ▼
-                    AWS Application Load Balancer
-                             │
-                             ▼
-                     Kubernetes Ingress
-                             │
-                             ▼
-                     Frontend Service
-                             │
-                             ▼
-                         API Service
-                             │
-                             ▼
-                    Dependency Service
-
-──────────────────────────────────────
-
-Amazon EKS
-
-reliability-lab namespace
-
-├── frontend Deployment
-├── api Deployment
-├── dependency Deployment
-├── Services
-├── HPA
-├── PDB
-├── Network Policies
-└── Ingress
-
-monitoring namespace
-
-├── Prometheus
-├── Grafana
-└── Alertmanager
-
-──────────────────────────────────────
-
-AWS
-
-├── ECR
-├── IAM OIDC Provider
-├── IRSA
-├── AWS Load Balancer Controller
-└── ALB
-```
-## Next Milestone — Final Reliability Capstone and Portfolio Packaging
-
-The final milestone will consolidate the technical implementation into a
-portfolio-ready reliability engineering case study.
-
-It will not introduce a large new platform build. Instead, it will produce the
-final proof, documentation and presentation layer.
-
-Planned deliverables include:
-
-- Final platform architecture diagram
-- Final GitOps workflow diagram
-- Complete README rewrite
-- Evidence index
-- Curated screenshots folder
-- Runbook index
-- Incident and postmortem examples
-- AWS cost summary
-- Known limitations
-- Production improvement recommendations
-
+**Project status: final planned milestone completed.**
