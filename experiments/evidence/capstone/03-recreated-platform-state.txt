@@ -1,0 +1,84 @@
+=== Milestone 17 Recreated Environment ===
+Sun  4 Oct 2026 19:41:29 UTC
+
+=== AWS Identity ===
+{
+    "Account": "393864004024",
+    "Arn": "arn:aws:iam::393864004024:user/terraform"
+}
+
+=== Terraform Outputs ===
+aws_region = "us-east-1"
+cluster_endpoint = "https://3A20B1C9E745FA5D3F28325D08F3F20C.gr7.us-east-1.eks.amazonaws.com"
+cluster_name = "reliability-lab-dev"
+ecr_repository_url = "393864004024.dkr.ecr.us-east-1.amazonaws.com/reliability-app"
+
+=== Kubernetes Context ===
+arn:aws:eks:us-east-1:393864004024:cluster/reliability-lab-dev
+
+=== EKS Nodes ===
+NAME                          STATUS   ROLES    AGE    VERSION                INTERNAL-IP   EXTERNAL-IP      OS-IMAGE                        KERNEL-VERSION                     CONTAINER-RUNTIME
+ip-10-40-0-203.ec2.internal   Ready    <none>   2d1h   v1.34.11-eks-3b4a6ca   10.40.0.203   3.239.205.72     Amazon Linux 2023.12.20260928   6.12.110-135.201.amzn2023.x86_64   containerd://2.2.7+unknown
+ip-10-40-0-73.ec2.internal    Ready    <none>   2d1h   v1.34.11-eks-3b4a6ca   10.40.0.73    100.24.120.101   Amazon Linux 2023.12.20260928   6.12.110-135.201.amzn2023.x86_64   containerd://2.2.7+unknown
+ip-10-40-1-144.ec2.internal   Ready    <none>   2d1h   v1.34.11-eks-3b4a6ca   10.40.1.144   52.54.218.231    Amazon Linux 2023.12.20260928   6.12.110-135.201.amzn2023.x86_64   containerd://2.2.7+unknown
+
+=== Helm Releases ===
+NAME                 	NAMESPACE 	REVISION	UPDATED                             	STATUS  	CHART                       	APP VERSION
+kube-prometheus-stack	monitoring	1       	2026-10-03 21:31:41.896824 +0100 BST	deployed	kube-prometheus-stack-86.0.1	v0.91.0    
+kyverno              	kyverno   	1       	2026-10-04 13:43:45.780407 +0100 BST	deployed	kyverno-3.8.2               	v1.18.2    
+
+=== Argo CD Pods ===
+NAME                                                READY   STATUS    RESTARTS   AGE   IP            NODE                          NOMINATED NODE   READINESS GATES
+argocd-application-controller-0                     1/1     Running   0          14m   10.40.0.174   ip-10-40-0-73.ec2.internal    <none>           <none>
+argocd-applicationset-controller-69bddf5587-44jxg   1/1     Running   0          36m   10.40.0.158   ip-10-40-0-203.ec2.internal   <none>           <none>
+argocd-dex-server-779bbb6b9d-lczrf                  1/1     Running   0          36m   10.40.0.14    ip-10-40-0-73.ec2.internal    <none>           <none>
+argocd-notifications-controller-7494d5f69f-sv2b9    1/1     Running   0          36m   10.40.1.179   ip-10-40-1-144.ec2.internal   <none>           <none>
+argocd-redis-74d7d69cc8-vldht                       1/1     Running   0          36m   10.40.0.154   ip-10-40-0-73.ec2.internal    <none>           <none>
+argocd-repo-server-84875b969-tpzrq                  1/1     Running   0          14m   10.40.0.81    ip-10-40-0-203.ec2.internal   <none>           <none>
+argocd-server-576977ff6d-wmzzm                      1/1     Running   0          14m   10.40.1.203   ip-10-40-1-144.ec2.internal   <none>           <none>
+
+=== Argo CD Applications ===
+NAME                             SYNC     HEALTH    REVISION
+multi-service-app                Synced   Healthy   c85a25630508bd9be944970d26ba9314e58ced56
+reliability-platform-bootstrap   Synced   Healthy   <none>
+
+=== Application Workloads ===
+NAME                         READY   UP-TO-DATE   AVAILABLE   AGE     CONTAINERS   IMAGES                                                          SELECTOR
+deployment.apps/api          2/2     2            2           6m52s   api          393864004024.dkr.ecr.us-east-1.amazonaws.com/api:0.1.0          app.kubernetes.io/name=api
+deployment.apps/dependency   2/2     2            2           6m52s   dependency   393864004024.dkr.ecr.us-east-1.amazonaws.com/dependency:0.1.0   app.kubernetes.io/name=dependency
+deployment.apps/frontend     2/2     2            2           6m52s   frontend     393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend:0.1.0     app.kubernetes.io/name=frontend
+
+NAME                              READY   STATUS    RESTARTS   AGE     IP            NODE                          NOMINATED NODE   READINESS GATES
+pod/api-58564685f8-c2lft          1/1     Running   0          6m52s   10.40.0.17    ip-10-40-0-203.ec2.internal   <none>           <none>
+pod/api-58564685f8-pxx4s          1/1     Running   0          6m53s   10.40.1.199   ip-10-40-1-144.ec2.internal   <none>           <none>
+pod/dependency-57d46946ff-kln4x   1/1     Running   0          6m53s   10.40.0.208   ip-10-40-0-203.ec2.internal   <none>           <none>
+pod/dependency-57d46946ff-rbwwc   1/1     Running   0          6m53s   10.40.1.4     ip-10-40-1-144.ec2.internal   <none>           <none>
+pod/frontend-54b6645786-9vbds     1/1     Running   0          6m53s   10.40.0.145   ip-10-40-0-203.ec2.internal   <none>           <none>
+pod/frontend-54b6645786-gttl6     1/1     Running   0          6m52s   10.40.0.133   ip-10-40-0-73.ec2.internal    <none>           <none>
+
+NAME                 TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)   AGE     SELECTOR
+service/api          ClusterIP   172.20.45.186    <none>        80/TCP    6m53s   app.kubernetes.io/name=api
+service/dependency   ClusterIP   172.20.153.185   <none>        80/TCP    6m53s   app.kubernetes.io/name=dependency
+service/frontend     ClusterIP   172.20.175.240   <none>        80/TCP    6m53s   app.kubernetes.io/name=frontend
+
+=== Application ServiceMonitors ===
+NAME         AGE
+api          6m53s
+dependency   6m53s
+frontend     6m53s
+
+=== Kyverno Policies ===
+NAME                               ADMISSION   BACKGROUND   READY   AGE     MESSAGE
+disallow-latest-image-tag          true        true         True    6h46m   Ready
+require-resource-requests-limits   true        true         True    6h47m   Ready
+require-standard-labels            true        true         True    6h48m   Ready
+
+=== Resource Tracking Method ===
+annotation
+
+=== Workload Images ===
+api: 393864004024.dkr.ecr.us-east-1.amazonaws.com/api:0.1.0
+dependency: 393864004024.dkr.ecr.us-east-1.amazonaws.com/dependency:0.1.0
+frontend: 393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend:0.1.0
+
+PASS: Milestone 17 environment successfully recreated.

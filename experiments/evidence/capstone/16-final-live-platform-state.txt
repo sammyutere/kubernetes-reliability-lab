@@ -1,0 +1,53 @@
+=== Milestone 17 Final Live Platform State ===
+Sun  4 Oct 2026 23:10:29 UTC
+
+=== EKS Nodes ===
+NAME                          STATUS   ROLES    AGE    VERSION                INTERNAL-IP   EXTERNAL-IP      OS-IMAGE                        KERNEL-VERSION                     CONTAINER-RUNTIME
+ip-10-40-0-203.ec2.internal   Ready    <none>   2d5h   v1.34.11-eks-3b4a6ca   10.40.0.203   3.239.205.72     Amazon Linux 2023.12.20260928   6.12.110-135.201.amzn2023.x86_64   containerd://2.2.7+unknown
+ip-10-40-0-73.ec2.internal    Ready    <none>   2d5h   v1.34.11-eks-3b4a6ca   10.40.0.73    100.24.120.101   Amazon Linux 2023.12.20260928   6.12.110-135.201.amzn2023.x86_64   containerd://2.2.7+unknown
+ip-10-40-1-144.ec2.internal   Ready    <none>   2d5h   v1.34.11-eks-3b4a6ca   10.40.1.144   52.54.218.231    Amazon Linux 2023.12.20260928   6.12.110-135.201.amzn2023.x86_64   containerd://2.2.7+unknown
+ip-10-40-1-235.ec2.internal   Ready    <none>   60m    v1.34.11-eks-3b4a6ca   10.40.1.235   44.202.12.100    Amazon Linux 2023.12.20260928   6.12.110-135.201.amzn2023.x86_64   containerd://2.2.7+unknown
+
+=== Argo CD Applications ===
+NAME                             SYNC     HEALTH    REVISION
+multi-service-app                Synced   Healthy   0ee6db903c504350bc7469df6dacab821b0068d8
+reliability-platform-bootstrap   Synced   Healthy   <none>
+
+=== Application Deployments ===
+NAME         READY   UP-TO-DATE   AVAILABLE   AGE     CONTAINERS   IMAGES                                                                       SELECTOR
+api          2/2     2            2           3h35m   api          393864004024.dkr.ecr.us-east-1.amazonaws.com/api:0.1.0-supply-chain          app.kubernetes.io/name=api
+dependency   2/2     2            2           3h35m   dependency   393864004024.dkr.ecr.us-east-1.amazonaws.com/dependency:0.1.0-supply-chain   app.kubernetes.io/name=dependency
+frontend     2/2     2            2           3h35m   frontend     393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend:0.1.0-supply-chain     app.kubernetes.io/name=frontend
+
+=== Application Pods ===
+NAME                          READY   STATUS    RESTARTS   AGE    IP            NODE                          NOMINATED NODE   READINESS GATES
+api-5d65ccd46-5szk5           1/1     Running   0          115m   10.40.1.44    ip-10-40-1-235.ec2.internal   <none>           <none>
+api-5d65ccd46-zb5mz           1/1     Running   0          60m    10.40.1.122   ip-10-40-1-235.ec2.internal   <none>           <none>
+dependency-5fc7d9bfd9-dmtf2   1/1     Running   0          60m    10.40.1.58    ip-10-40-1-235.ec2.internal   <none>           <none>
+dependency-5fc7d9bfd9-q42js   1/1     Running   0          115m   10.40.1.24    ip-10-40-1-235.ec2.internal   <none>           <none>
+frontend-8474db7578-n8kdg     1/1     Running   0          115m   10.40.1.253   ip-10-40-1-235.ec2.internal   <none>           <none>
+frontend-8474db7578-r42sp     1/1     Running   0          60m    10.40.0.177   ip-10-40-0-203.ec2.internal   <none>           <none>
+
+=== Trusted Runtime Images ===
+api: 393864004024.dkr.ecr.us-east-1.amazonaws.com/api:0.1.0-supply-chain
+dependency: 393864004024.dkr.ecr.us-east-1.amazonaws.com/dependency:0.1.0-supply-chain
+frontend: 393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend:0.1.0-supply-chain
+
+=== ServiceMonitors ===
+NAME         AGE
+api          3h35m
+dependency   3h35m
+frontend     3h35m
+
+=== Kyverno Policies ===
+NAME                               ADMISSION   BACKGROUND   READY   AGE   MESSAGE
+disallow-latest-image-tag          true        true         True    10h   Ready
+require-resource-requests-limits   true        true         True    10h   Ready
+require-standard-labels            true        true         True    10h   Ready
+
+=== Helm Releases ===
+NAME                 	NAMESPACE 	REVISION	UPDATED                             	STATUS  	CHART                       	APP VERSION
+kube-prometheus-stack	monitoring	1       	2026-10-03 21:31:41.896824 +0100 BST	deployed	kube-prometheus-stack-86.0.1	v0.91.0    
+kyverno              	kyverno   	1       	2026-10-04 13:43:45.780407 +0100 BST	deployed	kyverno-3.8.2               	v1.18.2    
+
+PASS: Final live platform evidence captured.

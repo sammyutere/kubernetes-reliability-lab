@@ -1,0 +1,108 @@
+=== Trusted Release Rollout Failure ===
+Sun  4 Oct 2026 21:33:29 UTC
+
+=== Deployments ===
+NAME         READY   UP-TO-DATE   AVAILABLE   AGE    CONTAINERS   IMAGES                                                                       SELECTOR
+api          2/2     1            2           118m   api          393864004024.dkr.ecr.us-east-1.amazonaws.com/api:0.1.0-supply-chain          app.kubernetes.io/name=api
+dependency   2/2     1            2           118m   dependency   393864004024.dkr.ecr.us-east-1.amazonaws.com/dependency:0.1.0-supply-chain   app.kubernetes.io/name=dependency
+frontend     2/2     1            2           118m   frontend     393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend:0.1.0-supply-chain     app.kubernetes.io/name=frontend
+
+=== ReplicaSets ===
+NAME                    DESIRED   CURRENT   READY   AGE    CONTAINERS   IMAGES                                                                       SELECTOR
+api-58564685f8          2         2         2       118m   api          393864004024.dkr.ecr.us-east-1.amazonaws.com/api:0.1.0                       app.kubernetes.io/name=api,pod-template-hash=58564685f8
+api-5d65ccd46           1         1         0       18m    api          393864004024.dkr.ecr.us-east-1.amazonaws.com/api:0.1.0-supply-chain          app.kubernetes.io/name=api,pod-template-hash=5d65ccd46
+dependency-57d46946ff   2         2         2       118m   dependency   393864004024.dkr.ecr.us-east-1.amazonaws.com/dependency:0.1.0                app.kubernetes.io/name=dependency,pod-template-hash=57d46946ff
+dependency-5fc7d9bfd9   1         1         0       18m    dependency   393864004024.dkr.ecr.us-east-1.amazonaws.com/dependency:0.1.0-supply-chain   app.kubernetes.io/name=dependency,pod-template-hash=5fc7d9bfd9
+frontend-54b6645786     2         2         2       118m   frontend     393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend:0.1.0                  app.kubernetes.io/name=frontend,pod-template-hash=54b6645786
+frontend-8474db7578     1         1         0       18m    frontend     393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend:0.1.0-supply-chain     app.kubernetes.io/name=frontend,pod-template-hash=8474db7578
+
+=== Pods ===
+NAME                          READY   STATUS    RESTARTS   AGE    IP            NODE                          NOMINATED NODE   READINESS GATES
+api-58564685f8-c2lft          1/1     Running   0          118m   10.40.0.17    ip-10-40-0-203.ec2.internal   <none>           <none>
+api-58564685f8-pxx4s          1/1     Running   0          118m   10.40.1.199   ip-10-40-1-144.ec2.internal   <none>           <none>
+api-5d65ccd46-5szk5           0/1     Pending   0          18m    <none>        <none>                        <none>           <none>
+dependency-57d46946ff-kln4x   1/1     Running   0          118m   10.40.0.208   ip-10-40-0-203.ec2.internal   <none>           <none>
+dependency-57d46946ff-rbwwc   1/1     Running   0          118m   10.40.1.4     ip-10-40-1-144.ec2.internal   <none>           <none>
+dependency-5fc7d9bfd9-q42js   0/1     Pending   0          18m    <none>        <none>                        <none>           <none>
+frontend-54b6645786-9vbds     1/1     Running   0          118m   10.40.0.145   ip-10-40-0-203.ec2.internal   <none>           <none>
+frontend-54b6645786-gttl6     1/1     Running   0          118m   10.40.0.133   ip-10-40-0-73.ec2.internal    <none>           <none>
+frontend-8474db7578-n8kdg     0/1     Pending   0          18m    <none>        <none>                        <none>           <none>
+
+=== Deployment Conditions ===
+
+--- frontend ---
+[
+  {
+    "lastTransitionTime": "2026-10-04T19:34:59Z",
+    "lastUpdateTime": "2026-10-04T19:34:59Z",
+    "message": "Deployment has minimum availability.",
+    "reason": "MinimumReplicasAvailable",
+    "status": "True",
+    "type": "Available"
+  },
+  {
+    "lastTransitionTime": "2026-10-04T21:25:31Z",
+    "lastUpdateTime": "2026-10-04T21:25:31Z",
+    "message": "ReplicaSet \"frontend-8474db7578\" has timed out progressing.",
+    "reason": "ProgressDeadlineExceeded",
+    "status": "False",
+    "type": "Progressing"
+  }
+]
+
+--- api ---
+[
+  {
+    "lastTransitionTime": "2026-10-04T19:35:00Z",
+    "lastUpdateTime": "2026-10-04T19:35:00Z",
+    "message": "Deployment has minimum availability.",
+    "reason": "MinimumReplicasAvailable",
+    "status": "True",
+    "type": "Available"
+  },
+  {
+    "lastTransitionTime": "2026-10-04T21:25:31Z",
+    "lastUpdateTime": "2026-10-04T21:25:31Z",
+    "message": "ReplicaSet \"api-5d65ccd46\" has timed out progressing.",
+    "reason": "ProgressDeadlineExceeded",
+    "status": "False",
+    "type": "Progressing"
+  }
+]
+
+--- dependency ---
+[
+  {
+    "lastTransitionTime": "2026-10-04T19:35:00Z",
+    "lastUpdateTime": "2026-10-04T19:35:00Z",
+    "message": "Deployment has minimum availability.",
+    "reason": "MinimumReplicasAvailable",
+    "status": "True",
+    "type": "Available"
+  },
+  {
+    "lastTransitionTime": "2026-10-04T21:25:31Z",
+    "lastUpdateTime": "2026-10-04T21:25:31Z",
+    "message": "ReplicaSet \"dependency-5fc7d9bfd9\" has timed out progressing.",
+    "reason": "ProgressDeadlineExceeded",
+    "status": "False",
+    "type": "Progressing"
+  }
+]
+
+=== Recent Events ===
+LAST SEEN   TYPE      REASON              OBJECT                             MESSAGE
+18m         Normal    ScalingReplicaSet   deployment/api                     Scaled up replica set api-5d65ccd46 from 0 to 1
+18m         Normal    ScalingReplicaSet   deployment/dependency              Scaled up replica set dependency-5fc7d9bfd9 from 0 to 1
+18m         Normal    ScalingReplicaSet   deployment/frontend                Scaled up replica set frontend-8474db7578 from 0 to 1
+18m         Normal    SuccessfulCreate    replicaset/api-5d65ccd46           Created pod: api-5d65ccd46-5szk5
+18m         Normal    SuccessfulCreate    replicaset/dependency-5fc7d9bfd9   Created pod: dependency-5fc7d9bfd9-q42js
+18m         Normal    SuccessfulCreate    replicaset/frontend-8474db7578     Created pod: frontend-8474db7578-n8kdg
+2m46s       Warning   FailedScheduling    pod/api-5d65ccd46-5szk5            0/3 nodes are available: 3 Too many pods. no new claims to deallocate, preemption: 0/3 nodes are available: 3 No preemption victims found for incoming pod.
+2m46s       Warning   FailedScheduling    pod/dependency-5fc7d9bfd9-q42js    0/3 nodes are available: 3 Too many pods. no new claims to deallocate, preemption: 0/3 nodes are available: 3 No preemption victims found for incoming pod.
+2m46s       Warning   FailedScheduling    pod/frontend-8474db7578-n8kdg      0/3 nodes are available: 3 Too many pods. no new claims to deallocate, preemption: 0/3 nodes are available: 3 No preemption victims found for incoming pod.
+
+=== Argo CD ===
+NAME                             SYNC     HEALTH
+multi-service-app                Synced   Degraded
+reliability-platform-bootstrap   Synced   Healthy

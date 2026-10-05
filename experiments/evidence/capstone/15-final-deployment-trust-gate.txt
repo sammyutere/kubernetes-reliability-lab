@@ -1,0 +1,60 @@
+=== FINAL MILESTONE 17 DEPLOYMENT TRUST GATE ===
+Sun  4 Oct 2026 23:06:46 UTC
+
+==============================================
+393864004024.dkr.ecr.us-east-1.amazonaws.com/api:0.1.0-supply-chain
+==============================================
+Image: 393864004024.dkr.ecr.us-east-1.amazonaws.com/api:0.1.0-supply-chain
+Step 1: Verify cryptographic signature
+WARNING: Skipping tlog verification is an insecure practice that lacks transparency and auditability verification for the signature.
+
+Verification for 393864004024.dkr.ecr.us-east-1.amazonaws.com/api:0.1.0-supply-chain --
+The following checks were performed on each of these signatures:
+  - The cosign claims were validated
+  - The signatures were verified against the specified public key
+PASS: Signature verified
+Step 2: Validate vulnerability scan evidence
+PASS: Vulnerability scan evidence found
+Step 3: Validate SBOM evidence
+PASS: SBOM evidence found
+APPROVED: Deployment trust gate passed for 393864004024.dkr.ecr.us-east-1.amazonaws.com/api:0.1.0-supply-chain
+
+==============================================
+393864004024.dkr.ecr.us-east-1.amazonaws.com/dependency:0.1.0-supply-chain
+==============================================
+Image: 393864004024.dkr.ecr.us-east-1.amazonaws.com/dependency:0.1.0-supply-chain
+Step 1: Verify cryptographic signature
+WARNING: Skipping tlog verification is an insecure practice that lacks transparency and auditability verification for the signature.
+
+Verification for 393864004024.dkr.ecr.us-east-1.amazonaws.com/dependency:0.1.0-supply-chain --
+The following checks were performed on each of these signatures:
+  - The cosign claims were validated
+  - The signatures were verified against the specified public key
+PASS: Signature verified
+Step 2: Validate vulnerability scan evidence
+PASS: Vulnerability scan evidence found
+Step 3: Validate SBOM evidence
+PASS: SBOM evidence found
+APPROVED: Deployment trust gate passed for 393864004024.dkr.ecr.us-east-1.amazonaws.com/dependency:0.1.0-supply-chain
+
+==============================================
+393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend:0.1.0-supply-chain
+==============================================
+Image: 393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend:0.1.0-supply-chain
+Step 1: Verify cryptographic signature
+WARNING: Skipping tlog verification is an insecure practice that lacks transparency and auditability verification for the signature.
+
+Verification for 393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend:0.1.0-supply-chain --
+The following checks were performed on each of these signatures:
+  - The cosign claims were validated
+  - The signatures were verified against the specified public key
+PASS: Signature verified
+Step 2: Validate vulnerability scan evidence
+PASS: Vulnerability scan evidence found
+Step 3: Validate SBOM evidence
+PASS: SBOM evidence found
+APPROVED: Deployment trust gate passed for 393864004024.dkr.ecr.us-east-1.amazonaws.com/frontend:0.1.0-supply-chain
+
+================================================
+PASS: ALL THREE TRUSTED IMAGES APPROVED
+================================================

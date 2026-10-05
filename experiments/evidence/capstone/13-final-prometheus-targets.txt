@@ -1,0 +1,52 @@
+=== Final Prometheus Target Evidence ===
+Sun  4 Oct 2026 22:53:54 UTC
+
+=== Application ServiceMonitors ===
+NAME         AGE
+api          3h19m
+dependency   3h19m
+frontend     3h19m
+
+=== Active Reliability-Lab Targets ===
+{
+  "service": "api",
+  "job": "api",
+  "instance": "10.40.1.44:8000",
+  "health": "up",
+  "lastError": ""
+}
+{
+  "service": "api",
+  "job": "api",
+  "instance": "10.40.1.122:8000",
+  "health": "up",
+  "lastError": ""
+}
+{
+  "service": "dependency",
+  "job": "dependency",
+  "instance": "10.40.1.24:8000",
+  "health": "up",
+  "lastError": ""
+}
+{
+  "service": "dependency",
+  "job": "dependency",
+  "instance": "10.40.1.58:8000",
+  "health": "up",
+  "lastError": ""
+}
+{
+  "service": "frontend",
+  "job": "frontend",
+  "instance": "10.40.1.253:8000",
+  "health": "up",
+  "lastError": ""
+}
+{
+  "service": "frontend",
+  "job": "frontend",
+  "instance": "10.40.0.177:8000",
+  "health": "up",
+  "lastError": ""
+}

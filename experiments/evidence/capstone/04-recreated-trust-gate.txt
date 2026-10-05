@@ -1,0 +1,21 @@
+=== Milestone 17 Deployment Trust Gate ===
+Sun  4 Oct 2026 20:40:06 UTC
+
+AWS Region:   us-east-1
+ECR Registry: 393864004024.dkr.ecr.us-east-1.amazonaws.com
+
+========================================
+Trust-gating:
+393864004024.dkr.ecr.us-east-1.amazonaws.com/api:0.1.0
+========================================
+Image: 393864004024.dkr.ecr.us-east-1.amazonaws.com/api:0.1.0
+Step 1: Verify cryptographic signature
+WARNING: Skipping tlog verification is an insecure practice that lacks transparency and auditability verification for the signature.
+
+Verification for 393864004024.dkr.ecr.us-east-1.amazonaws.com/api:0.1.0 --
+The following checks were performed on each of these signatures:
+  - The cosign claims were validated
+  - The signatures were verified against the specified public key
+PASS: Signature verified
+Step 2: Validate vulnerability scan evidence
+BLOCKED: Missing or empty scan report: supply-chain/scans/api-0.1.0-grype.json
